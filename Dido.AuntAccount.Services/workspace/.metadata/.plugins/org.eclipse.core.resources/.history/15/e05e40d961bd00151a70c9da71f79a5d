@@ -1,0 +1,42 @@
+package dido.auntaccount.data.dao;
+
+import org.javalite.activejdbc.Base;
+
+import dido.auntaccount.data.entities.User;
+
+public class App 
+{
+    public static void main(String[] args) {
+
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/DIDO", "root", "hYL(Ruce/8Df");
+
+        createUser();
+        System.out.println("=========> Created employee:");
+      /*  selectEmployee();
+        updateEmployee();
+        System.out.println("=========> Updated employee:");
+        selectAllEmployees();
+        deleteEmployee();
+        System.out.println("=========> Deleted employee:");
+        selectAllEmployees();
+        createEmployee();
+        System.out.println("=========> Created employee:");
+        selectEmployee();
+        deleteAllEmployees();
+        System.out.println("=========> Deleted all employees:");
+        selectAllEmployees();*/
+
+        Base.close();
+    }
+    
+    private static void createUser() {
+    	User user = new User();
+    	user.set("UserName", "Name");
+    	user.set("FirstName", "Name1");
+    	user.set("LastName", "Name2");
+    	user.set("Password", "Pas");
+    	user.set("isDeleted", false);
+    	user.saveIt();
+    }
+
+}
