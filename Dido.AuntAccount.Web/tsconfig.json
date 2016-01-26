@@ -20,6 +20,7 @@
         "typings/tsd.d.ts",
         "client/bootstrap.ts",
         "client/components/app.ts",
+        "client/components/base/baseView.ts",
         "client/components/dashboard.ts",
         "client/components/expense.ts",
         "client/components/manage.ts",

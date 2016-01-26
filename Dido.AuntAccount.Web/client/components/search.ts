@@ -1,6 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
 import {Component, View} from 'angular2/angular2';
+import {BaseView} from './base/baseView';
 
 @Component({
   selector: 'search'
@@ -12,6 +13,6 @@ import {Component, View} from 'angular2/angular2';
     </div>
   `
 })
-export class Search {
+export class Search extends BaseView {
 
 }

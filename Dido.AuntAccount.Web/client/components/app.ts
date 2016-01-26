@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
 import {Component, View} from 'angular2/angular2';
-import {RouteConfig, Router, RouterOutlet, RouterLink, OnActivate, ComponentInstruction} from 'angular2/router';
+import {RouteConfig, Router, RouterOutlet, RouterLink, CanActivate, OnActivate, ComponentInstruction} from 'angular2/router';
 
 import {Dashboard} from './dashboard';
 import {Manage} from './manage';
@@ -40,13 +40,5 @@ import {Expense} from './expense';
   </div>
   `
 })
-export class App implements OnActivate {
-  static componentHandler: any;
-
-  constructor(){
-  }
-
-  onActivate(next: ComponentInstruction, prev: ComponentInstruction) {
-    componentHandler.upgradeDom();
-  }
+export class App {
 }
