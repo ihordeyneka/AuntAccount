@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-import {Component, View, Directive, NgIf} from 'angular2/angular2';
+import {Component, View, Directive, NgIf, Control} from 'angular2/angular2';
 import {FORM_BINDINGS, FORM_DIRECTIVES, FormBuilder, Validators} from 'angular2/angular2';
 import {BaseView} from './base/baseView';
 
@@ -21,15 +21,15 @@ import {BaseView} from './base/baseView';
           <span class="mdl-textfield__error">Amount must be a number!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input ng-control="expenseDate" class="mdl-textfield__input" type="text" id="expenseDate">
-          <label class="mdl-textfield__label" for="expenseDate">Date...</label>
+          <input ng-control="expenseDate" class="mdl-textfield__input" type="date" id="expenseDate">
+          <label class="mdl-textfield__label aa-mdl-date" for="expenseDate">Date...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input ng-control="category" class="mdl-textfield__input" type="text" id="category">
           <label class="mdl-textfield__label" for="category">Category...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input ng-control="category" class="mdl-textfield__input" type="text" id="tags">
+          <input ng-control="tags" class="mdl-textfield__input" type="text" id="tags">
           <label class="mdl-textfield__label" for="tags">Tags...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -49,7 +49,11 @@ export class Expense extends BaseView {
   constructor(fb: FormBuilder){
     super();
     this.expenseForm = fb.group({
-      amount: ["", Validators.required]
+      amount: ["", Validators.required],
+      expenseDate: ["", Validators.required],
+      category: ["Test Category", Validators.required],
+      tags: ["", Validators.required],
+      notes: ["", Validators.required]
     });
   }
 
