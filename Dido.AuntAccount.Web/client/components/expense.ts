@@ -3,6 +3,7 @@
 import {Component, View, Directive, NgIf, Control} from 'angular2/angular2';
 import {FORM_BINDINGS, FORM_DIRECTIVES, FormBuilder, Validators} from 'angular2/angular2';
 import {BaseView} from './base/baseView';
+import {Globals} from './common/globals';
 
 @Component({
   selector: 'expense',
@@ -21,8 +22,8 @@ import {BaseView} from './base/baseView';
           <span class="mdl-textfield__error">Amount must be a number!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input ng-control="expenseDate" class="mdl-textfield__input" type="date" id="expenseDate">
-          <label class="mdl-textfield__label aa-mdl-date" for="expenseDate">Date...</label>
+          <input ng-control="expenseDateStr" class="mdl-textfield__input" type="date" id="expenseDateStr">
+          <label class="mdl-textfield__label aa-mdl-floated" for="expenseDateStr">Date...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input ng-control="category" class="mdl-textfield__input" type="text" id="category">
@@ -45,15 +46,23 @@ import {BaseView} from './base/baseView';
 })
 export class Expense extends BaseView {
   expenseForm: any;
+  amount: number = null;
+  expenseDate: Date = new Date();
+  category: string = "";
+  tags: Array<string> = ["tag1", "tag2"];
+  notes: string = "";
+  get expenseDateStr() {
+    return Globals.DateToStr(this.expenseDate);
+  }
 
   constructor(fb: FormBuilder){
     super();
     this.expenseForm = fb.group({
-      amount: ["", Validators.required],
-      expenseDate: ["", Validators.required],
-      category: ["Test Category", Validators.required],
-      tags: ["", Validators.required],
-      notes: ["", Validators.required]
+      amount: [this.amount, Validators.required],
+      expenseDateStr: [this.expenseDateStr],
+      category: [this.category],
+      tags: [this.tags],
+      notes: [this.notes]
     });
   }
 
