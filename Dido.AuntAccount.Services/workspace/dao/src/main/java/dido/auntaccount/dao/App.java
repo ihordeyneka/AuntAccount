@@ -21,13 +21,15 @@ public class App {
 		return user;
 	}
 
-	public static User createUser() {
+	public static User
+	createUser() {
 		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/sys", "root", "password");
 		User user = new User();
-		user.set("UserId", "1");
-		user.set("FirstName", "Name1");
-		user.set("LastName", "Name2");
-		user.set("Password", "Pas");
+		user.set("userId", "1");
+		user.set("userName", "Name");
+		user.set("firstName", "Name1");
+		user.set("lastName", "Name2");
+		user.set("password", "Pas");
 		user.set("isDeleted", false);
 		user.saveIt();
 		Base.close();

@@ -1,11 +1,14 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-import {Component, View, Directive} from 'angular2/core';
+import {Component, View, Directive, ElementRef} from 'angular2/core';
 import {NgIf, NgFor, Control} from 'angular2/common'
 import {FORM_BINDINGS, FORM_DIRECTIVES, FormBuilder, Validators} from 'angular2/common';
 import {ChipCollection} from './controls/chipCollection';
+import {ValidationService} from '../services/validationService'
 import {BaseView} from './base/baseView';
 import {Globals} from './common/globals';
+
+declare var jQuery:JQueryStatic;
 
 @Component({
   selector: 'expense',
@@ -18,16 +21,16 @@ import {Globals} from './common/globals';
     <div class="mdl-cell mdl-cell--4-col"></div>
     <div class="mdl-cell mdl-cell--4-col">
       <form [ngFormModel]="expenseForm" (submit)="addExpense()">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label aa-required">
           <input ng-control="amount" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="amount">
           <label class="mdl-textfield__label" for="amount">Amount...</label>
           <span class="mdl-textfield__error">Amount must be a number!</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label aa-required">
           <input ng-control="expenseDateStr" class="mdl-textfield__input" type="date" id="expenseDateStr">
           <label class="mdl-textfield__label aa-mdl-floated" for="expenseDateStr">Date...</label>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label aa-required">
           <input ng-control="category" class="mdl-textfield__input" type="text" id="category">
           <label class="mdl-textfield__label" for="category">Category...</label>
         </div>
@@ -44,17 +47,19 @@ import {Globals} from './common/globals';
   `
 })
 export class Expense extends BaseView {
+  element: ElementRef;
   expenseForm: any;
   amount: number = null;
   expenseDate: Date = new Date();
   category: string = "";
   tags: Array<string> = [];
   notes: string = "";
+  validationService: ValidationService;
   get expenseDateStr() {
     return Globals.DateToStr(this.expenseDate);
   }
 
-  constructor(fb: FormBuilder){
+  constructor(fb: FormBuilder, element: ElementRef, validationService: ValidationService){
     super();
     this.expenseForm = fb.group({
       amount: [this.amount, Validators.required],
@@ -63,10 +68,18 @@ export class Expense extends BaseView {
       tags: [this.tags],
       notes: [this.notes]
     });
+    this.validationService = validationService;
+    this.element = element;
+  }
+
+  ngOnInit() {
+    this.validationService.init(this.element);
   }
 
   addExpense() {
-    console.log('expense added!');
+    if(this.validationService.isValid()){
+      alert("SUCCESS!");
+    }
   }
 
 }

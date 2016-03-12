@@ -25,7 +25,8 @@
         "client/components/controls/chipCollection.ts",
         "client/components/expense.ts",
         "client/components/search.ts",
-        "client/services/stocks.ts"
+        "client/services/stocks.ts",
+        "client/services/validationService.ts"
     ],
     "atom": {
         "rewriteTsconfig": true
