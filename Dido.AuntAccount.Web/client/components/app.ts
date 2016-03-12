@@ -1,14 +1,14 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
 import {RouteConfig, Router, RouterOutlet, RouterLink, CanActivate, OnActivate, ComponentInstruction} from 'angular2/router';
 
 import {Search} from './search';
 import {Expense} from './expense';
 
 @RouteConfig([
-  {path: '/', as: 'search', component: Search},
-  {path: '/expense', as: 'expense', component: Expense}
+  {path: '/', as: 'Search', component: Search},
+  {path: '/expense', as: 'Expense', component: Expense}
 ])
 
 @Component({
@@ -20,11 +20,11 @@ import {Expense} from './expense';
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">AuntAccount</span>
+        <span class="mdl-layout-title">Aunt Account</span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" [router-link]="['/search']">Search</a>
-          <a class="mdl-navigation__link" [router-link]="['/expense']">Expense</a>
+          <a class="mdl-navigation__link" [routerLink]="['/Search']">Search</a>
+          <a class="mdl-navigation__link" [routerLink]="['/Expense']">Expense</a>
         </nav>
       </div>
     </header>

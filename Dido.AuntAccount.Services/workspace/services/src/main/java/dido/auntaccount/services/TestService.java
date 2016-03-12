@@ -1,6 +1,7 @@
 package dido.auntaccount.services;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -24,6 +25,17 @@ public class TestService {
 
 		return Response.status(200).entity(output).build();
  
+	}
+
+	@GET
+	@Path("/create")
+	public Response createMsg() {
+
+		App app = new App();
+		app.createUser();
+
+		return Response.status(200).entity("User created").build();
+
 	}
  
 }

@@ -1,0 +1,1293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="640b2f69-d07e-4017-b60e-628979932ac0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_3_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_core_1_8.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_server_1_8.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_38.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javalite_activejdbc_1_4_11.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javalite_javalite_common_1_4_11.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/workspace/dao/dao.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/workspace/services/services.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/11/005aa8355abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/11/106e24d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/12/108f0be396bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/12/a05e76a1d5c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/15/704206e4dbc200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/17/70b11e47d3c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/18/00a980e097bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/18/20627a66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/1d/00c72c4bd0c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/2/a05c23d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/26/500a25d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/28/10cc98f096bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/28/f0d3b7cd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/29/00355bcd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/2c/d0d6617767bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/2f/f09f021766bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/31/300a47c0d2c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/31/506c81e097bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/3e/300e4e42e1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/44/90a2814255bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/46/306b7f66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/46/40ec8a5d5abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/47/f05d7c66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/48/20054e8595bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/48/e0e65acd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/4a/c0ab6eafd0c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/4a/f01cde9d54bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/53/70f00eb09bbc00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/54/004724d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/56/70bb5b1e5bbd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/58/30bc24d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/5b/407222d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/5f/509922d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/5f/b0dda54055bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/6/40e324d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/63/7020c7b6e2bd0015112dddd0554f20b2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/63/d0cdeef154bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/64/60c022d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/65/b0ff0092e0c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/6a/20feabf266bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/6f/305b05eed1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/7/80417b54d3c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/71/20d37c66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/74/0096397863bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/74/10ebfe6bd1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/74/408d200997bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/77/a0297966d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/78/301e81e097bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/78/70ba81e097bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/7a/00098ccd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/7d/10415f29d1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/7f/e0b78be867bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/83/c0df1763e0c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/85/c0dd8dcd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/85/e09c90cd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/85/f0466b66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/86/8002d6ed5abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/87/203991cd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/87/b0458bcd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/88/b016e815e1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/8c/d02ba64055bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/9/30546e66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/90/b081763ed3c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/95/009cdb4693bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/98/314b22d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/9a/a0f7e8575abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/9a/d04e4ef297bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/9b/a0fe603293bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/9d/c09561d267bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/9f/40168fcd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/a1/2062e4205bbd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/a2/903e6f66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/a4/70a72cafd5c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/a8/10d080e097bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ae/102c7c26d6c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ae/20cec8cdd5c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/b3/404581e097bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/b3/d0f86a66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/b4/80356a66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/b9/d0d66bcd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ba/709390f595bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/bc/00299e67d1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/c7/3002abfbd1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/c8/f0b76d66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ca/705825d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ca/802392cd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/cd/10b1c90b93bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ce/b0715acd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/cf/c03094256abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/d/908fa54055bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/d/a0b76e56d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/d0/b075dfe2dbc200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/d2/808c535dd4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/d2/d0d123d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/d4/308eb3cd8fbc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/d6/a01e52abd0c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/db/f0a50049d5c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/de/10fd21d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/de/202422d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/df/304b22d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/df/a00b7e66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/e/00dc2e8dd1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/e/e0a88baf5abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/e3/80bd79625abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/e3/f0287066d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/e9/90af88e792bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/e9/a0c29c7f63bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ed/30e54e899bbc00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ed/a0f53b53d1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/f2/10066e66d4c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/f3/60a0dbbfe1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/f3/90a625d259bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/fb/f07522b0d1c200151c05ed9940898006" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/fc/20a797e859bd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/fc/30478f536abd00151a70c9da71f79a5d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.history/ff/00c2832393bc00151c52fb61f36676f5" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/Servers/.indexes/14/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/Servers/.indexes/b7/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/92/e4/b9/22/e4/92/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/92/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/15/d0/d/aa/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/d0/d/aa/3f/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/d0/d/aa/92/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/e1/e4/92/22/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/e1/e4/b9/22/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/e1/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/f9/8b/2b/aa/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/f9/8b/dd/aa/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/f9/8b/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/6f/26/f9/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/af/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/e4/92/22/d0/d/aa/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/e4/b9/22/d0/d/aa/3f/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/e4/b9/22/d0/d/aa/92/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/e4/b9/db/e1/e4/92/22/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/e4/b9/db/e1/e4/b9/22/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/e4/b9/db/e1/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/e4/b9/db/f9/8b/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/aa/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/af/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/e4/b9/22/d0/d/5e/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/e4/b9/b3/a8/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.indexes/history.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.epp.logging.aeri.ui/history/write.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1115467115.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1129686770.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1299022128.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1319774933.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1498219845.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/156892997.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/163172794.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1686083788.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1693424326.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1697886153.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/1995173708.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/2192391902.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/2833010890.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/305854171.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/3065916431.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/30765161.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/3133528496.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/3619979710.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/371195503.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/3974580528.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/4041092966.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/4108727661.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/4155206848.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/520863142.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/1394061101.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/1686083788.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/2935576206.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/3194095692.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/635437745.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/75843142.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/write.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/Servers/Tomcat v8.0 Server at localhost Windows-config/catalina.policy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/Servers/Tomcat v8.0 Server at localhost Windows-config/catalina.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/Servers/Tomcat v8.0 Server at localhost Windows-config/context.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/Servers/Tomcat v8.0 Server at localhost Windows-config/server.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/Servers/Tomcat v8.0 Server at localhost Windows-config/tomcat-users.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/workspace/Servers/Tomcat v8.0 Server at localhost Windows-config/web.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.markers.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.markers.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.syncinfo.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.syncinfo.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/Servers/.markers.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/Servers/.markers.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/Servers/.syncinfo.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/Servers/.syncinfo.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.markers" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.markers" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.markers.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.markers.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.syncinfo.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/services/.syncinfo.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.root/2.tree" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.root/2.tree" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/2.snap" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.resources/2.snap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.epp.logging.aeri.ui/remote-index/segments.gen" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.epp.logging.aeri.ui/remote-index/segments.gen" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.core/workspaceState.ser" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.core/workspaceState.ser" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/externalLibsTimeStamps" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/externalLibsTimeStamps" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/variablesAndContainers.dat" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/variablesAndContainers.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/dao/target/dao-0.0.1-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/workspace/dao/target/dao-0.0.1-SNAPSHOT.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/services/target/classes/dido/auntaccount/services/TestService.class" afterPath="$PROJECT_DIR$/workspace/services/target/classes/dido/auntaccount/services/TestService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/services/target/services.war" afterPath="$PROJECT_DIR$/workspace/services/target/services.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/services/target/services/WEB-INF/classes/dido/auntaccount/services/TestService.class" afterPath="$PROJECT_DIR$/workspace/services/target/services/WEB-INF/classes/dido/auntaccount/services/TestService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/services/target/services/WEB-INF/lib/dao-0.0.1-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/workspace/services/target/services/WEB-INF/lib/dao-0.0.1-SNAPSHOT.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.log" afterPath="$PROJECT_DIR$/workspace/.metadata/.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.ui.prefs" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.ui.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.jsdt.web.core.prefs" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.jsdt.web.core.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches/App.launch" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches/App.launch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.epp.logging.aeri.ui/server-config.json" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.epp.logging.aeri.ui/server-config.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.launching/.install.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.launching/.install.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/OpenTypeHistory.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/OpenTypeHistory.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/QualifiedTypeNameHistory.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/QualifiedTypeNameHistory.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.core.ui/dialog_settings.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.core.ui/dialog_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.core/workspacestate.properties" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.core/workspacestate.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0 (Спірна копія користувача Orysia Khapko 2016-01-18).log" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0 (Спірна копія користувача Orysia Khapko 2016-01-18).log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.ui.ide/dialog_settings.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.ui.ide/dialog_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/savedIndexNames.txt" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/savedIndexNames.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.ui/OpenTypeHistory.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.ui/OpenTypeHistory.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.ui/QualifiedTypeNameHistory.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.ui/QualifiedTypeNameHistory.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.server.core/monitors.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.server.core/monitors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.sse.ui/dialog_settings.xml" afterPath="$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.wst.sse.ui/dialog_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/dao/target/surefire-reports/TEST-dido.auntaccount.dao.AppTest.xml" afterPath="$PROJECT_DIR$/workspace/dao/target/surefire-reports/TEST-dido.auntaccount.dao.AppTest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/dao/target/surefire-reports/dido.auntaccount.dao.AppTest.txt" afterPath="$PROJECT_DIR$/workspace/dao/target/surefire-reports/dido.auntaccount.dao.AppTest.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/services/src/main/java/dido/auntaccount/services/TestService.java" afterPath="$PROJECT_DIR$/workspace/services/src/main/java/dido/auntaccount/services/TestService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace/services/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/workspace/services/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/bootstrap.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/bootstrap.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/app.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/app.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/base/baseView.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/base/baseView.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/expense.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/expense.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/search.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/components/search.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/css/site.css" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/css/site.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/index.html" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/services/stocks.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/client/services/stocks.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/gulpfile.js" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/package.json" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/tsconfig.json" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/tsconfig.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/tsd.json" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/tsd.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/typings/globals.d.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/typings/globals.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dido.AuntAccount.Web/typings/tsd.d.ts" afterPath="$PROJECT_DIR$/../Dido.AuntAccount.Web/typings/tsd.d.ts" />
+    </list>
+    <ignored path="Dido.AuntAccount.Services.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/workspace/services/target/" />
+    <ignored path="$PROJECT_DIR$/workspace/dao/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Dido.AuntAccount.Services" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/workspace/dao/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.0">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/workspace/dao/src/main/java/dido/auntaccount/dao/App.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/workspace/services/src/main/java/dido/auntaccount/services/TestService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.921875">
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/workspace/services/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="7.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/workspace/services/src/main/webapp/WEB-INF/web.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.875">
+              <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/workspace/services/src/main/java/dido/auntaccount/services/TestService.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="services Maven Webapp" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="services Maven Webapp" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="dao" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="dao" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="724" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Servers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auntaccount" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auntaccount" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".recommenders" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dido.AuntAccount.Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/workspace/dao/pom.xml" />
+    <property name="SearchEverywhereHistoryKey" value="maven&#9;ACTION&#9;ActivateMavenProjectsToolWindow&#10;mave&#9;ACTION&#9;ActivateMavenProjectsToolWindow&#10;ser&#9;FILE&#9;file:///Users/orysiadeyneka/Dropbox/AuntAccount/Dido.AuntAccount.Services/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat v8.0 Server at localhost Windows.launch&#10;tomca&#9;FILE&#9;file:///Users/orysiadeyneka/Dropbox/AuntAccount/Dido.AuntAccount.Services/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat v8.0 Server at localhost Windows.launch" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RunManager" selected="Maven.services [install]">
+    <configuration default="false" name="services [install]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/workspace/services" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Dido.AuntAccount.Services" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Maven.services [install]" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Maven.services [install]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="640b2f69-d07e-4017-b60e-628979932ac0" name="Default" comment="" />
+      <created>1457783677686</created>
+      <option name="number" value="Default" />
+      <updated>1457783677686</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1280" height="724" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22109374" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat v8.0 Server at localhost Windows.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches/App.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace/.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat v8.0 Server at localhost Windows.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace/services/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.875">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace/services/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="7.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace/dao/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace/dao/src/main/java/dido/auntaccount/dao/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/workspace/services/src/main/java/dido/auntaccount/services/TestService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.921875">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>dao</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: asm:asm:3.1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

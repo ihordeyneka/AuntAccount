@@ -16,13 +16,15 @@ var packageJson = require('./package.json');
 
 var PATHS = {
   lib: [
-    'node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
-    'node_modules/angular2/node_modules/rx/dist/rx.js',
+    'node_modules/es6-shim/es6-shim.js',
+    'node_modules/rxjs/Rx.js',
+    'node_modules/rxjs/Subject.js',
     'node_modules/reflect-metadata/Reflect.js',
     'node_modules/zone.js/dist/zone.js',
     'node_modules/zone.js/dist/long-stack-trace-zone.js',
     '!node_modules/systemjs/dist/*.src.js',
-    'node_modules/systemjs/dist/*.js'
+    'node_modules/systemjs/dist/*.js',
+    'node_modules/jquery/dist/jquery.min.js'
   ],
   typings: [
     'typings/tsd.d.ts'
@@ -44,7 +46,10 @@ var tsProject = ts.createProject('tsconfig.json', {
 });
 
 gulp.task('clean', function() {
-  del([PATHS.dist], function(){ });
+  del([PATHS.distClient], function(){ });
+  del([PATHS.distLib + '/angular2/?**'], function(){ });
+  del([PATHS.distLib + '/rxjs/?**'], function(){ });
+  del([PATHS.distLib + '/*', '!' + PATHS.distLib + '/angular2', '!' + PATHS.distLib + '/rxjs'], function(){ });
 });
 
 gulp.task('angular2', function() {
@@ -58,10 +63,18 @@ gulp.task('angular2', function() {
 			'!node_modules/angular2/ts/**',
 			'node_modules/angular2/**/*.js'
 		])
-		.pipe(gulp.dest(PATHS.dist + '/lib/angular2'));
+		.pipe(gulp.dest(PATHS.distLib + '/angular2'));
 });
 
-gulp.task('libs', ['angular2'], function() {
+gulp.task('rxjs', function() {
+  return gulp
+		.src([
+			'node_modules/rxjs/**/*.js'
+		])
+		.pipe(gulp.dest(PATHS.distLib + '/rxjs'));
+});
+
+gulp.task('libs', ['angular2', 'rxjs'], function() {
   return gulp
     .src(PATHS.lib)
     .pipe(gulp.dest(PATHS.distLib));

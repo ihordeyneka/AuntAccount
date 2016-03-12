@@ -2,3 +2,34 @@
   font-size: 12px !important;
   top: 4px !important;
 }
+
+.aa-mdl-input-button {
+  left: 300px;
+}
+
+.aa-current-chips {
+  width: 300px;
+  max-width: 100%;
+}
+
+.aa-mdl-chip {
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  height: 24px;
+  margin: 0;
+  min-width: 48px;
+  padding: 0 11px;
+  display: inline-block;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-align: center;
+  line-height: 24px;
+  vertical-align: middle;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}

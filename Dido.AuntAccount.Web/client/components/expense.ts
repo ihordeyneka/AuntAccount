@@ -1,7 +1,9 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-import {Component, View, Directive, NgIf, Control} from 'angular2/angular2';
-import {FORM_BINDINGS, FORM_DIRECTIVES, FormBuilder, Validators} from 'angular2/angular2';
+import {Component, View, Directive} from 'angular2/core';
+import {NgIf, NgFor, Control} from 'angular2/common'
+import {FORM_BINDINGS, FORM_DIRECTIVES, FormBuilder, Validators} from 'angular2/common';
+import {ChipCollection} from './controls/chipCollection';
 import {BaseView} from './base/baseView';
 import {Globals} from './common/globals';
 
@@ -10,12 +12,12 @@ import {Globals} from './common/globals';
   viewBindings: [FORM_BINDINGS]
 })
 @View({
-  directives: [FORM_DIRECTIVES],
+  directives: [FORM_DIRECTIVES, NgIf, NgFor, ChipCollection],
   template: `
   <div class="expense-grid mdl-grid">
     <div class="mdl-cell mdl-cell--4-col"></div>
     <div class="mdl-cell mdl-cell--4-col">
-      <form [ng-form-model]="expenseForm" (submit)="addExpense()">
+      <form [ngFormModel]="expenseForm" (submit)="addExpense()">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input ng-control="amount" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="amount">
           <label class="mdl-textfield__label" for="amount">Amount...</label>
@@ -29,15 +31,12 @@ import {Globals} from './common/globals';
           <input ng-control="category" class="mdl-textfield__input" type="text" id="category">
           <label class="mdl-textfield__label" for="category">Category...</label>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input ng-control="tags" class="mdl-textfield__input" type="text" id="tags">
-          <label class="mdl-textfield__label" for="tags">Tags...</label>
-        </div>
+        <chipCollection [chips]="tags" [label]="'Tags...'"></chipCollection>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <textarea ng-control="notes" class="mdl-textfield__input" type="text" rows= "3" id="notes"></textarea>
           <label class="mdl-textfield__label" for="notes">Notes...</label>
         </div>
-        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">Add Expense</button>
+        <button type="submit" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect">Add Expense</button>
       </form>
     </div>
     <div class="mdl-cell mdl-cell--4-col"></div>
@@ -49,7 +48,7 @@ export class Expense extends BaseView {
   amount: number = null;
   expenseDate: Date = new Date();
   category: string = "";
-  tags: Array<string> = ["tag1", "tag2"];
+  tags: Array<string> = [];
   notes: string = "";
   get expenseDateStr() {
     return Globals.DateToStr(this.expenseDate);

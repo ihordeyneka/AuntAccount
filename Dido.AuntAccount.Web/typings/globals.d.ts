@@ -1,1 +1,1 @@
-declare var componentHandler: any; 
+declare var componentHandler: any;

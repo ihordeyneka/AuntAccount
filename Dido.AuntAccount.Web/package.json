@@ -1,34 +1,33 @@
 {
-  "name": "hello-world",
+  "name": "AuntAccount",
   "version": "0.1.0",
-  "description": "Stock tracker in Angular 2",
+  "description": "Aunt Account",
   "main": "server/bootstrap.js",
   "scripts": {
     "start": "npm install && node ./node_modules/gulp/bin/gulp.js go"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angular-in-action/hello-world.git"
+    "url": "git+https://github.com/ihordeyneka/AuntAccount.git"
   },
   "keywords": [
     "angular2"
   ],
-  "author": "Jeremy Wilken <gnomation@gnomeontherun.com>",
+  "author": "Ihor Deyneka <ihordeyneka@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angular-in-action/hello-world/issues"
+    "url": "https://github.com/ihordeyneka/AuntAccount/issues"
   },
-  "homepage": "https://github.com/angular-in-action/hello-world#readme",
+  "homepage": "https://github.com/ihordeyneka/AuntAccount",
   "dependencies": {
-    "angular2": "2.0.0-alpha.37",
+    "angular2": "2.0.0-beta.2",
     "chalk": "^1.1.1",
     "express": "4.13.1",
-    "reflect-metadata": "0.1.0",
+    "reflect-metadata": "0.1.2",
     "replace-ext": "0.0.1",
     "systemjs": "0.18.4",
     "vinyl": "^1.1.0",
-    "yahoo-finance": "0.2.11",
-    "zone.js": "0.5.2"
+    "zone.js": "0.5.10"
   },
   "devDependencies": {
     "del": "1.2.0",
