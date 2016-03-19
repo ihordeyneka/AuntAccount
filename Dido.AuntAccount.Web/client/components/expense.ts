@@ -5,10 +5,9 @@ import {NgIf, NgFor, Control} from 'angular2/common'
 import {FORM_BINDINGS, FORM_DIRECTIVES, FormBuilder, Validators} from 'angular2/common';
 import {ChipCollection} from './controls/chipCollection';
 import {ValidationService} from '../services/validationService'
+import {ExpenseService} from '../services/expenseService'
+import {ExpenseModel} from '../models/expenseModel';
 import {BaseView} from './base/baseView';
-import {Globals} from './common/globals';
-
-declare var jQuery:JQueryStatic;
 
 @Component({
   selector: 'expense',
@@ -20,23 +19,23 @@ declare var jQuery:JQueryStatic;
   <div class="expense-grid mdl-grid">
     <div class="mdl-cell mdl-cell--4-col"></div>
     <div class="mdl-cell mdl-cell--4-col">
-      <form [ngFormModel]="expenseForm" (submit)="addExpense()">
+      <form (submit)="addExpense()">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label aa-required">
-          <input ng-control="amount" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="amount">
+          <input [(ngModel)]="model.amount" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="amount">
           <label class="mdl-textfield__label" for="amount">Amount...</label>
           <span class="mdl-textfield__error">Amount must be a number!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label aa-required">
-          <input ng-control="expenseDateStr" class="mdl-textfield__input" type="date" id="expenseDateStr">
+          <input [(ngModel)]="model.expenseDateStr" class="mdl-textfield__input" type="date" id="expenseDateStr">
           <label class="mdl-textfield__label aa-mdl-floated" for="expenseDateStr">Date...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label aa-required">
-          <input ng-control="category" class="mdl-textfield__input" type="text" id="category">
+          <input [(ngModel)]="model.category" class="mdl-textfield__input" type="text" id="category">
           <label class="mdl-textfield__label" for="category">Category...</label>
         </div>
-        <chipCollection [chips]="tags" [label]="'Tags...'"></chipCollection>
+        <chipCollection [chips]="model.tags" [label]="'Tags...'"></chipCollection>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <textarea ng-control="notes" class="mdl-textfield__input" type="text" rows= "3" id="notes"></textarea>
+          <textarea [(ngModel)]="model.notes" class="mdl-textfield__input" type="text" rows= "3" id="notes"></textarea>
           <label class="mdl-textfield__label" for="notes">Notes...</label>
         </div>
         <button type="submit" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect">Add Expense</button>
@@ -48,27 +47,15 @@ declare var jQuery:JQueryStatic;
 })
 export class Expense extends BaseView {
   element: ElementRef;
-  expenseForm: any;
-  amount: number = null;
-  expenseDate: Date = new Date();
-  category: string = "";
-  tags: Array<string> = [];
-  notes: string = "";
+  model: ExpenseModel;
   validationService: ValidationService;
-  get expenseDateStr() {
-    return Globals.DateToStr(this.expenseDate);
-  }
+  expenseService: ExpenseService;
 
-  constructor(fb: FormBuilder, element: ElementRef, validationService: ValidationService){
+  constructor(fb: FormBuilder, element: ElementRef, validationService: ValidationService, expenseService: ExpenseService){
     super();
-    this.expenseForm = fb.group({
-      amount: [this.amount, Validators.required],
-      expenseDateStr: [this.expenseDateStr],
-      category: [this.category],
-      tags: [this.tags],
-      notes: [this.notes]
-    });
+    this.model = new ExpenseModel();
     this.validationService = validationService;
+    this.expenseService = expenseService;
     this.element = element;
   }
 
@@ -78,7 +65,7 @@ export class Expense extends BaseView {
 
   addExpense() {
     if(this.validationService.isValid()){
-      alert("SUCCESS!");
+      this.expenseService.postExpense(this.model);
     }
   }
 

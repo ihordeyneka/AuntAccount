@@ -10,7 +10,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
-        "outDir": "dist"
+        "outDir": "bin"
     },
     "filesGlob": [
         "typings/tsd.d.ts",
@@ -25,7 +25,9 @@
         "client/components/controls/chipCollection.ts",
         "client/components/expense.ts",
         "client/components/search.ts",
-        "client/services/stocks.ts",
+        "client/models/expenseModel.ts",
+        "client/services/configService.ts",
+        "client/services/expenseService.ts",
         "client/services/validationService.ts"
     ],
     "atom": {

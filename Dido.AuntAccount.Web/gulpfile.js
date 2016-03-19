@@ -19,11 +19,28 @@ var PATHS = {
     'node_modules/es6-shim/es6-shim.js',
     'node_modules/rxjs/Rx.js',
     'node_modules/rxjs/Subject.js',
+    'node_modules/rxjs/Observable.js.map',
+    'node_modules/rxjs/Subscriber.js.map',
+    'node_modules/rxjs/util/noop.js.map',
+    'node_modules/rxjs/util/SymbolShim.js.map',
+    'node_modules/rxjs/subject/SubjectSubscription.js.map',
+    'node_modules/rxjs/Subject.js.map',
+    'node_modules/rxjs/util/throwError.js.map',
+    'node_modules/rxjs/Subscription.js.map',
+    'node_modules/rxjs/util/tryOrOnError.js.map',
+    'node_modules/rxjs/observable/fromPromise.js.map',
+    'node_modules/rxjs/scheduler/QueueScheduler.js.map',
+    'node_modules/rxjs/scheduler/QueueAction.js.map',
+    'node_modules/rxjs/scheduler/FutureAction.js.map',
+    'node_modules/rxjs/operator/toPromise.js.map',
     'node_modules/reflect-metadata/Reflect.js',
+    'node_modules/reflect-metadata/Reflect.js.map',
     'node_modules/zone.js/dist/zone.js',
     'node_modules/zone.js/dist/long-stack-trace-zone.js',
     '!node_modules/systemjs/dist/*.src.js',
     'node_modules/systemjs/dist/*.js',
+    '!node_modules/systemjs/dist/*.src.js.map',
+    'node_modules/systemjs/dist/*.js.map',
     'node_modules/jquery/dist/jquery.min.js'
   ],
   typings: [
@@ -69,7 +86,8 @@ gulp.task('angular2', function() {
 gulp.task('rxjs', function() {
   return gulp
 		.src([
-			'node_modules/rxjs/**/*.js'
+			'node_modules/rxjs/**/*.js',
+      'node_modules/rxjs/**/*.js.map'
 		])
 		.pipe(gulp.dest(PATHS.distLib + '/rxjs'));
 });
