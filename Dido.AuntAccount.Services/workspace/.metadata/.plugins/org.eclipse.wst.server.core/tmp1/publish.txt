@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Sun Jan 24 22:50:26 EET 2016
-org.eclipse.jst.j2ee.server\:dao=WEB-INF/lib/dao-0.0.1-SNAPSHOT.jar

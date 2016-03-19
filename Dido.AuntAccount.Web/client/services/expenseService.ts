@@ -16,9 +16,6 @@ export class ExpenseService {
   }
 
   public postExpense(expense: ExpenseModel) {
-    alert(this.rootUrl);
-    //this.http.post(this.rootUrl + "/expense/post", JSON.stringify(expense));
-
-    //3. fix this.http.post not sending a request in Network Tab
+    this.http.post(this.rootUrl + "/expense/post", JSON.stringify(expense));
   }
 }

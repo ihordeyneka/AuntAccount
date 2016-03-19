@@ -1,3 +1,0 @@
-INDEX VERSION 1.127+/Users/orysiadeyneka/Dropbox/AuntAccount/Dido.AuntAccount.Services/workspace/.metadata/.plugins/org.eclipse.jdt.core
-2907793372.index
-151282615.index

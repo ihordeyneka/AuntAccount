@@ -14,4 +14,10 @@ export class ExpenseModel {
     return Globals.DateToStr(this.expenseDate);
   }
 
+  constructor() {
+    this.amount = 10;
+    this.category = "Beverages";
+    this.tags.push("Glory Cafe");
+    this.notes = "morning coffee";
+  }
 }

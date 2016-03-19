@@ -1,8 +1,0 @@
-package dido.auntaccount.entities;
-
-import org.javalite.activejdbc.Model;
-
-@Table("users")
-public class User extends Model {
-
-}
