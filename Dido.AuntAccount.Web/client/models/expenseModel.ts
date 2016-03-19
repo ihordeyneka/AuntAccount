@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-import {Globals} from '../components/common/globals';
+import {Globals} from '../common/globals';
 
 export class ExpenseModel {
 

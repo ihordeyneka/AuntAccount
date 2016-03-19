@@ -19,9 +19,9 @@
     "files": [
         "typings/tsd.d.ts",
         "client/bootstrap.ts",
+        "client/common/globals.ts",
         "client/components/app.ts",
         "client/components/base/baseView.ts",
-        "client/components/common/globals.ts",
         "client/components/controls/chipCollection.ts",
         "client/components/expense.ts",
         "client/components/search.ts",

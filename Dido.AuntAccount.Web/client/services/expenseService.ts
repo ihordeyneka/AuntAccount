@@ -16,6 +16,11 @@ export class ExpenseService {
   }
 
   public postExpense(expense: ExpenseModel) {
-    this.http.post(this.rootUrl + "/expense/post", JSON.stringify(expense));
+    this.http.post("http://localhost:3000/search", JSON.stringify(expense)).subscribe(
+        data => { },
+        err => console.log(err),
+        () => console.log('done')
+      );
+    //this.http.post(this.rootUrl + "/expense/post", JSON.stringify(expense));
   }
 }
