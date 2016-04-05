@@ -2,11 +2,11 @@ media (max-width: 900px) {
   .aa-navigation-container {
     display: none;
   }
-  .android-title {
+  .aa-title {
     display: none !important;
   }
 
-  .android-mobile-title {
+  .aa-mobile-title {
     display: block !important;
     position: absolute;
     left: calc(50% - 70px);

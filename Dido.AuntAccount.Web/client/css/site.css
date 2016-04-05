@@ -140,6 +140,19 @@
   background-color: #f3f3f3;
 }
 
+.aa-card {
+  width: 100%;
+}
+
+.aa-card > .mdl-card__title {
+  color: rgb(0,150,136);
+  height: 200px;
+}
+
+.aa-wedding-card > .mdl-card__title {
+  background: url('images/cards/wedding.jpg') center / cover;
+}
+
 /*-----------Custom Styles-------------*/
 
 .aa-mdl-floated {

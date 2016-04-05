@@ -23,7 +23,7 @@ import {Expense} from './expense';
     <div class="aa-header mdl-layout__header mdl-layout__header--waterfall">
       <div class="mdl-layout__header-row">
         <span class="aa-title mdl-layout-title">
-          <a [routerLink]="['/Home']" class="aa-home-link"><img class="aa-logo-image" src="client/images/android-logo.png"></a>
+          <a [routerLink]="['/Home']" class="aa-home-link"><img class="aa-logo-image" src="client/images/site-logo.png"></a>
         </span>
         <!-- Add spacer, to align navigation to the right in desktop -->
         <div class="aa-header-spacer mdl-layout-spacer"></div>
@@ -38,21 +38,23 @@ import {Expense} from './expense';
         <!-- Navigation -->
         <div class="aa-navigation-container">
           <nav class="aa-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['/Home']">Home</a>
             <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['/Search']">Search</a>
             <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['/Expense']">Expense</a>
           </nav>
         </div>
         <span class="aa-mobile-title mdl-layout-title">
-          <img class="aa-logo-image" src="client/images/android-logo.png">
+          <img class="aa-logo-image" src="client/images/site-logo.png">
         </span>
       </div>
     </div>
 
     <div class="aa-drawer mdl-layout__drawer">
       <span class="mdl-layout-title">
-        <img class="aa-logo-image" src="client/images/android-logo-white.png">
+        <img class="aa-logo-image" src="client/images/site-logo-white.png">
       </span>
       <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" [routerLink]="['/Home']">Home</a>
         <a class="mdl-navigation__link" [routerLink]="['/Search']">Search</a>
         <a class="mdl-navigation__link" [routerLink]="['/Expense']">Expense</a>
       </nav>
