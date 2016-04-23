@@ -19,17 +19,17 @@ import {HomeTile} from './controls/homeTile';
         </homeTile>
       </div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-        <homeTile [header]="'House'"
-                  [redirectUrl]="'http://www.google.com.ua'"
-                  [containerClass]="'aa-house-card'"
-                  [supportingText]="'Building a house or started doing some little refurnishment? You will need some help...'">
-        </homeTile>
-      </div>
-      <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
         <homeTile [header]="'Trip'"
                   [redirectUrl]="'http://www.google.com.ua'"
                   [containerClass]="'aa-trip-card'"
                   [supportingText]="'Everything you need to plan your new journey right on your hand...'">
+        </homeTile>
+      </div>
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+        <homeTile [header]="'House'"
+                  [redirectUrl]="'http://www.google.com.ua'"
+                  [containerClass]="'aa-house-card'"
+                  [supportingText]="'Building a house or started doing some little refurnishment? You will need some help...'">
         </homeTile>
       </div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">

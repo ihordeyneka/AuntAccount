@@ -153,6 +153,18 @@
   background: url('images/cards/wedding.jpg') center / cover;
 }
 
+.aa-trip-card > .mdl-card__title {
+  background: url('images/cards/trip.jpg') center / cover;
+}
+
+.aa-house-card > .mdl-card__title {
+  background: url('images/cards/house.jpg') center / cover;
+}
+
+.aa-custom-card > .mdl-card__title {
+  background: url('images/cards/custom.jpg') center / cover;
+}
+
 /*-----------Custom Styles-------------*/
 
 .aa-mdl-floated {
