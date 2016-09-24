@@ -1,0 +1,22 @@
+{
+  "name": "AuntAccountPosts",
+  "version": "0.1.0",
+  "description": "Aunt Account Posts",
+  "main": "server/bootstrap.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihordeyneka/AuntAccount.git"
+  },
+  "author": "Ihor Deyneka <ihordeyneka@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "gulp-changed": "^1.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-run-seq": "^1.2.4",
+    "gulp-sequence": "^0.4.6",
+    "run-sequence": "^1.2.2"
+  }
+}
