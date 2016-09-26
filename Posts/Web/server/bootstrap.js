@@ -11,12 +11,19 @@ var DIST_DIR = path.join(__dirname, '..', 'dist');
 
 // Send static files from client directory
 app.use('/client', express.static(DIST_DIR + '/client'));
+app.use('/lib', express.static(DIST_DIR + '/lib'));
 
 var router = express.Router();
 
-// Send any other urls to the client app to load.
-router.get('*', function(req, res) {
+// Send home url to index.html.
+router.get('/', function(req, res) {
   res.sendFile(DIST_DIR + '/client/index.html');
+});
+
+// Send any other urls notfound.html.
+router.get('*', function(req,res) {
+  res.statusCode = 404;
+  res.sendFile(DIST_DIR + '/client/notfound.html');
 });
 
 app.use('/', router);

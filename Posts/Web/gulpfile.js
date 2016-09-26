@@ -10,6 +10,7 @@ var nodeServer = null;
 var packageJson = require('./package.json');
 var PATHS = {
   lib: [
+    'node_modules/jquery.1/node_modules/jquery/dist/jquery.min.js'
   ],
   client: {
     js: ['client/**/*.js'],
@@ -48,7 +49,13 @@ gulp.task('css', function() {
     .pipe(sourcemaps.init())
     .pipe(concat('app.css'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.distClient));
+    .pipe(gulp.dest(PATHS.distClient + '/css'));
+});
+
+gulp.task('libs', function() {
+  return gulp
+    .src(PATHS.lib)
+    .pipe(gulp.dest(PATHS.distLib));
 });
 
 gulp.task('js', function() {
@@ -67,6 +74,7 @@ gulp.task('img', function() {
 
 gulp.task('clean', function() {
   del([PATHS.distClient], function(){ });
+  del([PATHS.distLib], function(){ });
 });
 
 gulp.task('watch', function() {
@@ -77,7 +85,9 @@ gulp.task('watch', function() {
 });
 
 gulp.task('bundle', function() {
-  runSequence(['html', 'css', 'js', 'img']);
+  runSequence(['html', 'css', 'libs', 'js', 'img']);
 });
 
-gulp.task('default', ['server', 'bundle']);
+gulp.task('default', ['server', 'bundle'], function() {
+  runSequence('watch');
+});
