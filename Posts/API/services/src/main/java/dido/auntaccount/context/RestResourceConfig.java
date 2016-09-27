@@ -1,11 +1,12 @@
 package dido.auntaccount.context;
 
-import com.google.inject.Inject;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
+
+import javax.inject.Inject;
 
 /**
  * Created by orysiadeyneka on 26.09.16.

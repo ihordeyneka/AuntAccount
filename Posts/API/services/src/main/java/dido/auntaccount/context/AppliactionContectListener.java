@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebListener;
  * Created by orysiadeyneka on 24.09.16.
  */
 
-@WebListener
+//@WebListener
 public class AppliactionContectListener extends GuiceServletContextListener {
 
     static Injector injector;
