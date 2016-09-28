@@ -7,14 +7,47 @@
   <title>Aunt Account</title>
   <link rel="stylesheet" href="/client/css/app.css">
   <script src="/lib/jquery.min.js"></script>
+  <script src="/lib/bootstrap.min.js"></script>
   <script src="/client/scripts/router.js"></script>
 </head>
 <body>
-  <h1>Node.JS web application.</h1>
-  <br>
-  <a class="router-link" href="/client/views/offer.html">My Offer</a>
-  <a class="router-link" href="/client/views/offerslist.html">Offers List</a>
-  <br>
-  <div id="router"></div>
+  <header class="navbar navbar-fixed-top aa-page-header">
+    <nav role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle header-nav__button" data-toggle="collapse" data-target=".navbar-main">
+          <span class="icon-bar header-nav__button-line"></span>
+          <span class="icon-bar header-nav__button-line"></span>
+          <span class="icon-bar header-nav__button-line"></span>
+        </button>
+        <div class="header-nav__logo">
+          <a class="header-nav__logo-link header__logo aa-logo" href="/">AA</a>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse navbar-main navbar-right">
+        <ul class="nav navbar-nav header-nav__navigation">
+          <li class="header-nav__navigation-item">
+            <a href="/" class="header-nav__navigation-link">Home</a>
+          </li>
+          <li class="header-nav__navigation-item">
+            <a href="/client/views/post.html" class="header-nav__navigation-link router-link">Post</a>
+          </li>
+          <li class="header-nav__navigation-item">
+            <a href="/client/views/notifications.html" class="header-nav__navigation-link router-link">Notifications</a>
+          </li>
+          <li class="header-nav__navigation-item">
+            <a href="/" class="header-nav__navigation-link">Login</a>
+          </li>
+          <li class="header-nav__navigation-item">
+            <a href="/" class="header-nav__navigation-link">Sign up</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div id="router">
+      <h1 class="center">Node.JS web application.</h1>
+    </div>
+  </main>
 </body>
 </html>

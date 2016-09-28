@@ -2,3 +2,33 @@
   width: 100%;
   height: 100%;
 }
+
+.aa-page-header {
+  padding: 10px 30px;
+}
+
+.aa-logo {
+  font-family: 'Merriweather';
+  font-size: 36px;
+}
+
+a.header-nav__navigation-link:hover {
+  background: transparent !important;
+  border-bottom: solid 2px rgb(51, 51, 51);
+}
+
+.header-nav__button {
+  background-color: rgb(51, 51, 51);
+}
+
+.header-nav__button span {
+  background-color: #fff;
+}
+
+.header-nav__button:hover {
+  background-color: transparent;
+}
+
+.header-nav__button:hover span {
+  background-color: rgb(51, 51, 51);
+}
