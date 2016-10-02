@@ -10,13 +10,15 @@ var nodeServer = null;
 var packageJson = require('./package.json');
 var PATHS = {
   lib: [
-    'node_modules/jquery.1/node_modules/jquery/dist/jquery.min.js'
+    'node_modules/jquery.1/node_modules/jquery/dist/jquery.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js'
   ],
   client: {
     js: ['client/**/*.js'],
     html: 'client/**/*.html',
     css: 'client/**/*.css',
-    img: 'client/**/*.{svg,jpg,png,ico}'
+    img: 'client/**/*.{svg,jpg,png,ico}',
+    fonts: 'client/**/*.{ttf,otf,woff,woff2}'
   },
   dist: 'dist',
   distClient: 'dist/client',
@@ -72,6 +74,13 @@ gulp.task('img', function() {
     .pipe(gulp.dest(PATHS.distClient));
 });
 
+gulp.task('fonts', function() {
+  return gulp
+    .src(PATHS.client.fonts)
+    .pipe(changed(PATHS.distClient))
+    .pipe(gulp.dest(PATHS.distClient));
+});
+
 gulp.task('clean', function() {
   del([PATHS.distClient], function(){ });
   del([PATHS.distLib], function(){ });
@@ -85,7 +94,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('bundle', function() {
-  runSequence(['html', 'css', 'libs', 'js', 'img']);
+  runSequence(['html', 'css', 'libs', 'js', 'img', 'fonts']);
 });
 
 gulp.task('default', ['server', 'bundle'], function() {

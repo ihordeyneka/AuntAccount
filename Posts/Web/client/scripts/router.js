@@ -1,5 +1,5 @@
 $(function(){
-  $(document).click(".router-link", function (e) {
+  $(document).on("click", ".router-link", function (e) {
     e.preventDefault();
     var href = $(e.target).attr("href");
     $.ajax({
