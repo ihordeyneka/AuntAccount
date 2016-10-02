@@ -11,7 +11,8 @@ var packageJson = require('./package.json');
 var PATHS = {
   lib: [
     'node_modules/jquery.1/node_modules/jquery/dist/jquery.min.js',
-    'node_modules/bootstrap/dist/js/bootstrap.min.js'
+    'node_modules/bootstrap/dist/js/bootstrap.min.js',
+    'node_modules/bootstrap/dist/css/bootstrap.min.css'
   ],
   client: {
     js: ['client/**/*.js'],
