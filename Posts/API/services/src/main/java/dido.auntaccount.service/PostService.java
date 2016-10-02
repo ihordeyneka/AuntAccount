@@ -20,15 +20,16 @@ public class PostService {
     @GET
     @Path("/get/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPost(@PathParam("param") Long id) {
-        return postDAO.find(id).getDescription();
+    public Response getPost(@PathParam("param") Long id) {
+        Post post = postDAO.find(id);
+        return Response.status(200).entity(post).build();
     }
 
     @POST
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response savePost(String description) throws Exception {
-        Post post = new Post().setDescription(description);
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response savePost(Post post) throws Exception {
         postDAO.save(post);
         return Response.status(200).entity(post).build();
     }

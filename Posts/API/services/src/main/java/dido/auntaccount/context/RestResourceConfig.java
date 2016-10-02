@@ -23,7 +23,7 @@ public class RestResourceConfig extends ResourceConfig {
         GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
 
         GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
-        guiceBridge.bridgeGuiceInjector(AppliactionContectListener.injector);
+        guiceBridge.bridgeGuiceInjector(ApplicationContextListener.injector);
 
         register(MultiPartFeature.class);
     }

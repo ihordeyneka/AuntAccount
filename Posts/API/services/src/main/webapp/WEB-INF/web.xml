@@ -5,7 +5,7 @@
 		version="3.0">
 
 	<listener>
-		<listener-class>dido.auntaccount.context.AppliactionContectListener</listener-class>
+		<listener-class>dido.auntaccount.context.ApplicationContextListener</listener-class>
 	</listener>
 
 	<servlet>
