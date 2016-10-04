@@ -1,4 +1,43 @@
 .nav > li > a:focus {
   background-color: transparent;
-  color: inherit;
+}
+
+.navbar-bottom {
+  border-bottom: solid 2px rgb(51, 51, 51) !important;
+}
+
+.header-nav__button {
+  background-color: transparent;
+}
+
+.header-nav__button span {
+  background-color: rgb(51, 51, 51);
+}
+
+.header-nav__button:hover {
+  background-color: rgb(51, 51, 51);
+}
+
+.header-nav__button:hover span {
+  background-color: #fff;
+}
+
+.navbar-header, .navbar-main {
+  padding: 0px 30px !important;
+}
+
+.navbar-collapse {
+  border-top: none;
+}
+
+a.header-nav__navigation-link {
+  border-bottom: solid 2px transparent;
+}
+
+a.header-nav__navigation-link.active {
+  border-bottom: solid 2px rgb(51, 51, 51);
+}
+
+a.header-nav__navigation-link:hover {
+  background: transparent !important;
 }

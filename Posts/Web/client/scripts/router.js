@@ -10,7 +10,14 @@ $(function(){
   }
 
   var navigate = function(element) {
+    $(".router-link.active").removeClass("active");
+    element.addClass("active");
     var href = element.data("url");
+
+    var toggle = $(".navbar-toggle");
+    if (toggle.is(":visible"))
+      toggle.click();
+      
     $.ajax({
       url: href
     }).done(function(html) {
