@@ -1,13 +1,10 @@
 $(function(){
 
   var init = function () {
-    if (location.hash != "") {
-      var element = $("a[href='" + location.hash + "']");
-      if (element != null) {
-          navigate(element);
-      }
-    } else {
-      $(".aa-home-link").addClass("active");
+    var page = location.hash != "" ? location.hash : "#home";
+    var element = $("a[href='" + page + "']");
+    if (element != null) {
+        navigate(element);
     }
   }
 
@@ -29,8 +26,4 @@ $(function(){
 
   init();
   window.onhashchange = init;
-
-  $(document).on("click", ".router-link", function (e) {
-    navigate($(e.target));
-  });
 });
