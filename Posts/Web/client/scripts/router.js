@@ -6,6 +6,8 @@ $(function(){
       if (element != null) {
           navigate(element);
       }
+    } else {
+      $(".aa-home-link").addClass("active");
     }
   }
 
@@ -15,9 +17,9 @@ $(function(){
     var href = element.data("url");
 
     var toggle = $(".navbar-toggle");
-    if (toggle.is(":visible"))
+    if (toggle.is(":visible") && $(".navbar-collapse").hasClass("in"))
       toggle.click();
-      
+
     $.ajax({
       url: href
     }).done(function(html) {

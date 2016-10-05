@@ -6,11 +6,7 @@ body {
   background-color: rgb(238, 238, 225);
 }
 
-a {
-  color: rgb(51, 51, 51);
-}
-
-a:focus {
+a, a:focus {
   color: rgb(51, 51, 51);
 }
 

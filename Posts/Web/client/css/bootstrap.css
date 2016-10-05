@@ -41,3 +41,10 @@ a.header-nav__navigation-link.active {
 a.header-nav__navigation-link:hover {
   background: transparent !important;
 }
+
+@media (max-width: 768px) {
+  a.header-nav__navigation-link.active {
+    color: rgb(159, 159, 130);
+    border-bottom: solid 2px transparent;
+  }
+}
