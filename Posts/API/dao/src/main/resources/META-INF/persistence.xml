@@ -7,7 +7,14 @@
     <persistence-unit name="auntaccount" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
                 <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
+                <class>dido.auntaccount.entities.Country</class>
+                <class>dido.auntaccount.entities.Location</class>
+                <class>dido.auntaccount.entities.Message</class>
+                <class>dido.auntaccount.entities.Offer</class>
                 <class>dido.auntaccount.entities.Post</class>
+                <class>dido.auntaccount.entities.Review</class>
+                <class>dido.auntaccount.entities.Tag</class>
+                <class>dido.auntaccount.entities.User</class>
         
                 <properties>
                     <property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver" />

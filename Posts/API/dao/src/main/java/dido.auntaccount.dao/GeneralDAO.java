@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
  */
 public abstract class GeneralDAO<T> implements AutoCloseable {
 
-    private final EntityManager entityManager;
+    protected final EntityManager entityManager;
 
     public GeneralDAO(EntityManager entityManager) {
         this.entityManager = entityManager;

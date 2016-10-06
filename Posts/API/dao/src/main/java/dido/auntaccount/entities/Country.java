@@ -2,13 +2,14 @@ package dido.auntaccount.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity
-public class Tag {
+public class Country {
 
     @Id
     private Long id;
-    private String tag;
+    private String country;
 
     public Long getId() {
         return id;
@@ -18,8 +19,11 @@ public class Tag {
         this.id = id;
     }
 
-    public String getTag() {
-        return tag;
+    public String getCountry() {
+        return country;
     }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

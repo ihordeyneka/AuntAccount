@@ -8,8 +8,8 @@ public class Offer {
 
     @Id
     private Long id;
-    private Long postId;
-    private Long supplierId;
+    private Post post;
+    private User supplier;
 
     public Long getId() {
         return id;
@@ -19,20 +19,19 @@ public class Offer {
         this.id = id;
     }
 
-    public Long getPostId() {
-        return postId;
+    public Post getPost() {
+        return post;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
+    public User getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
+    public void setSupplier(User supplier) {
+        this.supplier = supplier;
     }
-
 }

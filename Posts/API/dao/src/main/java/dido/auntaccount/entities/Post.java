@@ -1,24 +1,33 @@
 package dido.auntaccount.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
-/**
- * Created by orysiadeyneka on 24.09.16.
- */
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Post {
 
     @Id
     private long id;
-    private long userId;
     private String description;
     private byte[] photo;
     private Double latitude;
     private Double longitude;
     private Double priceMax;
     private Double priceMin;
+    private DateTime creationDate;
+    private Location location;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "PostTag",
+            joinColumns = @JoinColumn(name = "PostId"),
+            inverseJoinColumns = @JoinColumn(name = "TagId"))
+    private List<Tag> postTags;
+
+    @ManyToOne
+    @JoinColumn(name="UserId",referencedColumnName="Id")
+    private User user;
 
     public String getDescription() {
         return description;
@@ -37,12 +46,12 @@ public class Post {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public byte[] getPhoto() {
@@ -83,5 +92,29 @@ public class Post {
 
     public void setPriceMin(Double priceMin) {
         this.priceMin = priceMin;
+    }
+
+    public List<Tag> getPostTags() {
+        return postTags;
+    }
+
+    public void setPostTags(List<Tag> postTags) {
+        this.postTags = postTags;
+    }
+
+    public DateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(DateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
