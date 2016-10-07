@@ -2,14 +2,22 @@ package dido.auntaccount.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Offer {
 
     @Id
     private Long id;
-    private Post post;
+
+    @ManyToOne
+    @JoinColumn(name = "SupplierId", referencedColumnName = "Id")
     private User supplier;
+
+    @ManyToOne
+    @JoinColumn(name = "PostId", referencedColumnName = "Id")
+    private Post post;
 
     public Long getId() {
         return id;

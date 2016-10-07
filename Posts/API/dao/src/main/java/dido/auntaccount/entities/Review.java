@@ -4,6 +4,8 @@ import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Review {
@@ -12,9 +14,15 @@ public class Review {
     private Long id;
     private String description;
     private int rate;
-    private User authorId;
-    private User objectId;
     private DateTime creationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "AuthorId", referencedColumnName = "Id")
+    private User authorId;
+
+    @ManyToOne
+    @JoinColumn(name = "ObjectId", referencedColumnName = "Id")
+    private User objectId;
 
     public Long getId() {
         return id;

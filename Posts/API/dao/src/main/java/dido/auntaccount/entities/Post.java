@@ -17,17 +17,23 @@ public class Post {
     private Double priceMax;
     private Double priceMin;
     private DateTime creationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "LocationId", referencedColumnName = "Id")
     private Location location;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PostTag",
             joinColumns = @JoinColumn(name = "PostId"),
             inverseJoinColumns = @JoinColumn(name = "TagId"))
     private List<Tag> postTags;
 
     @ManyToOne
-    @JoinColumn(name="UserId",referencedColumnName="Id")
+    @JoinColumn(name = "UserId", referencedColumnName = "Id")
     private User user;
+
+    @OneToMany(mappedBy = "post")
+    private List<Offer> offers;
 
     public String getDescription() {
         return description;
@@ -116,5 +122,13 @@ public class Post {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 }

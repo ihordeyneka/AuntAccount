@@ -4,6 +4,8 @@ import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Message {
@@ -13,7 +15,13 @@ public class Message {
     private String description;
     private byte[] photo;
     private DateTime creationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "SenderId", referencedColumnName = "Id")
     private User sender;
+
+    @ManyToOne
+    @JoinColumn(name = "OfferId", referencedColumnName = "Id")
     private Offer offer;
 
     public Long getId() {
