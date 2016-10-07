@@ -2,6 +2,8 @@ package dido.auntaccount.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -16,6 +18,9 @@ public class User {
     private String website;
     private boolean isSupplier;
     private Review review;
+
+    @ManyToOne
+    @JoinColumn(name = "LocationId", referencedColumnName = "Id")
     private Location location;
 
     public Long getId() {

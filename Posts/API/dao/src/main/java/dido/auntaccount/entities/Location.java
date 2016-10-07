@@ -2,6 +2,8 @@ package dido.auntaccount.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Location {
@@ -14,6 +16,8 @@ public class Location {
     private String region;
     private String street;
 
+    @ManyToOne
+    @JoinColumn(name = "CountryId", referencedColumnName = "Id")
     private Country country;
 
     public Long getId() {
