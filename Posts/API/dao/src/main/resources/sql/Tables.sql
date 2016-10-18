@@ -1,3 +1,5 @@
+create database if not exists dido;
+
 CREATE TABLE `dido`.`Post` (
   `Id` bigint(20) NOT NULL,
   `UserId` bigint(10) NOT NULL,

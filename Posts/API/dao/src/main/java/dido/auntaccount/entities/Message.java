@@ -1,6 +1,9 @@
 package dido.auntaccount.entities;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+import dido.auntaccount.utils.JodaDateTimeConverter;
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.Converter;
+import org.joda.time.DateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,14 +17,17 @@ public class Message {
     private Long id;
     private String description;
     private byte[] photo;
+
+    @Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
+    @Convert("dateTimeConverter")
     private DateTime creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "SenderId", referencedColumnName = "Id")
+    @JoinColumn(name = "SenderId")
     private User sender;
 
     @ManyToOne
-    @JoinColumn(name = "OfferId", referencedColumnName = "Id")
+    @JoinColumn(name = "OfferId")
     private Offer offer;
 
     public Long getId() {

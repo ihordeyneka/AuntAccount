@@ -1,6 +1,7 @@
 package dido.auntaccount.service;
 
 import dido.auntaccount.dao.PostDAO;
+import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 
 import javax.inject.Inject;
@@ -9,37 +10,35 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-/**
- * Created by orysiadeyneka on 19.03.16.
- */
-@Path("/post")
+@Path("/posts")
 public class PostService {
 
     @Inject
-    PostDAO postDAO;
+    private PostDAO postDAO;
 
     @GET
-    @Path("/get/{param}")
+    @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPost(@PathParam("param") Long id) {
-        Post post = postDAO.find(id);
-        return Response.status(200).entity(post).build();
-    }
-
-    @GET
-    @Path("/user/{param}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserPosts(@PathParam("param") Long userId) {
-        List<Post> post = postDAO.findByUser(userId);
+    public Response getPost(@PathParam("param") Long postId) {
+        Post post = postDAO.find(postId);
         return Response.status(200).entity(post).build();
     }
 
     @POST
-    @Path("/save")
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response savePost(Post post) throws Exception {
-        postDAO.save(post);
-        return Response.status(200).entity(post).build();
+        Post savedPost = postDAO.save(post);
+        return Response.status(200).entity(savedPost).build();
+    }
+
+    @GET
+    @Path("/{param}/offers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPostOffers(@PathParam("param") Long postId) {
+        Post post = postDAO.find(postId);
+        List<Offer> offers = post.getOffers();
+        return Response.status(200).entity(offers).build();
     }
 }
