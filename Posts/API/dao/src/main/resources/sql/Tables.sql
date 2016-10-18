@@ -96,5 +96,11 @@ CREATE TABLE `dido`.`Message` (
   PRIMARY KEY (`Id`)
 );
 
+--fix post table - remove latitude and longitude, add supplierTag table
 
-
+insert into COUNTRY (id, country) values (1, "Ukraine");
+insert into LOCATION (id, city, latitude, longitude, region, street, countryId) values (1, 'Lviv', 5, 4, 'Lvivska', 'Perf', 1);
+insert into USER (id, creationdate, email, issupplier, name, password, phone, website, locationId) values (1, now(), 'orysia@ua', 0, 'orysia', 'pass', '096123', 'www', 1);
+insert into USER (id, creationdate, email, issupplier, name, password, phone, website, locationId) values (2, now(), 'ihor@ua', 0, 'ihor', 'pass', '096123', 'www', 1);
+insert into REVIEW (id, creationdate, description, rate, authorId, objectId) values (1, now(), 'good', 5, 1, 2);
+insert into TAG (id, tag) values (1, "tag");

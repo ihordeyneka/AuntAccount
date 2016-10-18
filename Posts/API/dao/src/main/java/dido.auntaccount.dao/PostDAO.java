@@ -12,6 +12,6 @@ public interface PostDAO {
 
     public Post save(Post post) throws Exception;
 
-    public void delete(Post post);
+    public void delete(Post post) throws Exception;
 
 }

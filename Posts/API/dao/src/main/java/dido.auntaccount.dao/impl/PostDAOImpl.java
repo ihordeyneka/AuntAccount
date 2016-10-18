@@ -30,4 +30,8 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
     public Post save(Post post) throws Exception {
         return persistEntity(post);
     }
+
+    public void delete(Post post) throws Exception {
+        deleteEntity(post.getId(), Post.class);
+    }
 }
