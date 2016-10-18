@@ -27,20 +27,6 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
         return findEntity(id, Post.class);
     }
 
-    public List<Post> findByUser(Long userId) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Post> cq = cb.createQuery(Post.class);
-        Root<Post> post = cq.from(Post.class);
-        cq.select(post);
-
-        ParameterExpression<Long> params = cb.parameter(Long.class);
-        cq.where(cb.equal(post.get("userId"), params));
-
-        TypedQuery<Post> q = entityManager.createQuery(cq);
-        q.setParameter(params, userId);
-        return q.getResultList();
-    }
-
     public Post save(Post post) throws Exception {
         return persistEntity(post);
     }

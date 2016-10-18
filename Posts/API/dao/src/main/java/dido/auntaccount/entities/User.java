@@ -1,9 +1,12 @@
 package dido.auntaccount.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import dido.auntaccount.utils.JodaDateTimeConverter;
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.Converter;
+import org.joda.time.DateTime;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,11 +20,20 @@ public class User {
     private byte[] photo;
     private String website;
     private boolean isSupplier;
-    private Review review;
+
+    @Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
+    @Convert("dateTimeConverter")
+    private DateTime creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "LocationId", referencedColumnName = "Id")
+    @JoinColumn(name = "LocationId")
     private Location location;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "object")
+    private List<Review> reviews;
 
     public Long getId() {
         return id;
@@ -79,6 +91,14 @@ public class User {
         this.website = website;
     }
 
+    public DateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(DateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public boolean isSupplier() {
         return isSupplier;
     }
@@ -87,19 +107,27 @@ public class User {
         isSupplier = supplier;
     }
 
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
-    }
-
     public Location getLocation() {
         return location;
     }
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

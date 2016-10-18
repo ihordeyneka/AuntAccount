@@ -17,7 +17,7 @@ public class Location {
     private String street;
 
     @ManyToOne
-    @JoinColumn(name = "CountryId", referencedColumnName = "Id")
+    @JoinColumn(name = "CountryId")
     private Country country;
 
     public Long getId() {

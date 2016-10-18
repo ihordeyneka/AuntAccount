@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface PostDAO {
 
-    Post find(Long id);
+    public Post find(Long id);
 
-    List<Post> findByUser(Long userId);
+    public Post save(Post post) throws Exception;
 
-    Post save(Post post) throws Exception;
+    public void delete(Post post);
 
 }

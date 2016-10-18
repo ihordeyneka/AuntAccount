@@ -4,6 +4,10 @@ import dido.auntaccount.entities.Offer;
 
 public interface OfferDAO {
 
-    public Offer findOffer(Long offerId);
+    public Offer find(Long offerId);
+
+    public Offer save(Offer offer) throws Exception;
+
+    public void delete(Offer offer) throws Exception;
 
 }

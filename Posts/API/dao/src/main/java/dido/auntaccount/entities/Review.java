@@ -1,6 +1,9 @@
 package dido.auntaccount.entities;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+import dido.auntaccount.utils.JodaDateTimeConverter;
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.Converter;
+import org.joda.time.DateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,15 +17,18 @@ public class Review {
     private Long id;
     private String description;
     private int rate;
+
+    @Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
+    @Convert("dateTimeConverter")
     private DateTime creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "AuthorId", referencedColumnName = "Id")
-    private User authorId;
+    @JoinColumn(name = "AuthorId")
+    private User author;
 
     @ManyToOne
-    @JoinColumn(name = "ObjectId", referencedColumnName = "Id")
-    private User objectId;
+    @JoinColumn(name = "ObjectId")
+    private User object;
 
     public Long getId() {
         return id;
@@ -48,20 +54,20 @@ public class Review {
         this.rate = rate;
     }
 
-    public User getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(User authorId) {
-        this.authorId = authorId;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
-    public User getObjectId() {
-        return objectId;
+    public User getObject() {
+        return object;
     }
 
-    public void setObjectId(User objectId) {
-        this.objectId = objectId;
+    public void setObject(User object) {
+        this.object = object;
     }
 
     public DateTime getCreationDate() {

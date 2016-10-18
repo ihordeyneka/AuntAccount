@@ -1,9 +1,7 @@
 package dido.auntaccount.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Offer {
@@ -12,12 +10,15 @@ public class Offer {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "SupplierId", referencedColumnName = "Id")
+    @JoinColumn(name = "SupplierId")
     private User supplier;
 
     @ManyToOne
-    @JoinColumn(name = "PostId", referencedColumnName = "Id")
+    @JoinColumn(name = "PostId")
     private Post post;
+
+    @OneToMany(mappedBy = "offer")
+    private List<Message> messages;
 
     public Long getId() {
         return id;
@@ -42,4 +43,13 @@ public class Offer {
     public void setSupplier(User supplier) {
         this.supplier = supplier;
     }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
 }

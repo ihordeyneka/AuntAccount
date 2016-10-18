@@ -1,6 +1,7 @@
 package dido.auntaccount.entities;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+import dido.auntaccount.utils.JodaDateTimeConverter;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,10 +17,13 @@ public class Post {
     private Double longitude;
     private Double priceMax;
     private Double priceMin;
+
+    @org.eclipse.persistence.annotations.Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
+    @org.eclipse.persistence.annotations.Convert("dateTimeConverter")
     private DateTime creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "LocationId", referencedColumnName = "Id")
+    @JoinColumn(name = "LocationId")
     private Location location;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -29,7 +33,7 @@ public class Post {
     private List<Tag> postTags;
 
     @ManyToOne
-    @JoinColumn(name = "UserId", referencedColumnName = "Id")
+    @JoinColumn(name = "UserId")
     private User user;
 
     @OneToMany(mappedBy = "post")
