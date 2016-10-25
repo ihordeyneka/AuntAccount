@@ -3,17 +3,18 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
+var merge = require('merge-stream')
 var spawn = require('child_process').spawn;
 var del = require('del');
 var nodeServer = null;
 
 var packageJson = require('./package.json');
 var PATHS = {
-  lib: [
-    'node_modules/jquery.1/node_modules/jquery/dist/jquery.min.js',
-    'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    'node_modules/bootstrap/dist/css/bootstrap.min.css'
-  ],
+  lib: {
+    jquery: 'node_modules/jquery.1/node_modules/jquery/dist/**/*',
+    bootstrap: 'node_modules/bootstrap/dist/**/*',
+    font_awesome: 'node_modules/font-awesome/**/*'
+  },
   client: {
     js: ['client/**/*.js'],
     html: 'client/**/*.html',
@@ -56,9 +57,19 @@ gulp.task('css', function() {
 });
 
 gulp.task('libs', function() {
-  return gulp
-    .src(PATHS.lib)
-    .pipe(gulp.dest(PATHS.distLib));
+  var jquery = gulp
+    .src(PATHS.lib.jquery)
+    .pipe(gulp.dest(PATHS.distLib + '/jquery'));
+
+  var bootstrap = gulp
+    .src(PATHS.lib.bootstrap)
+    .pipe(gulp.dest(PATHS.distLib + '/bootstrap'));
+
+  var font_awesome = gulp
+    .src(PATHS.lib.font_awesome)
+    .pipe(gulp.dest(PATHS.distLib + '/font_awesome'));
+
+  return merge(jquery, bootstrap, font_awesome);
 });
 
 gulp.task('js', function() {

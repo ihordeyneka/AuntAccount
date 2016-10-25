@@ -1,0 +1,30 @@
+.btn-google, .btn-facebook {
+  width: 300px;
+}
+
+.btn-lg.btn-google i, .btn-lg.btn-facebook i {
+  line-height: 24px;
+}
+
+.btn-login {
+  width: 150px;
+}
+
+#inputRememberMe {
+  position: static;
+  margin-right: 5px;
+}
+
+.aa-social {
+  float: right;
+  width: 315px;
+}
+
+@media (max-width: 767px) {
+  .aa-social {
+    width: 100%;
+  }
+  .aa-social .btn {
+    float: left;
+  }
+}
