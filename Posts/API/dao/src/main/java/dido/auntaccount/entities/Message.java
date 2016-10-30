@@ -1,14 +1,7 @@
 package dido.auntaccount.entities;
 
-import dido.auntaccount.utils.JodaDateTimeConverter;
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
-import org.joda.time.DateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 public class Message {
@@ -18,17 +11,15 @@ public class Message {
     private String description;
     private byte[] photo;
 
-    @Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-    @Convert("dateTimeConverter")
-    private DateTime creationDate;
+    //@Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
+    //@Convert("dateTimeConverter")
+    private Date creationDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SenderId")
     private User sender;
 
-    @ManyToOne
-    @JoinColumn(name = "OfferId")
-    private Offer offer;
+    private Long offerId;
 
     public Long getId() {
         return id;
@@ -54,11 +45,11 @@ public class Message {
         this.photo = photo;
     }
 
-    public DateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(DateTime creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -70,11 +61,12 @@ public class Message {
         this.sender = sender;
     }
 
-    public Offer getOffer() {
-        return offer;
+    public Long getOfferId() {
+        return offerId;
     }
 
-    public void setOffer(Offer offer) {
-        this.offer = offer;
+    public void setOfferId(Long offerId) {
+        this.offerId = offerId;
     }
+
 }

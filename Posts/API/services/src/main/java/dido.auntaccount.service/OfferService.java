@@ -47,8 +47,7 @@ public class OfferService {
     @Path("/{param}/messages")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferMessages(@PathParam("param") Long offerId) {
-        Offer offer = offerDAO.find(offerId);
-        List<Message> messages = offer.getMessages();
+        List<Message> messages = offerDAO.getMessagesByOfferId(offerId);
         return Response.status(200).entity(messages).build();
     }
 

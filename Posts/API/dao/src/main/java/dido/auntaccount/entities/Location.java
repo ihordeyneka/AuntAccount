@@ -1,9 +1,6 @@
 package dido.auntaccount.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Location {
@@ -16,7 +13,7 @@ public class Location {
     private String region;
     private String street;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CountryId")
     private Country country;
 

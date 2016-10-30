@@ -2,6 +2,7 @@ package dido.auntaccount.dao.impl;
 
 import dido.auntaccount.dao.GeneralDAO;
 import dido.auntaccount.dao.PostDAO;
+import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 
 import javax.inject.Inject;
@@ -33,5 +34,10 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
 
     public void delete(Post post) throws Exception {
         deleteEntity(post.getId(), Post.class);
+    }
+
+    public List<Offer> getOffersByPostId(Long postId) {
+        TypedQuery<Offer> query = entityManager.createQuery("SELECT o FROM Offer o WHERE o.postId = :postId", Offer.class);
+        return query.setParameter("postId", postId).getResultList();
     }
 }

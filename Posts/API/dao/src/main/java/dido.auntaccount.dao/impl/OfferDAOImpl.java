@@ -2,10 +2,13 @@ package dido.auntaccount.dao.impl;
 
 import dido.auntaccount.dao.GeneralDAO;
 import dido.auntaccount.dao.OfferDAO;
+import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class OfferDAOImpl extends GeneralDAO<Offer> implements OfferDAO {
 
@@ -24,6 +27,11 @@ public class OfferDAOImpl extends GeneralDAO<Offer> implements OfferDAO {
 
     public void delete(Offer offer) throws Exception {
         deleteEntity(offer.getId(), Offer.class);
+    }
+
+    public List<Message> getMessagesByOfferId(Long offerId) {
+        TypedQuery<Message> query = entityManager.createQuery("SELECT m FROM Message m WHERE m.offerId = :offerId", Message.class);
+        return query.setParameter("offerId", offerId).getResultList();
     }
 
 }

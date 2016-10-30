@@ -9,16 +9,11 @@ public class Offer {
     @Id
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SupplierId")
     private User supplier;
 
-    @ManyToOne
-    @JoinColumn(name = "PostId")
-    private Post post;
-
-    @OneToMany(mappedBy = "offer")
-    private List<Message> messages;
+    private Long postId;
 
     public Long getId() {
         return id;
@@ -28,12 +23,12 @@ public class Offer {
         this.id = id;
     }
 
-    public Post getPost() {
-        return post;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     public User getSupplier() {
@@ -42,14 +37,6 @@ public class Offer {
 
     public void setSupplier(User supplier) {
         this.supplier = supplier;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 
 }

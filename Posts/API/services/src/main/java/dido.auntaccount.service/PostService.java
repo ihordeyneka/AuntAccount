@@ -37,8 +37,7 @@ public class PostService {
     @Path("/{param}/offers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPostOffers(@PathParam("param") Long postId) {
-        Post post = postDAO.find(postId);
-        List<Offer> offers = post.getOffers();
+        List<Offer> offers = postDAO.getOffersByPostId(postId);
         return Response.status(200).entity(offers).build();
     }
 }

@@ -38,8 +38,7 @@ public class UserService {
     @Path("/{param}/posts")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserPosts(@PathParam("param") Long userId) {
-        User user = userDAO.find(userId);
-        List<Post> posts = user.getPosts();
+        List<Post> posts = userDAO.getPostsByUserId(userId);
         return Response.status(200).entity(posts).build();
     }
 
@@ -47,8 +46,7 @@ public class UserService {
     @Path("/{param}/reviews")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserReviews(@PathParam("param") Long userId) {
-        User user = userDAO.find(userId);
-        List<Review> reviews = user.getReviews();
+        List<Review> reviews = userDAO.getReviewsByUserId(userId);
         return Response.status(200).entity(reviews).build();
     }
 
