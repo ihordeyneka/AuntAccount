@@ -7,13 +7,24 @@
       </div>
     </div>
     <div class="col-sm-5">
-      - Location
-      <br>
-      - Price min
-      <br>
-      - Price max
-      <br>
-      - Photo
+      <div class="form-group">
+        <label for="inputLocation" class="lb">Location</label>
+        <input class="form-control input" id="inputLocation" placeholder="Where do you want to find?" />
+      </div>
+      <div class="aa-post-map">
+      </div>
     </div>
   </div>
+  <div class="row">
+    - Tags
+    <br>
+    - Price min
+    <br>
+    - Price max
+    <br>
+    - Photo
+  </div>
 </div>
+<script>
+  require(["post"], function(post) { post.init(); });
+</script>

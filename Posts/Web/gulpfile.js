@@ -13,6 +13,7 @@ var PATHS = {
   lib: {
     jquery: 'node_modules/jquery.1/node_modules/jquery/dist/**/*',
     bootstrap: 'node_modules/bootstrap/dist/**/*',
+    requirejs: 'node_modules/requirejs/require.js',
     font_awesome: 'node_modules/font-awesome/**/*'
   },
   client: {
@@ -65,11 +66,15 @@ gulp.task('libs', function() {
     .src(PATHS.lib.bootstrap)
     .pipe(gulp.dest(PATHS.distLib + '/bootstrap'));
 
+  var requirejs = gulp
+    .src(PATHS.lib.requirejs)
+    .pipe(gulp.dest(PATHS.distLib + '/requirejs'));
+
   var font_awesome = gulp
     .src(PATHS.lib.font_awesome)
     .pipe(gulp.dest(PATHS.distLib + '/font_awesome'));
 
-  return merge(jquery, bootstrap, font_awesome);
+  return merge(jquery, bootstrap, requirejs, font_awesome);
 });
 
 gulp.task('js', function() {
