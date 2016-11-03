@@ -3,6 +3,7 @@ package dido.auntaccount.service;
 import dido.auntaccount.dao.OfferDAO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
+import dido.auntaccount.entities.Supplier;
 import dido.auntaccount.entities.User;
 
 import javax.inject.Inject;
@@ -39,7 +40,7 @@ public class OfferService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferSupplier(@PathParam("param") Long offerId) {
         Offer offer = offerDAO.find(offerId);
-        User supplier = offer.getSupplier();
+        Supplier supplier = offer.getSupplier();
         return Response.status(200).entity(supplier).build();
     }
 

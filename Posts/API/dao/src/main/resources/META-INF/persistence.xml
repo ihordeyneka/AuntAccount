@@ -6,26 +6,28 @@
 
     <persistence-unit name="auntaccount" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-                <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
-                <class>dido.auntaccount.entities.Country</class>
-                <class>dido.auntaccount.entities.Location</class>
-                <class>dido.auntaccount.entities.Message</class>
-                <class>dido.auntaccount.entities.Offer</class>
-                <class>dido.auntaccount.entities.Post</class>
-                <class>dido.auntaccount.entities.Review</class>
-                <class>dido.auntaccount.entities.Tag</class>
-                <class>dido.auntaccount.entities.User</class>
-        
-                <properties>
-                    <property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver" />
-                    <property name="javax.persistence.jdbc.url"
-                              value="jdbc:mysql://localhost:3306/dido"/>
-                    <property name="javax.persistence.jdbc.user" value="root"/>
-                    <property name="javax.persistence.jdbc.password" value="root"/>
+        <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
+        <class>dido.auntaccount.entities.Country</class>
+        <class>dido.auntaccount.entities.Location</class>
+        <class>dido.auntaccount.entities.Message</class>
+        <class>dido.auntaccount.entities.Offer</class>
+        <class>dido.auntaccount.entities.Post</class>
+        <class>dido.auntaccount.entities.Review</class>
+        <class>dido.auntaccount.entities.Tag</class>
+        <class>dido.auntaccount.entities.User</class>
+        <class>dido.auntaccount.entities.Person</class>
+        <class>dido.auntaccount.entities.Supplier</class>
 
-                </properties>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/dido"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
 
-</persistence-unit>
+        </properties>
+
+    </persistence-unit>
 
 
 </persistence>

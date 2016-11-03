@@ -11,7 +11,7 @@ public class Offer {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SupplierId")
-    private User supplier;
+    private Supplier supplier;
 
     private Long postId;
 
@@ -31,11 +31,11 @@ public class Offer {
         this.postId = postId;
     }
 
-    public User getSupplier() {
+    public Supplier getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(User supplier) {
+    public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 
