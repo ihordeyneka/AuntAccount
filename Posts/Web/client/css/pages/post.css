@@ -1,4 +1,9 @@
 #inputPost {
   width: 100%;
+  height: 350px;
+}
+
+.aa-post-map {
+  width: 100%;
   height: 300px;
 }
