@@ -11,7 +11,7 @@ import com.google.inject.persist.jpa.JpaPersistModule;
 /**
  * Created by orysiadeyneka on 24.09.16.
  */
-public class InjectionModule extends AbstractModule {
+public class InjectionDAOModule extends AbstractModule {
 
     @Override
     protected void configure() {
