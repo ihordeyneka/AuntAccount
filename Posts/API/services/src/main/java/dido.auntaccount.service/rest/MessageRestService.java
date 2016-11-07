@@ -1,7 +1,7 @@
-package dido.auntaccount.service;
+package dido.auntaccount.service.rest;
 
-import dido.auntaccount.dao.MessageDAO;
 import dido.auntaccount.entities.Message;
+import dido.auntaccount.service.business.MessageService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -9,16 +9,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/messages")
-public class MessageService {
+public class MessageRestService {
 
     @Inject
-    private MessageDAO messageDAO;
+    private MessageService service;
 
     @GET
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMessage(@PathParam("param") Long messageId) {
-        Message message = messageDAO.find(messageId);
+        Message message = service.getMessage(messageId);
         return Response.status(200).entity(message).build();
     }
 
@@ -27,7 +27,7 @@ public class MessageService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveMessage(Message message) throws Exception {
-        Message savedMessage = messageDAO.save(message);
+        Message savedMessage = service.saveMessage(message);
         return Response.status(200).entity(savedMessage).build();
     }
     

@@ -71,6 +71,23 @@ public abstract class GeneralDAO<T> implements AutoCloseable {
         }
     }
 
+    protected <T> void updateEntity(T entity) throws Exception {
+        if (entity == null)
+            return;
+
+        EntityTransaction et = entityManager.getTransaction();
+
+        try {
+            et.begin();
+            entityManager.merge(entity);
+            et.commit();
+
+        } catch (Exception e) {
+            rollback(et);
+            throw e;
+        }
+    }
+
     protected void rollback(EntityTransaction et) {
         if (et.isActive()) {
             et.rollback();

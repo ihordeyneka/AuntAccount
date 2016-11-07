@@ -7,13 +7,13 @@ import java.util.List;
 @DiscriminatorValue("1")
 public class Supplier extends Person {
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "SupplierTag",
             joinColumns = @JoinColumn(name = "SupplierId"),
             inverseJoinColumns = @JoinColumn(name = "TagId"))
     private List<Tag> supplierTags;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "SupplierPost",
             joinColumns = @JoinColumn(name = "SupplierId"),
             inverseJoinColumns = @JoinColumn(name = "PostId"))
@@ -34,4 +34,5 @@ public class Supplier extends Person {
     public void setSupplierPosts(List<Post> supplierPosts) {
         this.supplierPosts = supplierPosts;
     }
+
 }
