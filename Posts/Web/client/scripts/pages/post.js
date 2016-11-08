@@ -18,7 +18,19 @@ define("post", function(){
   }
 
   self.init = function(){
+    //first load map
     require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap"]);
+    //load slider
+    $("#inputRadius").slider({
+      handle: 'square',
+      value: 0,
+      min: 0,
+      max: 5000,
+      step: 500,
+      formatter: function(value) {
+        return value + 'm';
+      }
+    });
   }
 
   window.initMap = function() {

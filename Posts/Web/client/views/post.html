@@ -2,14 +2,22 @@
   <div class="aa-post-form row">
     <div class="col-sm-offset-1 col-sm-5">
       <div class="form-group">
-        <label for="inputPost" class="lb">Post</label>
-        <textarea class="form-control input" id="inputPost" placeholder="What do you want to find?"></textarea>
+        <label for="inputKeywords" class="lb">Search</label>
+        <input type="text" class="form-control input" id="inputKeywords" placeholder="What do you want to find?" />
+      </div>
+      <div class="form-group">
+        <label for="inputPost" class="lb">Description</label>
+        <textarea class="form-control input" id="inputPost" placeholder="More details?"></textarea>
       </div>
     </div>
     <div class="col-sm-5">
       <div class="form-group">
         <label for="inputLocation" class="lb">Location</label>
-        <input class="form-control input" id="inputLocation" placeholder="Where do you want to find?" />
+        <input type="text" class="form-control input" id="inputLocation" placeholder="Specify the location" />
+      </div>
+      <div class="form-group">
+        <label for="inputRadius" class="lb">Radius</label>
+        <input type="text" class="form-control input" id="inputRadius" />
       </div>
       <div class="aa-post-map">
       </div>

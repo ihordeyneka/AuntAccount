@@ -89,3 +89,24 @@ a.header-nav__navigation-link:hover {
 .lb-lg {
   font-size: 20px;
 }
+
+/*---Slider---*/
+div.slider.slider-horizontal {
+  display: block;
+  width: 100%;
+}
+div.slider.slider-horizontal div.slider-handle {
+	background: #777;
+  margin-left: -5px;
+  width: 10px;
+  cursor: pointer;
+}
+div.slider-track {
+  border-radius: 0;
+}
+div.slider-track div {
+  border-radius: 0;
+}
+div.slider-selection {
+  background: #ABABAC;
+}

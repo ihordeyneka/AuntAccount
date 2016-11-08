@@ -13,6 +13,7 @@ var PATHS = {
   lib: {
     jquery: 'node_modules/jquery.1/node_modules/jquery/dist/**/*',
     bootstrap: 'node_modules/bootstrap/dist/**/*',
+    bootstrap_slider: 'node_modules/bootstrap-slider/dist/**/*',
     requirejs: 'node_modules/requirejs/require.js',
     font_awesome: 'node_modules/font-awesome/**/*'
   },
@@ -66,6 +67,10 @@ gulp.task('libs', function() {
     .src(PATHS.lib.bootstrap)
     .pipe(gulp.dest(PATHS.distLib + '/bootstrap'));
 
+  var bootstrap_slider = gulp
+    .src(PATHS.lib.bootstrap_slider)
+    .pipe(gulp.dest(PATHS.distLib + '/bootstrap_slider'));
+
   var requirejs = gulp
     .src(PATHS.lib.requirejs)
     .pipe(gulp.dest(PATHS.distLib + '/requirejs'));
@@ -74,7 +79,7 @@ gulp.task('libs', function() {
     .src(PATHS.lib.font_awesome)
     .pipe(gulp.dest(PATHS.distLib + '/font_awesome'));
 
-  return merge(jquery, bootstrap, requirejs, font_awesome);
+  return merge(jquery, bootstrap, bootstrap_slider, requirejs, font_awesome);
 });
 
 gulp.task('js', function() {
