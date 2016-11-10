@@ -10,13 +10,14 @@ var nodeServer = null;
 
 var packageJson = require('./package.json');
 var PATHS = {
-  lib: {
-    jquery: 'node_modules/jquery.1/node_modules/jquery/dist/**/*',
-    bootstrap: 'node_modules/bootstrap/dist/**/*',
-    bootstrap_slider: 'node_modules/bootstrap-slider/dist/**/*',
-    requirejs: 'node_modules/requirejs/require.js',
-    font_awesome: 'node_modules/font-awesome/**/*'
-  },
+  lib: [
+    { name: 'jquery', files: 'node_modules/jquery.1/node_modules/jquery/dist/**/*' },
+    { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
+    { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },
+    { name: 'bootstrap3_typeahead', files: 'external/lib/bootstrap3-typeahead/**/*' },
+    { name: 'requirejs', files: 'node_modules/requirejs/require.js' },
+    { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' }
+  ],
   client: {
     js: ['client/**/*.js'],
     html: 'client/**/*.html',
@@ -59,27 +60,16 @@ gulp.task('css', function() {
 });
 
 gulp.task('libs', function() {
-  var jquery = gulp
-    .src(PATHS.lib.jquery)
-    .pipe(gulp.dest(PATHS.distLib + '/jquery'));
+  var streams = [];
 
-  var bootstrap = gulp
-    .src(PATHS.lib.bootstrap)
-    .pipe(gulp.dest(PATHS.distLib + '/bootstrap'));
+  for (var i=0; i<PATHS.lib.length; i++) {
+    var lib = PATHS.lib[i];
+    streams.push(gulp
+      .src(lib.files)
+      .pipe(gulp.dest(PATHS.distLib + '/' + lib.name)));
+  }
 
-  var bootstrap_slider = gulp
-    .src(PATHS.lib.bootstrap_slider)
-    .pipe(gulp.dest(PATHS.distLib + '/bootstrap_slider'));
-
-  var requirejs = gulp
-    .src(PATHS.lib.requirejs)
-    .pipe(gulp.dest(PATHS.distLib + '/requirejs'));
-
-  var font_awesome = gulp
-    .src(PATHS.lib.font_awesome)
-    .pipe(gulp.dest(PATHS.distLib + '/font_awesome'));
-
-  return merge(jquery, bootstrap, bootstrap_slider, requirejs, font_awesome);
+  return merge(streams);
 });
 
 gulp.task('js', function() {

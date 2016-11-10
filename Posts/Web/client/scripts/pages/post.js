@@ -27,6 +27,8 @@ define("post", function(){
       min: 0,
       max: 5000,
       step: 500,
+      tooltip: 'always',
+      tooltip_position: 'bottom',
       formatter: function(value) {
         return value + 'm';
       }
