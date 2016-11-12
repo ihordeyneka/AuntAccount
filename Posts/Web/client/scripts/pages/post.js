@@ -1,4 +1,4 @@
-define("post", function(){
+define(["communication/client"], function(client){
   var self = this;
   self.map = null;
   self.marker = null;
@@ -19,7 +19,7 @@ define("post", function(){
 
   self.init = function(){
     //first load map
-    require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap"]);
+    require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
     //load slider
     $("#inputRadius").slider({
       handle: 'square',
@@ -31,6 +31,51 @@ define("post", function(){
       tooltip_position: 'bottom',
       formatter: function(value) {
         return value + 'm';
+      }
+    });
+
+    var typeahead = $("#inputLocation").typeahead({
+      items: "all",
+      minLength: 3,
+      delay: 300,
+      fitToElement: true,
+      source: function(query, process) {
+        var result = client.getLocations(query);
+        return process(result);
+      },
+      afterSelect: function(item) {
+        if (item.location) {
+          self.updatePosition(item.location);
+        }
+        self.processPlace(item.name);
+      }
+    });
+
+    typeahead.keypress(function(e) {
+      if (e.which == 13) //key is Enter
+        self.processPlace(typeahead.val());
+    });
+
+    $(".btn-location-search").click(function() {
+      self.processPlace(typeahead.val());
+    });
+  }
+
+  self.processPlace = function(place) {
+    if (!place)
+      return;
+
+    var request = {
+      query: place
+    };
+
+    var service = new google.maps.places.PlacesService(self.map);
+    service.textSearch(request, function(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        var data = results[0].geometry;
+        self.map.fitBounds(data.viewport);
+        var location = { lat: data.location.lat(), lng: data.location.lng() };
+        self.marker.setPosition(location);
       }
     });
   }
