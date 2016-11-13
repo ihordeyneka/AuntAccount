@@ -7,3 +7,11 @@
   width: 100%;
   height: 300px;
 }
+
+.input-group .btn.btn-location-nearby {
+  margin-left: 3px;
+}
+
+.popover.aa-nearby-popover .popover-title {
+  display: none;
+}

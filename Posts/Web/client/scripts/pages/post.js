@@ -1,13 +1,14 @@
 define(["communication/client"], function(client){
   var self = this;
+  var defaultPosition = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
+
   self.map = null;
   self.marker = null;
   self.circle = null;
-  self.userPosition = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
+  self.userPosition = null;
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
-    self.userPosition.lat = position.coords.latitude;
-    self.userPosition.lng = position.coords.longitude;
+    self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
     if(self.map && self.marker) {
       $("#inputLocation").val("");
       self.updatePosition();
@@ -88,6 +89,30 @@ define(["communication/client"], function(client){
     $(".btn-location-search").click(function() {
       processPlace(typeahead.val());
     });
+
+    $(".btn-location-nearby").popover({
+      placement: "bottom",
+      container: ".aa-post-location-container",
+      trigger: "manual",
+      content: "Sorry, you've denied access to your geolocation."
+    })
+    .data("bs.popover")
+    .tip()
+    .addClass("aa-nearby-popover");
+
+    $(".btn-location-nearby").click(function(e) {
+      if (self.userPosition) {
+        $("#inputLocation").val("");
+        self.updatePosition(self.userPosition);
+        self.map.setZoom(10);
+      } else {
+        $(this).popover("show");
+        e.stopPropagation();
+        $("body").one("click", function() {
+          $(".btn-location-nearby").popover("hide");
+        });
+      }
+    });
   }
 
   self.initRadiusSlider = function() {
@@ -113,7 +138,7 @@ define(["communication/client"], function(client){
 
   self.updatePosition = function(location) {
     if (!location) {
-      location = userPosition;
+      location = userPosition || defaultPosition;
     }
 
     var latLng = new google.maps.LatLng(location.lat, location.lng);

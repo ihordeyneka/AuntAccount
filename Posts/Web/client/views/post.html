@@ -10,13 +10,16 @@
         <textarea class="form-control input" id="inputPost" placeholder="More details?"></textarea>
       </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-5 aa-post-location-container">
       <label for="inputLocation" class="lb">Location</label>
       <div class="input-group form-group">
         <input type="text" class="form-control input" id="inputLocation" placeholder="Specify the location" />
         <span class="input-group-btn">
-          <button class="btn btn-default btn-location-search" type="button">
+          <button class="btn btn-default btn-location-search" type="button" data-toggle="tooltip" title="Search">
             <i class="fa fa-search"></i>
+          </button>
+          <button class="btn btn-default btn-location-nearby" type="button" data-toggle="tooltip" title="Nearby">
+            <i class="fa fa-crosshairs"></i>
           </button>
         </span>
       </div>
