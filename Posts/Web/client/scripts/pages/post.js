@@ -2,6 +2,7 @@ define(["communication/client"], function(client){
   var self = this;
   self.map = null;
   self.marker = null;
+  self.circle = null;
   self.userPosition = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
@@ -9,7 +10,7 @@ define(["communication/client"], function(client){
     self.userPosition.lng = position.coords.longitude;
     if(self.map && self.marker) {
       $("#inputLocation").val("");
-      updatePosition();
+      self.updatePosition();
     }
   }
 
@@ -18,21 +19,49 @@ define(["communication/client"], function(client){
   }
 
   self.init = function(){
-    //first load map
     require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
-    //load slider
-    $("#inputRadius").slider({
-      handle: 'square',
-      value: 0,
-      min: 0,
-      max: 5000,
-      step: 500,
-      tooltip: 'always',
-      tooltip_position: 'bottom',
-      formatter: function(value) {
-        return value + 'm';
-      }
+    self.initLocationTypeahead();
+    self.initRadiusSlider();
+  }
+
+  window.initMap = function() {
+    self.map = new google.maps.Map($(".aa-post-map").get(0), {
+      zoom: 10
     });
+    self.marker = new google.maps.Marker({
+      map: self.map
+    });
+    self.circle = new google.maps.Circle({
+        radius: 1000, // 1 mile
+        strokeColor: '#0000FF',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000FF',
+        fillOpacity: 0.35,
+    });
+    self.circle.bindTo('center', self.marker, 'position');
+    updatePosition();
+  }
+
+  self.initLocationTypeahead = function() {
+    var processPlace = function(place) {
+      if (!place)
+        return;
+
+      var request = {
+        query: place
+      };
+
+      var service = new google.maps.places.PlacesService(self.map);
+      service.textSearch(request, function(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          var data = results[0].geometry;
+          self.map.fitBounds(data.viewport);
+          var location = { lat: data.location.lat(), lng: data.location.lng() };
+          self.marker.setPosition(location);
+        }
+      });
+    }
 
     var typeahead = $("#inputLocation").typeahead({
       items: "all",
@@ -47,47 +76,39 @@ define(["communication/client"], function(client){
         if (item.location) {
           self.updatePosition(item.location);
         }
-        self.processPlace(item.name);
+        processPlace(item.name);
       }
     });
 
     typeahead.keypress(function(e) {
       if (e.which == 13) //key is Enter
-        self.processPlace(typeahead.val());
+        processPlace(typeahead.val());
     });
 
     $(".btn-location-search").click(function() {
-      self.processPlace(typeahead.val());
+      processPlace(typeahead.val());
     });
   }
 
-  self.processPlace = function(place) {
-    if (!place)
-      return;
-
-    var request = {
-      query: place
-    };
-
-    var service = new google.maps.places.PlacesService(self.map);
-    service.textSearch(request, function(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        var data = results[0].geometry;
-        self.map.fitBounds(data.viewport);
-        var location = { lat: data.location.lat(), lng: data.location.lng() };
-        self.marker.setPosition(location);
+  self.initRadiusSlider = function() {
+    $("#inputRadius").slider({
+      handle: 'square',
+      value: 0,
+      min: 0,
+      max: 5000,
+      step: 500,
+      tooltip: 'always',
+      tooltip_position: 'bottom',
+      formatter: function(value) {
+        return value + 'm';
       }
     });
-  }
 
-  window.initMap = function() {
-    self.map = new google.maps.Map($(".aa-post-map").get(0), {
-      zoom: 10
+    $("#inputRadius").slider().on("change", function(e) {
+      var radius = e.value.newValue;
+      self.circle.setRadius(radius);
+      self.circle.setMap(radius > 0 ? self.map : null); //toggle visibility
     });
-    self.marker = new google.maps.Marker({
-      map: map
-    });
-    updatePosition();
   }
 
   self.updatePosition = function(location) {
