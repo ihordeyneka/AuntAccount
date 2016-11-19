@@ -1,11 +1,14 @@
 define(["communication/client"], function(client){
   var self = this;
-  var defaultPosition = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
+  var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
+  var MIN_ZOOM_FOR_PLACE = 15;
 
   self.map = null;
   self.marker = null;
   self.circle = null;
   self.userPosition = null;
+  self.slider = null;
+  self.typeahead = null;
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
     self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -20,14 +23,25 @@ define(["communication/client"], function(client){
   }
 
   self.init = function(){
-    require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
     self.initLocationTypeahead();
     self.initRadiusSlider();
+    require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
   }
 
   window.initMap = function() {
     self.map = new google.maps.Map($(".aa-post-map").get(0), {
-      zoom: 10
+      zoom: MIN_ZOOM_FOR_PLACE
+    });
+    self.map.addListener('zoom_changed', function() {
+      var zoom = self.map.getZoom();
+      if (zoom < MIN_ZOOM_FOR_PLACE) {
+        self.slider.setValue(0);
+        self.circle.setRadius(0);
+        self.slider.disable();
+      } else {
+        self.slider.enable();
+      }
+      self.slider.relayout();
     });
     self.marker = new google.maps.Marker({
       map: self.map
@@ -64,7 +78,7 @@ define(["communication/client"], function(client){
       });
     }
 
-    var typeahead = $("#inputLocation").typeahead({
+    self.typeahead = $("#inputLocation").typeahead({
       items: "all",
       minLength: 3,
       delay: 300,
@@ -81,13 +95,13 @@ define(["communication/client"], function(client){
       }
     });
 
-    typeahead.keypress(function(e) {
+    self.typeahead.keypress(function(e) {
       if (e.which == 13) //key is Enter
-        processPlace(typeahead.val());
+        processPlace(self.typeahead.val());
     });
 
     $(".btn-location-search").click(function() {
-      processPlace(typeahead.val());
+      processPlace(self.typeahead.val());
     });
 
     $(".btn-location-nearby").popover({
@@ -104,7 +118,7 @@ define(["communication/client"], function(client){
       if (self.userPosition) {
         $("#inputLocation").val("");
         self.updatePosition(self.userPosition);
-        self.map.setZoom(10);
+        self.map.setZoom(MIN_ZOOM_FOR_PLACE);
       } else {
         $(this).popover("show");
         e.stopPropagation();
@@ -116,7 +130,7 @@ define(["communication/client"], function(client){
   }
 
   self.initRadiusSlider = function() {
-    $("#inputRadius").slider({
+    self.slider = $("#inputRadius").slider({
       handle: 'square',
       value: 0,
       min: 0,
@@ -125,12 +139,14 @@ define(["communication/client"], function(client){
       tooltip: 'always',
       tooltip_position: 'bottom',
       formatter: function(value) {
-        return value + 'm';
+        return self.slider == null || self.slider.isEnabled() ?
+          value + 'm' :
+          'Disabled';
       }
-    });
+    }).data('slider');
 
-    $("#inputRadius").slider().on("change", function(e) {
-      var radius = e.value.newValue;
+    self.slider.on('change', function(e) {
+      var radius = e.newValue;
       self.circle.setRadius(radius);
       self.circle.setMap(radius > 0 ? self.map : null); //toggle visibility
     });
@@ -138,7 +154,7 @@ define(["communication/client"], function(client){
 
   self.updatePosition = function(location) {
     if (!location) {
-      location = userPosition || defaultPosition;
+      location = userPosition || DEF_POSITION;
     }
 
     var latLng = new google.maps.LatLng(location.lat, location.lng);
