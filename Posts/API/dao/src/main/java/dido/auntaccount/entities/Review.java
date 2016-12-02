@@ -17,7 +17,7 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AuthorId")
-    private User author;
+    private Customer author;
 
     private Long objectId;
 
@@ -45,11 +45,11 @@ public class Review {
         this.rate = rate;
     }
 
-    public User getAuthor() {
+    public Customer getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Customer author) {
         this.author = author;
     }
 

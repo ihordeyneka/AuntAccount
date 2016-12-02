@@ -18,7 +18,8 @@ public class InjectionServiceModule extends AbstractModule {
         bind(OfferService.class).to(OfferServiceImpl.class);
         bind(PostService.class).to(PostServiceImpl.class);
         bind(ReviewService.class).to(ReviewServiceImpl.class);
-        bind(SupplierService.class).to(SupplierServiceImpl.class);
         bind(UserService.class).to(UserServiceImpl.class);
+        bind(SupplierService.class).to(SupplierServiceImpl.class);
+        bind(CustomerService.class).to(CustomerServiceImpl.class);
     }
 }

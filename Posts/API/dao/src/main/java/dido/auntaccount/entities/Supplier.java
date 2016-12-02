@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("1")
-public class Supplier extends Person {
+public class Supplier extends User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "SupplierTag",
