@@ -8,9 +8,6 @@ import dido.auntaccount.dao.*;
 import dido.auntaccount.dao.impl.*;
 import com.google.inject.persist.jpa.JpaPersistModule;
 
-/**
- * Created by orysiadeyneka on 24.09.16.
- */
 public class InjectionDAOModule extends AbstractModule {
 
     @Override
@@ -20,6 +17,7 @@ public class InjectionDAOModule extends AbstractModule {
         bind(PostDAO.class).to(PostDAOImpl.class);
         bind(OfferDAO.class).to(OfferDAOImpl.class);
         bind(UserDAO.class).to(UserDAOImpl.class);
+        bind(CustomerDAO.class).to(CustomerDAOImpl.class);
         bind(MessageDAO.class).to(MessageDAOImpl.class);
         bind(ReviewDAO.class).to(ReviewDAOImpl.class);
         bind(SupplierDAO.class).to(SupplierDAOImpl.class);
