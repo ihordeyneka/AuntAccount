@@ -15,6 +15,7 @@ var PATHS = {
     { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
     { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },
     { name: 'bootstrap3_typeahead', files: 'external/lib/bootstrap3-typeahead/**/*' },
+    { name: 'bootstrap_fileinput', files: 'node_modules/bootstrap-fileinput/{css,js}/**/*' },
     { name: 'requirejs', files: 'node_modules/requirejs/require.js' },
     { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' }
   ],
