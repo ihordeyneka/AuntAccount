@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/reviews")
-public class ReviewRestService {
+public class ReviewController {
 
     @Inject
     ReviewService reviewService;

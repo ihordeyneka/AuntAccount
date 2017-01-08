@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/messages")
-public class MessageRestService {
+public class MessageController {
 
     @Inject
     private MessageService service;

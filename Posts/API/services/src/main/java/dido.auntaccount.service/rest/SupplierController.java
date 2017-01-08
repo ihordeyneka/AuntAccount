@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/suppliers")
-public class SupplierRestService {
+public class SupplierController {
 
     @Inject
     SupplierService supplierService;

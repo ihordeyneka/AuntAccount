@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/users")
-public class UserRestService {
+public class UserController {
 
     @Inject
     private UserService userService;

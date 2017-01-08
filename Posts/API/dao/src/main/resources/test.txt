@@ -1,0 +1,10 @@
+Insert Supplier
+
+{"id":114,"name":"Orysia","password":"da","email":"orysia.deyneka@gmail.com","phone":"0961818306","photo":"PwAAAAAAAAAAAA==","website":"google.com","creationDate":"1999-01-01","location":{"id":2,"latitude":222.0,"longitude":3333.0,"city":"Lviv","region":"Lvivska","street":"Shyroka","country":{"id":2,"country":"USA"}},"supplierTags":[{"id":1,"tag":"blue"}, {"id":2,"tag":"skirt"}, {"id":2,"tag":"tv"}],"supplierPosts":[]}
+
+Insert Post
+{"id":111,"description":"desc","photo":null,"priceMax":134.0,"priceMin":12.0,"creationDate":"1999-01-01","location":{"id":3,"latitude":222.0,"longitude":3333.0,"city":"Lviv","region":"Lvivska","street":"Shyroka","country":{"id":1,"country":"Ukraine"}},"postTags":[{"id":200,"tag":"tv"}],"userId":1}
+
+
+
+

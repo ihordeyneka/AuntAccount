@@ -96,6 +96,14 @@ CREATE TABLE `dido`.`Message` (
   PRIMARY KEY (`Id`)
 );
 
+CREATE TABLE `TOKEN` (
+  `Token` varchar(255) NOT NULL,
+  `ExpirationDate` datetime NOT NULL,
+  PRIMARY KEY (`Token`),
+  UNIQUE KEY `Token_UNIQUE` (`Token`)
+);
+
+
 --fix post table - remove latitude and longitude, add supplierTag table
 
 insert into COUNTRY (id, country) values (1, "Ukraine");

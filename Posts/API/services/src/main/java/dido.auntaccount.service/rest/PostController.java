@@ -3,9 +3,6 @@ package dido.auntaccount.service.rest;
 import dido.auntaccount.dao.SupplierDAO;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
-import dido.auntaccount.entities.Supplier;
-import dido.auntaccount.entities.Tag;
-import dido.auntaccount.search.SearchSupplierService;
 import dido.auntaccount.service.business.PostService;
 
 import javax.inject.Inject;
@@ -13,10 +10,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path("/posts")
-public class PostRestService {
+public class PostController {
 
     @Inject
     private SupplierDAO supplierDAO;
