@@ -3,11 +3,12 @@ define(["communication/client"], function(client){
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
 
+  self.googleApiLoaded = false;
   self.map = null;
   self.marker = null;
   self.circle = null;
   self.userPosition = null;
-  self.slider = null;
+  self.radiusSlider = null;
   self.typeahead = null;
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
@@ -25,23 +26,30 @@ define(["communication/client"], function(client){
   self.init = function(){
     self.initLocationTypeahead();
     self.initRadiusSlider();
-    require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
+    self.initAttachmentUpload();
+    if (!self.googleApiLoaded) {
+      require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
+    }
+    else {
+      initMap();
+    }
   }
 
   window.initMap = function() {
+    self.googleApiLoaded = true;
     self.map = new google.maps.Map($(".aa-post-map").get(0), {
       zoom: MIN_ZOOM_FOR_PLACE
     });
     self.map.addListener('zoom_changed', function() {
       var zoom = self.map.getZoom();
       if (zoom < MIN_ZOOM_FOR_PLACE) {
-        self.slider.setValue(0);
+        self.radiusSlider.setValue(0);
         self.circle.setRadius(0);
-        self.slider.disable();
+        self.radiusSlider.disable();
       } else {
-        self.slider.enable();
+        self.radiusSlider.enable();
       }
-      self.slider.relayout();
+      self.radiusSlider.relayout();
     });
     self.marker = new google.maps.Marker({
       map: self.map
@@ -130,7 +138,7 @@ define(["communication/client"], function(client){
   }
 
   self.initRadiusSlider = function() {
-    self.slider = $("#inputRadius").slider({
+    self.radiusSlider = $("#inputRadius").slider({
       handle: 'square',
       value: 0,
       min: 0,
@@ -139,16 +147,27 @@ define(["communication/client"], function(client){
       tooltip: 'always',
       tooltip_position: 'bottom',
       formatter: function(value) {
-        return self.slider == null || self.slider.isEnabled() ?
+        return self.radiusSlider == null || self.radiusSlider.isEnabled() ?
           value + 'm' :
           'Disabled';
       }
     }).data('slider');
 
-    self.slider.on('change', function(e) {
+    self.radiusSlider.on('change', function(e) {
       var radius = e.newValue;
       self.circle.setRadius(radius);
       self.circle.setMap(radius > 0 ? self.map : null); //toggle visibility
+    });
+  }
+
+  self.initAttachmentUpload = function() {
+    $("#inputAttachment").fileinput({
+      browseLabel: 'Browse',
+      browseIcon: '<i class="fa fa-search"></i>',
+      uploadIcon: '<i class="fa fa-upload"></i>',
+      deleteIcon: '<i class="fa fa-delete"></i>',
+      showPreview: false,
+      allowedFileExtensions: ["jpg", "jpeg", "bmp", "gif", "png"]
     });
   }
 
