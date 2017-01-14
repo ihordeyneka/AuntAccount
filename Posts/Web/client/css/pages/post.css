@@ -1,11 +1,15 @@
 #inputPost {
   width: 100%;
-  height: 350px;
+  height: 300px;
+}
+
+#btnPost {
+  width: 100px;
 }
 
 .aa-post-map {
   width: 100%;
-  height: 400px;
+  height: 340px;
 }
 
 .input-group .btn.btn-location-nearby {
