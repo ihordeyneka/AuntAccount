@@ -1,6 +1,5 @@
 package dido.auntaccount.service.rest;
 
-import dido.auntaccount.dao.SupplierDAO;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.service.business.PostService;
@@ -13,9 +12,6 @@ import java.util.List;
 
 @Path("/posts")
 public class PostController {
-
-    @Inject
-    private SupplierDAO supplierDAO;
 
     @Inject
     PostService postService;
