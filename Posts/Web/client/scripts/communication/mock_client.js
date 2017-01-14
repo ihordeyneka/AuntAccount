@@ -19,5 +19,9 @@ define(function() {
     return result;
   }
 
+  self.savePost = function(post) {
+    console.log(post);
+  }
+
   return self;
-})
+});

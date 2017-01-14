@@ -1,4 +1,4 @@
-define(["communication/client"], function(client){
+define(["communication_client"], function(client) {
   var self = this;
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
@@ -10,6 +10,7 @@ define(["communication/client"], function(client){
   self.userPosition = null;
   self.radiusSlider = null;
   self.typeahead = null;
+  self.selectedLocationId = null;
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
     self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -27,6 +28,7 @@ define(["communication/client"], function(client){
     self.initLocationTypeahead();
     self.initRadiusSlider();
     self.initAttachmentUpload();
+    self.addButtonHandlers();
     if (!self.googleApiLoaded) {
       require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
     }
@@ -96,6 +98,7 @@ define(["communication/client"], function(client){
         return process(result);
       },
       afterSelect: function(item) {
+        self.selectedLocationId = item.id;
         if (item.location) {
           self.updatePosition(item.location);
         }
@@ -180,6 +183,21 @@ define(["communication/client"], function(client){
 
     self.marker.setPosition(latLng);
     self.map.panTo(latLng);
+  }
+
+  self.addButtonHandlers = function() {
+    $("#btnPost").click(function() {
+      client.savePost({
+        keywords: $("#inputKeywords").val(),
+        post: $("#inputPost").val(),
+        attachment: null,
+        locationId: self.selectedLocationId,
+        place: $("#inputLocation").val(),
+        latitude: self.marker.position.lat(),
+        longitude: self.marker.position.lng(),
+        radius: self.radiusSlider.getValue()
+      });
+    });
   }
 
   return self;
