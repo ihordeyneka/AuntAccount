@@ -11,6 +11,8 @@ define(["communication_client"], function(client) {
   self.radiusSlider = null;
   self.typeahead = null;
   self.selectedLocationId = null;
+  self.attachmentUpload = null;
+  self.lastPostId = null;
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
     self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -164,12 +166,21 @@ define(["communication_client"], function(client) {
   }
 
   self.initAttachmentUpload = function() {
-    $("#inputAttachment").fileinput({
+    self.attachmentUpload = $("#inputAttachment").fileinput({
       browseLabel: 'Browse',
       browseIcon: '<i class="fa fa-search"></i>',
-      uploadIcon: '<i class="fa fa-upload"></i>',
-      deleteIcon: '<i class="fa fa-delete"></i>',
+      showUpload: false,
+      showRemove: false,
       showPreview: false,
+      uploadUrl: client.getAttachmentUploadUrl(),
+      uploadAsync: false,
+      layoutTemplates: {
+        progress: '', //hide progress
+      },
+      uploadExtraData: function () {
+        return { postId: self.lastPostId };
+      },
+      maxFileCount: 1,
       allowedFileExtensions: ["jpg", "jpeg", "bmp", "gif", "png"]
     });
   }
@@ -190,12 +201,17 @@ define(["communication_client"], function(client) {
       client.savePost({
         keywords: $("#inputKeywords").val(),
         post: $("#inputPost").val(),
-        attachment: null,
         locationId: self.selectedLocationId,
         place: $("#inputLocation").val(),
         latitude: self.marker.position.lat(),
         longitude: self.marker.position.lng(),
         radius: self.radiusSlider.getValue()
+      }, function() {
+        //0. validation checks
+        //1. notify user that post is saved
+        //2. verify what is posted to the serverside
+        if (self.attachmentUpload.fileinput("getFilesCount") > 0)
+          self.attachmentUpload.fileinput("upload");
       });
     });
   }
