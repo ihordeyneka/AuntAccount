@@ -1,7 +1,7 @@
 package dido.auntaccount.service.filter;
 
-import dido.auntaccount.dao.TokenDAO;
 import dido.auntaccount.entities.Token;
+import dido.auntaccount.service.business.TokenService;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.ParameterStyle;
@@ -28,7 +28,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private HttpServletRequest request;
 
     @Inject
-    private TokenDAO tokenDAO;
+    private TokenService tokenService;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -45,7 +45,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
     private void validateToken(String token) throws OAuthProblemException {
-        Token serverToken = tokenDAO.find(token);
+        Token serverToken = tokenService.getToken(token);
         Date now = DateTime.now().toDate();
         if (serverToken == null || serverToken.getExpirationDate().before(now)) {
             throw OAuthProblemException.error("Token is not valid");

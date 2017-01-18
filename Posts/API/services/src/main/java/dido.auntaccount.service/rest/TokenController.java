@@ -2,8 +2,8 @@ package dido.auntaccount.service.rest;
 
 import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.PasswordService;
+import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
-import dido.auntaccount.service.business.impl.PasswordServiceImpl;
 import dido.auntaccount.service.business.impl.PasswordServiceImpl.CannotPerformOperationException;
 import dido.auntaccount.service.business.impl.PasswordServiceImpl.InvalidHashException;
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
@@ -18,8 +18,6 @@ import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -29,14 +27,19 @@ import java.net.URISyntaxException;
 @Path("/token")
 public class TokenController {
 
+    private static final Long EXPIRES_IN = 3600L;
+
     @Inject
     UserService userService;
 
     @Inject
     PasswordService passwordService;
 
+    @Inject
+    TokenService tokenService;
+
     @POST
-   // @Consumes("application/x-www-form-urlencoded")
+    // @Consumes("application/x-www-form-urlencoded")
     public Response authorize(@Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
 
         OAuthTokenRequest oauthRequest = null;
@@ -56,9 +59,11 @@ public class TokenController {
             OAuthResponse r = OAuthASResponse
                     .tokenResponse(HttpServletResponse.SC_OK)
                     .setAccessToken(accessToken)
-                    .setExpiresIn("3600")
+                    .setExpiresIn(EXPIRES_IN.toString())
                     .setRefreshToken(refreshToken)
                     .buildJSONMessage();
+
+            tokenService.saveToken(accessToken, EXPIRES_IN);
 
             return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
 
