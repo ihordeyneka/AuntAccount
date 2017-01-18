@@ -4,6 +4,7 @@ import dido.auntaccount.entities.Customer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.service.business.CustomerService;
+import dido.auntaccount.service.business.PasswordService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -16,6 +17,9 @@ public class CustomerController {
 
     @Inject
     private CustomerService customerService;
+
+    @Inject
+    PasswordService passwordService;
 
     @GET
     @Path("/{param}")
@@ -30,6 +34,8 @@ public class CustomerController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveCustomer(Customer customer) throws Exception {
+        String hashedPassword = passwordService.createHash(customer.getPassword());
+        customer.setPassword(hashedPassword);
         Customer savedCustomer = customerService.saveCustomer(customer);
         return Response.status(200).entity(savedCustomer).build();
     }

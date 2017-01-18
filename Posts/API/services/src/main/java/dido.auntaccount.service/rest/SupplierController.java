@@ -2,6 +2,7 @@ package dido.auntaccount.service.rest;
 
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Supplier;
+import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.SupplierService;
 
 import javax.inject.Inject;
@@ -16,6 +17,9 @@ public class SupplierController {
     @Inject
     SupplierService supplierService;
 
+    @Inject
+    PasswordService passwordService;
+
     @GET
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,6 +33,8 @@ public class SupplierController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveSupplier(Supplier supplier) throws Exception {
+        String hashedPassword = passwordService.createHash(supplier.getPassword());
+        supplier.setPassword(hashedPassword);
         Supplier savedSupplier = supplierService.saveSupplier(supplier);
         return Response.status(200).entity(savedSupplier).build();
     }

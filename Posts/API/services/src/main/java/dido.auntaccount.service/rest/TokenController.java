@@ -3,6 +3,7 @@ package dido.auntaccount.service.rest;
 import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.UserService;
+import dido.auntaccount.service.business.impl.PasswordServiceImpl;
 import dido.auntaccount.service.business.impl.PasswordServiceImpl.CannotPerformOperationException;
 import dido.auntaccount.service.business.impl.PasswordServiceImpl.InvalidHashException;
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
@@ -17,7 +18,9 @@ import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -32,7 +35,8 @@ public class TokenController {
     @Inject
     PasswordService passwordService;
 
-    @GET
+    @POST
+   // @Consumes("application/x-www-form-urlencoded")
     public Response authorize(@Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
 
         OAuthTokenRequest oauthRequest = null;
