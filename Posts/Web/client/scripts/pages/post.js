@@ -1,5 +1,5 @@
 define(["communication_client"], function(client) {
-  var self = this;
+  var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
 
@@ -13,6 +13,7 @@ define(["communication_client"], function(client) {
   self.selectedLocationId = null;
   self.attachmentUpload = null;
   self.lastPostId = null;
+  self.validatorForm = $("#formPost");
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
     self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -37,6 +38,7 @@ define(["communication_client"], function(client) {
     else {
       initMap();
     }
+    self.validatorForm.validator();
   }
 
   window.initMap = function() {
@@ -67,7 +69,7 @@ define(["communication_client"], function(client) {
         fillOpacity: 0.35,
     });
     self.circle.bindTo('center', self.marker, 'position');
-    updatePosition();
+    self.updatePosition();
   }
 
   self.initLocationTypeahead = function() {
@@ -187,7 +189,7 @@ define(["communication_client"], function(client) {
 
   self.updatePosition = function(location) {
     if (!location) {
-      location = userPosition || DEF_POSITION;
+      location = self.userPosition || DEF_POSITION;
     }
 
     var latLng = new google.maps.LatLng(location.lat, location.lng);
@@ -198,21 +200,34 @@ define(["communication_client"], function(client) {
 
   self.addButtonHandlers = function() {
     $("#btnPost").click(function() {
-      client.savePost({
-        keywords: $("#inputKeywords").val(),
-        post: $("#inputPost").val(),
-        locationId: self.selectedLocationId,
-        place: $("#inputLocation").val(),
-        latitude: self.marker.position.lat(),
-        longitude: self.marker.position.lng(),
-        radius: self.radiusSlider.getValue()
-      }, function() {
-        //0. validation checks
-        //1. notify user that post is saved
-        //2. verify what is posted to the serverside
-        if (self.attachmentUpload.fileinput("getFilesCount") > 0)
-          self.attachmentUpload.fileinput("upload");
-      });
+      $(".aa-notification-area .alert").hide();
+      if (self.validatorForm.validator('validate').has('.has-error').length === 0) {
+        globals.loading($('body'), true);
+        client.savePost({
+          keywords: $("#inputKeywords").val(),
+          post: $("#inputPost").val(),
+          locationId: self.selectedLocationId,
+          place: $("#inputLocation").val(),
+          latitude: self.marker.position.lat(),
+          longitude: self.marker.position.lng(),
+          radius: self.radiusSlider.getValue()
+        }, function(res) {
+          globals.loading($("body"), false);
+          if (res.success) {
+            self.lastPostId = res.data.id;
+            if (self.attachmentUpload.fileinput("getFilesCount") > 0)
+              self.attachmentUpload.fileinput("upload");
+
+            $(".aa-notification-area .alert-success").show();
+          }
+          else {
+            $(".aa-notification-area .alert-danger").show();
+          }
+        });
+      }
+      else {
+        $(".aa-notification-area .alert-danger").show();
+      }
     });
   }
 

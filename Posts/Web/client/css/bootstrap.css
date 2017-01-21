@@ -49,6 +49,10 @@ a.header-nav__navigation-link:hover {
   }
 }
 
+.alert {
+  border-radius: 0;
+}
+
 .btn {
   border-radius: 0;
 }

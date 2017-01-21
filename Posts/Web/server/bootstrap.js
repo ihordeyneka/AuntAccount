@@ -20,6 +20,12 @@ router.get('/', function(req, res) {
   res.sendFile(DIST_DIR + '/client/index.html');
 });
 
+//for test requests just return OK
+router.post('/test*', function(req, res) {
+  res.statusCode = 200;
+  res.send('OK');
+});
+
 // Send any other urls notfound.html.
 router.get('*', function(req,res) {
   res.statusCode = 404;

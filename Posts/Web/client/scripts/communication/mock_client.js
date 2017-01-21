@@ -2,7 +2,7 @@ define(function() {
   var self = this;
 
   self.getAttachmentUploadUrl = function () {
-    return "http://localhost:7000/upload";
+    return "http://localhost:7000/test/upload";
   };
 
   self.getLocations = function(query) {
@@ -25,8 +25,10 @@ define(function() {
 
   self.savePost = function(post, callback) {
     console.log(post);
-    var id = 0;
-    callback(id);
+    callback({
+      success: true,
+      data: { id: 0 }
+    });
   }
 
   return self;
