@@ -10,6 +10,9 @@
 .margin-top {
   margin-top: 10px;
 }
-.ishidden {
+.is-hidden {
   display: none;
+}
+.no-outline {
+  outline-width: 0;
 }

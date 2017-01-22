@@ -1,15 +1,19 @@
 <form id="formPost">
   <div class="container-fluid">
-    <div class="row aa-notification-area">
-      <div class="col-sm-offset-1 col-sm-10">
-        <div class="alert alert-success alert-dismissable ishidden">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Success!</strong> Your message has been posted, we've notified our subscribers.
-        </div>
-        <div class="alert alert-danger alert-dismissable ishidden">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Warning!</strong> One or more validation failed, please fix the errors and try again.
-        </div>
+    <div class="row">
+      <div class="aa-notification-area no-outline col-sm-offset-1 col-sm-10" tabindex="-1">
+        <script id="templateSuccess" type="text/x-jsrender">
+          <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Your message has been posted, we''ve notified our subscribers.
+          </div>
+        </script>
+        <script id="templateError" type="text/x-jsrender">
+          <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong> One or more validation failed, please fix the errors and try again.
+          </div>
+        </script>
       </div>
     </div>
     <div class="row">

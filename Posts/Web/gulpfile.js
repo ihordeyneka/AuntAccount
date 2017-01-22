@@ -12,6 +12,7 @@ var packageJson = require('./package.json');
 var PATHS = {
   lib: [
     { name: 'jquery', files: 'node_modules/jquery.1/node_modules/jquery/dist/**/*' },
+    { name: 'jsrender', files: 'node_modules/jsrender/*.{js,map}' },
     { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
     { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },
     { name: 'bootstrap3_typeahead', files: 'external/lib/bootstrap3-typeahead/**/*' },

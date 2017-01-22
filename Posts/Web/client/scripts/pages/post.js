@@ -38,7 +38,9 @@ define(["communication_client"], function(client) {
     else {
       initMap();
     }
-    self.validatorForm.validator();
+    self.validatorForm.validator({
+      focus: false
+    });
   }
 
   window.initMap = function() {
@@ -200,7 +202,8 @@ define(["communication_client"], function(client) {
 
   self.addButtonHandlers = function() {
     $("#btnPost").click(function() {
-      $(".aa-notification-area .alert").hide();
+      var notificationArea = $(".aa-notification-area");
+      notificationArea.find(".alert").remove(); //clear all alerts
       if (self.validatorForm.validator('validate').has('.has-error').length === 0) {
         globals.loading($('body'), true);
         client.savePost({
@@ -218,15 +221,15 @@ define(["communication_client"], function(client) {
             if (self.attachmentUpload.fileinput("getFilesCount") > 0)
               self.attachmentUpload.fileinput("upload");
 
-            $(".aa-notification-area .alert-success").show();
+            notificationArea.append($.templates("#templateSuccess").render()).focus();
           }
           else {
-            $(".aa-notification-area .alert-danger").show();
+            notificationArea.append($.templates("#templateError").render()).focus();
           }
         });
       }
       else {
-        $(".aa-notification-area .alert-danger").show();
+        notificationArea.append($.templates("#templateError").render()).focus();
       }
     });
   }
