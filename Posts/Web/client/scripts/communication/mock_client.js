@@ -5,6 +5,32 @@ define(function() {
     return "http://localhost:7000/test/upload";
   };
 
+  self.getTags = function(query) {
+    var result = [
+      "Shoes",
+      "Boots",
+      "Socks",
+      "Trousers",
+      "Jeans",
+      "Shorts",
+      "Pants",
+      "Belt",
+      "Skirt",
+      "Shirt",
+      "T-Shirt",
+      "Sweater",
+      "Polo",
+      "Hoodie",
+      "Jacket",
+      "Watch",
+      "Glasses",
+      "Scarf",
+      "Hat",
+      "Cap"
+    ];
+    return result;
+  }
+
   self.getLocations = function(query) {
     //type: 1-country, 2-province, 3-city, 4-place
     var result = [

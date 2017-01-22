@@ -53,6 +53,16 @@ a.header-nav__navigation-link:hover {
   border-radius: 0;
 }
 
+.bootstrap-tagsinput {
+  border-radius: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bootstrap-tagsinput > .tag, .bootstrap-tagsinput > input {
+  position: relative;
+}
+
 .btn {
   border-radius: 0;
 }
@@ -94,6 +104,14 @@ a.header-nav__navigation-link:hover {
   font-size: 20px;
 }
 
+.label-info {
+  background-color: #9F9F82;
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+  background-color: #9F9F82;
+}
+
 /*---Slider---*/
 div.slider.slider-horizontal {
   display: block;
@@ -113,4 +131,9 @@ div.slider-track div {
 }
 div.slider-selection {
   background: #ABABAC;
+}
+
+/*---Tags Input---*/
+.bootstrap-tagsinput {
+  width: 100%;
 }
