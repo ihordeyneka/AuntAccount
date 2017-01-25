@@ -1,5 +1,5 @@
 define(["communication_client"], function(client) {
-  var self = this;
+  var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
 
@@ -13,6 +13,7 @@ define(["communication_client"], function(client) {
   self.selectedLocationId = null;
   self.attachmentUpload = null;
   self.lastPostId = null;
+  self.validatorForm = $("#formPost");
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
     self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -27,6 +28,7 @@ define(["communication_client"], function(client) {
   }
 
   self.init = function(){
+    self.initSearchTagsInput();
     self.initLocationTypeahead();
     self.initRadiusSlider();
     self.initAttachmentUpload();
@@ -37,6 +39,9 @@ define(["communication_client"], function(client) {
     else {
       initMap();
     }
+    self.validatorForm.validator({
+      focus: false
+    });
   }
 
   window.initMap = function() {
@@ -67,7 +72,61 @@ define(["communication_client"], function(client) {
         fillOpacity: 0.35,
     });
     self.circle.bindTo('center', self.marker, 'position');
-    updatePosition();
+    self.updatePosition();
+  }
+
+  self.initSearchTagsInput = function() {
+    $("#inputKeywords").tagsinput({
+      typeahead: {
+        afterSelect: function(val) {
+          this.$element.val(""); //clear input when tag is added
+        },
+        source: function(query) {
+          var result = client.getTags(query);
+          return result;
+        }
+      }
+    });
+
+    var tagsinput = $("#inputKeywords").data("tagsinput");
+
+    //normally shifting of controls should be possible to reuse in other instances of tags input
+    //this code should be moved to a separate place to override the behavior of tags input control
+    tagsinput.currentShift = 0;
+    var updateTagsPosition = function() {
+      var shiftStepPixels = 100;
+      var inputRight = tagsinput.$input.position().left + tagsinput.$input.width();
+      var containerRight = tagsinput.$container.position().left + tagsinput.$container.width();
+      if (inputRight > containerRight) {
+        tagsinput.currentShift -= shiftStepPixels;
+      } else if (tagsinput.currentShift < 0) {
+        var restoreStepsCount = (containerRight - inputRight) / shiftStepPixels;
+        tagsinput.currentShift += restoreStepsCount * shiftStepPixels;
+      }
+      if (tagsinput.currentShift > 0)
+        tagsinput.currentShift = 0;
+      //update left css property for input and tags within the tagsinput
+      tagsinput.$container.children('span.tag, input')
+        .css("left", tagsinput.currentShift.toString() + "px");
+    }
+
+    $("#inputKeywords").on("itemAdded", function() {
+      updateTagsPosition();
+      tagsinput.$input.attr('placeholder', ''); //remove placeholder if at least one tag is added
+    });
+    $("#inputKeywords").on("itemRemoved", function() {
+      updateTagsPosition();
+      if (tagsinput.itemsArray.length === 0)
+        tagsinput.$input.attr('placeholder', tagsinput.placeholderText); //restore placeholder if there are no tags again
+    });
+    tagsinput.$input.keypress(function() {
+      updateTagsPosition();
+    });
+    tagsinput.$input.keydown(function(e) {
+      if (e.which === 37 && tagsinput.$input.val() === '') { //LEFT ARROW and input is empty
+        e.stopPropagation(); //avoid moving input between tags, see keydown event handler in bootstrap-tagsinput.js
+      }
+    });
   }
 
   self.initLocationTypeahead = function() {
@@ -187,7 +246,7 @@ define(["communication_client"], function(client) {
 
   self.updatePosition = function(location) {
     if (!location) {
-      location = userPosition || DEF_POSITION;
+      location = self.userPosition || DEF_POSITION;
     }
 
     var latLng = new google.maps.LatLng(location.lat, location.lng);
@@ -198,21 +257,35 @@ define(["communication_client"], function(client) {
 
   self.addButtonHandlers = function() {
     $("#btnPost").click(function() {
-      client.savePost({
-        keywords: $("#inputKeywords").val(),
-        post: $("#inputPost").val(),
-        locationId: self.selectedLocationId,
-        place: $("#inputLocation").val(),
-        latitude: self.marker.position.lat(),
-        longitude: self.marker.position.lng(),
-        radius: self.radiusSlider.getValue()
-      }, function() {
-        //0. validation checks
-        //1. notify user that post is saved
-        //2. verify what is posted to the serverside
-        if (self.attachmentUpload.fileinput("getFilesCount") > 0)
-          self.attachmentUpload.fileinput("upload");
-      });
+      var notificationArea = $(".aa-notification-area");
+      notificationArea.find(".alert").remove(); //clear all alerts
+      if (self.validatorForm.validator('validate').has('.has-error').length === 0) {
+        globals.loading($('body'), true);
+        client.savePost({
+          keywords: $("#inputKeywords").val(),
+          post: $("#inputPost").val(),
+          locationId: self.selectedLocationId,
+          place: $("#inputLocation").val(),
+          latitude: self.marker.position.lat(),
+          longitude: self.marker.position.lng(),
+          radius: self.radiusSlider.getValue()
+        }, function(res) {
+          globals.loading($("body"), false);
+          if (res.success) {
+            self.lastPostId = res.data.id;
+            if (self.attachmentUpload.fileinput("getFilesCount") > 0)
+              self.attachmentUpload.fileinput("upload");
+
+            notificationArea.append($.templates("#templateSuccess").render()).focus();
+          }
+          else {
+            notificationArea.append($.templates("#templateError").render()).focus();
+          }
+        });
+      }
+      else {
+        notificationArea.append($.templates("#templateError").render()).focus();
+      }
     });
   }
 

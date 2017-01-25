@@ -2,8 +2,12 @@ define(function() {
   var self = this;
 
   self.getAttachmentUploadUrl = function () {
-    throw "Not Implemented"
+    throw "Not Implemented";
   };
+
+  self.getTags = function(query) {
+    throw "Not Implemented";
+  }
 
   self.getLocations = function(query) {
     throw "Not Implemented";
