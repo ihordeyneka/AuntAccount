@@ -1,5 +1,6 @@
 package dido.auntaccount.service.filter;
 
+import dido.auntaccount.dao.TokenDAO;
 import dido.auntaccount.entities.Token;
 import dido.auntaccount.service.business.TokenService;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;

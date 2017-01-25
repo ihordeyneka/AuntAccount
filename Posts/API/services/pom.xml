@@ -13,10 +13,16 @@
     <artifactId>services</artifactId>
 
     <properties>
-        <oltu.version>1.0.0</oltu.version>
+        <oltu.version>1.0.2</oltu.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20090211</version>
+        </dependency>
 
         <dependency>
             <groupId>dido.auntaccount</groupId>
