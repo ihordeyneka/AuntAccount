@@ -14,8 +14,11 @@ import java.net.URISyntaxException;
 public class AuthController {
 
     private static final String FACEBOOK_CLIENT_ID = "*";
+    private static final String GOOGLE_CLIENT_ID = "525119728769-gmkgq6jl3cfag9lp8ij5ugupihnkpv7o.apps.googleusercontent.com";
 
+/*
     @GET
+    @Path("/facebook")
     public Response authorize() throws URISyntaxException, OAuthSystemException {
 
 
@@ -23,6 +26,21 @@ public class AuthController {
                 .authorizationLocation(OAuthProviderType.FACEBOOK.getAuthzEndpoint())
                 .setClientId(FACEBOOK_CLIENT_ID)
                 .setRedirectURI("http://localhost:8080/api/service/clienttoken")
+                .buildQueryMessage();
+        return Response.seeOther(URI.create(request.getLocationUri())).build();
+    }
+*/
+
+    @GET
+    //@Path("/google")
+    public Response authorize() throws URISyntaxException, OAuthSystemException {
+
+        OAuthClientRequest request = OAuthClientRequest
+                .authorizationLocation(OAuthProviderType.GOOGLE.getAuthzEndpoint())
+                .setClientId(GOOGLE_CLIENT_ID)
+                .setRedirectURI("http://localhost:8080/api/service/clienttoken")
+                .setResponseType("code")
+                .setScope("https://www.googleapis.com/auth/plus.login")
                 .buildQueryMessage();
         return Response.seeOther(URI.create(request.getLocationUri())).build();
     }
