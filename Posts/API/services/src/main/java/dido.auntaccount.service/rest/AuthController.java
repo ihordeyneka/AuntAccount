@@ -13,31 +13,29 @@ import java.net.URISyntaxException;
 @Path("/auth")
 public class AuthController {
 
-    private static final String FACEBOOK_CLIENT_ID = "*";
-    private static final String GOOGLE_CLIENT_ID = "*";
-/*
-    @GET
-    @Path("/facebook")
-    public Response authorize() throws URISyntaxException, OAuthSystemException {
+    private static final String FACEBOOK_CLIENT_ID = "";
+    private static final String GOOGLE_CLIENT_ID = "";
 
+    @GET
+    @Path("/fb")
+    public Response authFacebook() throws URISyntaxException, OAuthSystemException {
 
         OAuthClientRequest request = OAuthClientRequest
                 .authorizationLocation(OAuthProviderType.FACEBOOK.getAuthzEndpoint())
                 .setClientId(FACEBOOK_CLIENT_ID)
-                .setRedirectURI("http://localhost:8080/api/service/clienttoken")
+                .setRedirectURI("http://localhost:8080/api/service/token/client/fb")
                 .buildQueryMessage();
         return Response.seeOther(URI.create(request.getLocationUri())).build();
     }
-*/
 
     @GET
-    //@Path("/google")
-    public Response authorize() throws URISyntaxException, OAuthSystemException {
+    @Path("/google")
+    public Response authGoogle() throws URISyntaxException, OAuthSystemException {
 
         OAuthClientRequest request = OAuthClientRequest
                 .authorizationLocation(OAuthProviderType.GOOGLE.getAuthzEndpoint())
                 .setClientId(GOOGLE_CLIENT_ID)
-                .setRedirectURI("http://localhost:8080/api/service/clienttoken")
+                .setRedirectURI("http://localhost:8080/api/service/token/client/google")
                 .setResponseType("code")
                 .setScope("https://www.googleapis.com/auth/plus.login")
                 .buildQueryMessage();

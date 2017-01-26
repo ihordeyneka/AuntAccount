@@ -24,30 +24,31 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
 
-@Path("/clienttoken")
+@Path("/token/client")
 public class ClientTokenController {
 
-    private static final String FACEBOOK_CLIENT_ID = "*";
-    private static final String FACEBOOK_CLIENT_SECRET = "*";
+    private static final String FACEBOOK_CLIENT_ID = "";
+    private static final String FACEBOOK_CLIENT_SECRET = "";
 
-    private static final String GOOGLE_CLIENT_ID = "*";
-    private static final String GOOGLE_CLIENT_SECRET = "*";
+    private static final String GOOGLE_CLIENT_ID = "";
+    private static final String GOOGLE_CLIENT_SECRET = "";
 
     private static final Long EXPIRES_IN = 3600L;
 
     @Inject
     TokenService tokenService;
 
-   /* @GET
+    @GET
+    @Path("/fb")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response authorize(@Context HttpServletRequest httpRequest) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
+    public Response getToken(@Context HttpServletRequest httpRequest) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
 
         OAuthClientRequest request = OAuthClientRequest
                 .tokenProvider(OAuthProviderType.FACEBOOK)
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId(FACEBOOK_CLIENT_ID)
                 .setClientSecret(FACEBOOK_CLIENT_SECRET)
-                .setRedirectURI("http://localhost:8080/api/service/clienttoken")
+                .setRedirectURI("http://localhost:8080/api/service/token/client/fb")
                 .setCode(httpRequest.getParameter("code"))
                 .buildQueryMessage();
 
@@ -56,7 +57,6 @@ public class ClientTokenController {
         GitHubTokenResponse oAuthResponse = oAuthClient.accessToken(request, GitHubTokenResponse.class);
 
         String accessToken = oAuthResponse.getAccessToken();
-        Long expiresIn = oAuthResponse.getExpiresIn();
 
         OAuthResponse r = OAuthASResponse
                 .tokenResponse(HttpServletResponse.SC_OK)
@@ -68,9 +68,9 @@ public class ClientTokenController {
 
         return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
     }
-*/
 
     @GET
+    @Path("/google")
     @Produces(MediaType.APPLICATION_JSON)
     public Response authorize(@Context HttpServletRequest httpRequest) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
 
@@ -79,7 +79,7 @@ public class ClientTokenController {
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId(GOOGLE_CLIENT_ID)
                 .setClientSecret(GOOGLE_CLIENT_SECRET)
-                .setRedirectURI("http://localhost:8080/api/service/clienttoken")
+                .setRedirectURI("http://localhost:8080/api/service/token/client/google")
                 .setCode(httpRequest.getParameter("code"))
                 .buildBodyMessage();
 
@@ -93,7 +93,7 @@ public class ClientTokenController {
         OAuthResponse r = OAuthASResponse
                 .tokenResponse(HttpServletResponse.SC_OK)
                 .setAccessToken(accessToken)
-                .setExpiresIn(EXPIRES_IN.toString())
+                .setExpiresIn(expiresIn.toString())
                 .buildJSONMessage();
 
         tokenService.saveToken(accessToken, EXPIRES_IN);
