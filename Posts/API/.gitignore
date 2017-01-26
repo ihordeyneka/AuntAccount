@@ -1,3 +1,4 @@
 */.idea
 *.iml
 */target/
+/services/src/main/resources/config.properties
