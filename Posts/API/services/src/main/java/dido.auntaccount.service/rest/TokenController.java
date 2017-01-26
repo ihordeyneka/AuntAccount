@@ -39,7 +39,6 @@ public class TokenController {
     TokenService tokenService;
 
     @POST
-    // @Consumes("application/x-www-form-urlencoded")
     public Response authorize(@Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
 
         OAuthTokenRequest oauthRequest = null;
