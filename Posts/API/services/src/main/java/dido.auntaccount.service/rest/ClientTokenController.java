@@ -1,5 +1,6 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
 import dido.auntaccount.service.business.TokenService;
 import org.apache.oltu.oauth2.as.response.OAuthASResponse;
 import org.apache.oltu.oauth2.client.OAuthClient;
@@ -27,11 +28,11 @@ import java.net.URISyntaxException;
 @Path("/token/client")
 public class ClientTokenController {
 
-    private static final String FACEBOOK_CLIENT_ID = "";
-    private static final String FACEBOOK_CLIENT_SECRET = "";
+    private static final String FACEBOOK_CLIENT_ID = PropertiesHandler.getProperty("fb.client.id");
+    private static final String GOOGLE_CLIENT_ID =  PropertiesHandler.getProperty("google.client.id");
 
-    private static final String GOOGLE_CLIENT_ID = "";
-    private static final String GOOGLE_CLIENT_SECRET = "";
+    private static final String FACEBOOK_CLIENT_SECRET = PropertiesHandler.getProperty("fb.client.secret");
+    private static final String GOOGLE_CLIENT_SECRET = PropertiesHandler.getProperty("google.client.secret");
 
     private static final Long EXPIRES_IN = 3600L;
 

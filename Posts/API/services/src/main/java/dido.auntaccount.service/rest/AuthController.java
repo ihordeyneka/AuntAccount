@@ -1,5 +1,6 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
 import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
@@ -13,8 +14,8 @@ import java.net.URISyntaxException;
 @Path("/auth")
 public class AuthController {
 
-    private static final String FACEBOOK_CLIENT_ID = "";
-    private static final String GOOGLE_CLIENT_ID = "";
+    private static final String FACEBOOK_CLIENT_ID = PropertiesHandler.getProperty("fb.client.id");
+    private static final String GOOGLE_CLIENT_ID =  PropertiesHandler.getProperty("google.client.id");
 
     @GET
     @Path("/fb")
