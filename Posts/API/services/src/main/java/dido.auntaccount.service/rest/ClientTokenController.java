@@ -30,8 +30,8 @@ public class ClientTokenController {
     private static final String FACEBOOK_CLIENT_ID = "*";
     private static final String FACEBOOK_CLIENT_SECRET = "*";
 
-    private static final String GOOGLE_CLIENT_ID = "525119728769-gmkgq6jl3cfag9lp8ij5ugupihnkpv7o.apps.googleusercontent.com";
-    private static final String GOOGLE_CLIENT_SECRET = "Za0GQeIttQHkTzBYOqWlMOpH";
+    private static final String GOOGLE_CLIENT_ID = "*";
+    private static final String GOOGLE_CLIENT_SECRET = "*";
 
     private static final Long EXPIRES_IN = 3600L;
 

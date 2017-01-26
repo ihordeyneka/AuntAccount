@@ -14,8 +14,7 @@ import java.net.URISyntaxException;
 public class AuthController {
 
     private static final String FACEBOOK_CLIENT_ID = "*";
-    private static final String GOOGLE_CLIENT_ID = "525119728769-gmkgq6jl3cfag9lp8ij5ugupihnkpv7o.apps.googleusercontent.com";
-
+    private static final String GOOGLE_CLIENT_ID = "*";
 /*
     @GET
     @Path("/facebook")
