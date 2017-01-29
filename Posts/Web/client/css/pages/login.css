@@ -6,18 +6,18 @@
   line-height: 24px;
 }
 
-.btn-login {
-  width: 150px;
-}
-
-#inputRememberMe {
-  position: static;
-  margin-right: 5px;
-}
-
 .aa-social {
   float: right;
   width: 315px;
+}
+
+.lb-remember-me {
+  line-height: 46px;
+}
+
+.lb-social {
+  display: block;
+  float: left;
 }
 
 @media (max-width: 767px) {

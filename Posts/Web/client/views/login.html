@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-sm-offset-2 col-sm-4">
       <div class="aa-social">
-        <label class="lb-lg">Social</label>
-        <button class="btn btn-lg btn-google aa-mbl" id="googleSignIn">
+        <label class="lb-lg lb-social">Social</label>
+        <button class="btn btn-lg btn-google aa-mbl clear" id="googleSignIn">
           <i class="fa fa-google-plus pull-left"></i> Continue with Google
         </button>
         <button class="btn btn-lg btn-facebook aa-mbl" id="fbSignIn">
@@ -21,9 +21,12 @@
         <input type="password" class="form-control input-lg" id="inputPassword" placeholder="Password">
       </div>
       <div class="checkbox">
-        <label class="lb-lg" for="inputRememberMe"><input type="checkbox" id="inputRememberMe">Remember me</label>
+        <label class="lb-lg left lb-remember-me" for="inputRememberMe">
+          <input type="checkbox" id="inputRememberMe" class="aa-lg-checkbox" />
+          Remember me
+        </label>
+        <button type="button" id="btnLogin" class="btn btn-lg right btn-login">Login</button>
       </div>
-      <button type="submit" id="btnLogin" class="btn btn-lg btn-login">Login</button>
     </div>
   </div>
 </div>
