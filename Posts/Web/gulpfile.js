@@ -32,7 +32,7 @@ var PATHS = {
   dist: 'dist',
   distClient: 'dist/client',
   distLib: 'dist/lib',
-  port: 7000
+  port: 8282
 };
 
 gulp.task('server', function() {

@@ -1,7 +1,8 @@
-define(function() {
+define(["../core/config"], function(config) {
   var self = this;
 
   self.getAttachmentUploadUrl = function () {
+    alert(config.apiRoot);
     throw "Not Implemented";
   };
 

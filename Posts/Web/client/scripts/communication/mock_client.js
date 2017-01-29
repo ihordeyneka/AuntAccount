@@ -2,7 +2,7 @@ define(function() {
   var self = this;
 
   self.getAttachmentUploadUrl = function () {
-    return "http://localhost:7000/test/upload";
+    return "/test/upload";
   };
 
   self.getTags = function(query) {

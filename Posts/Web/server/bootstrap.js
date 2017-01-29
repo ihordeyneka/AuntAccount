@@ -4,7 +4,7 @@ var minimist = require('minimist');
 
 // Express App
 var app = express();
-var args = minimist(process.argv.slice(2), {default: {port: '7000'}});
+var args = minimist(process.argv.slice(2));
 
 var PORT = args.port;
 var DIST_DIR = path.join(__dirname, '..', 'dist');
