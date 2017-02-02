@@ -18,5 +18,9 @@ define(["../core/config"], function(config) {
     throw "Not Implemented";
   }
 
+  self.signUp = function(model, callback) {
+    throw "Not Implemented";
+  }
+
   return self;
 });

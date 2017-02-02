@@ -64,5 +64,17 @@
       <h1 class="center">Node.JS web application.</h1>
     </div>
   </main>
+  <script id="templateSuccess" type="text/x-jsrender">
+    <div class="alert alert-success alert-dismissable">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> {{:message}}
+    </div>
+  </script>
+  <script id="templateError" type="text/x-jsrender">
+    <div class="alert alert-danger alert-dismissable">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Warning!</strong> One or more validation failed, please fix the errors and try again.
+    </div>
+  </script>
 </body>
 </html>

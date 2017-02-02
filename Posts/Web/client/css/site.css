@@ -13,6 +13,12 @@
   margin-right: 15px;
 }
 
+input[type="checkbox"].aa-lg-checkbox {
+  position: static;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 .loading-container {
   relative: 0;
 }

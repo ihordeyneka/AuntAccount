@@ -57,5 +57,12 @@ define(function() {
     });
   }
 
+  self.signUp = function(model, callback) {
+    console.log(model);
+    callback({
+      success: true
+    });
+  }
+
   return self;
 });

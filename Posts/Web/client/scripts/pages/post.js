@@ -1,4 +1,4 @@
-define(["communication_client"], function(client) {
+define(["../core/globals", "communication_client"], function(globals, client) {
   var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
@@ -13,7 +13,6 @@ define(["communication_client"], function(client) {
   self.selectedLocationId = null;
   self.attachmentUpload = null;
   self.lastPostId = null;
-  self.validatorForm = $("#formPost");
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
     self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -39,9 +38,9 @@ define(["communication_client"], function(client) {
     else {
       initMap();
     }
-    self.validatorForm.validator({
-      focus: false
-    });
+    self.validatorForm = $("#formPost");
+    self.validatorForm.validator({ focus: false });
+    self.notificationArea = $(".aa-notification-area").notificationArea();
   }
 
   window.initMap = function() {
@@ -257,35 +256,36 @@ define(["communication_client"], function(client) {
 
   self.addButtonHandlers = function() {
     $("#btnPost").click(function() {
-      var notificationArea = $(".aa-notification-area");
-      notificationArea.find(".alert").remove(); //clear all alerts
-      if (self.validatorForm.validator('validate').has('.has-error').length === 0) {
-        globals.loading($('body'), true);
-        client.savePost({
-          keywords: $("#inputKeywords").val(),
-          post: $("#inputPost").val(),
-          locationId: self.selectedLocationId,
-          place: $("#inputLocation").val(),
-          latitude: self.marker.position.lat(),
-          longitude: self.marker.position.lng(),
-          radius: self.radiusSlider.getValue()
-        }, function(res) {
-          globals.loading($("body"), false);
-          if (res.success) {
-            self.lastPostId = res.data.id;
-            if (self.attachmentUpload.fileinput("getFilesCount") > 0)
-              self.attachmentUpload.fileinput("upload");
+      globals.validate({
+        notificationArea: self.notificationArea,
+        validatorForm: self.validatorForm,
+        success: function() {
+          globals.loading($('body'), true);
+          client.savePost({
+            keywords: $("#inputKeywords").val(),
+            post: $("#inputPost").val(),
+            locationId: self.selectedLocationId,
+            place: $("#inputLocation").val(),
+            latitude: self.marker.position.lat(),
+            longitude: self.marker.position.lng(),
+            radius: self.radiusSlider.getValue()
+          }, function(res) {
+            globals.loading($("body"), false);
+            if (res.success) {
+              self.lastPostId = res.data.id;
+              if (self.attachmentUpload.fileinput("getFilesCount") > 0)
+                self.attachmentUpload.fileinput("upload");
 
-            notificationArea.append($.templates("#templateSuccess").render()).focus();
-          }
-          else {
-            notificationArea.append($.templates("#templateError").render()).focus();
-          }
-        });
-      }
-      else {
-        notificationArea.append($.templates("#templateError").render()).focus();
-      }
+              self.notificationArea.success({
+                message: "Your message has been posted, we've notified our subscribers."
+              });
+            }
+            else {
+              notificationArea.error();
+            }
+          });
+        }
+      });
     });
   }
 
