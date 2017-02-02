@@ -6,9 +6,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name="USER")
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="IsSupplier", discriminatorType = DiscriminatorType.INTEGER)
-public abstract class User implements Serializable {
+public class User implements Serializable {
 
     @Id
     private Long id;

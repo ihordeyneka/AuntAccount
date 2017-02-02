@@ -33,8 +33,8 @@ public class SupplierController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveSupplier(Supplier supplier) throws Exception {
-        String hashedPassword = passwordService.createHash(supplier.getPassword());
-        supplier.setPassword(hashedPassword);
+        String hashedPassword = passwordService.createHash(supplier.getUser().getPassword());
+        supplier.getUser().setPassword(hashedPassword);
         Supplier savedSupplier = supplierService.saveSupplier(supplier);
         return Response.status(200).entity(savedSupplier).build();
     }
