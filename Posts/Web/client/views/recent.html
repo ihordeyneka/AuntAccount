@@ -1,1 +1,23 @@
-<h3>You haven't added any posts yet.</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="aa-notification-area no-outline col-sm-offset-2 col-sm-8" tabindex="-1">
+    </div>
+  </div>
+  <div class="row">
+    <div class="aa-recent-container col-sm-offset-2 col-sm-8">
+    </div>
+  </div>
+</div>
+<script id="templatePost" type="text/x-jsrender">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{:title}}</h3>
+    </div>
+    <div class="panel-body">
+      {{:content}}
+    </div>
+  </div>
+</script>
+<script>
+  require(["pages/recent"], function(recent) { recent.init(); });
+</script>

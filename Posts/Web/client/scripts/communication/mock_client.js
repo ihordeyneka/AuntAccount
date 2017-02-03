@@ -1,11 +1,9 @@
 define(function() {
   var self = this;
 
-  self.getAttachmentUploadUrl = function () {
-    return "/test/upload";
-  };
+  self.attachmentUploadUrl = "/test/upload";
 
-  self.getTags = function(query) {
+  self.getTags = function(parameters, callback) {
     var result = [
       "Shoes",
       "Boots",
@@ -28,10 +26,13 @@ define(function() {
       "Hat",
       "Cap"
     ];
-    return result;
+    callback({
+      success: true,
+      data: result
+    });
   }
 
-  self.getLocations = function(query) {
+  self.getLocations = function(parameters, callback) {
     //type: 1-country, 2-province, 3-city, 4-place
     var result = [
       {id: 1, type: 3, name: "Lviv"},
@@ -45,11 +46,13 @@ define(function() {
       {id: 9, type: 1, name: "Romania"},
       {id: 10, type: 4, name: "Victoria Gardens", location: { lat: 49.807049, lng: 23.978466} }
     ];
-
-    return result;
+    callback({
+      success: true,
+      data: result
+    });
   }
 
-  self.savePost = function(post, callback) {
+  self.savePost = function(parameters, callback) {
     console.log(post);
     callback({
       success: true,
@@ -57,10 +60,22 @@ define(function() {
     });
   }
 
-  self.signUp = function(model, callback) {
+  self.signUp = function(parameters, callback) {
     console.log(model);
     callback({
       success: true
+    });
+  }
+
+  self.getMyRecentPosts = function(parameters, callback) {
+    var result = [
+      { postId: 1, title: "Blue Jeans", description: "I want to buy blue jeans, size: 32/30" },
+      { postId: 2, title: "Red Ferrari", description: "Rrrrrrrrrrrrr" },
+      { postId: 3, title: "Ball Pen", description: "I just need a simple pen\nBlue or black\nDoesn't matter..." },
+    ];
+    callback({
+      success: true,
+      data: result
     });
   }
 

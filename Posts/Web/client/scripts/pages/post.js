@@ -80,9 +80,15 @@ define(["../core/globals", "communication_client"], function(globals, client) {
         afterSelect: function(val) {
           this.$element.val(""); //clear input when tag is added
         },
-        source: function(query) {
-          var result = client.getTags(query);
-          return result;
+        source: function(query, process) {
+          client.getTags(query, function(res) {
+            if (res.success) {
+              process(res.data);
+            }
+            else {
+              self.notificationArea.error();
+            }
+          });
         }
       }
     });
@@ -154,8 +160,14 @@ define(["../core/globals", "communication_client"], function(globals, client) {
       delay: 300,
       fitToElement: true,
       source: function(query, process) {
-        var result = client.getLocations(query);
-        return process(result);
+        client.getLocations(query, function(res) {
+          if (res.success) {
+            process(res.data);
+          }
+          else {
+            self.notificationArea.error();
+          }
+        });
       },
       afterSelect: function(item) {
         self.selectedLocationId = item.id;
@@ -230,7 +242,7 @@ define(["../core/globals", "communication_client"], function(globals, client) {
       showUpload: false,
       showRemove: false,
       showPreview: false,
-      uploadUrl: client.getAttachmentUploadUrl(),
+      uploadUrl: client.attachmentUploadUrl,
       uploadAsync: false,
       layoutTemplates: {
         progress: '', //hide progress
