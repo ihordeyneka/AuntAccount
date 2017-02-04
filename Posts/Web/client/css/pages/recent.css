@@ -1,0 +1,23 @@
+.aa-post-block {
+  margin-bottom: 15px;
+}
+
+.aa-navigate-button {
+  width: 90px;
+}
+
+.aa-post-header {
+  min-height: 34px;
+  padding-top: 7px;
+}
+
+.aa-post-caption {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline;
+}
+
+.aa-post-time {
+  width: 90px;
+}

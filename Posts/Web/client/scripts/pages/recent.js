@@ -18,8 +18,12 @@ define(["../core/globals", "communication_client"], function(globals, client) {
           for (var i=0; i<res.data.length; i++) {
             var post = res.data[i];
             element.append($.templates("#templatePost").render({
-              title: post.title,
-              content: post.description
+              postId: post.postId,
+              time: post.time,
+              title: post.tags.join(),
+              content: post.description,
+              conversations: post.conversations,
+              badgeCss: post.conversations == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
             }));
           }
         }

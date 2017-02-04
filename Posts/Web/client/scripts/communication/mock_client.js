@@ -69,9 +69,9 @@ define(function() {
 
   self.getMyRecentPosts = function(parameters, callback) {
     var result = [
-      { postId: 1, title: "Blue Jeans", description: "I want to buy blue jeans, size: 32/30" },
-      { postId: 2, title: "Red Ferrari", description: "Rrrrrrrrrrrrr" },
-      { postId: 3, title: "Ball Pen", description: "I just need a simple pen\nBlue or black\nDoesn't matter..." },
+      { postId: 1, time: "03-02-2017", conversations: 5, newMessages: true, tags: ["Blue Jeans", "New"], description: "I want to buy blue jeans, size: 32/30" },
+      { postId: 2, time: "29-01-2017", conversations: 0, newMessages: false, tags: ["Red Ferrari"], description: "Rrrrrrrrrrrrr" },
+      { postId: 3, time: "15-12-2016", conversations: 1, newMessages: false, tags: ["Ball Pen"], description: "I just need a simple pen<br/>Blue or black<br/>Doesn't matter..." },
     ];
     callback({
       success: true,

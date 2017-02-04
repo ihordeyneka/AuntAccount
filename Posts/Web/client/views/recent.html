@@ -9,11 +9,13 @@
   </div>
 </div>
 <script id="templatePost" type="text/x-jsrender">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{:title}}</h3>
+  <div class="aa-post-block">
+    <button class="aa-navigate-button btn btn-primary right" data-postid="{{:postId}}" id="btnView">Offers<span class="badge {{:badgeCss}}">{{:conversations}}</span></button>
+    <div class="aa-post-header">
+      <span class="aa-post-time right">{{:time}}</span>
+      <span class="aa-post-caption">{{:title}}</span>
     </div>
-    <div class="panel-body">
+    <div class="aa-post-content">
       {{:content}}
     </div>
   </div>
