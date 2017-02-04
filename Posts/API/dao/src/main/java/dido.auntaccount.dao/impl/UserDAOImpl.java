@@ -23,7 +23,7 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     }
 
     public User findByUserName(String userName) {
-        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE and u.name = :name", User.class);
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.name = :name", User.class);
         return query.setParameter("name", userName).getSingleResult();
     }
 
@@ -36,7 +36,7 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     }
 
     public List<Post> getPostsByUserId(Long userId) {
-        TypedQuery<Post> query = entityManager.createQuery("SELECT p FROM Post p WHERE o.userId = :userId", Post.class);
+        TypedQuery<Post> query = entityManager.createQuery("SELECT p FROM Post p WHERE p.userId = :userId", Post.class);
         return query.setParameter("userId", userId).getResultList();
     }
 

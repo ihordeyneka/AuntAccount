@@ -10,7 +10,7 @@ public class Supplier {
     private Long id;
 
     @JoinColumn(name = "Id")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     private User user;
 
