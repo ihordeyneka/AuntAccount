@@ -39,7 +39,7 @@ define([], function() {
         settings.success();
     } else {
       if (settings.notificationArea)
-        settings.notificationArea.error();
+        settings.notificationArea.validationWarning();
     }
   }
 
@@ -48,8 +48,10 @@ define([], function() {
       element: this,
       successHeader: "Success!",
       successMessage: "The operation was successful.",
-      errorHeader: "Warning!",
-      errorMessage: "One or more validation failed, please fix the errors and try again."
+      validationWarningHeader: "Warning!",
+      validationWarningMessage: "One or more validation failed, please fix the errors and try again.",
+      errorHeader: "Error!",
+      errorMessage: "An error has occurred, please try again."
     };
     $.extend(true, settings, options);
 
@@ -62,6 +64,13 @@ define([], function() {
         settings.element.append($.templates("#templateSuccess").render({
           header: options.header || settings.successHeader,
           message: options.message || settings.successMessage
+        })).focus();
+      },
+      validationWarning: function(options) {
+        options = options || {};
+        settings.element.append($.templates("#templateError").render({
+          header: options.header || settings.validationWarningHeader,
+          message: options.message || settings.validationWarningMessage
         })).focus();
       },
       error: function(options) {

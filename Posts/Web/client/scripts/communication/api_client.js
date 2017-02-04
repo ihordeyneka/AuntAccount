@@ -1,24 +1,25 @@
 define(["../core/config"], function(config) {
   var self = this;
 
-  self.getAttachmentUploadUrl = function () {
-    alert(config.apiRoot);
-    throw "Not Implemented";
-  };
+  self.attachmentUploadUrl = config.apiRoot; //TODO:update this
 
-  self.getTags = function(query) {
+  self.getTags = function(parameters, callback) {
     throw "Not Implemented";
   }
 
-  self.getLocations = function(query) {
+  self.getLocations = function(parameters, callback) {
     throw "Not Implemented";
   }
 
-  self.savePost = function(post) {
+  self.savePost = function(parameters, callback) {
     throw "Not Implemented";
   }
 
-  self.signUp = function(model, callback) {
+  self.signUp = function(parameters, callback) {
+    throw "Not Implemented";
+  }
+
+  self.getMyRecentPosts = function(parameters, callback) {
     throw "Not Implemented";
   }
 

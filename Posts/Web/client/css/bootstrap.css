@@ -108,6 +108,17 @@ a.header-nav__navigation-link:hover {
   background-color: #9F9F82;
 }
 
+.panel.panel-primary {
+  border-radius: 0;
+  border-color: #8F8F72;
+}
+
+.panel.panel-primary>.panel-heading {
+  border-radius: 0;
+  background-color: #8F8F72;
+  border-color: #8F8F72;
+}
+
 .dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
   background-color: #9F9F82;
 }
