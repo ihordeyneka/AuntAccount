@@ -4,6 +4,7 @@ import dido.auntaccount.dao.GeneralDAO;
 import dido.auntaccount.dao.OfferDAO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
+import dido.auntaccount.entities.Supplier;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -21,8 +22,11 @@ public class OfferDAOImpl extends GeneralDAO<Offer> implements OfferDAO {
         return findEntity(id, Offer.class);
     }
 
-    public Offer save(Offer Offer) throws Exception {
-        return persistEntity(Offer);
+    public Offer save(Offer offer) throws Exception {
+        Long supplierId = offer.getSupplier().getId();
+        Supplier supplier = entityManager.getReference(Supplier.class, supplierId);
+        offer.setSupplier(supplier);
+        return persistEntity(offer);
     }
 
     public void delete(Offer offer) throws Exception {

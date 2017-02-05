@@ -14,8 +14,6 @@ public class Post {
     private Double priceMax;
     private Double priceMin;
 
-   // @org.eclipse.persistence.annotations.Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-   // @org.eclipse.persistence.annotations.Convert("dateTimeConverter")
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

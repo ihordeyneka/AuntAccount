@@ -11,8 +11,6 @@ public class Message {
     private String description;
     private byte[] photo;
 
-    //@Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-    //@Convert("dateTimeConverter")
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

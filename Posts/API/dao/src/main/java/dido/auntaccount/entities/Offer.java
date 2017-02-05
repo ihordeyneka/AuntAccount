@@ -9,7 +9,7 @@ public class Offer {
     @Id
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "SupplierId")
     private Supplier supplier;
 

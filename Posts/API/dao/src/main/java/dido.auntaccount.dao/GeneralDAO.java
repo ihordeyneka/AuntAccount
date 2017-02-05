@@ -23,7 +23,7 @@ public abstract class GeneralDAO<T> implements AutoCloseable {
 
         try {
             et.begin();
-            entityManager.persist(entity);
+            entityManager.merge(entity);
             et.commit();
 
             return entity;

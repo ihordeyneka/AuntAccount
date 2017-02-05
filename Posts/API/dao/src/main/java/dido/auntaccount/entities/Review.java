@@ -11,8 +11,6 @@ public class Review {
     private String description;
     private int rate;
 
-    //@Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-    //@Convert("dateTimeConverter")
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
