@@ -1,21 +1,36 @@
 $(function(){
 
   var init = function () {
-    var page = location.hash != "" ? location.hash : "#home";
-    var element = $("a[href='" + page + "']");
-    if (element != null) {
-        navigate(element);
-    }
+    var hash = location.hash != "" ? location.hash : "#home";
+    navigate(hash);
   }
 
-  var navigate = function(element) {
-    $(".router-link.active").removeClass("active");
-    element.addClass("active");
-    var href = element.data("url");
+  var navigate = function(hash) {
+    var route = hash.slice(1) || "/";
 
-    var toggle = $(".navbar-toggle");
-    if (toggle.is(":visible") && $(".navbar-collapse").hasClass("in"))
-      toggle.click();
+    var element = $("a[href='" + hash + "']");
+    if (element != null) {
+      $(".router-link.active").removeClass("active");
+      element.addClass("active");
+
+      var toggle = $(".navbar-toggle");
+      if (toggle.is(":visible") && $(".navbar-collapse").hasClass("in"))
+        toggle.click();
+
+      if (element.data("route"))
+        route = element.data("route");
+    }
+
+    var routeParts = route.split("/");
+
+    //default route is #page/{id} where id is optional
+    var page = "recent";
+    if (routeParts.length > 0)
+      page = routeParts[0];
+
+    var href = "client/views/" + page + ".html";
+    if (routeParts.length > 1)
+      href += "?id=" + routeParts[1];
 
     $.ajax({
       url: href
