@@ -10,7 +10,10 @@ var PORT = args.port;
 var DIST_DIR = path.join(__dirname, '..', 'dist');
 
 // Send static files from client directory
-app.use('/client', express.static(DIST_DIR + '/client'));
+app.use('/client', function(req, res, next) {
+  //we can get to query string through "req"
+  return express.static(DIST_DIR + '/client')(req, res, next);
+});
 app.use('/lib', express.static(DIST_DIR + '/lib'));
 
 var router = express.Router();
