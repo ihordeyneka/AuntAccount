@@ -80,15 +80,17 @@ define(["../core/globals", "communication_client"], function(globals, client) {
         afterSelect: function(val) {
           this.$element.val(""); //clear input when tag is added
         },
-        source: function(query, process) {
+        source: function(query) {
+          var result = null;
           client.getTags(query, function(res) {
             if (res.success) {
-              process(res.data);
+              result = res.data;
             }
             else {
               self.notificationArea.error();
             }
           });
+          return result;
         }
       }
     });
