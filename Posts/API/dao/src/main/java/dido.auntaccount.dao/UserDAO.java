@@ -1,14 +1,23 @@
 package dido.auntaccount.dao;
 
-
+import dido.auntaccount.entities.Post;
+import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.User;
+
+import java.util.List;
 
 public interface UserDAO {
 
-    public User find(Long userId);
+    User find(Long userId);
 
-    public User save(User user) throws Exception;
+    User findByUserName(String userName);
 
-    public void delete(User user) throws Exception;
+    User save(User user) throws Exception;
+
+    void delete(User user) throws Exception;
+
+    List<Post> getPostsByUserId(Long userId);
+
+    List<Review> getReviewsByUserId(Long userId);
 
 }

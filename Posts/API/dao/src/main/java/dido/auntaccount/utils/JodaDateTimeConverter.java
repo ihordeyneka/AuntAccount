@@ -1,12 +1,12 @@
 package dido.auntaccount.utils;
 
-import org.eclipse.persistence.mappings.DatabaseMapping;
+/*import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.converters.Converter;
 import org.eclipse.persistence.sessions.Session;
 import org.joda.time.DateTime;
-import java.sql.Timestamp;
+import java.sql.Timestamp;*/
 
-public class JodaDateTimeConverter implements Converter {
+public class JodaDateTimeConverter {/* implements Converter {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,5 +26,5 @@ public class JodaDateTimeConverter implements Converter {
     public boolean isMutable() {
         return false;
     }
-
+*/
 }

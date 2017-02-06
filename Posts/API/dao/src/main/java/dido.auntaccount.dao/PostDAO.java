@@ -1,5 +1,6 @@
 package dido.auntaccount.dao;
 
+import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 
 import javax.inject.Inject;
@@ -13,5 +14,7 @@ public interface PostDAO {
     public Post save(Post post) throws Exception;
 
     public void delete(Post post) throws Exception;
+
+    public List<Offer> getOffersByPostId(Long postId);
 
 }

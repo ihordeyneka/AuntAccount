@@ -27,7 +27,7 @@ CREATE TABLE `dido`.`PostTag` (
 CREATE TABLE `dido`.`User` (
   `Id` bigint(10) NOT NULL,
   `Name` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL,
+  `Password` varchar(200) NOT NULL,
   `LocationId` bigint(10) NOT NULL,
   `Email` varchar(45) NOT NULL,
   `Phone` varchar(45) DEFAULT NULL,
@@ -95,6 +95,14 @@ CREATE TABLE `dido`.`Message` (
   `CreationDate` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 );
+
+CREATE TABLE `TOKEN` (
+  `Token` varchar(255) NOT NULL,
+  `ExpirationDate` datetime NOT NULL,
+  PRIMARY KEY (`Token`),
+  UNIQUE KEY `Token_UNIQUE` (`Token`)
+);
+
 
 --fix post table - remove latitude and longitude, add supplierTag table
 

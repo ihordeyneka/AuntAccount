@@ -1,15 +1,12 @@
 package dido.auntaccount.entities;
 
-import dido.auntaccount.utils.JodaDateTimeConverter;
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
-import org.joda.time.DateTime;
-
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
-public class User {
+@Table(name="USER")
+public class User implements Serializable {
 
     @Id
     private Long id;
@@ -19,21 +16,11 @@ public class User {
     private String phone;
     private byte[] photo;
     private String website;
-    private boolean isSupplier;
+    private Date creationDate;
 
-    @Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-    @Convert("dateTimeConverter")
-    private DateTime creationDate;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LocationId")
     private Location location;
-
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
-
-    @OneToMany(mappedBy = "object")
-    private List<Review> reviews;
 
     public Long getId() {
         return id;
@@ -91,20 +78,12 @@ public class User {
         this.website = website;
     }
 
-    public DateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(DateTime creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public boolean isSupplier() {
-        return isSupplier;
-    }
-
-    public void setSupplier(boolean supplier) {
-        isSupplier = supplier;
     }
 
     public Location getLocation() {
@@ -115,19 +94,4 @@ public class User {
         this.location = location;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }

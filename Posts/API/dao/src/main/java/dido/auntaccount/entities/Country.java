@@ -2,7 +2,6 @@ package dido.auntaccount.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 
 @Entity
 public class Country {

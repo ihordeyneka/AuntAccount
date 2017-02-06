@@ -7,3 +7,15 @@
 .right {
   float: right;
 }
+.clear {
+  clear: both;
+}
+.margin-top {
+  margin-top: 10px;
+}
+.is-hidden {
+  display: none;
+}
+.no-outline {
+  outline-width: 0;
+}

@@ -1,1 +1,52 @@
-Welcome to Posts page
+<form id="formPost">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="aa-notification-area no-outline col-sm-offset-1 col-sm-10" tabindex="-1">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-5">
+        <label for="inputKeywords" class="lb">Search</label>
+        <div class="form-group">
+          <input type="text" class="form-control input" id="inputKeywords" required placeholder="What do you want to find?" />
+        </div>
+        <label for="inputPost" class="lb">Description</label>
+        <div class="form-group">
+          <textarea class="form-control input" id="inputPost" placeholder="More details?"></textarea>
+        </div>
+        <label for="inputAttachment" class="lb">Attachment</label>
+        <div class="form-group">
+          <input type="file" class="form-control input" id="inputAttachment" placeholder="A picture might help..." />
+        </div>
+      </div>
+      <div class="col-sm-5 aa-post-location-container">
+        <label for="inputLocation" class="lb">Location</label>
+        <div class="input-group form-group">
+          <input type="text" class="form-control input" id="inputLocation" placeholder="Specify the location" />
+          <span class="input-group-btn">
+            <button class="btn btn-default btn-location-search" type="button" data-toggle="tooltip" title="Search">
+              <i class="fa fa-search"></i>
+            </button>
+            <button class="btn btn-default btn-location-nearby" type="button" data-toggle="tooltip" title="Nearby">
+              <i class="fa fa-crosshairs"></i>
+            </button>
+          </span>
+        </div>
+        <label for="inputRadius" class="lb">Radius</label>
+        <div class="form-group">
+          <input type="text" class="form-control input" id="inputRadius" />
+        </div>
+        <div class="aa-post-map">
+        </div>
+      </div>
+    </div>
+    <div class="row margin-top">
+      <div class="col-sm-offset-1 col-sm-5">
+        <button type="button" id="btnPost" class="btn btn-primary btn-post">Post</button>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+  require(["pages/post"], function(post) { post.init(); });
+</script>

@@ -1,9 +1,7 @@
 package dido.auntaccount.entities;
 
-import dido.auntaccount.utils.JodaDateTimeConverter;
-import org.joda.time.DateTime;
-
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -13,16 +11,12 @@ public class Post {
     private long id;
     private String description;
     private byte[] photo;
-    private Double latitude;
-    private Double longitude;
     private Double priceMax;
     private Double priceMin;
 
-    @org.eclipse.persistence.annotations.Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-    @org.eclipse.persistence.annotations.Convert("dateTimeConverter")
-    private DateTime creationDate;
+    private Date creationDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LocationId")
     private Location location;
 
@@ -32,12 +26,7 @@ public class Post {
             inverseJoinColumns = @JoinColumn(name = "TagId"))
     private List<Tag> postTags;
 
-    @ManyToOne
-    @JoinColumn(name = "UserId")
-    private User user;
-
-    @OneToMany(mappedBy = "post")
-    private List<Offer> offers;
+    private Long userId;
 
     public String getDescription() {
         return description;
@@ -56,12 +45,12 @@ public class Post {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public byte[] getPhoto() {
@@ -70,22 +59,6 @@ public class Post {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 
     public Double getPriceMax() {
@@ -112,11 +85,11 @@ public class Post {
         this.postTags = postTags;
     }
 
-    public DateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(DateTime creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -128,11 +101,4 @@ public class Post {
         this.location = location;
     }
 
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
-    }
 }

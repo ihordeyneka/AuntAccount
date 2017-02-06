@@ -2,15 +2,9 @@ package dido.auntaccount.context;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import dido.auntaccount.inject.InjectionModule;
+import dido.auntaccount.inject.InjectionDAOModule;
 
 import com.google.inject.servlet.GuiceServletContextListener;
-
-import javax.servlet.annotation.WebListener;
-
-/**
- * Created by orysiadeyneka on 24.09.16.
- */
 
 //@WebListener
 public class ApplicationContextListener extends GuiceServletContextListener {
@@ -19,7 +13,7 @@ public class ApplicationContextListener extends GuiceServletContextListener {
 
     protected Injector getInjector() {
         if (injector == null) {
-            injector = Guice.createInjector(new InjectionModule());
+            injector = Guice.createInjector(new InjectionDAOModule(), new InjectionServiceModule());
         }
 
         return injector;

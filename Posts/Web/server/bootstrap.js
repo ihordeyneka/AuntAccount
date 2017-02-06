@@ -4,7 +4,7 @@ var minimist = require('minimist');
 
 // Express App
 var app = express();
-var args = minimist(process.argv.slice(2), {default: {port: '7000'}});
+var args = minimist(process.argv.slice(2));
 
 var PORT = args.port;
 var DIST_DIR = path.join(__dirname, '..', 'dist');
@@ -18,6 +18,12 @@ var router = express.Router();
 // Send home url to index.html.
 router.get('/', function(req, res) {
   res.sendFile(DIST_DIR + '/client/index.html');
+});
+
+//for test requests just return OK
+router.post('/test*', function(req, res) {
+  res.statusCode = 200;
+  res.send('OK');
 });
 
 // Send any other urls notfound.html.

@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
+var merge = require('merge-stream')
 var spawn = require('child_process').spawn;
 var del = require('del');
 var nodeServer = null;
@@ -10,9 +11,16 @@ var nodeServer = null;
 var packageJson = require('./package.json');
 var PATHS = {
   lib: [
-    'node_modules/jquery.1/node_modules/jquery/dist/jquery.min.js',
-    'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    'node_modules/bootstrap/dist/css/bootstrap.min.css'
+    { name: 'jquery', files: 'node_modules/jquery.1/node_modules/jquery/dist/**/*' },
+    { name: 'jsrender', files: 'node_modules/jsrender/*.{js,map}' },
+    { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
+    { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },
+    { name: 'bootstrap3_typeahead', files: 'external/lib/bootstrap3-typeahead/**/*' },
+    { name: 'bootstrap_fileinput', files: 'node_modules/bootstrap-fileinput/{css,js}/**/*' },
+    { name: 'bootstrap_validator', files: 'node_modules/bootstrap-validator/dist/**/*' },
+    { name: 'bootstrap_tagsinput', files: 'node_modules/bootstrap-tagsinput/dist/**/*' },
+    { name: 'requirejs', files: 'node_modules/requirejs/require.js' },
+    { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' }
   ],
   client: {
     js: ['client/**/*.js'],
@@ -24,7 +32,7 @@ var PATHS = {
   dist: 'dist',
   distClient: 'dist/client',
   distLib: 'dist/lib',
-  port: 7000
+  port: 8282
 };
 
 gulp.task('server', function() {
@@ -56,9 +64,16 @@ gulp.task('css', function() {
 });
 
 gulp.task('libs', function() {
-  return gulp
-    .src(PATHS.lib)
-    .pipe(gulp.dest(PATHS.distLib));
+  var streams = [];
+
+  for (var i=0; i<PATHS.lib.length; i++) {
+    var lib = PATHS.lib[i];
+    streams.push(gulp
+      .src(lib.files)
+      .pipe(gulp.dest(PATHS.distLib + '/' + lib.name)));
+  }
+
+  return merge(streams);
 });
 
 gulp.task('js', function() {
