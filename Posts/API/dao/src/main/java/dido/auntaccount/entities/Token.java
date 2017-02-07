@@ -23,16 +23,18 @@ public class Token {
         return token;
     }
 
-    public void setToken(String token) {
+    public Token setToken(String token) {
         this.token = token;
+        return this;
     }
 
     public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public Token setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+        return this;
     }
 
 }

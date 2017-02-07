@@ -1,6 +1,9 @@
 package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.UserDAO;
+import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.ReviewDTO;
+import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.User;
@@ -11,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
@@ -20,34 +24,37 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Override
-    public User getUser(Long userId) {
-        return userDAO.find(userId);
-    }
-    
-    @Override
-    public User findByUserName(String userName) {
-        return userDAO.findByUserName(userName);
+    public UserDTO getUser(Long userId) {
+        return new UserDTO(userDAO.find(userId));
     }
 
     @Override
-    public User saveUser(User user) {
+    public UserDTO findByUserName(String userName) {
+        User user = userDAO.findByUserName(userName);
+        return new UserDTO(user);
+    }
+
+    @Override
+    public UserDTO saveUser(UserDTO user) {
         User savedUser = null;
         try {
-            savedUser = userDAO.save(user);
+            savedUser = userDAO.save(user.buildEntity());
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save user", e);
         }
-        return savedUser;
+        return new UserDTO(savedUser);
     }
 
     @Override
-    public List<Post> getUserPosts(Long userId) {
-        return userDAO.getPostsByUserId(userId);
+    public List<PostDTO> getUserPosts(Long userId) {
+        List<Post> posts = userDAO.getPostsByUserId(userId);
+        return posts.stream().map(PostDTO::new).collect(Collectors.toList());
     }
 
     @Override
-    public List<Review> getUserReviews(Long userId) {
-        return userDAO.getReviewsByUserId(userId);
+    public List<ReviewDTO> getUserReviews(Long userId) {
+        List<Review> reviews = userDAO.getReviewsByUserId(userId);
+        return reviews.stream().map(ReviewDTO::new).collect(Collectors.toList());
     }
 
 

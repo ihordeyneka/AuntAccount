@@ -1,5 +1,8 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dto.MessageDTO;
+import dido.auntaccount.dto.OfferDTO;
+import dido.auntaccount.dto.SupplierDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Supplier;
@@ -21,7 +24,7 @@ public class OfferController {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOffer(@PathParam("param") Long offerId) {
-        Offer offer = service.getOffer(offerId);
+        OfferDTO offer = service.getOffer(offerId);
         return Response.status(200).entity(offer).build();
     }
 
@@ -29,8 +32,8 @@ public class OfferController {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveOffer(Offer offer) throws Exception {
-        Offer savedOffer = service.saveOffer(offer);
+    public Response saveOffer(OfferDTO offer) throws Exception {
+        OfferDTO savedOffer = service.saveOffer(offer);
         return Response.status(200).entity(savedOffer).build();
     }
 
@@ -38,7 +41,7 @@ public class OfferController {
     @Path("/{param}/supplier")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferSupplier(@PathParam("param") Long offerId) {
-        Supplier supplier = service.getOfferSupplier(offerId);
+        SupplierDTO supplier = service.getOfferSupplier(offerId);
         return Response.status(200).entity(supplier).build();
     }
 
@@ -46,7 +49,7 @@ public class OfferController {
     @Path("/{param}/messages")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferMessages(@PathParam("param") Long offerId) {
-        List<Message> messages = service.getOfferMessages(offerId);
+        List<MessageDTO> messages = service.getOfferMessages(offerId);
         return Response.status(200).entity(messages).build();
     }
 

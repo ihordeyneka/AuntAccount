@@ -1,11 +1,12 @@
 package dido.auntaccount.service.business;
 
+import dido.auntaccount.dto.ReviewDTO;
 import dido.auntaccount.entities.Review;
 
 public interface ReviewService {
 
-    Review getReview(Long reviewId);
+    ReviewDTO getReview(Long reviewId);
 
-    Review saveReview(Review review);
+    ReviewDTO saveReview(ReviewDTO review);
 
 }

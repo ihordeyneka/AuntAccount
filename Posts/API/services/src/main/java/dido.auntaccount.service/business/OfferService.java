@@ -1,5 +1,8 @@
 package dido.auntaccount.service.business;
 
+import dido.auntaccount.dto.MessageDTO;
+import dido.auntaccount.dto.OfferDTO;
+import dido.auntaccount.dto.SupplierDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Supplier;
@@ -8,12 +11,12 @@ import java.util.List;
 
 public interface OfferService {
 
-    Offer getOffer(Long offerId);
+    OfferDTO getOffer(Long offerId);
 
-    Offer saveOffer(Offer offer);
+    OfferDTO saveOffer(OfferDTO offer);
 
-    Supplier getOfferSupplier(Long offerId);
+    SupplierDTO getOfferSupplier(Long offerId);
 
-    List<Message> getOfferMessages(Long offerId);
+    List<MessageDTO> getOfferMessages(Long offerId);
 
 }

@@ -1,11 +1,12 @@
 package dido.auntaccount.service.business;
 
+import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.entities.Token;
 
 public interface TokenService {
 
-    Token getToken(String token);
+    TokenDTO getToken(String token);
 
-    Token saveToken(String token, long expiresIn);
+    TokenDTO saveToken(String token, long expiresIn);
 
 }

@@ -1,5 +1,6 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dto.MessageDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.service.business.MessageService;
 
@@ -18,7 +19,7 @@ public class MessageController {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMessage(@PathParam("param") Long messageId) {
-        Message message = service.getMessage(messageId);
+        MessageDTO message = service.getMessage(messageId);
         return Response.status(200).entity(message).build();
     }
 
@@ -26,8 +27,8 @@ public class MessageController {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveMessage(Message message) throws Exception {
-        Message savedMessage = service.saveMessage(message);
+    public Response saveMessage(MessageDTO message) throws Exception {
+        MessageDTO savedMessage = service.saveMessage(message);
         return Response.status(200).entity(savedMessage).build();
     }
     

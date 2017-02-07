@@ -19,24 +19,27 @@ public class Offer {
         return id;
     }
 
-    public void setId(Long id) {
+    public Offer setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(Long postId) {
+    public Offer setPostId(Long postId) {
         this.postId = postId;
+        return this;
     }
 
     public Supplier getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public Offer setSupplier(Supplier supplier) {
         this.supplier = supplier;
+        return this;
     }
 
 }
