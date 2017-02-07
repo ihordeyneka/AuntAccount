@@ -1,6 +1,9 @@
 package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.OfferDAO;
+import dido.auntaccount.dto.MessageDTO;
+import dido.auntaccount.dto.OfferDTO;
+import dido.auntaccount.dto.SupplierDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Supplier;
@@ -11,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OfferServiceImpl implements OfferService {
 
@@ -20,29 +24,32 @@ public class OfferServiceImpl implements OfferService {
     private OfferDAO offerDAO;
 
     @Override
-    public Offer getOffer(Long offerId) {
-        return offerDAO.find(offerId);
+    public OfferDTO getOffer(Long offerId) {
+        Offer offer = offerDAO.find(offerId);
+        return new OfferDTO(offer);
     }
 
     @Override
-    public Offer saveOffer(Offer offer) {
+    public OfferDTO saveOffer(OfferDTO offer) {
         Offer savedOffer = null;
         try {
-            savedOffer = offerDAO.save(offer);
+            savedOffer = offerDAO.save(offer.buildEntity());
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save offer", e);
         }
-        return savedOffer;
+        return new OfferDTO(savedOffer);
     }
 
     @Override
-    public Supplier getOfferSupplier(Long offerId) {
+    public SupplierDTO getOfferSupplier(Long offerId) {
         Offer offer = offerDAO.find(offerId);
-        return offer.getSupplier();
+        return new SupplierDTO(offer.getSupplier());
     }
 
     @Override
-    public List<Message> getOfferMessages(Long offerId) {
-        return offerDAO.getMessagesByOfferId(offerId);
+    public List<MessageDTO> getOfferMessages(Long offerId) {
+        List<Message> messages = offerDAO.getMessagesByOfferId(offerId);
+        return messages.stream().map(MessageDTO::new).collect(Collectors.toList());
     }
+
 }

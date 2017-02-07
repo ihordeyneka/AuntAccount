@@ -1,11 +1,12 @@
 package dido.auntaccount.dto;
 
+import dido.auntaccount.entities.Location;
 import dido.auntaccount.entities.User;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-public class UserDTO implements Serializable {
+public class UserDTO implements DTO<User>, Serializable {
 
     private Long id;
     private String name;
@@ -27,6 +28,21 @@ public class UserDTO implements Serializable {
         this.website = user.getWebsite();
         this.creationDate = user.getCreationDate();
         this.locationId = user.getLocation().getId();
+    }
+
+    @Override
+    public User buildEntity() {
+        Location location = new Location().setId(id);
+        return new User()
+                .setId(id)
+                .setName(name)
+                .setPassword(password)
+                .setEmail(email)
+                .setPhone(phone)
+                .setPhoto(photo)
+                .setWebsite(website)
+                .setCreationDate(creationDate)
+                .setLocation(location);
     }
 
     public Long getId() {

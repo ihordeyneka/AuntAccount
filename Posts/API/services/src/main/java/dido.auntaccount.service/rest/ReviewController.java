@@ -1,5 +1,6 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dto.ReviewDTO;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.service.business.ReviewService;
 
@@ -18,7 +19,7 @@ public class ReviewController {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReview(@PathParam("param") Long reviewId) {
-        Review review = reviewService.getReview(reviewId);
+        ReviewDTO review = reviewService.getReview(reviewId);
         return Response.status(200).entity(review).build();
     }
 
@@ -26,8 +27,8 @@ public class ReviewController {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveReview(Review review) throws Exception {
-        Review savedReview = reviewService.saveReview(review);
+    public Response saveReview(ReviewDTO review) throws Exception {
+        ReviewDTO savedReview = reviewService.saveReview(review);
         return Response.status(200).entity(savedReview).build();
     }
 

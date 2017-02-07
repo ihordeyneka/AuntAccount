@@ -2,6 +2,7 @@ package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.TokenDAO;
 import dido.auntaccount.dido.auntaccount.utils.CacheMap;
+import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.entities.Token;
 import dido.auntaccount.service.business.TokenService;
 import org.apache.logging.log4j.Level;
@@ -21,16 +22,16 @@ public class TokenServiceImpl implements TokenService {
     TokenDAO tokenDAO;
 
     @Override
-    public Token getToken(String token) {
-        if (tokenCacheMap.containsKey(token)) {
-            Long expirationMillis = tokenCacheMap.get(token);
-            return new Token(token, new Date(expirationMillis));
-        }
-        return tokenDAO.find(token);
+    public TokenDTO getToken(String token) {
+        Token foundToken = tokenCacheMap.containsKey(token) ?
+                new Token(token, new Date(tokenCacheMap.get(token)))
+                : tokenDAO.find(token);
+
+        return new TokenDTO(foundToken);
     }
 
     @Override
-    public Token saveToken(String token, long expiresIn) {
+    public TokenDTO saveToken(String token, long expiresIn) {
         DateTime now = DateTime.now();
         DateTime expirationDate = now.plus(expiresIn);
         long expirationDateMillis = expirationDate.getMillis();
@@ -42,7 +43,7 @@ public class TokenServiceImpl implements TokenService {
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save token", e);
         }
-        return savedToken;
+        return new TokenDTO(savedToken);
     }
 
 }

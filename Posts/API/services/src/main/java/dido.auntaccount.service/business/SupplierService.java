@@ -1,5 +1,7 @@
 package dido.auntaccount.service.business;
 
+import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.SupplierDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Supplier;
 
@@ -7,11 +9,12 @@ import java.util.List;
 
 public interface SupplierService {
 
-    Supplier getSupplier(Long supplierId);
+    SupplierDTO getSupplier(Long supplierId);
 
-    Supplier saveSupplier(Supplier supplier);
+    SupplierDTO saveSupplier(SupplierDTO supplier);
 
-    List<Post> getSupplierPosts(Long supplierId);
+    List<PostDTO> getSupplierPosts(Long supplierId);
 
-    void savePostForSuppliers(Post post);
+    void savePostForSuppliers(PostDTO post);
+
 }

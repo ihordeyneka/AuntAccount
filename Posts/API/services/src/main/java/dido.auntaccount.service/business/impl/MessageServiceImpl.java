@@ -1,6 +1,7 @@
 package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.MessageDAO;
+import dido.auntaccount.dto.MessageDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.service.business.MessageService;
 import org.apache.logging.log4j.Level;
@@ -17,18 +18,19 @@ public class MessageServiceImpl implements MessageService {
     private MessageDAO messageDAO;
 
     @Override
-    public Message getMessage(Long id) {
-        return messageDAO.find(id);
+    public MessageDTO getMessage(Long id) {
+        Message message = messageDAO.find(id);
+        return new MessageDTO(message);
     }
 
     @Override
-    public Message saveMessage(Message message) {
+    public MessageDTO saveMessage(MessageDTO message) {
         Message savedMessage = null;
         try {
-            savedMessage = messageDAO.save(message);
+            savedMessage = messageDAO.save(message.buildEntity());
         } catch (Exception e) {
            logger.log(Level.ERROR, "Couldn't save message", e);
         }
-        return savedMessage;
+        return new MessageDTO(savedMessage);
     }
 }

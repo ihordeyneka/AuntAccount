@@ -1,5 +1,7 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.SupplierDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Supplier;
 import dido.auntaccount.service.business.PasswordService;
@@ -24,7 +26,7 @@ public class SupplierController {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSupplier(@PathParam("param") Long supplierId) {
-        Supplier supplier = supplierService.getSupplier(supplierId);
+        SupplierDTO supplier = supplierService.getSupplier(supplierId);
         return Response.status(200).entity(supplier).build();
     }
 
@@ -32,10 +34,10 @@ public class SupplierController {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveSupplier(Supplier supplier) throws Exception {
+    public Response saveSupplier(SupplierDTO supplier) throws Exception {
         String hashedPassword = passwordService.createHash(supplier.getUser().getPassword());
         supplier.getUser().setPassword(hashedPassword);
-        Supplier savedSupplier = supplierService.saveSupplier(supplier);
+        SupplierDTO savedSupplier = supplierService.saveSupplier(supplier);
         return Response.status(200).entity(savedSupplier).build();
     }
 
@@ -43,7 +45,7 @@ public class SupplierController {
     @Path("/{param}/posts")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSupplierPosts(@PathParam("param") Long supplierId) {
-        List<Post> supplierPosts = supplierService.getSupplierPosts(supplierId);
+        List<PostDTO> supplierPosts = supplierService.getSupplierPosts(supplierId);
         return Response.status(200).entity(supplierPosts).build();
     }
 

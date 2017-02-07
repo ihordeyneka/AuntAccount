@@ -1,11 +1,14 @@
 package dido.auntaccount.dto;
 
+import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Supplier;
+import dido.auntaccount.entities.Tag;
+import dido.auntaccount.entities.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SupplierDTO {
+public class SupplierDTO implements DTO<Supplier> {
 
     private Long id;
     private UserDTO user;
@@ -13,6 +16,18 @@ public class SupplierDTO {
     private List<PostDTO> supplierPosts;
 
     public SupplierDTO() {
+    }
+
+    @Override
+    public Supplier buildEntity() {
+        User entityUser = new User().setId(user.getId());
+        List<Tag> entityTags = tags.stream().map(TagDTO::buildEntity).collect(Collectors.toList());
+        List<Post> entityPosts = supplierPosts.stream().map(PostDTO::buildEntity).collect(Collectors.toList());
+        return new Supplier()
+                .setId(id)
+                .setUser(entityUser)
+                .setSupplierTags(entityTags)
+                .setSupplierPosts(entityPosts);
     }
 
     public SupplierDTO(Supplier supplier) {
@@ -38,4 +53,20 @@ public class SupplierDTO {
         this.tags = tags;
     }
 
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+
+    public List<PostDTO> getSupplierPosts() {
+        return supplierPosts;
+    }
+
+    public void setSupplierPosts(List<PostDTO> supplierPosts) {
+        this.supplierPosts = supplierPosts;
+    }
 }

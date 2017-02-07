@@ -1,10 +1,11 @@
 package dido.auntaccount.dto;
 
 import dido.auntaccount.entities.Review;
+import dido.auntaccount.entities.User;
 
 import java.sql.Date;
 
-public class ReviewDTO {
+public class ReviewDTO implements DTO<Review> {
 
     private Long id;
     private String description;
@@ -20,6 +21,18 @@ public class ReviewDTO {
         this.creationDate = review.getCreationDate();
         this.authorId = review.getAuthor().getId();
         this.objectId = review.getObjectId();
+    }
+
+    @Override
+    public Review buildEntity() {
+        User author = new User().setId(authorId);
+        return new Review()
+                .setId(id)
+                .setDescription(description)
+                .setRate(rate)
+                .setCreationDate(creationDate)
+                .setAuthor(author)
+                .setObjectId(objectId);
     }
 
     public Long getId() {
@@ -69,4 +82,5 @@ public class ReviewDTO {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
 }
