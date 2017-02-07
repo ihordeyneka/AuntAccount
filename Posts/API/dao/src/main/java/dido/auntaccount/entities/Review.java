@@ -23,47 +23,53 @@ public class Review {
         return id;
     }
 
-    public void setId(Long id) {
+    public Review setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Review setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public int getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public Review setRate(int rate) {
         this.rate = rate;
+        return this;
     }
 
     public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public Review setAuthor(User author) {
         this.author = author;
+        return this;
     }
 
     public Long getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(Long objectId) {
+    public Review setObjectId(Long objectId) {
         this.objectId = objectId;
+        return this;
     }
 
     public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public Review setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+        return this;
     }
 }

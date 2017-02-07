@@ -17,13 +17,18 @@ public class Tag {
         return id;
     }
 
-    public void setId(Long id) {
+    public Tag setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getTag() {
         return tag;
     }
 
+    public Tag setTag(String tag) {
+        this.tag = tag;
+        return this;
+    }
 }
 

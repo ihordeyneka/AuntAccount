@@ -14,15 +14,17 @@ public class Country {
         return id;
     }
 
-    public void setId(Long id) {
+    public Country setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public Country setCountry(String country) {
         this.country = country;
+        return this;
     }
 }

@@ -30,31 +30,35 @@ public class Supplier {
         return supplierTags;
     }
 
-    public void setSupplierTags(List<Tag> supplierTags) {
+    public Supplier setSupplierTags(List<Tag> supplierTags) {
         this.supplierTags = supplierTags;
+        return this;
     }
 
     public List<Post> getSupplierPosts() {
         return supplierPosts;
     }
 
-    public void setSupplierPosts(List<Post> supplierPosts) {
+    public Supplier setSupplierPosts(List<Post> supplierPosts) {
         this.supplierPosts = supplierPosts;
+        return this;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Supplier setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public Supplier setUser(User user) {
         this.user = user;
+        return this;
     }
 }
