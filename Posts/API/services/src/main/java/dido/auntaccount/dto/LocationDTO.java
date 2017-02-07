@@ -11,7 +11,7 @@ public class LocationDTO implements DTO<Location> {
     private String city;
     private String region;
     private String street;
-    private Long countryId;
+    private CountryDTO country;
 
     public LocationDTO(Location location) {
         this.id = location.getId();
@@ -20,12 +20,12 @@ public class LocationDTO implements DTO<Location> {
         this.city = location.getCity();
         this.region = location.getRegion();
         this.street = location.getStreet();
-        this.countryId = location.getCountry().getId();
+        this.country = new CountryDTO(location.getCountry());
     }
 
     @Override
     public Location buildEntity() {
-        Country country = new Country().setId(countryId);
+        Country entityCountry = country.buildEntity();
         return new Location()
                 .setId(id)
                 .setLatitude(latitude)
@@ -33,7 +33,7 @@ public class LocationDTO implements DTO<Location> {
                 .setCity(city)
                 .setRegion(region)
                 .setStreet(street)
-                .setCountry(country);
+                .setCountry(entityCountry);
     }
 
     public Long getId() {
@@ -80,15 +80,16 @@ public class LocationDTO implements DTO<Location> {
         return street;
     }
 
+    public CountryDTO getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryDTO country) {
+        this.country = country;
+    }
+
     public void setStreet(String street) {
         this.street = street;
     }
 
-    public Long getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(Long country) {
-        this.countryId = countryId;
-    }
 }
