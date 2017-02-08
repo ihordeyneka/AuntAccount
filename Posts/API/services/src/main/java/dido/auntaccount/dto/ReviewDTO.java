@@ -14,6 +14,9 @@ public class ReviewDTO implements DTO<Review> {
     private Long authorId;
     private Long objectId;
 
+    public ReviewDTO() {
+    }
+
     public ReviewDTO(Review review) {
         this.id = review.getId();
         this.description = review.getDescription();

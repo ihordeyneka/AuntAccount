@@ -14,6 +14,9 @@ public class MessageDTO implements DTO<Message> {
     private Long senderId;
     private Long offerId;
 
+    public MessageDTO() {
+    }
+
     public MessageDTO(Message message) {
         this.id = message.getId();
         this.description = message.getDescription();

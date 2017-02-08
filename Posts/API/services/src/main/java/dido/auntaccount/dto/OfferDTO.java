@@ -9,6 +9,9 @@ public class OfferDTO implements DTO<Offer>{
     private Long supplierId;
     private Long postId;
 
+    public OfferDTO() {
+    }
+
     public OfferDTO(Offer offer) {
         this.id = offer.getId();
         this.supplierId = offer.getSupplier().getId();

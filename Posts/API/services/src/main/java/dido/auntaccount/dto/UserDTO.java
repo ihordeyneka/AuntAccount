@@ -18,6 +18,9 @@ public class UserDTO implements DTO<User>, Serializable {
     private Date creationDate;
     private LocationDTO location;
 
+    public UserDTO() {
+    }
+
     public UserDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();

@@ -14,6 +14,9 @@ public class LocationDTO implements DTO<Location> {
     private CountryDTO country;
     private double radius;
 
+    public LocationDTO() {
+    }
+
     public LocationDTO(Location location) {
         this.id = location.getId();
         this.latitude = location.getLatitude();

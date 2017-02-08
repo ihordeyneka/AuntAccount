@@ -6,6 +6,10 @@ public class CountryDTO implements DTO<Country> {
 
     private String country;
 
+
+    public CountryDTO() {
+    }
+
     public CountryDTO(Country country) {
         this.country = country.getCountry();
     }

@@ -20,6 +20,9 @@ public class PostDTO implements DTO<Post> {
     private List<TagDTO> postTags;
     private Long userId;
 
+    public PostDTO() {
+    }
+
     public PostDTO(Post post) {
         this.id = post.getId();
         this.description = post.getDescription();
