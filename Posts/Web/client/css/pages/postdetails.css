@@ -1,0 +1,23 @@
+.aa-conversation-block {
+  margin-bottom: 15px;
+}
+
+.aa-conversation-navigate-button {
+  width: 90px;
+}
+
+.aa-conversation-header {
+  min-height: 34px;
+  padding-top: 7px;
+}
+
+.aa-conversation-supplier {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline;
+}
+
+.aa-conversation-time {
+  width: 90px;
+}

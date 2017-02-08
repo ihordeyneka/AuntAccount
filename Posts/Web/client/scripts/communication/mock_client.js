@@ -69,9 +69,22 @@ define(function() {
 
   self.getMyRecentPosts = function(parameters, callback) {
     var result = [
-      { postId: 1, time: "03-02-2017", conversations: 5, newMessages: true, tags: ["Blue Jeans", "New"], description: "I want to buy blue jeans, size: 32/30" },
-      { postId: 2, time: "29-01-2017", conversations: 0, newMessages: false, tags: ["Red Ferrari"], description: "Rrrrrrrrrrrrr" },
-      { postId: 3, time: "15-12-2016", conversations: 1, newMessages: false, tags: ["Ball Pen"], description: "I just need a simple pen<br/>Blue or black<br/>Doesn't matter..." },
+      { postId: 1, time: "15-12-2016", conversations: 5, newMessages: true, tags: ["Food", "Gamburger"], description: "We've just survived a plane crash<br/>We need to find something to eat..." },
+      { postId: 2, time: "29-01-2017", conversations: 0, newMessages: false, tags: ["Shelter"], description: "Looks like we're stuck here." },
+      { postId: 3, time: "03-02-2017", conversations: 1, newMessages: false, tags: ["Gun", "AK-47"], description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
+    ];
+    callback({
+      success: true,
+      data: result
+    });
+  }
+
+  self.getPostConversations = function(parameters, callback) {
+    var result = [
+      { conversationId: 1, time: "03-02-2017", supplier: { id: 1, name: "Jack Shephard" }, newReplies: 0 },
+      { conversationId: 2, time: "03-02-2017", supplier: { id: 2, name: "Kate Austen" }, newReplies: 1 },
+      { conversationId: 3, time: "03-02-2017", supplier: { id: 3, name: "John Locke" }, newReplies: 1 },
+      { conversationId: 4, time: "03-02-2017", supplier: { id: 4, name: "Dharma Initiative" }, newReplies: 1 }
     ];
     callback({
       success: true,

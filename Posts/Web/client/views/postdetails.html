@@ -1,3 +1,18 @@
-Hello from Post Details page.
-Parameters:
-{{:0}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="aa-postdetails-container col-sm-offset-2 col-sm-8">
+    </div>
+  </div>
+</div>
+<script id="templateConversation" type="text/x-jsrender">
+  <div class="aa-conversation-block">
+    <a class="aa-conversation-navigate-button btn btn-primary right" href="#conversation/{{:conversationId}}">Details<span class="badge {{:badgeCss}}">{{:newReplies}}</span></a>
+    <div class="aa-conversation-header">
+      <span class="aa-conversation-time right">{{:time}}</span>
+      <span class="aa-conversation-supplier">{{:supplier}}</span>
+    </div>
+  </div>
+</script>
+<script>
+  require(["pages/postdetails"], function(postdetails) { postdetails.init({{:0}}); });
+</script>

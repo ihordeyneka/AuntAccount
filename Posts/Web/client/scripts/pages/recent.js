@@ -23,19 +23,12 @@ define(["../core/globals", "communication_client"], function(globals, client) {
               badgeCss: post.conversations == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
             }));
           }
-          self.addButtonHandlers();
         }
       }
       else {
         self.notificationArea = $(".aa-notification-area").notificationArea();
         self.notificationArea.error();
       }
-    });
-  }
-
-  self.addButtonHandlers = function() {
-    $(".aa-post-navigate-button").click(function() {
-      
     });
   }
 
