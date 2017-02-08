@@ -49,21 +49,22 @@ CREATE TABLE `dido`.`Review` (
   PRIMARY KEY (`Id`)
 );
 
-CREATE TABLE `dido`.`Location` (
-  `Id` BIGINT(10) NOT NULL,
-  `Latitude` VARCHAR(45) NOT NULL,
-  `Longitude` VARCHAR(45) NOT NULL,
-  `CountryId` BIGINT(10) NULL,
-  `City` VARCHAR(45) NULL,
-  `Region` VARCHAR(45) NULL,
-  `Street` VARCHAR(45) NULL,
+CREATE TABLE `LOCATION` (
+  `Id` bigint(10) NOT NULL,
+  `Latitude` varchar(45) NOT NULL,
+  `Longitude` varchar(45) NOT NULL,
+  `Country` varchar(45) DEFAULT NULL,
+  `City` varchar(45) DEFAULT NULL,
+  `Region` varchar(45) DEFAULT NULL,
+  `Street` varchar(45) DEFAULT NULL,
+  `Radius` double DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
 
+
 CREATE TABLE `dido`.`Country` (
-  `Id` BIGINT(10) NOT NULL,
   `Country` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`Country`)
 );
 
 
