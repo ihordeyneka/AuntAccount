@@ -1,7 +1,9 @@
 package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.SupplierDAO;
+import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.SupplierDTO;
+import dido.auntaccount.dto.TagDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Supplier;
 import dido.auntaccount.entities.Tag;
@@ -27,36 +29,39 @@ public class SupplierServiceImpl implements SupplierService {
     SearchSupplierService searchSupplierService;
 
     @Override
-    public Supplier getSupplier(Long supplierId) {
-        return supplierDAO.find(supplierId);
+    public SupplierDTO getSupplier(Long supplierId) {
+        Supplier supplier = supplierDAO.find(supplierId);
+        return new SupplierDTO(supplier);
     }
 
     @Override
-    public Supplier saveSupplier(Supplier supplier) {
+    public SupplierDTO saveSupplier(SupplierDTO supplier) {
         Supplier savedSupplier = null;
         try {
-            savedSupplier = supplierDAO.save(supplier);
+            savedSupplier = supplierDAO.save(supplier.buildEntity());
             searchSupplierService.saveSupplier(new SupplierDTO(savedSupplier));
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save supplier", e);
         }
-        return savedSupplier;
+        return new SupplierDTO(savedSupplier);
     }
 
     @Override
-    public List<Post> getSupplierPosts(Long supplierId) {
+    public List<PostDTO> getSupplierPosts(Long supplierId) {
         Supplier supplier = supplierDAO.find(supplierId);
         if (supplier != null) {
-            return supplier.getSupplierPosts();
+            List<Post> supplierPosts = supplier.getSupplierPosts();
+            return supplierPosts.stream().map(PostDTO::new).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    public void savePostForSuppliers(Post post) {
-        List<Tag> postTags = post.getPostTags();
-        List<String> tags = postTags.stream().map(Tag::getTag).collect(Collectors.toList());
+    @Override
+    public void savePostForSuppliers(PostDTO post) {
+        List<TagDTO> postTags = post.getPostTags();
+        List<String> tags = postTags.stream().map(TagDTO::getTag).collect(Collectors.toList());
 
         List<Long> supplierIds = searchSupplierService.getSupplierIdsByTags(tags);
-        supplierIds.stream().forEach(s -> supplierDAO.addSupplierPost(s, post));
+        supplierIds.stream().forEach(s -> supplierDAO.addSupplierPost(s, post.buildEntity()));
     }
 }

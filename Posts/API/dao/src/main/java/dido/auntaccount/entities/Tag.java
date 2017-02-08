@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Tag {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String tag;
 
@@ -17,13 +17,18 @@ public class Tag {
         return id;
     }
 
-    public void setId(Long id) {
+    public Tag setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getTag() {
         return tag;
     }
 
+    public Tag setTag(String tag) {
+        this.tag = tag;
+        return this;
+    }
 }
 

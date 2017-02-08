@@ -7,22 +7,14 @@ import javax.persistence.Id;
 public class Country {
 
     @Id
-    private Long id;
     private String country;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public Country setCountry(String country) {
         this.country = country;
+        return this;
     }
 }

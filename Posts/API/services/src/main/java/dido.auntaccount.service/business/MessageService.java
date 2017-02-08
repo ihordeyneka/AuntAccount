@@ -1,10 +1,10 @@
 package dido.auntaccount.service.business;
 
-import dido.auntaccount.entities.Message;
+import dido.auntaccount.dto.MessageDTO;
 
 public interface MessageService {
 
-    public Message getMessage(Long id);
+    public MessageDTO getMessage(Long id);
 
-    public Message saveMessage(Message message);
+    public MessageDTO saveMessage(MessageDTO message);
 }

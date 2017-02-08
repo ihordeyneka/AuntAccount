@@ -1,5 +1,8 @@
 package dido.auntaccount.service.business;
 
+import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.ReviewDTO;
+import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.User;
@@ -8,15 +11,15 @@ import java.util.List;
 
 public interface UserService {
 
-    User getUser(Long userId);
+    UserDTO getUser(Long userId);
 
-    User findByUserName(String userName);
+    UserDTO findByUserName(String userName);
 
-    User saveUser(User user);
+    UserDTO saveUser(UserDTO user);
 
-    List<Post> getUserPosts(Long userId);
+    List<PostDTO> getUserPosts(Long userId);
 
-    List<Review> getUserReviews(Long userId);
+    List<ReviewDTO> getUserReviews(Long userId);
 
 
 }

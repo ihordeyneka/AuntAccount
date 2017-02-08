@@ -8,14 +8,13 @@ import java.util.List;
 public class Post {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private String description;
     private byte[] photo;
     private Double priceMax;
     private Double priceMin;
 
-   // @org.eclipse.persistence.annotations.Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-   // @org.eclipse.persistence.annotations.Convert("dateTimeConverter")
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,64 +42,72 @@ public class Post {
         return id;
     }
 
-    public void setId(long id) {
+    public Post setId(long id) {
         this.id = id;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public Post setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 
     public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public Post setPhoto(byte[] photo) {
         this.photo = photo;
+        return this;
     }
 
     public Double getPriceMax() {
         return priceMax;
     }
 
-    public void setPriceMax(Double priceMax) {
+    public Post setPriceMax(Double priceMax) {
         this.priceMax = priceMax;
+        return this;
     }
 
     public Double getPriceMin() {
         return priceMin;
     }
 
-    public void setPriceMin(Double priceMin) {
+    public Post setPriceMin(Double priceMin) {
         this.priceMin = priceMin;
+        return this;
     }
 
     public List<Tag> getPostTags() {
         return postTags;
     }
 
-    public void setPostTags(List<Tag> postTags) {
+    public Post setPostTags(List<Tag> postTags) {
         this.postTags = postTags;
+        return this;
     }
 
     public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public Post setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+        return this;
     }
 
     public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public Post setLocation(Location location) {
         this.location = location;
+        return this;
     }
 
 }

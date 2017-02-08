@@ -7,12 +7,11 @@ import java.sql.Date;
 public class Message {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String description;
     private byte[] photo;
 
-    //@Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
-    //@Convert("dateTimeConverter")
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,48 +24,54 @@ public class Message {
         return id;
     }
 
-    public void setId(Long id) {
+    public Message setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Message setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public Message setPhoto(byte[] photo) {
         this.photo = photo;
+        return this;
     }
 
     public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public Message setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+        return this;
     }
 
     public User getSender() {
         return sender;
     }
 
-    public void setSender(User sender) {
+    public Message setSender(User sender) {
         this.sender = sender;
+        return this;
     }
 
     public Long getOfferId() {
         return offerId;
     }
 
-    public void setOfferId(Long offerId) {
+    public Message setOfferId(Long offerId) {
         this.offerId = offerId;
+        return this;
     }
 
 }
