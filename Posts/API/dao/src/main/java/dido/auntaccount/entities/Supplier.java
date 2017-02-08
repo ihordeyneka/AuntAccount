@@ -7,7 +7,7 @@ import java.util.List;
 public class Supplier {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.TABLE)
     private Long id;
 
     @JoinColumn(name = "Id")

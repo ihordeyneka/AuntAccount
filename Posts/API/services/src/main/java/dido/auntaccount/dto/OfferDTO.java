@@ -20,7 +20,7 @@ public class OfferDTO implements DTO<Offer>{
 
     @Override
     public Offer buildEntity() {
-        Supplier supplier = new Supplier().setId(id);
+        Supplier supplier = new Supplier().setId(supplierId);
         return new Offer()
                 .setId(id)
                 .setSupplier(supplier)

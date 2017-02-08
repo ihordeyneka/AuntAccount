@@ -13,16 +13,16 @@ public class SupplierDTO implements DTO<Supplier> {
     private Long id;
     private UserDTO user;
     private List<TagDTO> tags;
-    private List<PostDTO> supplierPosts;
+    private List<PostDTO> posts;
 
     public SupplierDTO() {
     }
 
     @Override
     public Supplier buildEntity() {
-        User entityUser = new User().setId(user.getId());
+        User entityUser = user.buildEntity();
         List<Tag> entityTags = tags.stream().map(TagDTO::buildEntity).collect(Collectors.toList());
-        List<Post> entityPosts = supplierPosts.stream().map(PostDTO::buildEntity).collect(Collectors.toList());
+        List<Post> entityPosts = posts.stream().map(PostDTO::buildEntity).collect(Collectors.toList());
         return new Supplier()
                 .setId(id)
                 .setUser(entityUser)
@@ -31,10 +31,10 @@ public class SupplierDTO implements DTO<Supplier> {
     }
 
     public SupplierDTO(Supplier supplier) {
-        this.id = supplier.getId();
+        this.id = supplier.getUser().getId();
         this.tags = supplier.getSupplierTags().stream().map(TagDTO::new).collect(Collectors.toList());
         this.user = new UserDTO(supplier.getUser());
-        this.supplierPosts = supplier.getSupplierPosts().stream().map(PostDTO::new).collect(Collectors.toList());
+        this.posts = supplier.getSupplierPosts().stream().map(PostDTO::new).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -62,11 +62,11 @@ public class SupplierDTO implements DTO<Supplier> {
         this.user = user;
     }
 
-    public List<PostDTO> getSupplierPosts() {
-        return supplierPosts;
+    public List<PostDTO> getPosts() {
+        return posts;
     }
 
-    public void setSupplierPosts(List<PostDTO> supplierPosts) {
-        this.supplierPosts = supplierPosts;
+    public void setPosts(List<PostDTO> posts) {
+        this.posts = posts;
     }
 }
