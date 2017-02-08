@@ -23,19 +23,23 @@ $(function(){
 
     var routeParts = route.split("/");
 
-    //default route is #page/{id} where id is optional
+    //default route is #page/{param1}/{param2}/... where id is optional
     var page = "recent";
     if (routeParts.length > 0)
       page = routeParts[0];
 
     var href = "client/views/" + page + ".html";
-    if (routeParts.length > 1)
-      href += "?id=" + routeParts[1];
 
     $.ajax({
       url: href
     }).done(function(html) {
-      $("#router").html(html);
+      require(["core/globals"], function(globals) { // make sure String.replaceAll is defined
+        for(var i = 1; i < routeParts.length; i++) {
+          var token = "{{:" + (i - 1) + "}}"
+          html = html.replaceAll(token, routeParts[i]);
+        }
+        $("#router").html(html);
+      });
     });
   }
 
