@@ -53,7 +53,6 @@ define(function() {
   }
 
   self.savePost = function(parameters, callback) {
-    console.log(post);
     callback({
       success: true,
       data: { id: 0 }
@@ -61,7 +60,6 @@ define(function() {
   }
 
   self.signUp = function(parameters, callback) {
-    console.log(model);
     callback({
       success: true
     });

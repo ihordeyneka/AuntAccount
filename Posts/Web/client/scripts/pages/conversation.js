@@ -19,7 +19,8 @@ define(["../core/globals", "communication_client"], function(globals, client) {
               time: reply.time,
               header: reply.author.name,
               content: reply.content,
-              replyOffset: reply.author.isMe ? "5" : "2" //bootstrap offsets
+              replyOffset: reply.author.isMe ? "4" : "2", //bootstrap offsets
+              replyCss: reply.author.isMe ? "aa-reply-my" : "aa-reply-their"
             }));
           }
         }
