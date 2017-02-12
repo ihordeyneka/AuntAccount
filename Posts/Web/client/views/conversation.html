@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="aa-notification-area no-outline col-sm-offset-2 col-sm-8" tabindex="-1">
+    </div>
+  </div>
+  <div class="row aa-conversation-container">
+  </div>
+</div>
+<script id="templateReply" type="text/x-jsrender">
+    <div class="col-sm-offset-{{:replyOffset}} col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{:header}} <span class="right">{{:time}}</span></h3>          
+        </div>
+        <div class="panel-body">
+          {{:content}}
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+<script>
+  require(["pages/conversation"], function(conversation) { conversation.init({{:0}}); });
+</script>

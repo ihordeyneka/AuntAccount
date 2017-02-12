@@ -27,5 +27,9 @@ define(["../core/config"], function(config) {
     throw "Not Implemented";
   }
 
+  self.getConversationReplies = function(parameters, callback) {
+    throw "Not Implemented";
+  }
+
   return self;
 });

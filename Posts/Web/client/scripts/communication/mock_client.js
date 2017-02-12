@@ -92,5 +92,17 @@ define(function() {
     });
   }
 
+  self.getConversationReplies = function(parameters, callback) {
+    var result = [
+      { replyId: 1, author: { id: 1, name: "Jack Shephard", isMe: false }, time: "03-02-2017 12:05", content: "I've got some food for you. Fruits, fish, even boar." },
+      { replyId: 2, author: { id: 8, name: "Hugo Reyes", isMe: true }, time: "03-02-2017 12:37", content: "Awesome, I love fish." },
+      { replyId: 3, author: { id: 1, name: "Jack Shephard", isMe: false }, time: "03-02-2017 15:09", content: "Sorry, I had to go. So?" },
+      { replyId: 4, author: { id: 1, name: "Jack Shephard", isMe: false }, time: "03-02-2017 16:37", content: "Are you still interested?" }
+    ];
+    callback({
+      success: true,
+      data: result
+    });  }
+
   return self;
 });

@@ -4,7 +4,7 @@ define(["../core/globals", "communication_client"], function(globals, client) {
   self.init = function(postId) {
 
     globals.loading($('body'), true);
-    client.getPostConversations({}, function(res) {
+    client.getPostConversations({postId: postId}, function(res) {
       globals.loading($('body'), false);
       if (res.success) {
         var element = $(".aa-postdetails-container");
