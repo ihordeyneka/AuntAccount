@@ -4,3 +4,9 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'DejaVuSans';
+  src: url('/client/fonts/DejaVuSans-ExtraLight.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

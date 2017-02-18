@@ -1,3 +1,7 @@
+.nav > li > a {
+  font-family: DejaVuSans, Georgia  
+}
+
 .nav > li > a:focus {
   background-color: transparent;
 }
