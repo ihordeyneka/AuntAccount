@@ -15,6 +15,7 @@
     "jsrender": "^0.9.83",
     "bootstrap": "^3.3.7",
     "bootstrap-slider": "^9.4.1",
+    "bootstrap-3-typeahead": "^4.0.2",
     "bootstrap-fileinput": "^4.3.6",
     "bootstrap-validator": "^0.11.9",
     "bootstrap-tagsinput": "^0.7.1",

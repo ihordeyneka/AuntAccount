@@ -15,7 +15,7 @@ var PATHS = {
     { name: 'jsrender', files: 'node_modules/jsrender/*.{js,map}' },
     { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
     { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },
-    { name: 'bootstrap3_typeahead', files: 'external/lib/bootstrap3-typeahead/**/*' },
+    { name: 'bootstrap3_typeahead', files: 'node_modules/bootstrap-3-typeahead/**/*' },
     { name: 'bootstrap_fileinput', files: 'node_modules/bootstrap-fileinput/{css,js}/**/*' },
     { name: 'bootstrap_validator', files: 'node_modules/bootstrap-validator/dist/**/*' },
     { name: 'bootstrap_tagsinput', files: 'node_modules/bootstrap-tagsinput/dist/**/*' },
