@@ -13,6 +13,10 @@ var PATHS = {
   lib: [
     { name: 'jquery', files: 'node_modules/jquery.1/node_modules/jquery/dist/**/*' },
     { name: 'jsrender', files: 'node_modules/jsrender/*.{js,map}' },
+    { name: 'jquery_cookie', files: 'node_modules/jquery.cookie/*.{js,map}' },
+    { name: 'jquery_deparam', files: 'node_modules/jquery-deparam/*.{js,map}' },
+    { name: 'pubsub_js', files: 'node_modules/pubsub-js/src/**/*' },
+    { name: 'j_toker', files: 'node_modules/j-toker/dist/**/*' },
     { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
     { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },
     { name: 'bootstrap3_typeahead', files: 'node_modules/bootstrap-3-typeahead/**/*' },
