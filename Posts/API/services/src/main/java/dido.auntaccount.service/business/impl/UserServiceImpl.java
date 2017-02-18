@@ -11,8 +11,10 @@ import dido.auntaccount.service.business.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,8 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findByUserName(String userName) {
-        User user = userDAO.findByUserName(userName);
+    public UserDTO findByEmail(String email) {
+        User user = userDAO.findByEmail(email);
         return new UserDTO(user);
     }
 
@@ -38,7 +40,9 @@ public class UserServiceImpl implements UserService {
     public UserDTO saveUser(UserDTO user) {
         User savedUser = null;
         try {
-            savedUser = userDAO.save(user.buildEntity());
+            User entity = user.buildEntity();
+            entity.setCreationDate(new Date(DateTime.now().getMillis()));
+            savedUser = userDAO.save(entity);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save user", e);
         }

@@ -7,11 +7,14 @@ import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.SupplierService;
+import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +50,21 @@ public class PostServiceImpl implements PostService {
     public List<OfferDTO> getPostOffers(Long postId) {
         List<Offer> offers = postDAO.getOffersByPostId(postId);
         return offers.stream().map(OfferDTO::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updatePhoto(InputStream stream, Long postId) {
+        Post post = postDAO.find(postId);
+        if (post == null) {
+            return;
+        }
+        byte[] bytes = null;
+        try {
+            bytes = IOUtils.toByteArray(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        postDAO.updatePhoto(postId, bytes);
     }
 
 }

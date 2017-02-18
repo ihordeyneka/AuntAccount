@@ -16,7 +16,7 @@ define(["../core/globals", "communication_client"], function(globals, client) {
             email: $("#inputEmail").val(),
             first: $("#inputFirst").val(),
             last: $("#inputLast").val(),
-            password: $("inputPassword").val()
+            password: $("#inputPassword").val()
           }, function(res) {
             globals.loading($('body'), false);
             if (res.success) {

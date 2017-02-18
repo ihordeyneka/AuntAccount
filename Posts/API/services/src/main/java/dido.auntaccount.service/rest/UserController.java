@@ -4,9 +4,6 @@ package dido.auntaccount.service.rest;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.ReviewDTO;
 import dido.auntaccount.dto.UserDTO;
-import dido.auntaccount.entities.Post;
-import dido.auntaccount.entities.Review;
-import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.UserService;
 
@@ -30,15 +27,15 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("param") Long userId) {
         UserDTO user = userService.getUser(userId);
-        return Response.status(200).entity(user).build();
+        return getResponseBuilder().status(200).entity(user).build();
     }
 
     @GET
-    @Path("/name/{param}")
+    @Path("/email/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserByName(@PathParam("param") String name) {
-        UserDTO user = userService.findByUserName(name);
-        return Response.status(200).entity(user).build();
+    public Response getUserByEmail(@PathParam("param") String email) {
+        UserDTO user = userService.findByEmail(email);
+        return getResponseBuilder().status(200).entity(user).build();
     }
 
     @POST
@@ -49,7 +46,15 @@ public class UserController {
         String hashedPassword = passwordService.createHash(user.getPassword());
         user.setPassword(hashedPassword);
         UserDTO savedUser = userService.saveUser(user);
-        return Response.status(200).entity(savedUser).build();
+        return getResponseBuilder().status(200).entity(savedUser).build();
+    }
+
+
+    /// TODO: remove later
+    @OPTIONS
+    @Path("/")
+    public Response saveUserPreflight(UserDTO user) {
+        return getResponseBuilder().build();
     }
 
     @GET
@@ -57,7 +62,7 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserPosts(@PathParam("param") Long userId) {
         List<PostDTO> posts = userService.getUserPosts(userId);
-        return Response.status(200).entity(posts).build();
+        return getResponseBuilder().status(200).entity(posts).build();
     }
 
     @GET
@@ -65,7 +70,13 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserReviews(@PathParam("param") Long userId) {
         List<ReviewDTO> reviews = userService.getUserReviews(userId);
-        return Response.status(200).entity(reviews).build();
+        return getResponseBuilder().status(200).entity(reviews).build();
+    }
+
+    private Response.ResponseBuilder getResponseBuilder() {
+        return Response.ok().header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, DELETE, OPTIONS, POST")
+                .header("Access-Control-Allow-Headers", "Content-Type, x-http-method-override");
     }
 
 

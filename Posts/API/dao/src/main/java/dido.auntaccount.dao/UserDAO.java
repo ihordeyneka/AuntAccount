@@ -10,7 +10,7 @@ public interface UserDAO {
 
     User find(Long userId);
 
-    User findByUserName(String userName);
+    User findByEmail(String userName);
 
     User save(User user) throws Exception;
 

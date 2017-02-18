@@ -2,9 +2,8 @@ package dido.auntaccount.service.business;
 
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.entities.Offer;
-import dido.auntaccount.entities.Post;
 
+import java.io.InputStream;
 import java.util.List;
 
 public interface PostService {
@@ -14,5 +13,7 @@ public interface PostService {
     PostDTO savePost(PostDTO post);
 
     List<OfferDTO> getPostOffers(Long postId);
+
+    void updatePhoto(InputStream stream, Long postId);
 
 }
