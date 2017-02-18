@@ -9,7 +9,8 @@ import java.sql.Date;
 public class UserDTO implements DTO<User>, Serializable {
 
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String password;
     private String email;
     private String phone;
@@ -23,22 +24,25 @@ public class UserDTO implements DTO<User>, Serializable {
 
     public UserDTO(User user) {
         this.id = user.getId();
-        this.name = user.getName();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.phone = user.getPhone();
         this.photo = user.getPhoto();
         this.website = user.getWebsite();
         this.creationDate = user.getCreationDate();
-        this.location = new LocationDTO(user.getLocation());
+        Location location = user.getLocation();
+        this.location = location != null ? new LocationDTO(user.getLocation()) : null;
     }
 
     @Override
     public User buildEntity() {
-        Location entityLocation = location.buildEntity();
+        Location entityLocation = location != null ? location.buildEntity() : null;
         return new User()
                 .setId(id)
-                .setName(name)
+                .setFirstName(firstName)
+                .setLastName(lastName)
                 .setPassword(password)
                 .setEmail(email)
                 .setPhone(phone)
@@ -56,12 +60,12 @@ public class UserDTO implements DTO<User>, Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
     }
 
     public String getPassword() {
@@ -118,5 +122,13 @@ public class UserDTO implements DTO<User>, Serializable {
 
     public void setLocation(LocationDTO location) {
         this.location = location;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

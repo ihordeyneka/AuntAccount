@@ -40,4 +40,11 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
         TypedQuery<Offer> query = entityManager.createQuery("SELECT o FROM Offer o WHERE o.postId = :postId", Offer.class);
         return query.setParameter("postId", postId).getResultList();
     }
+
+    public void updatePhoto(Long postId, byte[] photo) {
+        TypedQuery<Post> query = entityManager.createQuery("UPDATE Post SET photo = :photo WHERE postId = :postId", Post.class);
+        query.setParameter("postId", postId)
+                .setParameter("photo", photo)
+                .executeUpdate();
+    }
 }

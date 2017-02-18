@@ -16,11 +16,39 @@ define(["../core/config"], function(config) {
   }
 
   self.signUp = function(parameters, callback) {
-    throw "Not Implemented";
+      $.ajax({
+          url: "http://localhost:8080/api/service/users",
+          type: "POST",
+          contentType: 'application/json',
+          dataType: "json",
+          data: JSON.stringify({
+              email: parameters.email,
+              firstName: parameters.first,
+              lastName: parameters.last,
+              password: parameters.password
+          }),
+          success: function(result) {
+              callback({
+                  success: true
+              });
+          },
+          error: function() {
+              console.log("error");
+          }
+      });
   }
 
   self.getMyRecentPosts = function(parameters, callback) {
-    throw "Not Implemented";
+      $.ajax({
+          url: "http://localhost:8080/api/service/users/2/posts",
+          dataType: "json"
+      }).done(function(result) {
+          callback({
+              success: true,
+              data: result
+          });
+      });
+
   }
 
   self.getPostConversations = function(parameters, callback) {

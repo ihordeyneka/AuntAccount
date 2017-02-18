@@ -1,7 +1,6 @@
 package dido.auntaccount.service.rest;
 
 import dido.auntaccount.dto.UserDTO;
-import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
@@ -81,7 +80,7 @@ public class TokenController {
     }
 
     private void validateClient(OAuthTokenRequest request) throws OAuthProblemException {
-        UserDTO user = userService.findByUserName(request.getUsername());
+        UserDTO user = userService.findByEmail(request.getUsername());
         if (user == null) {
             throw OAuthProblemException.error("User is not valid " + request.getUsername());
         }
