@@ -20,7 +20,8 @@ var PATHS = {
     { name: 'bootstrap_validator', files: 'node_modules/bootstrap-validator/dist/**/*' },
     { name: 'bootstrap_tagsinput', files: 'node_modules/bootstrap-tagsinput/dist/**/*' },
     { name: 'requirejs', files: 'node_modules/requirejs/require.js' },
-    { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' }
+    { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' },
+    { name: 'underscore', files: 'node_modules/underscore/**/*' }
   ],
   client: {
     js: ['client/**/*.js'],
