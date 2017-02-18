@@ -67,9 +67,9 @@ define(function() {
 
   self.getMyRecentPosts = function(parameters, callback) {
     var result = [
-      { postId: 1, time: "15-12-2016", conversations: 5, newMessages: true, tags: ["Food", "Gamburger"], description: "We've just survived a plane crash<br/>We need to find something to eat..." },
-      { postId: 2, time: "29-01-2017", conversations: 0, newMessages: false, tags: ["Shelter"], description: "Looks like we're stuck here." },
-      { postId: 3, time: "03-02-2017", conversations: 1, newMessages: false, tags: ["Gun", "AK-47"], description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
+      { id: 1, creationDate: "15-12-2016", conversations: 5, newMessages: true, postTags: [{"id":1,"tag":"Food"}, {"id":2,"tag":"Gamburger"}], description: "We've just survived a plane crash<br/>We need to find something to eat..." },
+      { id: 2, creationDate: "29-01-2017", conversations: 0, newMessages: false, postTags: [{"id":3,"tag":"Shelter"}], description: "Looks like we're stuck here." },
+      { id: 3, creationDate: "03-02-2017", conversations: 1, newMessages: false, postTags: [{"id":4,"tag":"Gun"}, {"id":5,"tag":"AK-47"}], description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
     ];
     callback({
       success: true,
