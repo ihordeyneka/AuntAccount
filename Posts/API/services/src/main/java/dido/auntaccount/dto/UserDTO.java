@@ -32,7 +32,8 @@ public class UserDTO implements DTO<User>, Serializable {
         this.photo = user.getPhoto();
         this.website = user.getWebsite();
         this.creationDate = user.getCreationDate();
-        this.location = new LocationDTO(user.getLocation());
+        Location location = user.getLocation();
+        this.location = location != null ? new LocationDTO(user.getLocation()) : null;
     }
 
     @Override
