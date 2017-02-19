@@ -1,12 +1,16 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="row">
+      <div class="aa-notification-area no-outline col-sm-offset-3 col-sm-6" tabindex="-1">
+      </div>
+    </div>
     <div class="col-sm-offset-2 col-sm-4">
       <div class="aa-social">
         <label class="lb-lg lb-social">Social</label>
-        <button class="btn btn-lg btn-primary btn-google aa-mbl clear" id="googleSignIn">
+        <button class="btn btn-lg btn-primary btn-google aa-mbl clear" id="btnGoogleSignIn">
           <i class="fa fa-google-plus pull-left"></i> Google Login
         </button>
-        <button class="btn btn-lg btn-primary btn-facebook aa-mbl" id="fbSignIn">
+        <button class="btn btn-lg btn-primary btn-facebook aa-mbl" id="btnFbSignIn">
           <i class="fa fa-facebook-official pull-left"></i> Facebook Login
         </button>
       </div>
@@ -30,3 +34,6 @@
     </div>
   </div>
 </div>
+<script>
+  require(["pages/login"], function(login) { login.init(); });
+</script>

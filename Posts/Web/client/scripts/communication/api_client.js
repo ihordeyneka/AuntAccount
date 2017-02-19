@@ -15,6 +15,7 @@ define(["../core/config"], function(config) {
     throw "Not Implemented";
   }
 
+  //OBSOLETE
   self.signUp = function(parameters, callback) {
       $.ajax({
           url: "http://localhost:8080/api/service/users",

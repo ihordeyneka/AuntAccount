@@ -59,6 +59,7 @@ define(function() {
     });
   }
 
+  //OBSOLETE
   self.signUp = function(parameters, callback) {
     callback({
       success: true
