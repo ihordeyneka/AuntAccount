@@ -59,8 +59,8 @@ require(["core/config"], function(config) {
     },
 
     authProviderPaths: {
-      google:    '/auth/google_oauth2',
-      facebook:  '/auth/facebook'
+      google:    '/api/service/auth/google',
+      facebook:  '/api/service/auth/fb'
     }
   });
 });
