@@ -10,6 +10,11 @@
 .clear {
   clear: both;
 }
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .margin-top {
   margin-top: 10px;
 }
