@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/users")
-public class UserController {
+public class UserController extends Controller {
 
     @Inject
     private UserService userService;
@@ -72,12 +72,5 @@ public class UserController {
         List<ReviewDTO> reviews = userService.getUserReviews(userId);
         return getResponseBuilder().status(200).entity(reviews).build();
     }
-
-    private Response.ResponseBuilder getResponseBuilder() {
-        return Response.ok().header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, DELETE, OPTIONS, POST")
-                .header("Access-Control-Allow-Headers", "Content-Type, x-http-method-override");
-    }
-
 
 }

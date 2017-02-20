@@ -30,7 +30,8 @@ public class PostDTO implements DTO<Post> {
         this.priceMax = post.getPriceMax();
         this.priceMin = post.getPriceMin();
         this.creationDate = post.getCreationDate();
-        this.location = new LocationDTO(post.getLocation());
+        Location location = post.getLocation();
+        this.location = location != null ? new LocationDTO(location) : null;
         this.postTags = post.getPostTags().stream().map(TagDTO::new).collect(Collectors.toList());
         this.userId = post.getUserId();
     }

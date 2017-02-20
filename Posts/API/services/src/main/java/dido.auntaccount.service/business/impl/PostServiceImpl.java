@@ -11,10 +11,12 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,8 @@ public class PostServiceImpl implements PostService {
     public PostDTO savePost(PostDTO post) {
         PostDTO savedPost = null;
         try {
+            long currentMillis = DateTime.now().getMillis();
+            post.setCreationDate(new Date(currentMillis));
             savedPost = new PostDTO(postDAO.save(post.buildEntity()));
             supplierService.savePostForSuppliers(savedPost);
         } catch (Exception e) {

@@ -11,7 +11,7 @@ public class MessageDTO implements DTO<Message> {
     private String description;
     private byte[] photo;
     private Date creationDate;
-    private Long senderId;
+    private UserDTO sender;
     private Long offerId;
 
     public MessageDTO() {
@@ -22,19 +22,20 @@ public class MessageDTO implements DTO<Message> {
         this.description = message.getDescription();
         this.photo = message.getPhoto();
         this.creationDate = message.getCreationDate();
-        this.senderId = message.getSender().getId();
+        User senderEntity = message.getSender();
+        this.sender = senderEntity != null ? new UserDTO(senderEntity) : null;
         this.offerId = message.getOfferId();
     }
 
     @Override
     public Message buildEntity() {
-        User sender = new User().setId(senderId);
+        User senderEntity = sender != null ? sender.buildEntity() : null;
         return new Message()
                 .setId(id)
                 .setDescription(description)
                 .setPhoto(photo)
                 .setCreationDate(creationDate)
-                .setSender(sender)
+                .setSender(senderEntity)
                 .setOfferId(offerId);
     }
 
@@ -70,12 +71,12 @@ public class MessageDTO implements DTO<Message> {
         this.creationDate = creationDate;
     }
 
-    public Long getSenderId() {
-        return senderId;
+    public UserDTO getSender() {
+        return sender;
     }
 
-    public void setSenderId(Long senderId) {
-        this.senderId = senderId;
+    public void setSender(UserDTO sender) {
+        this.sender = sender;
     }
 
     public Long getOfferId() {

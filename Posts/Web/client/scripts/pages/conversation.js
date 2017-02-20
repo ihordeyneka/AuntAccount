@@ -14,13 +14,17 @@ define(["../core/globals", "communication_client"], function(globals, client) {
         } else {
           for (var i=0; i<res.data.length; i++) {
             var reply = res.data[i];
+            var displayName = reply.sender.firstName.concat(" ").concat(reply.sender.lastName);
             element.append($.templates("#templateReply").render({
-              replyId: reply.replyId,
-              time: reply.time,
-              header: reply.author.name,
-              content: reply.content,
-              replyOffset: reply.author.isMe ? "4" : "2", //bootstrap offsets
-              replyCss: reply.author.isMe ? "aa-reply-my" : "aa-reply-their"
+              replyId: reply.id,
+              time: reply.creationDate,
+              header: displayName,
+              content: reply.description,
+              ///TODO: check if user is logged in
+              /* replyOffset: reply.sender.id ? "4" : "2", //bootstrap offsets
+              replyCss: reply.sender.id ? "aa-reply-my" : "aa-reply-their"*/
+              replyOffset: "4",
+              replyCss: "aa-reply-my"
             }));
           }
         }
@@ -32,5 +36,5 @@ define(["../core/globals", "communication_client"], function(globals, client) {
     });
   }
 
-  return self;
+    return self;
 });

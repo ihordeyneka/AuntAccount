@@ -57,7 +57,17 @@ define(["../core/config"], function(config) {
   }
 
   self.getConversationReplies = function(parameters, callback) {
-    throw "Not Implemented";
+      var ref = "http://localhost:8080/api/service/offers/{param}/messages";
+      $.ajax({
+          url: ref.replace("{param}", parameters.conversationId),
+          dataType: "json"
+      }).done(function(result) {
+          callback({
+              success: true,
+              data: result
+          });
+      });
+
   }
 
   return self;

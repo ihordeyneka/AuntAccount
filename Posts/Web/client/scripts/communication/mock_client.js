@@ -93,10 +93,10 @@ define(function() {
 
   self.getConversationReplies = function(parameters, callback) {
     var result = [
-      { replyId: 1, author: { id: 1, name: "Jack Shephard", isMe: false }, time: "03-02-2017 12:05", content: "I've got some food for you. Fruits, fish, even boar." },
-      { replyId: 2, author: { id: 8, name: "Hugo Reyes", isMe: true }, time: "03-02-2017 12:37", content: "Awesome, I love fish." },
-      { replyId: 3, author: { id: 1, name: "Jack Shephard", isMe: false }, time: "03-02-2017 15:09", content: "Sorry, I had to go. So?" },
-      { replyId: 4, author: { id: 1, name: "Jack Shephard", isMe: false }, time: "03-02-2017 16:37", content: "Are you still interested?" }
+      { id: 1, sender: { id: 1, firstName: "Jack", lastName: "Shephard" }, creationDate: "03-02-2017 12:05", description: "I've got some food for you. Fruits, fish, even boar." },
+      { id: 2, sender: { id: 8, firstName: "Hugo", lastName: "Reyes" }, creationDate: "03-02-2017 12:37", description: "Awesome, I love fish." },
+      { id: 3, sender: { id: 1, firstName: "Jack", lastName: "Shephard" }, creationDate: "03-02-2017 15:09", description: "Sorry, I had to go. So?" },
+      { id: 4, sender: { id: 1, firstName: "Jack", lastName: "Shephard" }, creationDate: "03-02-2017 16:37", description: "Are you still interested?" }
     ];
     callback({
       success: true,
