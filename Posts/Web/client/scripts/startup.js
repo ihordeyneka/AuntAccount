@@ -12,7 +12,7 @@ require(["core/config"], function(config) {
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
     emailSignInPath:       '/auth/sign_in',
-    emailRegistrationPath: '/auth',
+    emailRegistrationPath: '/api/service/users',
     accountUpdatePath:     '/auth',
     accountDeletePath:     '/auth',
     passwordResetPath:     '/auth/password',

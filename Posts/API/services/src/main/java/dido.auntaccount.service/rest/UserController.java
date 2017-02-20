@@ -40,10 +40,12 @@ public class UserController extends Controller {
 
     @POST
     @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes("application/x-www-form-urlencoded")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveUser(UserDTO user) throws Exception {
-        String hashedPassword = passwordService.createHash(user.getPassword());
+    public Response saveUser(@FormParam("email") String email, @FormParam("firstName") String firstName,
+                             @FormParam("lastName") String lastName, @FormParam("password") String password) throws Exception {
+        UserDTO user = new UserDTO(email, firstName, lastName, password);
+        String hashedPassword = passwordService.createHash(password);
         user.setPassword(hashedPassword);
         UserDTO savedUser = userService.saveUser(user);
         return getResponseBuilder().status(200).entity(savedUser).build();

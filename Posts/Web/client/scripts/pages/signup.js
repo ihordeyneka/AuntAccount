@@ -13,8 +13,8 @@ define(["../core/globals", "communication_client"], function(globals, client) {
         success: function() {
           $.auth.emailSignUp({
             email: $("#inputEmail").val(),
-            first: $("#inputFirst").val(),
-            last: $("#inputLast").val(),
+            firstName: $("#inputFirst").val(),
+            lastName: $("#inputLast").val(),
             password: $("#inputPassword").val(),
             password_confirmation: $("#inputPassword").val()
           });
