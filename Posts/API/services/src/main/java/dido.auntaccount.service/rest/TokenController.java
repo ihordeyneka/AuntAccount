@@ -1,5 +1,6 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dido.auntaccount.utils.OAuthRequestWrapper;
 import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
@@ -18,11 +19,16 @@ import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
+import java.util.Enumeration;
+import java.util.Map;
 
 @Path("/token")
 public class TokenController extends Controller {
@@ -39,14 +45,15 @@ public class TokenController extends Controller {
     TokenService tokenService;
 
     @POST
-    public Response authorize(@Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
+    @Consumes("application/x-www-form-urlencoded")
+    public Response authorize(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
 
         OAuthTokenRequest oauthRequest = null;
 
         OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
 
         try {
-            oauthRequest = new OAuthTokenRequest(request);
+            oauthRequest = new OAuthTokenRequest(new OAuthRequestWrapper(request, form));
 
             validateClient(oauthRequest);
 
