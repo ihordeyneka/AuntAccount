@@ -25,7 +25,8 @@ var PATHS = {
     { name: 'bootstrap_tagsinput', files: 'node_modules/bootstrap-tagsinput/dist/**/*' },
     { name: 'requirejs', files: 'node_modules/requirejs/require.js' },
     { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' },
-    { name: 'underscore', files: 'node_modules/underscore/**/*' }
+    { name: 'underscore', files: 'node_modules/underscore/**/*' },
+    { name: 'dom_ready', files: 'other_modules/dom_ready/**/*' }
   ],
   client: {
     js: ['client/**/*.js'],

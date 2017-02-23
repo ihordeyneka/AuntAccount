@@ -1,6 +1,7 @@
-$(function(){
+define([], function(){
+  var self = {};
 
-  var init = function () {
+  self.init = function () {
     var hash = location.hash != "" ? location.hash : "#home";
     navigate(hash);
   }
@@ -43,6 +44,7 @@ $(function(){
     });
   }
 
-  init();
-  window.onhashchange = init;
+  window.onhashchange = self.init;
+
+  return self;
 });

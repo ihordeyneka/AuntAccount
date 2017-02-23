@@ -17,7 +17,7 @@ define(["../core/config"], function(config) {
 
   self.getMyRecentPosts = function(parameters, callback) {
       $.ajax({
-          url: config.apiRoot + "users/2/posts",
+          url: config.apiRoot + "/users/2/posts",
           dataType: "json"
       }).done(function(result) {
           callback({
@@ -33,7 +33,7 @@ define(["../core/config"], function(config) {
   }
 
   self.getConversationReplies = function(parameters, callback) {
-      var ref = config.apiRoot + "offers/{param}/messages";
+      var ref = config.apiRoot + "/offers/{param}/messages";
       $.ajax({
           url: ref.replace("{param}", parameters.conversationId),
           dataType: "json"

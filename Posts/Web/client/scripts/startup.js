@@ -1,5 +1,10 @@
 requirejs.config({
   baseUrl: '/client/scripts',
+  paths: {
+    domReady: ["../../lib/dom_ready/dom_ready"],
+    jsrender: ["../../lib/jsrender/jsrender.min"],
+    underscore: ["../../lib/underscore/underscore-min"]
+  },
   map: {
     '*': {
       'communication_client': 'communication/api_client'
@@ -7,7 +12,8 @@ requirejs.config({
   }
 });
 
-require(["core/config"], function(config) {
+require(["core/config", "router", "domReady", "jsrender"],
+  function(config, router, domReady) {
   $.auth.configure({
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
@@ -42,10 +48,6 @@ require(["core/config"], function(config) {
       uid:            "{{ uid }}"
     },
 
-    parseExpiry: function(headers){
-      return (parseInt(headers['expiry'], 10) * 1000) || null;
-    },
-
     handleLoginResponse: function(resp) {
       return resp.data;
     },
@@ -67,4 +69,8 @@ require(["core/config"], function(config) {
   $.auth.createPopup = function(url) {
     window.location = url;
   };
+
+  domReady(function(){
+    router.init();
+  });
 });
