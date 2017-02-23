@@ -59,13 +59,6 @@ define(function() {
     });
   }
 
-  //OBSOLETE
-  self.signUp = function(parameters, callback) {
-    callback({
-      success: true
-    });
-  }
-
   self.getMyRecentPosts = function(parameters, callback) {
     var result = [
       { id: 1, creationDate: "15-12-2016", conversations: 5, newMessages: true, postTags: [{"id":1,"tag":"Food"}, {"id":2,"tag":"Gamburger"}], description: "We've just survived a plane crash<br/>We need to find something to eat..." },

@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
 
 @Path("/token")
-public class TokenController {
+public class TokenController extends Controller {
 
     private static final Long EXPIRES_IN = 3600L;
 
@@ -64,7 +64,7 @@ public class TokenController {
 
             tokenService.saveToken(accessToken, EXPIRES_IN);
 
-            return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
+            return getResponseBuilder().status(r.getResponseStatus()).entity(r.getBody()).build();
 
             //if something goes wrong
         } catch (OAuthProblemException ex) {
@@ -74,7 +74,7 @@ public class TokenController {
                     .error(ex)
                     .buildJSONMessage();
 
-            return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
+            return getResponseBuilder().status(r.getResponseStatus()).entity(r.getBody()).build();
         }
 
     }

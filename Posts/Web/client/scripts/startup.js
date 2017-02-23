@@ -2,7 +2,7 @@ requirejs.config({
   baseUrl: '/client/scripts',
   map: {
     '*': {
-      'communication_client': 'communication/mock_client'
+      'communication_client': 'communication/api_client'
     }
   }
 });
@@ -11,8 +11,8 @@ require(["core/config"], function(config) {
   $.auth.configure({
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
-    emailSignInPath:       '/auth/sign_in',
-    emailRegistrationPath: '/api/service/users',
+    emailSignInPath:       '/token',
+    emailRegistrationPath: '/users',
     accountUpdatePath:     '/auth',
     accountDeletePath:     '/auth',
     passwordResetPath:     '/auth/password',
@@ -59,8 +59,8 @@ require(["core/config"], function(config) {
     },
 
     authProviderPaths: {
-      google:    '/api/service/auth/google',
-      facebook:  '/api/service/auth/fb'
+      google:    '/auth/google',
+      facebook:  '/auth/fb'
     }
   });
 
