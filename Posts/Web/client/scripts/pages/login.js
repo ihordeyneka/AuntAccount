@@ -1,4 +1,4 @@
-define(["../core/globals", "communication_client"], function(globals, client) {
+define(["../core/globals", "../core/config", "communication_client"], function(globals, config, client) {
   var self = {};
 
   self.init = function() {
@@ -21,7 +21,11 @@ define(["../core/globals", "communication_client"], function(globals, client) {
     $("#btnLogin").click(function() {
       $.auth.emailSignIn({
         email: $("#inputEmail").val(),
-        password: $("#inputPassword").val()
+        password: $("#inputPassword").val(),
+        grant_type: "password",
+        client_secret: config.clientSecret,
+        client_id: config.clientId,
+        remember_me: $("#inputRememberMe").is(":checked")
       });
     });
   }
