@@ -63,4 +63,8 @@ require(["core/config"], function(config) {
       facebook:  '/api/service/auth/fb'
     }
   });
+
+  $.auth.createPopup = function(url) {
+    window.location = url;
+  };
 });
