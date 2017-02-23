@@ -20,7 +20,7 @@ define(["../core/globals", "../core/config", "communication_client"], function(g
 
     $("#btnLogin").click(function() {
       $.auth.emailSignIn({
-        email: $("#inputEmail").val(),
+        username: $("#inputEmail").val(),
         password: $("#inputPassword").val(),
         grant_type: "password",
         client_secret: config.clientSecret,
