@@ -1,18 +1,38 @@
 requirejs.config({
   baseUrl: '/client/scripts',
-  paths: {
-    domReady: ["../../lib/dom_ready/dom_ready"],
-    jsrender: ["../../lib/jsrender/jsrender.min"],
-    underscore: ["../../lib/underscore/underscore-min"]
-  },
   map: {
     '*': {
-      'communication_client': 'communication/api_client'
+      'communication_client': 'communication/mock_client'
     }
+  },
+  paths: {
+    domReady: ["../../lib/dom_ready/dom_ready"],
+    jquery: ["../../lib/jquery/jquery.min"],
+    bootstrap: ["../../lib/bootstrap/js/bootstrap.min"],
+    jsrender: ["../../lib/jsrender/jsrender.min"],
+    validator: ["../../lib/bootstrap_validator/validator.min"],
+    "jquery.cookie": ["../../lib/jquery_cookie/jquery.cookie"],
+    "jquery-deparam": ["../../lib/jquery_deparam/jquery-deparam"],
+    "pubsub-js": ["../../lib/pubsub_js/pubsub"],
+    jtoker: ["../../lib/j_toker/jquery.j-toker.min"],
+    tagsinput: ["../../lib/bootstrap_tagsinput/bootstrap-tagsinput.min"],
+    underscore: ["../../lib/underscore/underscore-min"],
+    typeahead: ["../../lib/bootstrap3_typeahead/bootstrap3-typeahead.min"],
+    fileinput: ["../../lib/bootstrap_fileinput/js/fileinput.min"],
+    slider: ["../../lib/bootstrap_slider/bootstrap-slider.min"]
+  },
+  shim: {
+    bootstrap: { deps: ["jquery"] },
+    jsrender: { deps: ["jquery"] },
+    validator: { deps: ["jquery"] },
+    "jquery.cookie": { deps: ["jquery"] },
+    "jquery-deparam": { deps: ["jquery"] },
+    jtoker: { deps: ["jquery.cookie", "jquery-deparam", "pubsub-js"] }
   }
 });
 
-require(["core/config", "router", "domReady", "jsrender"],
+require(["core/config", "router", "domReady", "jquery", "bootstrap", "jsrender", "validator",
+  "jquery.cookie", "jquery-deparam", "pubsub-js", "jtoker"],
   function(config, router, domReady) {
   $.auth.configure({
     apiUrl:                config.apiRoot,
