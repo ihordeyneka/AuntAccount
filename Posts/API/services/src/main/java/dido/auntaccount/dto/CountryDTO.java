@@ -7,6 +7,9 @@ public class CountryDTO implements DTO<Country> {
     private Long id;
     private String country;
 
+    public CountryDTO(){
+    }
+
     public CountryDTO(Country country) {
         this.id = country.getId();
         this.country = country.getCountry();

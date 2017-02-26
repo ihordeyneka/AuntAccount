@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/offers")
-public class OfferController {
+public class OfferController extends Controller {
 
     @Inject
     OfferService service;
@@ -25,7 +25,7 @@ public class OfferController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOffer(@PathParam("param") Long offerId) {
         OfferDTO offer = service.getOffer(offerId);
-        return Response.status(200).entity(offer).build();
+        return getResponseBuilder().status(200).entity(offer).build();
     }
 
     @POST
@@ -34,7 +34,7 @@ public class OfferController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveOffer(OfferDTO offer) throws Exception {
         OfferDTO savedOffer = service.saveOffer(offer);
-        return Response.status(200).entity(savedOffer).build();
+        return getResponseBuilder().status(200).entity(savedOffer).build();
     }
 
     @GET
@@ -42,7 +42,7 @@ public class OfferController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferSupplier(@PathParam("param") Long offerId) {
         SupplierDTO supplier = service.getOfferSupplier(offerId);
-        return Response.status(200).entity(supplier).build();
+        return getResponseBuilder().status(200).entity(supplier).build();
     }
 
     @GET
@@ -50,7 +50,7 @@ public class OfferController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferMessages(@PathParam("param") Long offerId) {
         List<MessageDTO> messages = service.getOfferMessages(offerId);
-        return Response.status(200).entity(messages).build();
+        return getResponseBuilder().status(200).entity(messages).build();
     }
 
 }

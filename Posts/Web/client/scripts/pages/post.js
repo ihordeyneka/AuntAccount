@@ -1,4 +1,5 @@
-define(["../core/globals", "communication_client"], function(globals, client) {
+define(["../core/globals", "communication_client", "tagsinput", "typeahead", "fileinput", "slider"],
+  function(globals, client, tagsinputControl, typeaheadControl, fileinputControl, sliderControl) {
   var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;

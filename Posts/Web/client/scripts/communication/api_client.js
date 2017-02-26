@@ -15,12 +15,35 @@ define(["../core/config"], function(config) {
     throw "Not Implemented";
   }
 
-  self.signUp = function(parameters, callback) {
+  self.getMyRecentPosts = function(parameters, callback) {
+      $.ajax({
+          url: config.apiRoot + "/users/2/posts",
+          dataType: "json"
+      }).done(function(result) {
+          callback({
+              success: true,
+              data: result
+          });
+      });
+
+  }
+
+  self.getPostConversations = function(parameters, callback) {
     throw "Not Implemented";
   }
 
-  self.getMyRecentPosts = function(parameters, callback) {
-    throw "Not Implemented";
+  self.getConversationReplies = function(parameters, callback) {
+      var ref = config.apiRoot + "/offers/{param}/messages";
+      $.ajax({
+          url: ref.replace("{param}", parameters.conversationId),
+          dataType: "json"
+      }).done(function(result) {
+          callback({
+              success: true,
+              data: result
+          });
+      });
+
   }
 
   return self;

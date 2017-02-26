@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+  .aa-conversation-reply.aa-reply-my {
+    margin-left: 10%;
+  }
+  .aa-conversation-reply.aa-reply-their {
+    margin-right: 10%;
+  }
+}
+
+.aa-reply-author {
+}

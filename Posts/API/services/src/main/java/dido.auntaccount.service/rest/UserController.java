@@ -4,9 +4,6 @@ package dido.auntaccount.service.rest;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.ReviewDTO;
 import dido.auntaccount.dto.UserDTO;
-import dido.auntaccount.entities.Post;
-import dido.auntaccount.entities.Review;
-import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.UserService;
 
@@ -17,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/users")
-public class UserController {
+public class UserController extends Controller {
 
     @Inject
     private UserService userService;
@@ -30,26 +27,36 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("param") Long userId) {
         UserDTO user = userService.getUser(userId);
-        return Response.status(200).entity(user).build();
+        return getResponseBuilder().status(200).entity(user).build();
     }
 
     @GET
-    @Path("/name/{param}")
+    @Path("/email/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserByName(@PathParam("param") String name) {
-        UserDTO user = userService.findByUserName(name);
-        return Response.status(200).entity(user).build();
+    public Response getUserByEmail(@PathParam("param") String email) {
+        UserDTO user = userService.findByEmail(email);
+        return getResponseBuilder().status(200).entity(user).build();
     }
 
     @POST
     @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes("application/x-www-form-urlencoded")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveUser(UserDTO user) throws Exception {
-        String hashedPassword = passwordService.createHash(user.getPassword());
+    public Response saveUser(@FormParam("email") String email, @FormParam("firstName") String firstName,
+                             @FormParam("lastName") String lastName, @FormParam("password") String password) throws Exception {
+        UserDTO user = new UserDTO(email, firstName, lastName, password);
+        String hashedPassword = passwordService.createHash(password);
         user.setPassword(hashedPassword);
         UserDTO savedUser = userService.saveUser(user);
-        return Response.status(200).entity(savedUser).build();
+        return getResponseBuilder().status(200).entity(savedUser).build();
+    }
+
+
+    /// TODO: remove later
+    @OPTIONS
+    @Path("/")
+    public Response saveUserPreflight(UserDTO user) {
+        return getResponseBuilder().build();
     }
 
     @GET
@@ -57,7 +64,7 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserPosts(@PathParam("param") Long userId) {
         List<PostDTO> posts = userService.getUserPosts(userId);
-        return Response.status(200).entity(posts).build();
+        return getResponseBuilder().status(200).entity(posts).build();
     }
 
     @GET
@@ -65,8 +72,7 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserReviews(@PathParam("param") Long userId) {
         List<ReviewDTO> reviews = userService.getUserReviews(userId);
-        return Response.status(200).entity(reviews).build();
+        return getResponseBuilder().status(200).entity(reviews).build();
     }
-
 
 }

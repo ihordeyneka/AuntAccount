@@ -9,6 +9,9 @@ public class OfferDTO implements DTO<Offer>{
     private Long supplierId;
     private Long postId;
 
+    public OfferDTO() {
+    }
+
     public OfferDTO(Offer offer) {
         this.id = offer.getId();
         this.supplierId = offer.getSupplier().getId();
@@ -17,7 +20,7 @@ public class OfferDTO implements DTO<Offer>{
 
     @Override
     public Offer buildEntity() {
-        Supplier supplier = new Supplier().setId(id);
+        Supplier supplier = new Supplier().setId(supplierId);
         return new Offer()
                 .setId(id)
                 .setSupplier(supplier)

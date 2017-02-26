@@ -16,9 +16,12 @@ public class PostDTO implements DTO<Post> {
     private Double priceMax;
     private Double priceMin;
     private Date creationDate;
-    private Long locationId;
+    private LocationDTO location;
     private List<TagDTO> postTags;
     private Long userId;
+
+    public PostDTO() {
+    }
 
     public PostDTO(Post post) {
         this.id = post.getId();
@@ -27,14 +30,15 @@ public class PostDTO implements DTO<Post> {
         this.priceMax = post.getPriceMax();
         this.priceMin = post.getPriceMin();
         this.creationDate = post.getCreationDate();
-        this.locationId = post.getLocation().getId();
+        Location location = post.getLocation();
+        this.location = location != null ? new LocationDTO(location) : null;
         this.postTags = post.getPostTags().stream().map(TagDTO::new).collect(Collectors.toList());
         this.userId = post.getUserId();
     }
 
     public Post buildEntity() {
         List<Tag> tags = postTags.stream().map(TagDTO::buildEntity).collect(Collectors.toList());
-        Location location = new Location().setId(locationId);
+        Location entityLocation = location.buildEntity();
         return new Post()
                 .setId(id)
                 .setDescription(description)
@@ -42,7 +46,7 @@ public class PostDTO implements DTO<Post> {
                 .setPriceMax(priceMax)
                 .setPriceMin(priceMin)
                 .setCreationDate(creationDate)
-                .setLocation(location)
+                .setLocation(entityLocation)
                 .setUserId(userId)
                 .setPostTags(tags);
     }
@@ -111,12 +115,12 @@ public class PostDTO implements DTO<Post> {
         this.creationDate = creationDate;
     }
 
-    public Long getLocationId() {
-        return locationId;
+    public LocationDTO getLocation() {
+        return location;
     }
 
-    public void setLocationId(Long locationId) {
-        this.locationId = locationId;
+    public void setLocation(LocationDTO location) {
+        this.location = location;
     }
 
 }

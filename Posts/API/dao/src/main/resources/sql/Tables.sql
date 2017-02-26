@@ -24,20 +24,20 @@ CREATE TABLE `dido`.`PostTag` (
   PRIMARY KEY (`PostId`,`TagId`)
 );
 
-CREATE TABLE `dido`.`User` (
-  `Id` bigint(10) NOT NULL,
-  `Name` varchar(45) NOT NULL,
+CREATE TABLE `dido`.`USER` (
+  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(45) NOT NULL,
+  `LastName` varchar(45) DEFAULT NULL,
   `Password` varchar(200) NOT NULL,
-  `LocationId` bigint(10) NOT NULL,
+  `LocationId` bigint(10) DEFAULT NULL,
   `Email` varchar(45) NOT NULL,
   `Phone` varchar(45) DEFAULT NULL,
   `Photo` binary(10) DEFAULT NULL,
-  `ReviewId` bigint(10) NOT NULL,
   `Website` varchar(45) DEFAULT NULL,
-  `IsSupplier` tinyint(1) NOT NULL,
   `CreationDate` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 );
+
 
 CREATE TABLE `dido`.`Review` (
   `Id` BIGINT(10) NOT NULL,
@@ -49,21 +49,22 @@ CREATE TABLE `dido`.`Review` (
   PRIMARY KEY (`Id`)
 );
 
-CREATE TABLE `dido`.`Location` (
-  `Id` BIGINT(10) NOT NULL,
-  `Latitude` VARCHAR(45) NOT NULL,
-  `Longitude` VARCHAR(45) NOT NULL,
-  `CountryId` BIGINT(10) NULL,
-  `City` VARCHAR(45) NULL,
-  `Region` VARCHAR(45) NULL,
-  `Street` VARCHAR(45) NULL,
+CREATE TABLE `LOCATION` (
+  `Id` bigint(10) NOT NULL,
+  `Latitude` varchar(45) NOT NULL,
+  `Longitude` varchar(45) NOT NULL,
+  `Country` varchar(45) DEFAULT NULL,
+  `City` varchar(45) DEFAULT NULL,
+  `Region` varchar(45) DEFAULT NULL,
+  `Street` varchar(45) DEFAULT NULL,
+  `Radius` double DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
 
+
 CREATE TABLE `dido`.`Country` (
-  `Id` BIGINT(10) NOT NULL,
   `Country` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`Country`)
 );
 
 

@@ -1,7 +1,7 @@
 package dido.auntaccount.service.rest;
 
+import dido.auntaccount.dido.auntaccount.utils.OAuthRequestWrapper;
 import dido.auntaccount.dto.UserDTO;
-import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
@@ -19,14 +19,19 @@ import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
+import java.util.Enumeration;
+import java.util.Map;
 
 @Path("/token")
-public class TokenController {
+public class TokenController extends Controller {
 
     private static final Long EXPIRES_IN = 3600L;
 
@@ -40,14 +45,15 @@ public class TokenController {
     TokenService tokenService;
 
     @POST
-    public Response authorize(@Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
+    @Consumes("application/x-www-form-urlencoded")
+    public Response authorize(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
 
         OAuthTokenRequest oauthRequest = null;
 
         OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
 
         try {
-            oauthRequest = new OAuthTokenRequest(request);
+            oauthRequest = new OAuthTokenRequest(new OAuthRequestWrapper(request, form));
 
             validateClient(oauthRequest);
 
@@ -65,7 +71,7 @@ public class TokenController {
 
             tokenService.saveToken(accessToken, EXPIRES_IN);
 
-            return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
+            return getResponseBuilder().status(r.getResponseStatus()).entity(r.getBody()).build();
 
             //if something goes wrong
         } catch (OAuthProblemException ex) {
@@ -75,13 +81,13 @@ public class TokenController {
                     .error(ex)
                     .buildJSONMessage();
 
-            return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
+            return getResponseBuilder().status(r.getResponseStatus()).entity(r.getBody()).build();
         }
 
     }
 
     private void validateClient(OAuthTokenRequest request) throws OAuthProblemException {
-        UserDTO user = userService.findByUserName(request.getUsername());
+        UserDTO user = userService.findByEmail(request.getUsername());
         if (user == null) {
             throw OAuthProblemException.error("User is not valid " + request.getUsername());
         }

@@ -7,6 +7,7 @@ import java.sql.Date;
 public class Review {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String description;
     private int rate;

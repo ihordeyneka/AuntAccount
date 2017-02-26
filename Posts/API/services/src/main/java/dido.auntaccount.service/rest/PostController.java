@@ -2,14 +2,15 @@ package dido.auntaccount.service.rest;
 
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.entities.Offer;
-import dido.auntaccount.entities.Post;
 import dido.auntaccount.service.business.PostService;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Path("/posts")
@@ -42,4 +43,14 @@ public class PostController {
         List<OfferDTO> offers = postService.getPostOffers(postId);
         return Response.status(200).entity(offers).build();
     }
+
+
+    @POST
+    @Path("/upload/photo")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream, @FormParam("postId") Long postId) throws IOException {
+        postService.updatePhoto(uploadedInputStream, postId);
+        return Response.status(200).build();
+    }
+
 }

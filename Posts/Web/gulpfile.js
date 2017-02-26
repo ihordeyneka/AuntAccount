@@ -13,14 +13,20 @@ var PATHS = {
   lib: [
     { name: 'jquery', files: 'node_modules/jquery.1/node_modules/jquery/dist/**/*' },
     { name: 'jsrender', files: 'node_modules/jsrender/*.{js,map}' },
+    { name: 'jquery_cookie', files: 'node_modules/jquery.cookie/*.{js,map}' },
+    { name: 'jquery_deparam', files: 'node_modules/jquery-deparam/*.{js,map}' },
+    { name: 'pubsub_js', files: 'node_modules/pubsub-js/src/**/*' },
+    { name: 'j_toker', files: 'node_modules/j-toker/dist/**/*' },
     { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
     { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },
-    { name: 'bootstrap3_typeahead', files: 'external/lib/bootstrap3-typeahead/**/*' },
+    { name: 'bootstrap3_typeahead', files: 'node_modules/bootstrap-3-typeahead/**/*' },
     { name: 'bootstrap_fileinput', files: 'node_modules/bootstrap-fileinput/{css,js}/**/*' },
     { name: 'bootstrap_validator', files: 'node_modules/bootstrap-validator/dist/**/*' },
     { name: 'bootstrap_tagsinput', files: 'node_modules/bootstrap-tagsinput/dist/**/*' },
     { name: 'requirejs', files: 'node_modules/requirejs/require.js' },
-    { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' }
+    { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' },
+    { name: 'underscore', files: 'node_modules/underscore/**/*' },
+    { name: 'dom_ready', files: 'other_modules/dom_ready/**/*' }
   ],
   client: {
     js: ['client/**/*.js'],

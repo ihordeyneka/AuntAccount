@@ -9,8 +9,10 @@ import java.sql.Date;
 public class User implements Serializable {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String password;
     private String email;
     private String phone;
@@ -31,12 +33,12 @@ public class User implements Serializable {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User setName(String name) {
-        this.name = name;
+    public User setFirstName(String name) {
+        this.firstName = name;
         return this;
     }
 
@@ -103,4 +105,12 @@ public class User implements Serializable {
         return this;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
 }

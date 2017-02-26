@@ -6,15 +6,17 @@ import javax.persistence.*;
 public class Location {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private double latitude;
     private double longitude;
     private String city;
     private String region;
     private String street;
+    private double radius;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CountryId")
+    @JoinColumn(name = "Country")
     private Country country;
 
     public Long getId() {
@@ -77,6 +79,15 @@ public class Location {
 
     public Location setCountry(Country country) {
         this.country = country;
+        return this;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public Location setRadius(double radius) {
+        this.radius = radius;
         return this;
     }
 }

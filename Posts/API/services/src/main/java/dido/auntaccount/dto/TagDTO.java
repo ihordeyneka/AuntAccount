@@ -7,6 +7,9 @@ public class TagDTO implements DTO<Tag> {
     private Long id;
     private String tag;
 
+    public TagDTO() {
+    }
+
     public TagDTO(Tag tag) {
         this.id = tag.getId();
         this.tag = tag.getTag();

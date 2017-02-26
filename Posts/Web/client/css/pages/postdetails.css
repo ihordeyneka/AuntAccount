@@ -1,23 +1,23 @@
-.aa-post-block {
+.aa-conversation-block {
   margin-bottom: 15px;
 }
 
-.aa-post-navigate-button {
+.aa-conversation-navigate-button {
   width: 140px;
 }
 
-.aa-post-header {
+.aa-conversation-header {
   min-height: 34px;
   padding-top: 7px;
 }
 
-.aa-post-caption {
+.aa-conversation-supplier {
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline;
 }
 
-.aa-post-time {
+.aa-conversation-time {
   width: 90px;
 }

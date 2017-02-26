@@ -1,3 +1,8 @@
+.nav > li > a {
+  font-family: DejaVuSans, Georgia;
+  text-transform: uppercase;
+}
+
 .nav > li > a:focus {
   background-color: transparent;
 }
@@ -68,28 +73,36 @@ a.header-nav__navigation-link:hover {
 }
 
 .btn-primary, .btn-primary:focus {
-  color: #fff;
-  background-color: #9F9F82;
-  border-color: #666666;
+  color: #979797;
+  background-color: transparent;
+  border: 1px solid #979797;
   outline-width: 0 !important;
+  text-transform: uppercase;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
-.btn-primary:hover {
-  background-color: #8F8F72;
-}
-
-.btn-primary:active {
-  background-color: #8F8F72 !important;
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover:active,
+.btn-primary:focus:active {
+  color: #979797;
+  background-color: transparent;
 }
 
 .btn-primary .badge {
   margin-left: 4px;
-  color: rgb(51, 51, 51);
+  color: #979797;
+  background-color: transparent;
+  border: 1px solid #979797;
 }
 
 .btn-primary .badge.badge-highlighted {
   margin-left: 4px;
-  background-color: #edd49c;
+  color: #204d74;
+  background-color: transparent;
+  border: 1px solid #204d74;
 }
 
 .form-control {

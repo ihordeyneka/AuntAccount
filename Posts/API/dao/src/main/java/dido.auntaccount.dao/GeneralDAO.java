@@ -3,9 +3,6 @@ package dido.auntaccount.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-/**
- * Created by orysiadeyneka on 25.09.16.
- */
 public abstract class GeneralDAO<T> implements AutoCloseable {
 
     protected final EntityManager entityManager;
@@ -23,7 +20,7 @@ public abstract class GeneralDAO<T> implements AutoCloseable {
 
         try {
             et.begin();
-            entityManager.merge(entity);
+            entity = entityManager.merge(entity);
             et.commit();
 
             return entity;
