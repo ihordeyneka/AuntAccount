@@ -1,34 +1,35 @@
-define(["../core/globals", "communication_client", "underscore"], function(globals, client, _) {
+define(["../core/globals", "../core/config", "underscore"], function(globals, config, _) {
   var self = {};
 
   self.init = function() {
 
     globals.loading($('body'), true);
-    client.getMyRecentPosts({}, function(res) {
-      globals.loading($('body'), false);
-      if (res.success) {
-        var element = $(".aa-recent-container");
-        element.empty();
-        if (res.data.length == 0) {
-          element.append("<h3>You haven't added any posts yet.</h3>");
-        } else {
-          for (var i=0; i<res.data.length; i++) {
-            var post = res.data[i];
-            element.append($.templates("#templatePost").render({
-              postId: post.id,
-              time: post.creationDate,
-              title: _.map(post.postTags, function(i) {return i.tag;}).join(),
-              content: post.description,
-              conversations: post.conversations,
-              badgeCss: post.conversations == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
-            }));
-          }
+    $.ajax({
+        url: config.apiRoot + "/users/2/posts", //TODO: use actual user id here
+        dataType: "json"
+    }).done(function(data) {
+      var element = $(".aa-recent-container");
+      element.empty();
+      if (data.length == 0) {
+        element.append("<h3>You haven't added any posts yet.</h3>");
+      } else {
+        for (var i=0; i<data.length; i++) {
+          var post = data[i];
+          element.append($.templates("#templatePost").render({
+            postId: post.id,
+            time: post.creationDate,
+            title: _.map(post.postTags, function(i) {return i.tag;}).join(),
+            content: post.description,
+            conversations: post.conversations,
+            badgeCss: post.conversations == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
+          }));
         }
       }
-      else {
-        self.notificationArea = $(".aa-notification-area").notificationArea();
-        self.notificationArea.error();
-      }
+    }).fail(function(result) {
+      self.notificationArea = $(".aa-notification-area").notificationArea();
+      self.notificationArea.error();
+    }).always(function() {
+      globals.loading($('body'), false);
     });
   }
 

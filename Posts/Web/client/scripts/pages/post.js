@@ -1,5 +1,5 @@
-define(["../core/globals", "communication_client", "tagsinput", "typeahead", "fileinput", "slider"],
-  function(globals, client, tagsinputControl, typeaheadControl, fileinputControl, sliderControl) {
+define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinput", "slider"],
+  function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, sliderControl) {
   var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
@@ -82,15 +82,18 @@ define(["../core/globals", "communication_client", "tagsinput", "typeahead", "fi
           this.$element.val(""); //clear input when tag is added
         },
         source: function(query) {
-          var result = null;
-          client.getTags(query, function(res) {
-            if (res.success) {
-              result = res.data;
-            }
-            else {
-              self.notificationArea.error();
-            }
+          var result = [];
+
+          $.ajax({
+              url: config.apiRoot + "/tags/" + query,
+              dataType: "json",
+              async: false
+          }).done(function(data) {
+              result = data;
+          }).fail(function(result) {
+            self.notificationArea.error();
           });
+
           return result;
         }
       }
@@ -163,13 +166,13 @@ define(["../core/globals", "communication_client", "tagsinput", "typeahead", "fi
       delay: 300,
       fitToElement: true,
       source: function(query, process) {
-        client.getLocations(query, function(res) {
-          if (res.success) {
-            process(res.data);
-          }
-          else {
-            self.notificationArea.error();
-          }
+        $.ajax({
+            url: config.apiRoot + "/locations/" + query,
+            dataType: "json"
+        }).done(function(data) {
+            process(data);
+        }).fail(function(result) {
+          self.notificationArea.error();
         });
       },
       afterSelect: function(item) {
@@ -245,7 +248,7 @@ define(["../core/globals", "communication_client", "tagsinput", "typeahead", "fi
       showUpload: false,
       showRemove: false,
       showPreview: false,
-      uploadUrl: client.attachmentUploadUrl,
+      uploadUrl: config.apiRoot + "/posts/upload",
       uploadAsync: false,
       layoutTemplates: {
         progress: '', //hide progress
@@ -276,7 +279,7 @@ define(["../core/globals", "communication_client", "tagsinput", "typeahead", "fi
         validatorForm: self.validatorForm,
         success: function() {
           globals.loading($('body'), true);
-          client.savePost({
+          var postData = {
             keywords: $("#inputKeywords").val(),
             post: $("#inputPost").val(),
             locationId: self.selectedLocationId,
@@ -284,20 +287,24 @@ define(["../core/globals", "communication_client", "tagsinput", "typeahead", "fi
             latitude: self.marker.position.lat(),
             longitude: self.marker.position.lng(),
             radius: self.radiusSlider.getValue()
-          }, function(res) {
-            globals.loading($("body"), false);
-            if (res.success) {
-              self.lastPostId = res.data.id;
-              if (self.attachmentUpload.fileinput("getFilesCount") > 0)
-                self.attachmentUpload.fileinput("upload");
+          };
 
-              self.notificationArea.success({
-                message: "Your message has been posted, we've notified our subscribers."
-              });
-            }
-            else {
-              notificationArea.error();
-            }
+          $.post({
+              url: config.apiRoot + "/posts",
+              dataType: "json",
+              data: postData
+          }).done(function(data) {
+            self.lastPostId = data.id;
+            if (self.attachmentUpload.fileinput("getFilesCount") > 0)
+              self.attachmentUpload.fileinput("upload");
+
+            self.notificationArea.success({
+              message: "Your message has been posted, we've notified our subscribers."
+            });
+          }).fail(function(result) {
+            self.notificationArea.error();
+          }).always(function() {
+            globals.loading($('body'), false);
           });
         }
       });

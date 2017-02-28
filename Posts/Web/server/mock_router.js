@@ -1,0 +1,115 @@
+exports.init = function(router) {
+
+  var mockApiRoot = '/api/mock';
+
+  //api
+  router.post(mockApiRoot + '/posts/upload', function(req, res) {
+    res.statusCode = 200;
+    res.send('OK');
+  });
+
+  router.post(mockApiRoot + '/posts', function(req, res) {
+    var result = { id: 0 };
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  router.get(mockApiRoot + '/posts/:post/offers', function(req, res) {
+    var result = [
+      { conversationId: 1, time: "03-02-2017", supplier: { id: 1, name: "Jack Shephard" }, newReplies: 0 },
+      { conversationId: 2, time: "03-02-2017", supplier: { id: 2, name: "Kate Austen" }, newReplies: 1 },
+      { conversationId: 3, time: "03-02-2017", supplier: { id: 3, name: "John Locke" }, newReplies: 1 },
+      { conversationId: 4, time: "03-02-2017", supplier: { id: 4, name: "Dharma Initiative" }, newReplies: 1 }
+    ];
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  router.get(mockApiRoot + '/offers/:offer/messages', function(req, res) {
+    var result = [
+      { id: 1, sender: { id: 1, firstName: "Jack", lastName: "Shephard" }, creationDate: "03-02-2017 12:05", description: "I've got some food for you. Fruits, fish, even boar." },
+      { id: 2, sender: { id: 8, firstName: "Hugo", lastName: "Reyes" }, creationDate: "03-02-2017 12:37", description: "Awesome, I love fish." },
+      { id: 3, sender: { id: 1, firstName: "Jack", lastName: "Shephard" }, creationDate: "03-02-2017 15:09", description: "Sorry, I had to go. So?" },
+      { id: 4, sender: { id: 1, firstName: "Jack", lastName: "Shephard" }, creationDate: "03-02-2017 16:37", description: "Are you still interested?" }
+    ];
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  router.get(mockApiRoot + '/users/:user/posts', function(req, res) {
+    var result = [
+      { id: 1, creationDate: "15-12-2016", conversations: 5, newMessages: true, postTags: [{"id":1,"tag":"Food"}, {"id":2,"tag":"Gamburger"}], description: "We've just survived a plane crash<br/>We need to find something to eat..." },
+      { id: 2, creationDate: "29-01-2017", conversations: 0, newMessages: false, postTags: [{"id":3,"tag":"Shelter"}], description: "Looks like we're stuck here." },
+      { id: 3, creationDate: "03-02-2017", conversations: 1, newMessages: false, postTags: [{"id":4,"tag":"Gun"}, {"id":5,"tag":"AK-47"}], description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
+    ];
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  router.get(mockApiRoot + '/tags/:query', function(req, res) {
+    var result = [
+      "Shoes",
+      "Boots",
+      "Socks",
+      "Trousers",
+      "Jeans",
+      "Shorts",
+      "Pants",
+      "Belt",
+      "Skirt",
+      "Shirt",
+      "T-Shirt",
+      "Sweater",
+      "Polo",
+      "Hoodie",
+      "Jacket",
+      "Watch",
+      "Glasses",
+      "Scarf",
+      "Hat",
+      "Cap"
+    ];
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  router.get(mockApiRoot + '/locations/:query', function(req, res) {
+    var result = [
+      {id: 1, type: 3, name: "Lviv"},
+      {id: 2, type: 3, name: "New York"},
+      {id: 3, type: 4, name: "KingCross Leopolis Lviv", location: { lat: 49.773807, lng: 24.011436} },
+      {id: 4, type: 3, name: "Rome"},
+      {id: 5, type: 3, name: "Paris"},
+      {id: 6, type: 1, name: "Ukraine"},
+      {id: 7, type: 1, name: "New Zeland"},
+      {id: 8, type: 1, name: "Portugal"},
+      {id: 9, type: 1, name: "Romania"},
+      {id: 10, type: 4, name: "Victoria Gardens", location: { lat: 49.807049, lng: 23.978466} }
+    ];
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  //authentication
+  router.post(mockApiRoot + '/users', function(req, res) {
+    res.statusCode = 200;
+    res.send('OK');
+  });
+
+  router.post(mockApiRoot + '/token', function(req, res) {
+    res.statusCode = 200;
+    res.send('OK');
+  });
+}
