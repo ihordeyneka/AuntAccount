@@ -1,8 +1,6 @@
 package dido.auntaccount.service.filter;
 
-import dido.auntaccount.dao.TokenDAO;
 import dido.auntaccount.dto.TokenDTO;
-import dido.auntaccount.entities.Token;
 import dido.auntaccount.service.business.TokenService;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
@@ -23,6 +21,7 @@ import java.io.IOException;
 import java.util.Date;
 
 @Provider
+@Secured
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
@@ -34,7 +33,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        try {
+      /*  try {
             OAuthAccessResourceRequest oauthRequest = new OAuthAccessResourceRequest(request, ParameterStyle.HEADER);
 
             String accessToken = oauthRequest.getAccessToken();
@@ -43,7 +42,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
         } catch (OAuthProblemException | OAuthSystemException e) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-        }
+        }*/
     }
 
     private void validateToken(String token) throws OAuthProblemException {

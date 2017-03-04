@@ -18,6 +18,13 @@ CREATE TABLE `dido`.`Tag` (
   PRIMARY KEY (`Id`)
 );
 
+
+CREATE TABLE `dido`.`SUPPLIER` (
+  `Id` bigint(10) NOT NULL,
+  `UserId` bigint(10) NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+
 CREATE TABLE `dido`.`PostTag` (
   `TagId` bigint(10) NOT NULL,
   `PostId` bigint(10) NOT NULL,
@@ -94,6 +101,7 @@ CREATE TABLE `dido`.`Message` (
   `Description` varchar(255) DEFAULT NULL,
   `Photo` binary(10) DEFAULT NULL,
   `CreationDate` datetime NOT NULL,
+  `IsRead` tinyint(1) NOT NULL,
   PRIMARY KEY (`Id`)
 );
 
@@ -113,3 +121,5 @@ insert into USER (id, creationdate, email, issupplier, name, password, phone, we
 insert into USER (id, creationdate, email, issupplier, name, password, phone, website, locationId) values (2, now(), 'ihor@ua', 0, 'ihor', 'pass', '096123', 'www', 1);
 insert into REVIEW (id, creationdate, description, rate, authorId, objectId) values (1, now(), 'good', 5, 1, 2);
 insert into TAG (id, tag) values (1, "tag");
+
+ALTER TABLE MESSAGE ADD COLUMN  `Read` tinyint(1) NOT NULL DEFAULT 0;

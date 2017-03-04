@@ -52,8 +52,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<OfferDTO> getPostOffers(Long postId) {
-        List<Offer> offers = postDAO.getOffersByPostId(postId);
-        return offers.stream().map(OfferDTO::new).collect(Collectors.toList());
+        //List<Offer> offers = postDAO.getOffersByPostId(postId);
+        //return offers.stream().map(OfferDTO::new).collect(Collectors.toList());
+        return  postDAO.getPostOffersWithReplies(postId);
     }
 
     @Override

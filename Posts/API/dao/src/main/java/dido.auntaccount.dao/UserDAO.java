@@ -1,5 +1,6 @@
 package dido.auntaccount.dao;
 
+import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.User;
@@ -19,5 +20,7 @@ public interface UserDAO {
     List<Post> getPostsByUserId(Long userId);
 
     List<Review> getReviewsByUserId(Long userId);
+
+    List<PostDTO> getUserPostsWithOfferCount(Long userId);
 
 }

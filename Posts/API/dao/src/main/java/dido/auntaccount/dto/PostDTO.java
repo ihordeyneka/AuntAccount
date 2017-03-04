@@ -19,6 +19,7 @@ public class PostDTO implements DTO<Post> {
     private LocationDTO location;
     private List<TagDTO> postTags;
     private Long userId;
+    private int offerCount;
 
     public PostDTO() {
     }
@@ -34,6 +35,11 @@ public class PostDTO implements DTO<Post> {
         this.location = location != null ? new LocationDTO(location) : null;
         this.postTags = post.getPostTags().stream().map(TagDTO::new).collect(Collectors.toList());
         this.userId = post.getUserId();
+    }
+
+    public PostDTO(Post post, Integer offerCount) {
+        this(post);
+        this.offerCount = offerCount;
     }
 
     public Post buildEntity() {
@@ -123,4 +129,11 @@ public class PostDTO implements DTO<Post> {
         this.location = location;
     }
 
+    public int getOfferCount() {
+        return offerCount;
+    }
+
+    public void setOfferCount(int offerCount) {
+        this.offerCount = offerCount;
+    }
 }

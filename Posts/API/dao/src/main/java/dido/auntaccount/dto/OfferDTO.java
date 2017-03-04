@@ -3,11 +3,12 @@ package dido.auntaccount.dto;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Supplier;
 
-public class OfferDTO implements DTO<Offer>{
+public class OfferDTO implements DTO<Offer> {
 
     private Long id;
     private Long supplierId;
     private Long postId;
+    private Integer replyCount;
 
     public OfferDTO() {
     }
@@ -16,6 +17,12 @@ public class OfferDTO implements DTO<Offer>{
         this.id = offer.getId();
         this.supplierId = offer.getSupplier().getId();
         this.postId = offer.getPostId();
+    }
+
+
+    public OfferDTO(Offer offer, Integer replyCount) {
+        this(offer);
+        this.replyCount = replyCount;
     }
 
     @Override
@@ -51,4 +58,11 @@ public class OfferDTO implements DTO<Offer>{
         this.supplierId = supplierId;
     }
 
+    public Integer getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(Integer replyCount) {
+        this.replyCount = replyCount;
+    }
 }

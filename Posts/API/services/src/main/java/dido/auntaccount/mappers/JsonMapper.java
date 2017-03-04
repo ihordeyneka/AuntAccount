@@ -1,4 +1,4 @@
-package dido.auntaccount.dto.mapper;
+package dido.auntaccount.mappers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

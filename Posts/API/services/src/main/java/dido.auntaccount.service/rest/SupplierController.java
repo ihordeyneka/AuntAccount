@@ -6,6 +6,7 @@ import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Supplier;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.SupplierService;
+import dido.auntaccount.service.filter.Secured;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -24,6 +25,7 @@ public class SupplierController {
 
     @GET
     @Path("/{param}")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSupplier(@PathParam("param") Long supplierId) {
         SupplierDTO supplier = supplierService.getSupplier(supplierId);
@@ -32,6 +34,7 @@ public class SupplierController {
 
     @POST
     @Path("/")
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveSupplier(SupplierDTO supplier) throws Exception {
@@ -43,6 +46,7 @@ public class SupplierController {
 
     @GET
     @Path("/{param}/posts")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSupplierPosts(@PathParam("param") Long supplierId) {
         List<PostDTO> supplierPosts = supplierService.getSupplierPosts(supplierId);

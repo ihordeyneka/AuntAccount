@@ -3,6 +3,7 @@ package dido.auntaccount.service.rest;
 import dido.auntaccount.dto.ReviewDTO;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.service.business.ReviewService;
+import dido.auntaccount.service.filter.Secured;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -17,6 +18,7 @@ public class ReviewController {
 
     @GET
     @Path("/{param}")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReview(@PathParam("param") Long reviewId) {
         ReviewDTO review = reviewService.getReview(reviewId);
@@ -25,6 +27,7 @@ public class ReviewController {
 
     @POST
     @Path("/")
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveReview(ReviewDTO review) throws Exception {

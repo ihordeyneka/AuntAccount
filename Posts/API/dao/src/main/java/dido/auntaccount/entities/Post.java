@@ -1,14 +1,21 @@
 package dido.auntaccount.entities;
 
+import dido.auntaccount.dto.PostDTO;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
+
+@SqlResultSetMapping(
+        name = "PostOfferCountMapping",
+        entities = {@EntityResult(entityClass = Post.class)},
+        columns = @ColumnResult(name = "offerCount", type = Integer.class))
 public class Post {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
     private byte[] photo;

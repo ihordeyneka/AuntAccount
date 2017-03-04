@@ -3,6 +3,7 @@ package dido.auntaccount.service.rest;
 import dido.auntaccount.dto.MessageDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.service.business.MessageService;
+import dido.auntaccount.service.filter.Secured;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -17,6 +18,7 @@ public class MessageController {
 
     @GET
     @Path("/{param}")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMessage(@PathParam("param") Long messageId) {
         MessageDTO message = service.getMessage(messageId);
@@ -25,6 +27,7 @@ public class MessageController {
 
     @POST
     @Path("/")
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveMessage(MessageDTO message) throws Exception {

@@ -18,5 +18,4 @@ public interface UserService {
 
     List<ReviewDTO> getUserReviews(Long userId);
 
-
 }

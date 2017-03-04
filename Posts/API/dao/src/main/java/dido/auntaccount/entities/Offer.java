@@ -4,10 +4,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@SqlResultSetMapping(
+        name = "OfferReplyCountMapping",
+        entities = {@EntityResult(entityClass = Offer.class)},
+        columns = @ColumnResult(name = "replyCount", type = Integer.class))
 public class Offer {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

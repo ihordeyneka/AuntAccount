@@ -20,6 +20,8 @@ public class Message {
 
     private Long offerId;
 
+    private boolean isRead;
+
     public Long getId() {
         return id;
     }
@@ -74,4 +76,12 @@ public class Message {
         return this;
     }
 
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public Message setRead(boolean isRead) {
+        this.isRead = isRead;
+        return this;
+    }
 }

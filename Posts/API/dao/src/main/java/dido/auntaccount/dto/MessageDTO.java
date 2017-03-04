@@ -13,6 +13,7 @@ public class MessageDTO implements DTO<Message> {
     private Date creationDate;
     private UserDTO sender;
     private Long offerId;
+    private boolean isRead;
 
     public MessageDTO() {
     }
@@ -25,6 +26,7 @@ public class MessageDTO implements DTO<Message> {
         User senderEntity = message.getSender();
         this.sender = senderEntity != null ? new UserDTO(senderEntity) : null;
         this.offerId = message.getOfferId();
+        this.isRead = message.isRead();
     }
 
     @Override
@@ -36,7 +38,8 @@ public class MessageDTO implements DTO<Message> {
                 .setPhoto(photo)
                 .setCreationDate(creationDate)
                 .setSender(senderEntity)
-                .setOfferId(offerId);
+                .setOfferId(offerId)
+                .setRead(isRead);
     }
 
     public Long getId() {
@@ -85,5 +88,13 @@ public class MessageDTO implements DTO<Message> {
 
     public void setOfferId(Long offerId) {
         this.offerId = offerId;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean isRead) {
+        this.isRead = isRead;
     }
 }

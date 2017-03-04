@@ -1,5 +1,6 @@
 package dido.auntaccount.dao;
 
+import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 
@@ -18,5 +19,7 @@ public interface PostDAO {
     List<Offer> getOffersByPostId(Long postId);
 
     void updatePhoto(Long postId, byte[] photo);
+
+    public List<OfferDTO> getPostOffersWithReplies(Long postId);
 
 }

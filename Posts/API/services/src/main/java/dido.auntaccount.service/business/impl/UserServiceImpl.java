@@ -51,8 +51,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<PostDTO> getUserPosts(Long userId) {
-        List<Post> posts = userDAO.getPostsByUserId(userId);
-        return posts.stream().map(PostDTO::new).collect(Collectors.toList());
+        return userDAO.getUserPostsWithOfferCount(userId);
+        /*List<Post> posts = userDAO.getPostsByUserId(userId);
+        return posts.stream().map(PostDTO::new).collect(Collectors.toList());*/
     }
 
     @Override

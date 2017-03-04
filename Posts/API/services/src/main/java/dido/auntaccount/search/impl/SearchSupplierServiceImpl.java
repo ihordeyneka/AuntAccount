@@ -1,7 +1,7 @@
 package dido.auntaccount.search.impl;
 
 import dido.auntaccount.dto.SupplierDTO;
-import dido.auntaccount.dto.mapper.JsonMapper;
+import dido.auntaccount.mappers.JsonMapper;
 import dido.auntaccount.search.SearchSupplierService;
 import dido.auntaccount.search.client.SearchClientService;
 import org.apache.logging.log4j.LogManager;

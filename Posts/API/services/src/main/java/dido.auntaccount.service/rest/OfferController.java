@@ -7,6 +7,7 @@ import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Supplier;
 import dido.auntaccount.service.business.OfferService;
+import dido.auntaccount.service.filter.Secured;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -22,6 +23,7 @@ public class OfferController extends Controller {
 
     @GET
     @Path("/{param}")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOffer(@PathParam("param") Long offerId) {
         OfferDTO offer = service.getOffer(offerId);
@@ -30,6 +32,7 @@ public class OfferController extends Controller {
 
     @POST
     @Path("/")
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveOffer(OfferDTO offer) throws Exception {
@@ -39,6 +42,7 @@ public class OfferController extends Controller {
 
     @GET
     @Path("/{param}/supplier")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferSupplier(@PathParam("param") Long offerId) {
         SupplierDTO supplier = service.getOfferSupplier(offerId);
@@ -47,6 +51,7 @@ public class OfferController extends Controller {
 
     @GET
     @Path("/{param}/messages")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferMessages(@PathParam("param") Long offerId) {
         List<MessageDTO> messages = service.getOfferMessages(offerId);

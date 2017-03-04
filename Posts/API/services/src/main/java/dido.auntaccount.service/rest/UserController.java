@@ -6,6 +6,7 @@ import dido.auntaccount.dto.ReviewDTO;
 import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.UserService;
+import dido.auntaccount.service.filter.Secured;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -24,6 +25,7 @@ public class UserController extends Controller {
 
     @GET
     @Path("/{param}")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("param") Long userId) {
         UserDTO user = userService.getUser(userId);
@@ -32,6 +34,7 @@ public class UserController extends Controller {
 
     @GET
     @Path("/email/{param}")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserByEmail(@PathParam("param") String email) {
         UserDTO user = userService.findByEmail(email);
@@ -61,6 +64,7 @@ public class UserController extends Controller {
 
     @GET
     @Path("/{param}/posts")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserPosts(@PathParam("param") Long userId) {
         List<PostDTO> posts = userService.getUserPosts(userId);
@@ -69,6 +73,7 @@ public class UserController extends Controller {
 
     @GET
     @Path("/{param}/reviews")
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserReviews(@PathParam("param") Long userId) {
         List<ReviewDTO> reviews = userService.getUserReviews(userId);
