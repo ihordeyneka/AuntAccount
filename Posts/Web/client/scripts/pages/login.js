@@ -1,4 +1,4 @@
-define(["../core/globals", "../core/config", "communication_client"], function(globals, config, client) {
+define(["../core/globals", "../core/config"], function(globals, config) {
   var self = {};
 
   self.init = function() {

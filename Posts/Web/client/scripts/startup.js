@@ -1,10 +1,5 @@
 requirejs.config({
   baseUrl: '/client/scripts',
-  map: {
-    '*': {
-      'communication_client': 'communication/api_client'
-    }
-  },
   paths: {
     domReady: ["../../lib/dom_ready/dom_ready"],
     jquery: ["../../lib/jquery/jquery.min"],
