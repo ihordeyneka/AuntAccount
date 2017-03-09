@@ -15,12 +15,14 @@ define(["../core/globals", "../core/config"], function(globals, config) {
       } else {
         for (var i=0; i<data.length; i++) {
           var conversation = data[i];
+          var supplier = conversation.supplier;
+          var supplierDisplayName = supplier.firstName + " " + supplier.lastName;
           element.append($.templates("#templateConversation").render({
-            conversationId: conversation.conversationId,
+            conversationId: conversation.id,
             time: conversation.time,
-            supplier: conversation.supplier.name,
-            newReplies: conversation.newReplies,
-            badgeCss: conversation.newReplies == 0 ? "is-hidden" : "badge-highlighted"
+            supplier: supplierDisplayName,
+            newReplies: conversation.replyCount,
+            badgeCss: conversation.replyCount == 0 ? "is-hidden" : "badge-highlighted"
           }));
         }
       }

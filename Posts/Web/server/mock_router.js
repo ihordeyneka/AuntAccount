@@ -18,10 +18,10 @@ exports.init = function(router) {
 
   router.get(mockApiRoot + '/posts/:post/offers', function(req, res) {
     var result = [
-      { conversationId: 1, time: "03-02-2017", supplier: { id: 1, name: "Jack Shephard" }, newReplies: 0 },
-      { conversationId: 2, time: "03-02-2017", supplier: { id: 2, name: "Kate Austen" }, newReplies: 1 },
-      { conversationId: 3, time: "03-02-2017", supplier: { id: 3, name: "John Locke" }, newReplies: 1 },
-      { conversationId: 4, time: "03-02-2017", supplier: { id: 4, name: "Dharma Initiative" }, newReplies: 1 }
+      { id: 1, time: "03-02-2017", supplier: { id: 1, firstName: "Jack", lastName: "Shephard" }, replyCount: 0 },
+      { id: 2, time: "03-02-2017", supplier: { id: 2, firstName: "Kate", lastName: "Austen" }, replyCount: 1 },
+      { id: 3, time: "03-02-2017", supplier: { id: 3, firstName: "John", lastName: "Locke" }, replyCount: 1 },
+      { id: 4, time: "03-02-2017", supplier: { id: 4, firstName: "Dharma", lastName: "Initiative" }, replyCount: 1 }
     ];
 
     res.statusCode = 200;
@@ -44,9 +44,9 @@ exports.init = function(router) {
 
   router.get(mockApiRoot + '/users/:user/posts', function(req, res) {
     var result = [
-      { id: 1, creationDate: "15-12-2016", conversations: 5, newMessages: true, postTags: [{"id":1,"tag":"Food"}, {"id":2,"tag":"Gamburger"}], description: "We've just survived a plane crash<br/>We need to find something to eat..." },
-      { id: 2, creationDate: "29-01-2017", conversations: 0, newMessages: false, postTags: [{"id":3,"tag":"Shelter"}], description: "Looks like we're stuck here." },
-      { id: 3, creationDate: "03-02-2017", conversations: 1, newMessages: false, postTags: [{"id":4,"tag":"Gun"}, {"id":5,"tag":"AK-47"}], description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
+      { id: 1, creationDate: "15-12-2016", offerCount: 5, newMessages: true, postTags: [{"id":1,"tag":"Food"}, {"id":2,"tag":"Gamburger"}], description: "We've just survived a plane crash<br/>We need to find something to eat..." },
+      { id: 2, creationDate: "29-01-2017", offerCount: 0, newMessages: false, postTags: [{"id":3,"tag":"Shelter"}], description: "Looks like we're stuck here." },
+      { id: 3, creationDate: "03-02-2017", offerCount: 1, newMessages: false, postTags: [{"id":4,"tag":"Gun"}, {"id":5,"tag":"AK-47"}], description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
     ];
 
     res.statusCode = 200;
