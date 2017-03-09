@@ -20,8 +20,8 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
             time: post.creationDate,
             title: _.map(post.postTags, function(i) {return i.tag;}).join(),
             content: post.description,
-            conversations: post.conversations,
-            badgeCss: post.conversations == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
+            conversations: post.offerCount,
+            badgeCss: post.offerCount == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
           }));
         }
       }

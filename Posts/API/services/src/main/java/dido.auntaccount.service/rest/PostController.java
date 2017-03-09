@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @Path("/posts")
-public class PostController {
+public class PostController extends Controller {
 
     @Inject
     PostService postService;
@@ -26,7 +26,7 @@ public class PostController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPost(@PathParam("param") Long postId) {
         PostDTO post = postService.getPost(postId);
-        return Response.status(200).entity(post).build();
+        return getResponseBuilder().entity(post).build();
     }
 
     @POST
@@ -36,7 +36,7 @@ public class PostController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response savePost(PostDTO post) throws Exception {
         PostDTO savedPost = postService.savePost(post);
-        return Response.status(200).entity(savedPost).build();
+        return getResponseBuilder().entity(savedPost).build();
     }
 
     @GET
@@ -45,7 +45,7 @@ public class PostController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPostOffers(@PathParam("param") Long postId) {
         List<OfferDTO> offers = postService.getPostOffers(postId);
-        return Response.status(200).entity(offers).build();
+        return getResponseBuilder().entity(offers).build();
     }
 
 
@@ -55,7 +55,7 @@ public class PostController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream, @FormParam("postId") Long postId) throws IOException {
         postService.updatePhoto(uploadedInputStream, postId);
-        return Response.status(200).build();
+        return getResponseBuilder().build();
     }
 
 }

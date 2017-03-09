@@ -6,7 +6,7 @@ import dido.auntaccount.entities.Supplier;
 public class OfferDTO implements DTO<Offer> {
 
     private Long id;
-    private Long supplierId;
+    private SupplierDTO supplier;
     private Long postId;
     private Integer replyCount;
 
@@ -15,7 +15,8 @@ public class OfferDTO implements DTO<Offer> {
 
     public OfferDTO(Offer offer) {
         this.id = offer.getId();
-        this.supplierId = offer.getSupplier().getId();
+        Supplier entitySupplier = offer.getSupplier();
+        this.supplier = entitySupplier != null ? new SupplierDTO(entitySupplier) : null;
         this.postId = offer.getPostId();
     }
 
@@ -27,10 +28,10 @@ public class OfferDTO implements DTO<Offer> {
 
     @Override
     public Offer buildEntity() {
-        Supplier supplier = new Supplier().setId(supplierId);
+        Supplier entitySupplier = supplier != null ? supplier.buildEntity() : null;
         return new Offer()
                 .setId(id)
-                .setSupplier(supplier)
+                .setSupplier(entitySupplier)
                 .setPostId(postId);
     }
 
@@ -50,12 +51,12 @@ public class OfferDTO implements DTO<Offer> {
         this.postId = postId;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
+    public SupplierDTO getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
+    public void setSupplier(SupplierDTO supplier) {
+        this.supplier = supplier;
     }
 
     public Integer getReplyCount() {

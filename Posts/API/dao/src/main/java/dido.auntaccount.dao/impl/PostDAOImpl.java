@@ -43,7 +43,9 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
     //TODO: get back offer-supplier FK
     public List<OfferDTO> getPostOffersWithReplies(Long postId) {
         Post post = find(postId);
-        List<Object[]> resultList = entityManager.createNativeQuery("SELECT *, count(m.id) as replyCount FROM OFFER o LEFT JOIN MESSAGE m ON o.id = m.offerId WHERE o.postId = ?1 AND m.senderId != ?2 AND m.isRead = 0 GROUP BY m.offerId",
+        List<Object[]> resultList = entityManager.createNativeQuery("SELECT o.*, count(m.id) as replyCount " +
+                "FROM OFFER o LEFT JOIN MESSAGE m ON o.id = m.offerId AND m.senderId != ?2 AND m.isRead = 0 " +
+                "WHERE o.postId = ?1 GROUP BY o.id",
                 "OfferReplyCountMapping")
                 .setParameter(1, postId)
                 .setParameter(2, post.getUserId()).getResultList();
