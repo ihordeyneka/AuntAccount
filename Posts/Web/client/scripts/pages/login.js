@@ -5,21 +5,21 @@ define(["../core/globals", "../core/config"], function(globals, config) {
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
     $("#btnGoogleSignIn").click(function() {
-      $.auth.oAuthSignIn({
+      $.didoauth.oAuthSignIn({
         provider: 'google',
         params: {}
       });
     });
 
     $("#btnFbSignIn").click(function() {
-      $.auth.oAuthSignIn({
+      $.didoauth.oAuthSignIn({
         provider: 'facebook',
         params: {}
       });
     });
 
     $("#btnLogin").click(function() {
-      $.auth.emailSignIn({
+      $.didoauth.emailSignIn({
         username: $("#inputEmail").val(),
         password: $("#inputPassword").val(),
         grant_type: "password",

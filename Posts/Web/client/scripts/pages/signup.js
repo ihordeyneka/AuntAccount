@@ -11,7 +11,7 @@ define(["../core/globals"], function(globals) {
         notificationArea: self.notificationArea,
         validatorForm: self.validatorForm,
         success: function() {
-          $.auth.emailSignUp({
+          $.didoauth.emailSignUp({
             email: $("#inputEmail").val(),
             firstName: $("#inputFirst").val(),
             lastName: $("#inputLast").val(),
