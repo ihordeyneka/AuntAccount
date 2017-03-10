@@ -9,7 +9,7 @@ requirejs.config({
     "jquery.cookie": ["../../lib/jquery_cookie/jquery.cookie"],
     "jquery-deparam": ["../../lib/jquery_deparam/jquery-deparam"],
     "pubsub-js": ["../../lib/pubsub_js/pubsub"],
-    jtoker: ["../../lib/j_toker/jquery.j-toker.min"],
+    jtoker: ["../../lib/j_toker/jquery.j-toker"],
     tagsinput: ["../../lib/bootstrap_tagsinput/bootstrap-tagsinput.min"],
     underscore: ["../../lib/underscore/underscore-min"],
     typeahead: ["../../lib/bootstrap3_typeahead/bootstrap3-typeahead.min"],
@@ -27,9 +27,9 @@ requirejs.config({
 });
 
 require(["core/config", "router", "domReady", "jquery", "bootstrap", "jsrender", "validator",
-  "jquery.cookie", "jquery-deparam", "pubsub-js", "jtoker"],
+  "jquery.cookie", "jquery-deparam", "pubsub-js", "jtoker", "core/didoauth"],
   function(config, router, domReady) {
-  $.auth.configure({
+  $.didoauth.configure({
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
     emailSignInPath:       '/token',
