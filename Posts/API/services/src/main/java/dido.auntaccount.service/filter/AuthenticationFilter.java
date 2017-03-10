@@ -33,7 +33,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-      /*  try {
+        try {
             OAuthAccessResourceRequest oauthRequest = new OAuthAccessResourceRequest(request, ParameterStyle.HEADER);
 
             String accessToken = oauthRequest.getAccessToken();
@@ -42,7 +42,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
         } catch (OAuthProblemException | OAuthSystemException e) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-        }*/
+        }
     }
 
     private void validateToken(String token) throws OAuthProblemException {

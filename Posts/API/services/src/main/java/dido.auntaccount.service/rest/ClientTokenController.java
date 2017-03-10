@@ -26,7 +26,7 @@ import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
 
 @Path("/token/client")
-public class ClientTokenController {
+public class ClientTokenController extends Controller {
 
     private static final String FACEBOOK_CLIENT_ID = PropertiesHandler.getProperty("fb.client.id");
     private static final String GOOGLE_CLIENT_ID =  PropertiesHandler.getProperty("google.client.id");
@@ -49,7 +49,7 @@ public class ClientTokenController {
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId(FACEBOOK_CLIENT_ID)
                 .setClientSecret(FACEBOOK_CLIENT_SECRET)
-                .setRedirectURI("http://localhost:8080/api/service/token/client/fb")
+                .setRedirectURI("http://192.168.1.111:8080/api/service/token/client/fb")
                 .setCode(httpRequest.getParameter("code"))
                 .buildQueryMessage();
 
@@ -80,7 +80,7 @@ public class ClientTokenController {
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId(GOOGLE_CLIENT_ID)
                 .setClientSecret(GOOGLE_CLIENT_SECRET)
-                .setRedirectURI("http://localhost:8080/api/service/token/client/google")
+                .setRedirectURI("http://192.168.1.111:8080/api/service/token/client/google")
                 .setCode(httpRequest.getParameter("code"))
                 .buildBodyMessage();
 
