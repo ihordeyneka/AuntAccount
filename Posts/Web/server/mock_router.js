@@ -109,7 +109,13 @@ exports.init = function(router) {
   });
 
   router.post(mockApiRoot + '/token', function(req, res) {
+    var result = {
+      userId: 1,
+      name: "Jack Shephard"
+    }
+
     res.statusCode = 200;
-    res.send('OK');
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
   });
 }
