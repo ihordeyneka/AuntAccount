@@ -19,11 +19,9 @@ import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
@@ -46,6 +44,7 @@ public class TokenController extends Controller {
 
     @POST
     @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response authorize(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
 
         OAuthTokenRequest oauthRequest = null;
@@ -55,23 +54,16 @@ public class TokenController extends Controller {
         try {
             oauthRequest = new OAuthTokenRequest(new OAuthRequestWrapper(request, form));
 
-            validateClient(oauthRequest);
+            UserDTO userDTO = validateClient(oauthRequest);
 
             // some code
             String accessToken = oauthIssuerImpl.accessToken();
             String refreshToken = oauthIssuerImpl.refreshToken();
 
-            // some code
-            OAuthResponse r = OAuthASResponse
-                    .tokenResponse(HttpServletResponse.SC_OK)
-                    .setAccessToken(accessToken)
-                    .setExpiresIn(EXPIRES_IN.toString())
-                    .setRefreshToken(refreshToken)
-                    .buildJSONMessage();
-
             tokenService.saveToken(accessToken, EXPIRES_IN);
 
-            return getResponseBuilder().status(r.getResponseStatus()).entity(r.getBody()).build();
+            return getResponseBuilder().header("access-token", accessToken)
+                    .header("expiry", EXPIRES_IN.toString()).entity(userDTO).build();
 
             //if something goes wrong
         } catch (OAuthProblemException ex) {
@@ -86,7 +78,7 @@ public class TokenController extends Controller {
 
     }
 
-    private void validateClient(OAuthTokenRequest request) throws OAuthProblemException {
+    private UserDTO validateClient(OAuthTokenRequest request) throws OAuthProblemException {
         UserDTO user = userService.findByEmail(request.getUsername());
         if (user == null) {
             throw OAuthProblemException.error("User is not valid " + request.getUsername());
@@ -100,6 +92,7 @@ public class TokenController extends Controller {
         if (!isPasswordCorrect) {
             throw OAuthProblemException.error("Password is not valid for user " + request.getUsername());
         }
+        return user;
     }
 
 }

@@ -24,7 +24,7 @@ public class AuthController {
         OAuthClientRequest request = OAuthClientRequest
                 .authorizationLocation(OAuthProviderType.FACEBOOK.getAuthzEndpoint())
                 .setClientId(FACEBOOK_CLIENT_ID)
-                .setRedirectURI("http://localhost:8080/api/service/token/client/fb")
+                .setRedirectURI("http://192.168.1.111:8080/api/service/token/client/fb")
                 .buildQueryMessage();
         return Response.seeOther(URI.create(request.getLocationUri())).build();
     }
@@ -36,7 +36,7 @@ public class AuthController {
         OAuthClientRequest request = OAuthClientRequest
                 .authorizationLocation(OAuthProviderType.GOOGLE.getAuthzEndpoint())
                 .setClientId(GOOGLE_CLIENT_ID)
-                .setRedirectURI("http://localhost:8080/api/service/token/client/google")
+                .setRedirectURI("http://192.168.1.111:8080/api/service/token/client/google")
                 .setResponseType("code")
                 .setScope("https://www.googleapis.com/auth/plus.login")
                 .buildQueryMessage();
