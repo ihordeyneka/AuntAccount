@@ -118,4 +118,9 @@ exports.init = function(router) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(result));
   });
+
+  router.delete(mockApiRoot + '/auth/sign_out', function(req, res) {
+    res.statusCode = 200;
+    res.send('OK');
+  });
 }

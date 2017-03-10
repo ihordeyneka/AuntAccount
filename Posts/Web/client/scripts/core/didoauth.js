@@ -8,6 +8,7 @@ define(["jquery"], function ($) {
   var ACCESS_TOKEN_KEY = 'access-token';
   var USER_DATA_KEY = 'current-user';
   var ERROR_EMAIL_SIGNIN = 1;
+  var ERROR_SIGN_OUT = 9;
 
   var isApiRequest = function(url) {
     return (url.match(root.didoauth.config.apiUrl));
@@ -34,6 +35,7 @@ define(["jquery"], function ($) {
       emailSignInPath:       '/token',
       emailRegistrationPath: '/users',
       signIn: function() {},
+      signOut: function() {},
       error: function(err, data) {},
 
       authProviderPaths: {
@@ -103,7 +105,7 @@ define(["jquery"], function ($) {
     this.user.signedIn = true;
 
     if (persist)
-      root.didoauth.persistData(USER_DATA_KEY, user);
+      root.didoauth.persistData(USER_DATA_KEY, JSON.stringify(user));
 
     return this.user;
   };
@@ -205,7 +207,8 @@ define(["jquery"], function ($) {
   };
 
   Auth.prototype.signOut = function() {
-    var signOutUrl = this.config.apiUrl + this.config.signOutPath;
+    var config = this.config;
+    var signOutUrl = config.apiUrl + config.signOutPath;
 
     $.ajax({
       url: signOutUrl,
@@ -213,15 +216,15 @@ define(["jquery"], function ($) {
       method: 'DELETE',
 
       success: function(resp) {
-        //TODO: do something
+        //also cleanup session
+        this.destroySession();
+        //trigger signOut event handler
+        config.signOut();
       },
 
       error: function(resp) {
-        //TODO: do something
-      },
-
-      complete: function() {
-        this.destroySession();
+        //trigger error event handler
+        this.config.error(ERROR_SIGN_OUT, resp);
       }
     });
   };

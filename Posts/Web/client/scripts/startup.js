@@ -30,6 +30,9 @@ require(["core/config", "core/didoauth", "router", "domReady", "jquery", "bootst
     signIn: function() {
       router.home();
     },
+    signOut: function() {
+      router.home();
+    },
 
     authProviderPaths: {
       google:    '/auth/google',
