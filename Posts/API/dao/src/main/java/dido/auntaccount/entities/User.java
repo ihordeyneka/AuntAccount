@@ -5,11 +5,11 @@ import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
-@Table(name="USER")
+@Table(name = "USER")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -19,6 +19,7 @@ public class User implements Serializable {
     private byte[] photo;
     private String website;
     private Date creationDate;
+    private String clientId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LocationId")
@@ -111,6 +112,15 @@ public class User implements Serializable {
 
     public User setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public User setClientId(String clientId) {
+        this.clientId = clientId;
         return this;
     }
 }

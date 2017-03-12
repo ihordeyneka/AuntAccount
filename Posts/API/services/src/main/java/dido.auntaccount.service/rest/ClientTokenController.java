@@ -1,18 +1,25 @@
 package dido.auntaccount.service.rest;
 
 import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
+import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.mappers.JsonMapper;
 import dido.auntaccount.service.business.TokenService;
+import dido.auntaccount.service.business.UserService;
 import org.apache.oltu.oauth2.as.response.OAuthASResponse;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
+import org.apache.oltu.oauth2.client.request.OAuthBearerClientRequest;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
 import org.apache.oltu.oauth2.client.response.GitHubTokenResponse;
 import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
+import org.apache.oltu.oauth2.client.response.OAuthResourceResponse;
+import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +31,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
+import java.sql.Date;
 
 @Path("/token/client")
 public class ClientTokenController extends Controller {
 
     private static final String FACEBOOK_CLIENT_ID = PropertiesHandler.getProperty("fb.client.id");
-    private static final String GOOGLE_CLIENT_ID =  PropertiesHandler.getProperty("google.client.id");
+    private static final String GOOGLE_CLIENT_ID = PropertiesHandler.getProperty("google.client.id");
 
     private static final String FACEBOOK_CLIENT_SECRET = PropertiesHandler.getProperty("fb.client.secret");
     private static final String GOOGLE_CLIENT_SECRET = PropertiesHandler.getProperty("google.client.secret");
@@ -38,6 +46,12 @@ public class ClientTokenController extends Controller {
 
     @Inject
     TokenService tokenService;
+
+    @Inject
+    JsonMapper mapper;
+
+    @Inject
+    private UserService userService;
 
     @GET
     @Path("/fb")
@@ -58,6 +72,7 @@ public class ClientTokenController extends Controller {
         GitHubTokenResponse oAuthResponse = oAuthClient.accessToken(request, GitHubTokenResponse.class);
 
         String accessToken = oAuthResponse.getAccessToken();
+        String refreshToken = oAuthResponse.getRefreshToken();
 
         OAuthResponse r = OAuthASResponse
                 .tokenResponse(HttpServletResponse.SC_OK)
@@ -67,7 +82,19 @@ public class ClientTokenController extends Controller {
 
         tokenService.saveToken(accessToken, EXPIRES_IN);
 
-        return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
+        OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest("https://graph.facebook.com/me?fields=id,first_name,last_name,email").buildQueryMessage();
+        bearerClientRequest.addHeader("Authorization", "Bearer " + accessToken);
+
+        OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
+
+        String body = resourceResponse.getBody();
+        UserDTO user = mapper.jsonFacebookToUserDTO(body);
+        user.setCreationDate(new Date(DateTime.now().getMillis()));
+
+        UserDTO savedUser = userService.saveUser(user);
+
+        return getResponseBuilder().header("access-token", accessToken)
+                .header("refresh-token", refreshToken).entity(savedUser).build();
     }
 
     @GET
@@ -80,7 +107,7 @@ public class ClientTokenController extends Controller {
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId(GOOGLE_CLIENT_ID)
                 .setClientSecret(GOOGLE_CLIENT_SECRET)
-                .setRedirectURI("http://192.168.1.111:8080/api/service/token/client/google")
+                .setRedirectURI("http://localhost:8080/api/service/token/client/google")
                 .setCode(httpRequest.getParameter("code"))
                 .buildBodyMessage();
 
@@ -89,6 +116,7 @@ public class ClientTokenController extends Controller {
         OAuthJSONAccessTokenResponse oAuthResponse = oAuthClient.accessToken(request);
 
         String accessToken = oAuthResponse.getAccessToken();
+        String refreshToken = oAuthResponse.getRefreshToken();
         Long expiresIn = oAuthResponse.getExpiresIn();
 
         OAuthResponse r = OAuthASResponse
@@ -99,7 +127,19 @@ public class ClientTokenController extends Controller {
 
         tokenService.saveToken(accessToken, EXPIRES_IN);
 
-        return Response.status(r.getResponseStatus()).entity(r.getBody()).build();
+        OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest("https://www.googleapis.com/oauth2/v2/userinfo").buildQueryMessage();
+        bearerClientRequest.addHeader("Authorization", "Bearer " + accessToken);
+
+        OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
+
+        String body = resourceResponse.getBody();
+        UserDTO user = mapper.jsonGoogleToUserDTO(body);
+        user.setCreationDate(new Date(DateTime.now().getMillis()));
+
+        UserDTO savedUser = userService.saveUser(user);
+
+        return getResponseBuilder().header("access-token", accessToken)
+                .header("refresh-tokenN", refreshToken).entity(savedUser).build();
     }
 
 }

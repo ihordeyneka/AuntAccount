@@ -31,19 +31,21 @@ CREATE TABLE `dido`.`PostTag` (
   PRIMARY KEY (`PostId`,`TagId`)
 );
 
-CREATE TABLE `dido`.`USER` (
+CREATE TABLE `USER` (
   `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(45) NOT NULL,
   `LastName` varchar(45) DEFAULT NULL,
-  `Password` varchar(200) NOT NULL,
+  `Password` varchar(200),
   `LocationId` bigint(10) DEFAULT NULL,
   `Email` varchar(45) NOT NULL,
   `Phone` varchar(45) DEFAULT NULL,
   `Photo` binary(10) DEFAULT NULL,
   `Website` varchar(45) DEFAULT NULL,
   `CreationDate` datetime NOT NULL,
+  `ClientId` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
+
 
 
 CREATE TABLE `dido`.`Review` (
