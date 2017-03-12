@@ -116,11 +116,21 @@ exports.init = function(router) {
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
+    res.setHeader('access-token', 'ACCESS-TOKEN-SECRET');
+    res.setHeader('refresh-token', 'REFRESH-TOKEN-SECRET');
     res.send(JSON.stringify(result));
   });
 
-  router.delete(mockApiRoot + '/auth/sign_out', function(req, res) {
+  router.post(mockApiRoot + '/token/refresh', function(req, res) {
     res.statusCode = 200;
+    res.setHeader('access-token', 'NEW-ACCESS-TOKEN-SECRET');
+    res.setHeader('refresh-token', 'NEW-REFRESH-TOKEN-SECRET');
     res.send('OK');
+  });
+
+  router.delete(mockApiRoot + '/auth/sign_out', function(req, res) {
+    var data = req.get('Authentication');
+    res.statusCode = data == "Bearer NEW-ACCESS-TOKEN-SECRET" ? 200 : 401;
+    res.send(data);
   });
 }

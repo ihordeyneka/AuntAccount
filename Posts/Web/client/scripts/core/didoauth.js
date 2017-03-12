@@ -6,8 +6,10 @@ define(["jquery"], function ($) {
   }
 
   var ACCESS_TOKEN_KEY = 'access-token';
+  var REFRESH_TOKEN_KEY = 'refresh-token';
   var USER_DATA_KEY = 'current-user';
   var ERROR_EMAIL_SIGNIN = 1;
+  var ERROR_REFRESH_TOKEN = 2;
   var ERROR_SIGN_OUT = 9;
 
   var isApiRequest = function(url) {
@@ -17,6 +19,8 @@ define(["jquery"], function ($) {
   var unescapeQuotes = function(val) {
     return val && val.replace(/("|')/g, '');
   };
+
+  var _currentPrefilterFunc = null;
 
   var Auth = function () {
     // set flag so we know when plugin has been configured.
@@ -34,6 +38,7 @@ define(["jquery"], function ($) {
       signOutPath:           '/auth/sign_out',
       emailSignInPath:       '/token',
       emailRegistrationPath: '/users',
+      refreshTokenPath:      '/token/refresh',
       signIn: function() {},
       signOut: function() {},
       error: function(err, data) {},
@@ -71,6 +76,10 @@ define(["jquery"], function ($) {
 
     // intercept requests to the API, append auth headers
     $.ajaxSetup({beforeSend: root.didoauth.appendAuthHeaders});
+    _currentPrefilterFunc = root.didoauth.tokenPrefilter;
+    $.ajaxPrefilter(function(opts, originalOpts, jqXHR) {
+      return _currentPrefilterFunc(opts, originalOpts, jqXHR);
+    });
   };
 
   Auth.prototype.reset = function() {
@@ -82,6 +91,7 @@ define(["jquery"], function ($) {
 
     // remove global ajax "interceptors"
     $.ajaxSetup({beforeSend: undefined});
+    _currentPrefilterFunc = function() {};
   };
 
   Auth.prototype.destroySession = function() {
@@ -91,6 +101,7 @@ define(["jquery"], function ($) {
     }
 
     root.didoauth.deleteData(ACCESS_TOKEN_KEY);
+    root.didoauth.deleteData(REFRESH_TOKEN_KEY);
     root.didoauth.deleteData(USER_DATA_KEY);
   };
 
@@ -219,7 +230,7 @@ define(["jquery"], function ($) {
         //also cleanup session
         this.destroySession();
         //trigger signOut event handler
-        config.signOut();
+        this.config.signOut();
       },
 
       error: function(resp) {
@@ -233,6 +244,10 @@ define(["jquery"], function ($) {
     var accessToken = request.getResponseHeader(ACCESS_TOKEN_KEY);
     if (accessToken)
       root.didoauth.persistData(ACCESS_TOKEN_KEY, accessToken);
+
+    var refreshToken = request.getResponseHeader(REFRESH_TOKEN_KEY);
+    if (refreshToken)
+      root.didoauth.persistData(REFRESH_TOKEN_KEY, refreshToken);
   }
 
   Auth.prototype.appendAuthHeaders = function(xhr, settings) {
@@ -249,6 +264,58 @@ define(["jquery"], function ($) {
       );
       xhr.setRequestHeader("Authentication", "Bearer " + accessToken);
     }
+  };
+
+  Auth.prototype.tokenPrefilter = function(opts, originalOpts, jqXHR) {
+    var refreshToken = root.didoauth.retrieveData(REFRESH_TOKEN_KEY);
+
+    // you could pass this option in on a "retry" so that it doesn't
+    // get all recursive on you.
+    if (opts.refreshRequest || !refreshToken) {
+      return;
+    }
+
+    // our own deferred object to handle done/fail callbacks
+    var dfd = $.Deferred();
+    var config = root.didoauth.config;
+
+    // if the request works, return normally
+    jqXHR.done(dfd.resolve);
+
+    // if the request fails, do something else
+    // yet still resolve
+    jqXHR.fail(function() {
+      var args = Array.prototype.slice.call(arguments);
+      if (jqXHR.status === 401) {
+        var url = config.apiUrl + config.refreshTokenPath;
+        $.post({
+          url: url,
+          refreshRequest: true,
+          data: { refreshToken: refreshToken },
+          error: function(resp) {
+            // session can't be saved
+            config.error(ERROR_REFRESH_TOKEN, resp);
+            // reject with the original 401 data
+            dfd.rejectWith(jqXHR, args);
+          },
+          success: function(resp, textStatus, request) {
+            root.didoauth.updateAuthHeaders(request);
+
+            // retry with a copied originalOpts with refreshRequest.
+            var newOpts = $.extend({}, originalOpts, {
+                refreshRequest: true
+            });
+            // pass this one on to our deferred pass or fail.
+            $.ajax(newOpts).then(dfd.resolve, dfd.reject);
+          }
+        });
+      } else {
+        dfd.rejectWith(jqXHR, args);
+      }
+    });
+
+    // NOW override the jqXHR's promise functions with our deferred
+    return dfd.promise(jqXHR);
   };
 
   // abstract storing of session data
