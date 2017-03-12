@@ -1,9 +1,39 @@
-define([], function(){
+define(["core/didoauth"], function(didoauth) {
   var self = {};
 
-  self.init = function () {
+  var menu = [
+    { hash: "#home", route: "recent", text: "Home" },
+    { hash: "#post", route: "post", text: "Post" },
+    { hash: "#notifications", route: "notifications", text: "Notifications" },
+    { hash: "#login", route: "login", text: "Login", hideWhen: function() { return didoauth.user.signedIn; } },
+    { hash: "#signup", route: "signup", text: "Sign Up", hideWhen: function() { return didoauth.user.signedIn; } },
+    { hash: "#signout", route: "signout", text: "Sign Out", hideWhen: function() { return !didoauth.user.signedIn; } },
+  ];
+
+  self.refreshMenu = function() {
+    var element = $("#navMenu");
+    element.empty();
+    for (var i=0; i<menu.length; i++) {
+      var menuItem = menu[i];
+      var hide = menuItem.hideWhen && menuItem.hideWhen();
+      if (!hide) {
+        element.append($.templates("#templateMenuItem").render({
+          hash: menuItem.hash,
+          route: menuItem.route,
+          text: menuItem.text
+        }));
+      }
+    }
+  }
+
+  self.init = function() {
     var hash = location.hash != "" ? location.hash : "#home";
     navigate(hash);
+  }
+
+  self.home = function() {
+    self.refreshMenu();
+    location.hash = "";
   }
 
   var navigate = function(hash) {
@@ -20,6 +50,9 @@ define([], function(){
 
       if (element.data("route"))
         route = element.data("route");
+
+      if (existsRouteHandler(route))
+        return;
     }
 
     var routeParts = route.split("/");
@@ -42,6 +75,14 @@ define([], function(){
         $("#router").html(html);
       });
     });
+  }
+
+  var existsRouteHandler = function(route) {
+    if (route == "signout") {
+      didoauth.signOut();
+      return true;
+    }
+    return false;
   }
 
   window.onhashchange = self.init;

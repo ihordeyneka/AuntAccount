@@ -29,22 +29,7 @@
         </div>
       </div>
       <div class="collapse navbar-collapse navbar-main navbar-right">
-        <ul class="nav navbar-nav header-nav__navigation">
-          <li class="header-nav__navigation-item">
-            <a href="#home" data-route="recent" class="header-nav__navigation-link router-link">Home</a>
-          </li>
-          <li class="header-nav__navigation-item">
-            <a href="#post" class="header-nav__navigation-link router-link">Post</a>
-          </li>
-          <li class="header-nav__navigation-item">
-            <a href="#notifications" class="header-nav__navigation-link router-link">Notifications</a>
-          </li>
-          <li class="header-nav__navigation-item">
-            <a href="#login" class="header-nav__navigation-link router-link">Login</a>
-          </li>
-          <li class="header-nav__navigation-item">
-            <a href="#signup" class="header-nav__navigation-link router-link">Sign up</a>
-          </li>
+        <ul id="navMenu" class="nav navbar-nav header-nav__navigation">
         </ul>
       </div>
       <div class="navbar-bottom visible-xs-block"></div>
@@ -54,6 +39,11 @@
     <div id="router">
     </div>
   </main>
+  <script id="templateMenuItem" type="text/x-jsrender">
+    <li class="header-nav__navigation-item">
+      <a href="{{:hash}}" data-route="{{:route}}" class="header-nav__navigation-link router-link">{{:text}}</a>
+    </li>
+  </script>
   <script id="templateSuccess" type="text/x-jsrender">
     <div class="alert alert-success alert-dismissable">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

@@ -6,6 +6,9 @@ define(["jquery"], function ($) {
   }
 
   var ACCESS_TOKEN_KEY = 'access-token';
+  var USER_DATA_KEY = 'current-user';
+  var ERROR_EMAIL_SIGNIN = 1;
+  var ERROR_SIGN_OUT = 9;
 
   var isApiRequest = function(url) {
     return (url.match(root.didoauth.config.apiUrl));
@@ -31,10 +34,9 @@ define(["jquery"], function ($) {
       signOutPath:           '/auth/sign_out',
       emailSignInPath:       '/token',
       emailRegistrationPath: '/users',
-
-      handleLoginResponse: function(resp) {
-        return resp.data;
-      },
+      signIn: function() {},
+      signOut: function() {},
+      error: function(err, data) {},
 
       authProviderPaths: {
         github:    '/auth/github',
@@ -58,6 +60,10 @@ define(["jquery"], function ($) {
     if (!opts) {
       opts = {};
     }
+
+    var user = root.didoauth.retrieveData(USER_DATA_KEY);
+    if (user)
+      root.didoauth.setCurrentUser(user, false);
 
     // set configured
     this.config = $.extend({}, this.configBase, opts);
@@ -85,9 +91,10 @@ define(["jquery"], function ($) {
     }
 
     root.didoauth.deleteData(ACCESS_TOKEN_KEY);
+    root.didoauth.deleteData(USER_DATA_KEY);
   };
 
-  Auth.prototype.setCurrentUser = function(user) {
+  Auth.prototype.setCurrentUser = function(user, persist) {
     // clear user object of any existing attributes
     for (var key in this.user) {
       delete this.user[key];
@@ -96,6 +103,9 @@ define(["jquery"], function ($) {
     // save user data, preserve bindings to original user object
     $.extend(this.user, user);
     this.user.signedIn = true;
+
+    if (persist)
+      root.didoauth.persistData(USER_DATA_KEY, JSON.stringify(user));
 
     return this.user;
   };
@@ -141,19 +151,19 @@ define(["jquery"], function ($) {
       data: data,
 
       success: function(resp, textStatus, request) {
-        // return user attrs as directed by config
-        var user = config.handleLoginResponse(resp);
-
         // save user data, preserve bindings to original user object
-        this.setCurrentUser(user);
+        this.setCurrentUser(resp, true);
 
+        //update token information
         root.didoauth.updateAuthHeaders(request);
 
-        //TODO: do something
+        //trigger signIn event handler
+        this.config.signIn();
       },
 
       error: function(resp) {
-        //TODO: do something
+        //trigger error event handler
+        this.config.error(ERROR_EMAIL_SIGNIN, resp);
       }
     });
   };
@@ -197,7 +207,8 @@ define(["jquery"], function ($) {
   };
 
   Auth.prototype.signOut = function() {
-    var signOutUrl = this.config.apiUrl + this.config.signOutPath;
+    var config = this.config;
+    var signOutUrl = config.apiUrl + config.signOutPath;
 
     $.ajax({
       url: signOutUrl,
@@ -205,15 +216,15 @@ define(["jquery"], function ($) {
       method: 'DELETE',
 
       success: function(resp) {
-        //TODO: do something
+        //also cleanup session
+        this.destroySession();
+        //trigger signOut event handler
+        config.signOut();
       },
 
       error: function(resp) {
-        //TODO: do something
-      },
-
-      complete: function() {
-        this.destroySession();
+        //trigger error event handler
+        this.config.error(ERROR_SIGN_OUT, resp);
       }
     });
   };
