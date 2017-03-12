@@ -42,6 +42,7 @@ public class JsonMapper {
             JSONObject jsonObject = new JSONObject(json);
             user = new UserDTO();
             user.setClientId((String) jsonObject.get("id"));
+            user.setEmail((String) jsonObject.get("email"));
             user.setFirstName((String) jsonObject.get("first_name"));
             user.setLastName((String) jsonObject.get("last_name"));
         } catch (JSONException e) {
