@@ -18,6 +18,7 @@ public class UserDTO implements DTO<User>, Serializable {
     private String website;
     private Date creationDate;
     private LocationDTO location;
+    private String clientId;
 
     public UserDTO() {
     }
@@ -41,6 +42,7 @@ public class UserDTO implements DTO<User>, Serializable {
         this.creationDate = user.getCreationDate();
         Location location = user.getLocation();
         this.location = location != null ? new LocationDTO(user.getLocation()) : null;
+        this.clientId = user.getClientId();
     }
 
     @Override
@@ -56,7 +58,8 @@ public class UserDTO implements DTO<User>, Serializable {
                 .setPhoto(photo)
                 .setWebsite(website)
                 .setCreationDate(creationDate)
-                .setLocation(entityLocation);
+                .setLocation(entityLocation)
+                .setClientId(clientId);
     }
 
     public Long getId() {
@@ -137,5 +140,13 @@ public class UserDTO implements DTO<User>, Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }

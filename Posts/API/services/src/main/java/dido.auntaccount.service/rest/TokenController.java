@@ -78,6 +78,14 @@ public class TokenController extends Controller {
 
     }
 
+    @POST
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("refresh")
+    public Response refreshToken(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
+        return getResponseBuilder().build();
+    }
+
     private UserDTO validateClient(OAuthTokenRequest request) throws OAuthProblemException {
         UserDTO user = userService.findByEmail(request.getUsername());
         if (user == null) {

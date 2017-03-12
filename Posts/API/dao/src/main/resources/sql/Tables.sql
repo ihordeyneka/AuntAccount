@@ -31,7 +31,7 @@ CREATE TABLE `dido`.`PostTag` (
   PRIMARY KEY (`PostId`,`TagId`)
 );
 
-CREATE TABLE `dido`.`USER` (
+CREATE TABLE `USER` (
   `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(45) NOT NULL,
   `LastName` varchar(45) DEFAULT NULL,
@@ -42,8 +42,10 @@ CREATE TABLE `dido`.`USER` (
   `Photo` binary(10) DEFAULT NULL,
   `Website` varchar(45) DEFAULT NULL,
   `CreationDate` datetime NOT NULL,
+  `ClientId` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
+
 
 
 CREATE TABLE `dido`.`Review` (

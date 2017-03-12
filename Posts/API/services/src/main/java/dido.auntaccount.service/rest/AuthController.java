@@ -36,7 +36,7 @@ public class AuthController {
         OAuthClientRequest request = OAuthClientRequest
                 .authorizationLocation(OAuthProviderType.GOOGLE.getAuthzEndpoint())
                 .setClientId(GOOGLE_CLIENT_ID)
-                .setRedirectURI("http://192.168.1.111:8080/api/service/token/client/google")
+                .setRedirectURI("http://localhost:8080/api/service/token/client/google")
                 .setResponseType("code")
                 .setScope("https://www.googleapis.com/auth/plus.login")
                 .buildQueryMessage();
