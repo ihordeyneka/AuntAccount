@@ -38,7 +38,7 @@ public class AuthController {
                 .setClientId(GOOGLE_CLIENT_ID)
                 .setRedirectURI("http://localhost:8080/api/service/token/client/google")
                 .setResponseType("code")
-                .setScope("https://www.googleapis.com/auth/plus.login")
+                .setScope("https://www.googleapis.com/auth/userinfo.email")
                 .buildQueryMessage();
         return Response.seeOther(URI.create(request.getLocationUri())).build();
     }

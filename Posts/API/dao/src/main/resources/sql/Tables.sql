@@ -35,7 +35,7 @@ CREATE TABLE `USER` (
   `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(45) NOT NULL,
   `LastName` varchar(45) DEFAULT NULL,
-  `Password` varchar(200) NOT NULL,
+  `Password` varchar(200),
   `LocationId` bigint(10) DEFAULT NULL,
   `Email` varchar(45) NOT NULL,
   `Phone` varchar(45) DEFAULT NULL,

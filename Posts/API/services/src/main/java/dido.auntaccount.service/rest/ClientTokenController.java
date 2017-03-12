@@ -82,7 +82,7 @@ public class ClientTokenController extends Controller {
 
         tokenService.saveToken(accessToken, EXPIRES_IN);
 
-        OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest("https://graph.facebook.com/me?fields=id,first_name,last_name").buildQueryMessage();
+        OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest("https://graph.facebook.com/me?fields=id,first_name,last_name,email").buildQueryMessage();
         bearerClientRequest.addHeader("Authorization", "Bearer " + accessToken);
 
         OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
