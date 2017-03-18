@@ -3,6 +3,7 @@ package dido.auntaccount.service.rest.controller;
 import dido.auntaccount.dido.auntaccount.utils.OAuthRequestWrapper;
 import dido.auntaccount.dto.RefreshTokenDTO;
 import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.mappers.JsonMapper;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
@@ -20,7 +21,7 @@ import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.request.OAuthBearerClientRequest;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
-import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
+import org.apache.oltu.oauth2.client.response.OAuthAccessTokenResponse;
 import org.apache.oltu.oauth2.client.response.OAuthResourceResponse;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
@@ -58,21 +59,19 @@ public class TokenController extends Controller {
     @Inject
     private UserService userService;
 
+    @Inject
+    JsonMapper mapper;
+
     private FacebookProvider facebookProvider = new FacebookProvider();
     private GoogleProvider googleProvider = new GoogleProvider();
 
-    @GET
-    @Path("/fb")
+    @POST
+    @Consumes("application/x-www-form-urlencoded")
+    @Path("/client")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getToken(@Context HttpServletRequest httpRequest) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
-        return buildResponse(facebookProvider, httpRequest);
-    }
-
-    @GET
-    @Path("/google")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response authorize(@Context HttpServletRequest httpRequest) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
-        return buildResponse(googleProvider, httpRequest);
+    public Response getToken(@FormParam("provider") String provider, @FormParam("code") String code) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
+        ClientProvider clientProvider = provider.equals("fb") ? facebookProvider : googleProvider;
+        return buildResponse(clientProvider, code);
     }
 
     @POST
@@ -122,19 +121,19 @@ public class TokenController extends Controller {
 
     }
 
-    private Response buildResponse(ClientProvider provider, HttpServletRequest httpRequest) throws OAuthProblemException, OAuthSystemException {
+    private Response buildResponse(ClientProvider provider, String code) throws OAuthProblemException, OAuthSystemException {
         OAuthClientRequest request = OAuthClientRequest
                 .tokenProvider(provider.getProvider())
                 .setGrantType(provider.getGrantType())
                 .setClientId(provider.getClientId())
                 .setClientSecret(provider.getClientSecret())
                 .setRedirectURI(provider.getRedirectURI())
-                .setCode(httpRequest.getParameter(CODE))
+                .setCode(code)
                 .buildBodyMessage();
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 
-        OAuthJSONAccessTokenResponse oAuthResponse = oAuthClient.accessToken(request);
+        OAuthAccessTokenResponse oAuthResponse = provider.getAccessTokenResponse(oAuthClient, request);
 
         OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(provider.getUserInfoURI()).buildQueryMessage();
         bearerClientRequest.addHeader("Authorization", "Bearer " + oAuthResponse.getAccessToken());
@@ -142,7 +141,7 @@ public class TokenController extends Controller {
         OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
 
         String body = resourceResponse.getBody();
-        UserDTO user = provider.mapUser(body);
+        UserDTO user = provider.mapUser(mapper, body);
         user.setCreationDate(new Date(DateTime.now().getMillis()));
 
         UserDTO savedUser = userService.saveUser(user);
