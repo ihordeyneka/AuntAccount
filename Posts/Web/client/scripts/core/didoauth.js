@@ -38,6 +38,7 @@ define(["jquery"], function ($) {
       signOutPath:           '/auth/sign_out',
       emailSignInPath:       '/token',
       emailRegistrationPath: '/users',
+      provideAuthCodePath:   '/authcode/provide',
       refreshTokenPath:      '/token/refresh',
       signIn: function() {},
       signOut: function() {},
@@ -194,6 +195,39 @@ define(["jquery"], function ($) {
 
     // open link to provider auth screen
     this.openAuthWindow(oAuthUrl);
+  };
+
+  Auth.prototype.provideAuthCode = function(data) {
+    // normalize data
+    if (!data) {
+      data = {};
+    }
+
+    var config = this.config;
+    var url = config.apiUrl + config.provideAuthCodePath;
+
+    $.ajax({
+      url: url,
+      context: this,
+      method: 'POST',
+      data: data,
+
+      success: function(resp, textStatus, request) {
+        // save user data, preserve bindings to original user object
+        this.setCurrentUser(resp, true);
+
+        //update token information
+        root.didoauth.updateAuthHeaders(request);
+
+        //trigger signIn event handler
+        this.config.signIn();
+      },
+
+      error: function(resp) {
+        //trigger error event handler
+        this.config.error(ERROR_EMAIL_SIGNIN, resp);
+      }
+    });
   };
 
   Auth.prototype.buildOAuthUrl = function(params, providerPath) {

@@ -108,7 +108,7 @@ exports.init = function(router) {
     res.send('OK');
   });
 
-  router.post(mockApiRoot + '/token', function(req, res) {
+  var signIn = function(req, res) {
     var result = {
       userId: 1,
       name: "Jack Shephard"
@@ -119,7 +119,19 @@ exports.init = function(router) {
     res.setHeader('access-token', 'ACCESS-TOKEN-SECRET');
     res.setHeader('refresh-token', 'REFRESH-TOKEN-SECRET');
     res.send(JSON.stringify(result));
-  });
+  };
+
+  router.post(mockApiRoot + '/token', signIn);
+
+  router.post(mockApiRoot + '/authcode/provide', signIn);
+
+  router.get(mockApiRoot + "/auth/fb*", function(req, res) {
+    res.redirect("/authcode?provider=fb&authcode=BBB")
+  })
+
+  router.get(mockApiRoot + "/auth/google*", function(req, res) {
+    res.redirect("/authcode?provider=google&authcode=CCC")
+  })
 
   router.post(mockApiRoot + '/token/refresh', function(req, res) {
     res.statusCode = 200;

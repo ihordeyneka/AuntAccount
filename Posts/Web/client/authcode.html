@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aunt Account</title>
+  <script src="/lib/requirejs/require.js"></script>
+</head>
+<body>
+  <h1>Successfully authenticated!</h1>
+  <script>
+  requirejs.config({
+    baseUrl: '/client/scripts',
+    paths: {
+      jquery: ["../../lib/jquery/jquery.min"],
+      jquery_deparam: ["../../lib/jquery_deparam/jquery-deparam"],
+    }
+  });
+  require(["core/config", "core/didoauth", "jquery", "jquery_deparam"],
+    function(config, didoauth) {
+      $.didoauth.configure({
+        apiUrl: config.apiRoot,
+        signIn: function() {
+          window.location = "/";
+        },
+        error: function() {
+          //TODO: handle
+          alert('Error has occurred during authentication');
+          window.location = "/";
+        }
+      });
+      $.didoauth.provideAuthCode($.deparam(window.location.search.slice(1)));
+    });
+  </script>
+</body>
+</html>

@@ -21,6 +21,10 @@ router.get('/', function(req, res) {
   res.sendFile(DIST_DIR + '/client/index.html');
 });
 
+router.get('/authcode*', function(req, res) {
+  res.sendFile(DIST_DIR + '/client/authcode.html');
+});
+
 mock_router.init(router);
 
 // Send any other urls notfound.html.
