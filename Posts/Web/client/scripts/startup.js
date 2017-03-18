@@ -19,8 +19,8 @@ requirejs.config({
   }
 });
 
-require(["core/config", "core/didoauth", "router", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
-  function(config, didoauth, router, domReady) {
+require(["core/config", "core/didoauth", "navigation/router", "navigation/menu", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
+  function(config, didoauth, router, menu, domReady) {
   didoauth.configure({
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
@@ -41,7 +41,7 @@ require(["core/config", "core/didoauth", "router", "domReady", "jquery", "bootst
   });
 
   domReady(function(){
-    router.refreshMenu();
+    menu.refresh();
     router.init();
   });
 });

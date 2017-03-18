@@ -1,30 +1,5 @@
-define(["core/didoauth"], function(didoauth) {
+define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
   var self = {};
-
-  var menu = [
-    { hash: "#home", route: "recent", text: "Home" },
-    { hash: "#post", route: "post", text: "Post" },
-    { hash: "#notifications", route: "notifications", text: "Notifications" },
-    { hash: "#login", route: "login", text: "Login", hideWhen: function() { return didoauth.user.signedIn; } },
-    { hash: "#signup", route: "signup", text: "Sign Up", hideWhen: function() { return didoauth.user.signedIn; } },
-    { hash: "#signout", route: "signout", text: "Sign Out", hideWhen: function() { return !didoauth.user.signedIn; } },
-  ];
-
-  self.refreshMenu = function() {
-    var element = $("#navMenu");
-    element.empty();
-    for (var i=0; i<menu.length; i++) {
-      var menuItem = menu[i];
-      var hide = menuItem.hideWhen && menuItem.hideWhen();
-      if (!hide) {
-        element.append($.templates("#templateMenuItem").render({
-          hash: menuItem.hash,
-          route: menuItem.route,
-          text: menuItem.text
-        }));
-      }
-    }
-  }
 
   self.init = function() {
     var hash = location.hash != "" ? location.hash : "#home";
@@ -32,7 +7,7 @@ define(["core/didoauth"], function(didoauth) {
   }
 
   self.home = function() {
-    self.refreshMenu();
+    menu.refresh();
     location.hash = "";
   }
 
