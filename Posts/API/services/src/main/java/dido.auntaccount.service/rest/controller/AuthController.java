@@ -1,4 +1,4 @@
-package dido.auntaccount.service.rest;
+package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
@@ -40,6 +40,7 @@ public class AuthController {
                 .setRedirectURI("http://localhost:8080/api/service/token/client/google")
                 .setResponseType("code")
                 .setScope("https://www.googleapis.com/auth/userinfo.email")
+                .setParameter("access_type", "offline")
                 .buildQueryMessage();
         return Response.seeOther(URI.create(request.getLocationUri())).build();
     }
