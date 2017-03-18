@@ -114,6 +114,12 @@ CREATE TABLE `TOKEN` (
   UNIQUE KEY `Token_UNIQUE` (`Token`)
 );
 
+CREATE TABLE `RefreshToken` (
+  `Token` varchar(255) NOT NULL,
+  `ExpirationDate` date NOT NULL,
+  PRIMARY KEY (`Token`)
+);
+
 
 --fix post table - remove latitude and longitude, add supplierTag table
 

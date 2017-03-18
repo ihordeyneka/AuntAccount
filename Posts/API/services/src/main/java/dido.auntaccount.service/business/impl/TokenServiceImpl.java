@@ -1,8 +1,11 @@
 package dido.auntaccount.service.business.impl;
 
+import dido.auntaccount.dao.RefreshTokenDAO;
 import dido.auntaccount.dao.TokenDAO;
 import dido.auntaccount.dido.auntaccount.utils.CacheMap;
+import dido.auntaccount.dto.RefreshTokenDTO;
 import dido.auntaccount.dto.TokenDTO;
+import dido.auntaccount.entities.RefreshToken;
 import dido.auntaccount.entities.Token;
 import dido.auntaccount.service.business.TokenService;
 import org.apache.logging.log4j.Level;
@@ -21,6 +24,9 @@ public class TokenServiceImpl implements TokenService {
     @Inject
     TokenDAO tokenDAO;
 
+    @Inject
+    RefreshTokenDAO refreshTokenDAO;
+
     @Override
     public TokenDTO getToken(String token) {
         Token foundToken = tokenCacheMap.containsKey(token) ?
@@ -31,15 +37,30 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public TokenDTO saveToken(String token, long expiresIn) {
-        DateTime now = DateTime.now();
-        DateTime expirationDate = now.plus(expiresIn);
-        long expirationDateMillis = expirationDate.getMillis();
-        Token accessToken = new Token(token, new Date(expirationDateMillis));
+    public RefreshTokenDTO getRefreshToken(String token) {
+        RefreshToken refreshToken = refreshTokenDAO.find(token);
+        return new RefreshTokenDTO(refreshToken);
+    }
+
+    @Override
+    public RefreshTokenDTO saveRefreshToken(String token, long expirationDate) {
+        RefreshToken refreshToken = new RefreshToken(token, new Date(expirationDate));
+        RefreshToken savedRefreshToken = null;
+        try {
+            savedRefreshToken = refreshTokenDAO.save(refreshToken);
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "Couldn't save refresh token", e);
+        }
+        return new RefreshTokenDTO(savedRefreshToken);
+    }
+
+    @Override
+    public TokenDTO saveAccessToken(String token, long expirationDate) {
+        Token accessToken = new Token(token, new Date(expirationDate));
         Token savedToken = null;
         try {
             savedToken = tokenDAO.save(accessToken);
-            tokenCacheMap.put(token, expirationDateMillis);
+            tokenCacheMap.put(token, expirationDate);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save token", e);
         }

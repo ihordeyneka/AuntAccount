@@ -1,11 +1,8 @@
-package dido.auntaccount.service.rest;
+package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.MessageDTO;
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.SupplierDTO;
-import dido.auntaccount.entities.Message;
-import dido.auntaccount.entities.Offer;
-import dido.auntaccount.entities.Supplier;
 import dido.auntaccount.service.business.OfferService;
 import dido.auntaccount.service.filter.Secured;
 

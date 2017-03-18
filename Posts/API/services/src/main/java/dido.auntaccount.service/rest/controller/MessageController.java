@@ -1,4 +1,4 @@
-package dido.auntaccount.service.rest;
+package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.MessageDTO;
 import dido.auntaccount.entities.Message;
