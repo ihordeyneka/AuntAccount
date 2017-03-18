@@ -123,14 +123,14 @@ exports.init = function(router) {
 
   router.post(mockApiRoot + '/token', signIn);
 
-  router.post(mockApiRoot + '/authcode/provide', signIn);
+  router.post(mockApiRoot + '/token/client', signIn);
 
   router.get(mockApiRoot + "/auth/fb*", function(req, res) {
-    res.redirect("/authcode?provider=fb&authcode=BBB")
+    res.redirect("/authcode?provider=fb&code=BBB")
   })
 
   router.get(mockApiRoot + "/auth/google*", function(req, res) {
-    res.redirect("/authcode?provider=google&authcode=CCC")
+    res.redirect("/authcode?provider=google&code=CCC")
   })
 
   router.post(mockApiRoot + '/token/refresh', function(req, res) {
