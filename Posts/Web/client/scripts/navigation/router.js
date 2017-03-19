@@ -25,9 +25,6 @@ define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
 
       if (element.data("route"))
         route = element.data("route");
-
-      if (existsRouteHandler(route))
-        return;
     }
 
     var routeParts = route.split("/");
@@ -50,14 +47,6 @@ define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
         $("#router").html(html);
       });
     });
-  }
-
-  var existsRouteHandler = function(route) {
-    if (route == "signout") {
-      didoauth.signOut();
-      return true;
-    }
-    return false;
   }
 
   window.onhashchange = self.init;

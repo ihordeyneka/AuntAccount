@@ -1,0 +1,13 @@
+.aa-profile-section {
+  margin-bottom: 30px;  
+}
+.aa-profile-picture {
+  width: 100px;
+  height: 100px;
+  background: transparent url("/client/images/blank-profile.png") no-repeat center center;
+  background-size: 100px 100px;
+}
+.aa-profile-signout {
+  padding-top: 30px;
+  height: 100px;
+}

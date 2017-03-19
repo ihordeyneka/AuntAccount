@@ -1,0 +1,37 @@
+<form id="formProfile">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="aa-notification-area no-outline col-sm-offset-3 col-sm-6" tabindex="-1">
+      </div>
+    </div>
+    <div class="row aa-profile-section">
+      <div class="col-sm-offset-3 col-sm-6">
+        <div class="aa-profile-picture left">
+        </div>
+        <div class="aa-profile-signout right">
+          <button type="button" id="btnSignOut" class="btn btn-lg btn-primary right btn-signout">Sign Out</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-6">
+        <label for="inputEmail" class="lb-lg">Email</label>
+        <div class="form-group">
+          <input type="email" class="form-control input-lg" id="inputEmail" required placeholder="Email">
+        </div>
+        <label for="inputFirst" class="lb-lg">First Name</label>
+        <div class="form-group">
+          <input type="text" class="form-control input-lg" id="inputFirst" required placeholder="First Name">
+        </div>
+        <label for="inputLast" class="lb-lg">Last Name</label>
+        <div class="form-group">
+          <input type="text" class="form-control input-lg" id="inputLast" required placeholder="Last Name">
+        </div>
+        <button type="button" id="btnUpdate" class="btn btn-lg btn-primary right btn-profile-update">Update</button>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+  require(["pages/profile"], function(profile) { profile.init(); });
+</script>
