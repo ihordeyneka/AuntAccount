@@ -5,6 +5,9 @@ import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Tag;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +20,7 @@ public class PostDTO implements DTO<Post> {
     private Double priceMin;
     private Date creationDate;
     private LocationDTO location;
-    private List<TagDTO> postTags;
+    private String postTags;
     private Long userId;
     private int offerCount;
 
@@ -33,7 +36,7 @@ public class PostDTO implements DTO<Post> {
         this.creationDate = post.getCreationDate();
         Location location = post.getLocation();
         this.location = location != null ? new LocationDTO(location) : null;
-        this.postTags = post.getPostTags().stream().map(TagDTO::new).collect(Collectors.toList());
+        this.postTags = post.getPostTags().stream().map(Tag::getTag).collect(Collectors.joining(", "));
         this.userId = post.getUserId();
     }
 
@@ -43,7 +46,7 @@ public class PostDTO implements DTO<Post> {
     }
 
     public Post buildEntity() {
-        List<Tag> tags = postTags.stream().map(TagDTO::buildEntity).collect(Collectors.toList());
+        List<Tag> tags = parsePostTags().stream().map(Tag::new).collect(Collectors.toList());
         Location entityLocation = location.buildEntity();
         return new Post()
                 .setId(id)
@@ -105,11 +108,11 @@ public class PostDTO implements DTO<Post> {
         this.priceMin = priceMin;
     }
 
-    public List<TagDTO> getPostTags() {
+    public String getPostTags() {
         return postTags;
     }
 
-    public void setPostTags(List<TagDTO> postTags) {
+    public void setPostTags(String postTags) {
         this.postTags = postTags;
     }
 
@@ -135,5 +138,14 @@ public class PostDTO implements DTO<Post> {
 
     public void setOfferCount(int offerCount) {
         this.offerCount = offerCount;
+    }
+
+    public List<TagDTO> getTags() {
+        List<String> tags = parsePostTags();
+        return tags.stream().map(TagDTO::new).collect(Collectors.toList());
+    }
+
+    private List<String> parsePostTags() {
+        return !postTags.isEmpty() ? Arrays.asList(postTags.split(",")) : Collections.emptyList();
     }
 }

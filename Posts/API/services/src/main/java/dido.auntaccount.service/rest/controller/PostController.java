@@ -39,6 +39,12 @@ public class PostController extends Controller {
         return getResponseBuilder().entity(savedPost).build();
     }
 
+    @OPTIONS
+    @Path("/")
+    public Response savePostPreflight(PostDTO post) throws Exception {
+        return getResponseBuilder().build();
+    }
+
     @GET
     @Path("/{param}/offers")
     @Secured

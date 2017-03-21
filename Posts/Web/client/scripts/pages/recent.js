@@ -4,8 +4,9 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
   self.init = function() {
 
     globals.loading($('body'), true);
+    var userId = $.didoauth.user.id;
     $.ajax({
-        url: config.apiRoot + "/users/2/posts", //TODO: use actual user id here
+        url: config.apiRoot + "/users/"+ userId +"/posts", //TODO: use actual user id here
         dataType: "json"
     }).done(function(data) {
       var element = $(".aa-recent-container");
@@ -18,7 +19,7 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
           element.append($.templates("#templatePost").render({
             postId: post.id,
             time: post.creationDate,
-            title: _.map(post.postTags, function(i) {return i.tag;}).join(),
+            title: post.postTags,
             content: post.description,
             conversations: post.offerCount,
             badgeCss: post.offerCount == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")

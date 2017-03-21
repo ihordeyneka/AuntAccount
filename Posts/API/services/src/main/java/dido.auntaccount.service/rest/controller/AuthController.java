@@ -16,7 +16,6 @@ import java.net.URISyntaxException;
 @Path("/auth")
 public class AuthController {
 
-    private static final String GOOGLE_CLIENT_ID =  PropertiesHandler.getProperty("google.client.id");
     private FacebookProvider facebookProvider = new FacebookProvider();
     private GoogleProvider googleProvider = new GoogleProvider();
 

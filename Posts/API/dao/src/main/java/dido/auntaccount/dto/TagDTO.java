@@ -10,6 +10,10 @@ public class TagDTO implements DTO<Tag> {
     public TagDTO() {
     }
 
+    public TagDTO(String tag) {
+        this.tag = tag;
+    }
+
     public TagDTO(Tag tag) {
         this.id = tag.getId();
         this.tag = tag.getTag();
@@ -17,9 +21,8 @@ public class TagDTO implements DTO<Tag> {
 
     @Override
     public Tag buildEntity() {
-        return new Tag()
-                .setId(id)
-                .setTag(tag);
+        return new Tag(tag)
+                .setId(id);
     }
 
     public Long getId() {

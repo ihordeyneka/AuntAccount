@@ -58,7 +58,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public void savePostForSuppliers(PostDTO post) {
-        List<TagDTO> postTags = post.getPostTags();
+        List<TagDTO> postTags = post.getTags();
         List<String> tags = postTags.stream().map(TagDTO::getTag).collect(Collectors.toList());
 
         List<Long> supplierIds = searchSupplierService.getSupplierIdsByTags(tags);

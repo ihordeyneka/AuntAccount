@@ -13,6 +13,14 @@ public class Tag {
     private Long id;
     private String tag;
 
+    public Tag(){
+
+    }
+
+    public Tag(String tag) {
+        this.tag = tag;
+    }
+
     public Long getId() {
         return id;
     }

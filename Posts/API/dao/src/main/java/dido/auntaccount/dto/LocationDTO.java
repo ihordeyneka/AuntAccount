@@ -30,7 +30,7 @@ public class LocationDTO implements DTO<Location> {
 
     @Override
     public Location buildEntity() {
-        Country entityCountry = country.buildEntity();
+        Country entityCountry = country != null ? country.buildEntity() : null;
         return new Location()
                 .setId(id)
                 .setLatitude(latitude)

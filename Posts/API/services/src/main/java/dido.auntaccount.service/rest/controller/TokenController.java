@@ -38,6 +38,7 @@ import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
 import java.sql.Date;
 
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 @Path("/token")
@@ -48,7 +49,8 @@ public class TokenController extends Controller {
     public static final String ACCESS_TOKEN = "access-token";
     public static final String REFRESH_TOKEN = "refresh-token";
     public static final String EXPIRES_IN = "expires_in";
-    public static final String CODE = "code";
+    public static final String FACEBOOK = "fb";
+    public static final String GOOGLE = "google";
 
     @Inject
     PasswordService passwordService;
@@ -70,7 +72,17 @@ public class TokenController extends Controller {
     @Path("/client")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getToken(@FormParam("provider") String provider, @FormParam("code") String code) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
-        ClientProvider clientProvider = provider.equals("fb") ? facebookProvider : googleProvider;
+        ClientProvider clientProvider = null;
+        switch (provider) {
+            case FACEBOOK:
+                clientProvider = facebookProvider;
+                break;
+            case GOOGLE:
+                clientProvider = googleProvider;
+                break;
+            default:
+                return getResponseBuilder(BAD_REQUEST.getStatusCode()).build();
+        }
         return buildResponse(clientProvider, code);
     }
 
@@ -123,35 +135,35 @@ public class TokenController extends Controller {
 
     private Response buildResponse(ClientProvider provider, String code) throws OAuthProblemException, OAuthSystemException {
         OAuthClientRequest request = OAuthClientRequest
-                .tokenProvider(provider.getProvider())
-                .setGrantType(provider.getGrantType())
-                .setClientId(provider.getClientId())
-                .setClientSecret(provider.getClientSecret())
-                .setRedirectURI(provider.getRedirectURI())
-                .setCode(code)
-                .buildBodyMessage();
+            .tokenProvider(provider.getProvider())
+            .setGrantType(provider.getGrantType())
+            .setClientId(provider.getClientId())
+            .setClientSecret(provider.getClientSecret())
+            .setRedirectURI(provider.getRedirectURI())
+            .setCode(code)
+            .buildBodyMessage();
 
-        OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+    OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 
-        OAuthAccessTokenResponse oAuthResponse = provider.getAccessTokenResponse(oAuthClient, request);
+    OAuthAccessTokenResponse oAuthResponse = provider.getAccessTokenResponse(oAuthClient, request);
 
-        OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(provider.getUserInfoURI()).buildQueryMessage();
-        bearerClientRequest.addHeader("Authorization", "Bearer " + oAuthResponse.getAccessToken());
+    OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(provider.getUserInfoURI()).buildQueryMessage();
+    bearerClientRequest.addHeader("Authorization", "Bearer " + oAuthResponse.getAccessToken());
 
-        OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
+    OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
 
-        String body = resourceResponse.getBody();
-        UserDTO user = provider.mapUser(mapper, body);
-        user.setCreationDate(new Date(DateTime.now().getMillis()));
+    String body = resourceResponse.getBody();
+    UserDTO user = provider.mapUser(mapper, body);
+    user.setCreationDate(new Date(DateTime.now().getMillis()));
 
-        UserDTO savedUser = userService.saveUser(user);
-        Tokens tokens = issueNativeTokens();
+    UserDTO savedUser = userService.saveUser(user);
+    Tokens tokens = issueNativeTokens();
 
-        return getResponseBuilder()
-                .header(ACCESS_TOKEN, tokens.getAccessToken())
-                .header(REFRESH_TOKEN, tokens.getRefreshToken())
-                .header(EXPIRES_IN, tokens.getAccessExpirationDate()).entity(savedUser).build();
-    }
+    return getResponseBuilder()
+    .header(ACCESS_TOKEN, tokens.getAccessToken())
+            .header(REFRESH_TOKEN, tokens.getRefreshToken())
+            .header(EXPIRES_IN, tokens.getAccessExpirationDate()).entity(savedUser).build();
+}
 
     private UserDTO validateClient(OAuthTokenRequest request) throws OAuthProblemException {
         UserDTO user = userService.findByEmail(request.getUsername());

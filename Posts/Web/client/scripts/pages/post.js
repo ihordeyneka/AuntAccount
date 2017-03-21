@@ -280,19 +280,24 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
         success: function() {
           globals.loading($('body'), true);
           var postData = {
-            keywords: $("#inputKeywords").val(),
-            post: $("#inputPost").val(),
-            locationId: self.selectedLocationId,
-            place: $("#inputLocation").val(),
-            latitude: self.marker.position.lat(),
-            longitude: self.marker.position.lng(),
-            radius: self.radiusSlider.getValue()
+            postTags: $("#inputKeywords").val(),
+            description: $("#inputPost").val(),
+            location: {
+                id: self.selectedLocationId,
+                latitude: self.marker.position.lat(),
+                longitude: self.marker.position.lng(),
+                radius: self.radiusSlider.getValue()
+            },
+            userId: $.didoauth.user.id
+           // place: $("#inputLocation").val(),
+
           };
 
           $.post({
               url: config.apiRoot + "/posts",
               dataType: "json",
-              data: postData
+              contentType: "application/json",
+              data: JSON.stringify(postData)
           }).done(function(data) {
             self.lastPostId = data.id;
             if (self.attachmentUpload.fileinput("getFilesCount") > 0)
