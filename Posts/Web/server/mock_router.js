@@ -111,7 +111,8 @@ exports.init = function(router) {
   var signIn = function(req, res) {
     var result = {
       userId: 1,
-      name: "Jack Shephard"
+      firstName: "Jack",
+      lastName: "Shephard"
     }
 
     res.statusCode = 200;
