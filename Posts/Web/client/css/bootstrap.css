@@ -82,11 +82,20 @@ a.header-nav__navigation-link:hover {
   padding-right: 24px;
 }
 
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary:focus,
-.btn-primary:hover:active,
-.btn-primary:focus:active {
+.btn.btn-primary:hover,
+.btn.btn-primary:active,
+.btn.btn-primary:focus,
+.btn.btn-primary:hover:active,
+.btn.btn-primary:focus:active,
+.btn.btn-primary.active,
+.btn.btn-primary.active:hover,
+.btn.btn-primary.active:visited,
+.btn.btn-primary.active:active,
+.btn.btn-primary.active:focus,
+.btn.btn-primary.active:hover:active,
+.btn.btn-primary.active:focus:active,
+.btn.btn-primary.active:focus:visited
+{
   color: #979797;
   background-color: transparent;
 }
