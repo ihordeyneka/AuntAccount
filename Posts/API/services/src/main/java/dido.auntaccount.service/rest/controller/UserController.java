@@ -71,6 +71,14 @@ public class UserController extends Controller {
         return getResponseBuilder().status(200).entity(posts).build();
     }
 
+    @OPTIONS
+    @Path("/{param}/posts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserPostsPreflight(@PathParam("param") Long userId) {
+        return getResponseBuilder().build();
+    }
+
+
     @GET
     @Path("/{param}/reviews")
     @Secured

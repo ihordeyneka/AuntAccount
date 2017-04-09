@@ -9,6 +9,7 @@ define(["../core/globals", "../core/config"], function(globals, config) {
         dataType: "json"
     }).done(function(data) {
       var element = $(".aa-conversation-container");
+      var userId = $.didoauth.user.id;
       element.empty();
       if (data.length == 0) {
         element.append("<h3>There are no replies yet.</h3>");
@@ -22,10 +23,8 @@ define(["../core/globals", "../core/config"], function(globals, config) {
             header: displayName,
             content: reply.description,
             ///TODO: check if user is logged in
-            /* replyOffset: reply.sender.id ? "4" : "2", //bootstrap offsets
-            replyCss: reply.sender.id ? "aa-reply-my" : "aa-reply-their"*/
-            replyOffset: "4",
-            replyCss: "aa-reply-my"
+            replyOffset: reply.sender.id === userId ? "4" : "2", //bootstrap offsets
+            replyCss: reply.sender.id === userId  ? "aa-reply-my" : "aa-reply-their"
           }));
         }
       }
