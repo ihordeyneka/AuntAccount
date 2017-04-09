@@ -1,7 +1,15 @@
 define(["../core/globals", "../core/config"], function(globals, config) {
   var self = {};
 
-  self.init = function() {
+  self.init = function(recoveryToken) {
+    if (recoveryToken != "") {
+      $("#inputOldPassword").val("XXXXXXXX"); //creating an illusion for user as if the old password is already entered
+      $("#btnBack").hide();
+    } else {
+      $("#btnBack").show();
+    }
+
+
     self.validatorForm = $("#formPassword");
     self.validatorForm.validator({ focus: false });
     self.notificationArea = $(".aa-notification-area").notificationArea();
@@ -14,7 +22,8 @@ define(["../core/globals", "../core/config"], function(globals, config) {
           globals.loading($('body'), true);
           var passwordData = {
             oldPassword: $("#inputOldPassword").val(),
-            newPassword: $("#inputNewPassword").val()
+            newPassword: $("#inputNewPassword").val(),
+            recoveryToken: recoveryToken
           };
 
           $.post({

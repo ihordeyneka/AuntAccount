@@ -82,19 +82,19 @@ a.header-nav__navigation-link:hover {
   padding-right: 24px;
 }
 
-.btn.btn-primary:hover,
-.btn.btn-primary:active,
-.btn.btn-primary:focus,
-.btn.btn-primary:hover:active,
-.btn.btn-primary:focus:active,
-.btn.btn-primary.active,
-.btn.btn-primary.active:hover,
-.btn.btn-primary.active:visited,
-.btn.btn-primary.active:active,
-.btn.btn-primary.active:focus,
-.btn.btn-primary.active:hover:active,
-.btn.btn-primary.active:focus:active,
-.btn.btn-primary.active:focus:visited
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover:active,
+.btn-primary:focus:active,
+.btn-primary.active,
+.btn-primary.active:hover,
+.btn-primary.active:visited,
+.btn-primary.active:active,
+.btn-primary.active:focus,
+.btn-primary.active:hover:active,
+.btn-primary.active:focus:active,
+.btn-primary.active:focus:visited
 {
   color: #979797;
   background-color: transparent;
@@ -155,6 +155,10 @@ a.header-nav__navigation-link:hover {
   background-color: #9F9F82;
 }
 
+/*---Modal---*/
+.modal-content {
+  border-radius: 0;
+}
 /*---Slider---*/
 div.slider.slider-horizontal {
   display: block;
