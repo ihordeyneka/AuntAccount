@@ -44,8 +44,8 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
     public List<OfferDTO> getPostOffersWithReplies(Long postId) {
         Post post = find(postId);
         List<Object[]> resultList = entityManager.createNativeQuery("SELECT o.*, count(m.id) as replyCount " +
-                "FROM OFFER o LEFT JOIN MESSAGE m ON o.id = m.offerId AND m.senderId != ?2 AND m.isRead = 0 " +
-                "WHERE o.postId = ?1 GROUP BY o.id",
+                        "FROM OFFER o LEFT JOIN MESSAGE m ON o.id = m.offerId AND m.senderId != ?2 AND m.isRead = 0 " +
+                        "WHERE o.postId = ?1 GROUP BY o.id",
                 "OfferReplyCountMapping")
                 .setParameter(1, postId)
                 .setParameter(2, post.getUserId()).getResultList();
@@ -63,5 +63,10 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
         query.setParameter("postId", postId)
                 .setParameter("photo", photo)
                 .executeUpdate();
+    }
+
+    public Post setPhoto(Post post, byte[] photo) {
+        post.setPhoto(photo);
+        return entityManager.merge(post);
     }
 }

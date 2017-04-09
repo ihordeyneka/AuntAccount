@@ -56,12 +56,19 @@ public class PostController extends Controller {
 
 
     @POST
-    @Path("/upload/photo")
+    @Path("/upload")
     @Secured
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream, @FormParam("postId") Long postId) throws IOException {
+    public Response uploadFile(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("postId") Long postId) throws IOException {
         postService.updatePhoto(uploadedInputStream, postId);
         return getResponseBuilder().build();
     }
+
+    @OPTIONS
+    @Path("/upload")
+    public Response uploadFilePreflight() throws IOException {
+        return getResponseBuilder().build();
+    }
+
 
 }

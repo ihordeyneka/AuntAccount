@@ -54,14 +54,14 @@ public class PostServiceImpl implements PostService {
     public List<OfferDTO> getPostOffers(Long postId) {
         //List<Offer> offers = postDAO.getOffersByPostId(postId);
         //return offers.stream().map(OfferDTO::new).collect(Collectors.toList());
-        return  postDAO.getPostOffersWithReplies(postId);
+        return postDAO.getPostOffersWithReplies(postId);
     }
 
     @Override
-    public void updatePhoto(InputStream stream, Long postId) {
+    public PostDTO updatePhoto(InputStream stream, Long postId) {
         Post post = postDAO.find(postId);
         if (post == null) {
-            return;
+            return null;
         }
         byte[] bytes = null;
         try {
@@ -69,7 +69,8 @@ public class PostServiceImpl implements PostService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        postDAO.updatePhoto(postId, bytes);
+        Post updatedPost = postDAO.setPhoto(post, bytes);
+        return new PostDTO(updatedPost);
     }
 
 }

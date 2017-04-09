@@ -24,7 +24,8 @@ public class LocationDTO implements DTO<Location> {
         this.city = location.getCity();
         this.region = location.getRegion();
         this.street = location.getStreet();
-        this.country = new CountryDTO(location.getCountry());
+        Country country = location.getCountry();
+        this.country = country != null ? new CountryDTO(country) : null;
         this.radius = location.getRadius();
     }
 

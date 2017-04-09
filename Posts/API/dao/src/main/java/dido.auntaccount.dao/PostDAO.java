@@ -20,6 +20,8 @@ public interface PostDAO {
 
     void updatePhoto(Long postId, byte[] photo);
 
-    public List<OfferDTO> getPostOffersWithReplies(Long postId);
+    List<OfferDTO> getPostOffersWithReplies(Long postId);
+
+    Post setPhoto(Post post, byte[] photo);
 
 }
