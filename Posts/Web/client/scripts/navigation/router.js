@@ -1,6 +1,11 @@
 define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
   var self = {};
 
+  var cleanHtml = function(html) {
+    //TODO: implement a dynamic and fast way of cleaning HTML from replacement tokens
+    return html.replaceAll("{{:0}}", "").replaceAll("{{:1}}", "").replaceAll("{{:2}}", "");
+  }
+
   self.init = function() {
     var hash = location.hash != "" ? location.hash : "#home";
     navigate(hash);
@@ -44,7 +49,7 @@ define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
           var token = "{{:" + (i - 1) + "}}"
           html = html.replaceAll(token, routeParts[i]);
         }
-        $("#router").html(html);
+        $("#router").html(cleanHtml(html));
       });
     });
   }
