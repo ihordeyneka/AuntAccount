@@ -24,6 +24,8 @@ public class InjectionServiceModule extends AbstractModule {
         bind(SupplierService.class).to(SupplierServiceImpl.class);
         bind(PasswordService.class).to(PasswordServiceImpl.class);
         bind(TokenService.class).to(TokenServiceImpl.class);
+        bind(TagService.class).to(TagServiceImpl.class);
+        bind(LocationService.class).to(LocationServiceImpl.class);
 
         Names.bindProperties(binder(), PropertiesHandler.initProperties());
     }

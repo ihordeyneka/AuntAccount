@@ -8,11 +8,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.suggest.SuggestBuilder;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class SearchSupplierServiceImpl implements SearchSupplierService {
         }
     }
     }';*/
+
     @Override
     public List<Long> getSupplierIdsByTags(List<String> tags) {
         List<Long> supplierIds = new ArrayList<>();
