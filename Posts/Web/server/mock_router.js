@@ -5,7 +5,8 @@ exports.init = function(router) {
   //api
   router.post(mockApiRoot + '/posts/upload', function(req, res) {
     res.statusCode = 200;
-    res.send('OK');
+    res.setHeader('Content-Type', 'application/json');
+    res.send('{}');
   });
 
   router.post(mockApiRoot + '/posts', function(req, res) {
@@ -106,6 +107,20 @@ exports.init = function(router) {
   router.post(mockApiRoot + '/users', function(req, res) {
     res.statusCode = 200;
     res.send('OK');
+  });
+
+  router.post(mockApiRoot + '/user/profile', function(req, res) {
+    var result = { id: 0, first: 'dummy', last: 'user' };
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  router.post(mockApiRoot + '/user/picture', function(req, res) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send('{}');
   });
 
   var signIn = function(req, res) {

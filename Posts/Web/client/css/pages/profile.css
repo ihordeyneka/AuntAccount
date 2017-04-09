@@ -1,5 +1,5 @@
 .aa-profile-section {
-  margin-bottom: 30px;  
+  margin-bottom: 20px;
 }
 .aa-profile-picture {
   width: 100px;
@@ -8,6 +8,17 @@
   background-size: 100px 100px;
 }
 .aa-profile-signout {
-  padding-top: 30px;
+  padding-top: 32px;
   height: 100px;
+}
+.btn-change-password {
+  padding: 0 !important;
+  border: none !important;
+  line-height: 44px !important;
+  font-size: 12px !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.btn-change-password:hover {
+  color: #000;
 }

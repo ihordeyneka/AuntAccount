@@ -9,25 +9,30 @@
         <div class="aa-profile-picture left">
         </div>
         <div class="aa-profile-signout right">
-          <button type="button" id="btnSignOut" class="btn btn-lg btn-primary right btn-signout">Sign Out</button>
+          <button type="button" id="btnSignOut" class="btn btn-primary right btn-signout">Sign Out</button>
+        </div>
+      </div>
+    </div>
+    <div class="row aa-profile-section">
+      <div class="col-sm-offset-3 col-sm-6">
+        <label for="inputFirst" class="lb">First Name</label>
+        <div class="form-group">
+          <input type="text" class="form-control" id="inputFirst" required placeholder="First Name">
+        </div>
+        <label for="inputLast" class="lb">Last Name</label>
+        <div class="form-group">
+          <input type="text" class="form-control" id="inputLast" required placeholder="Last Name">
+        </div>
+        <label for="inputPicture" class="lb">Profile Picture</label>
+        <div class="form-group">
+          <input type="file" class="form-control input" id="inputPicture" placeholder="" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-offset-3 col-sm-6">
-        <label for="inputEmail" class="lb-lg">Email</label>
-        <div class="form-group">
-          <input type="email" class="form-control input-lg" id="inputEmail" required placeholder="Email">
-        </div>
-        <label for="inputFirst" class="lb-lg">First Name</label>
-        <div class="form-group">
-          <input type="text" class="form-control input-lg" id="inputFirst" required placeholder="First Name">
-        </div>
-        <label for="inputLast" class="lb-lg">Last Name</label>
-        <div class="form-group">
-          <input type="text" class="form-control input-lg" id="inputLast" required placeholder="Last Name">
-        </div>
-        <button type="button" id="btnUpdate" class="btn btn-lg btn-primary right btn-profile-update">Update</button>
+        <button type="button" id="btnProfileUpdate" class="btn btn-primary left btn-profile-update">Update</button>
+        <a id="btnChangePassword" href="#password" class="btn btn-lg btn-primary right btn-change-password">Change Password</a>
       </div>
     </div>
   </div>
