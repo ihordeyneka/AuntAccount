@@ -123,6 +123,12 @@ exports.init = function(router) {
     res.send('{}');
   });
 
+  router.post(mockApiRoot + '/user/password', function(req, res) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send("{}");
+  });
+
   var signIn = function(req, res) {
     var result = {
       userId: 1,
