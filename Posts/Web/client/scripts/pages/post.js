@@ -85,7 +85,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
           var result = [];
 
           $.ajax({
-              url: config.apiRoot + "/tags/" + query,
+              url: config.apiRoot + "/tag/" + query,
               dataType: "json",
               async: false
           }).done(function(data) {
@@ -167,7 +167,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
       fitToElement: true,
       source: function(query, process) {
         $.ajax({
-            url: config.apiRoot + "/locations/" + query,
+            url: config.apiRoot + "/location/" + query,
             dataType: "json"
         }).done(function(data) {
             process(data);
