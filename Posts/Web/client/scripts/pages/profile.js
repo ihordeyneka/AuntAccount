@@ -10,6 +10,34 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
     self.validatorForm.validator({ focus: false });
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
+    initPictureUpload();
+
+    globals.loading($('body'), true);
+    $.ajax({
+        url: config.apiRoot + "/users/" + didoauth.user.id,
+        dataType: "json"
+    }).done(function(data) {
+      if (data == null) {
+        self.notificationArea.error({
+          message: "User profile was not found."
+        });
+      } else {
+        $("#inputFirst").val(data.firstName);
+        $("#inputLast").val(data.lastName);
+        $(".aa-profile-picture").empty();
+        if (data.profilePicture) {
+          $("img").width("100%").attr("src", data.profilePicture).appendTo(".aa-profile-picture");
+        }
+        initButtonHandlers();
+      }
+    }).fail(function(result) {
+      self.notificationArea.error();
+    }).always(function() {
+      globals.loading($('body'), false);
+    });
+  }
+
+  var initPictureUpload = function() {
     self.pictureUpload = $("#inputPicture").fileinput({
       browseLabel: 'Change Picture',
       browseIcon: '',
@@ -27,7 +55,9 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
       maxFileCount: 1,
       allowedFileExtensions: ["jpg", "jpeg", "bmp", "gif", "png"]
     });
+  }
 
+  var initButtonHandlers = function() {
     $("#btnProfileUpdate").click(function() {
       globals.validate({
         notificationArea: self.notificationArea,
@@ -49,7 +79,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
               self.pictureUpload.fileinput("upload");
 
             self.notificationArea.success({
-              message: "Profile is being updated, you should be able to see updated changes in a moment."
+              message: "Profile is being updated, you should be able to see updated changes soon."
             });
           }).fail(function(result) {
             self.notificationArea.error();
@@ -59,7 +89,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
         }
       });
     });
-  }
+  };
 
   return self;
 });
