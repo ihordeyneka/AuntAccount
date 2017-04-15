@@ -88,4 +88,19 @@ public class UserController extends Controller {
         return getResponseBuilder().status(200).entity(reviews).build();
     }
 
+    @POST
+    @Path("/profile")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateProfile(UserDTO user) throws Exception {
+        //TODO get user from token and update name and surname
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/profile")
+    public Response updateProfilePreflight() throws Exception {
+        return getResponseBuilder().build();
+    }
+
 }

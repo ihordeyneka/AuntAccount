@@ -109,7 +109,7 @@ exports.init = function(router) {
     res.send('OK');
   });
 
-  router.post(mockApiRoot + '/user/profile', function(req, res) {
+  router.post(mockApiRoot + '/users/profile', function(req, res) {
     var result = { id: 0, first: 'dummy', last: 'user' };
 
     res.statusCode = 200;

@@ -35,12 +35,12 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
         success: function() {
           globals.loading($('body'), true);
           var profileData = {
-            first: $("#inputFirst").val(),
-            last: $("#inputLast").val()
+            firstName: $("#inputFirst").val(),
+            lastName: $("#inputLast").val()
           };
 
           $.post({
-              url: config.apiRoot + "/user/profile",
+              url: config.apiRoot + "/users/profile",
               dataType: "json",
               contentType: "application/json",
               data: JSON.stringify(profileData)
