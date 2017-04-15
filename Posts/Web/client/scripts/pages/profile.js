@@ -16,7 +16,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
       showUpload: false,
       showRemove: false,
       showPreview: false,
-      uploadUrl: config.apiRoot + "/user/picture",
+      uploadUrl: config.apiRoot + "/users/picture",
       uploadAsync: false,
       layoutTemplates: {
         progress: '', //hide progress

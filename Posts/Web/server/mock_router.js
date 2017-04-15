@@ -117,7 +117,7 @@ exports.init = function(router) {
     res.send(JSON.stringify(result));
   });
 
-  router.post(mockApiRoot + '/user/picture', function(req, res) {
+  router.post(mockApiRoot + '/users/picture', function(req, res) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.send('{}');
