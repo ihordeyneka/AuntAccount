@@ -9,15 +9,18 @@ public class RefreshTokenDTO {
 
     private String refreshToken;
     private Date expirationDate;
+    private Long userId;
 
-    public RefreshTokenDTO(String refreshToken, Date expirationDate) {
+    public RefreshTokenDTO(String refreshToken, Date expirationDate, Long userId) {
         this.refreshToken = refreshToken;
         this.expirationDate = expirationDate;
+        this.userId = userId;
     }
 
     public RefreshTokenDTO(RefreshToken refreshToken) {
         this.refreshToken = refreshToken.getToken();
         this.expirationDate = refreshToken.getExpirationDate();
+        this.userId = refreshToken.getUserId();
     }
 
     public String getRefreshToken() {
@@ -26,6 +29,10 @@ public class RefreshTokenDTO {
 
     public Date getExpirationDate() {
         return expirationDate;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public boolean isValid() {

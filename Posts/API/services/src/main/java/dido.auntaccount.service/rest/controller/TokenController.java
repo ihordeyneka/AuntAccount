@@ -101,7 +101,7 @@ public class TokenController extends Controller {
             return getResponseBuilder(UNAUTHORIZED.getStatusCode()).entity(ex).build();
         }
 
-        Tokens tokens = issueNativeTokens();
+        Tokens tokens = issueNativeTokens(userDTO.getId());
 
         return getResponseBuilder()
                 .header(ACCESS_TOKEN, tokens.getAccessToken())
@@ -125,7 +125,7 @@ public class TokenController extends Controller {
         String accessToken = oauthIssuerImpl.accessToken();
 
         long accessExpirationDate = getAccessExpirationDate();
-        tokenService.saveAccessToken(accessToken, accessExpirationDate);
+        tokenService.saveAccessToken(accessToken, accessExpirationDate, storedRefreshToken.getUserId());
 
         return getResponseBuilder()
                 .header(ACCESS_TOKEN, accessToken)
@@ -135,35 +135,35 @@ public class TokenController extends Controller {
 
     private Response buildResponse(ClientProvider provider, String code) throws OAuthProblemException, OAuthSystemException {
         OAuthClientRequest request = OAuthClientRequest
-            .tokenProvider(provider.getProvider())
-            .setGrantType(provider.getGrantType())
-            .setClientId(provider.getClientId())
-            .setClientSecret(provider.getClientSecret())
-            .setRedirectURI(provider.getRedirectURI())
-            .setCode(code)
-            .buildBodyMessage();
+                .tokenProvider(provider.getProvider())
+                .setGrantType(provider.getGrantType())
+                .setClientId(provider.getClientId())
+                .setClientSecret(provider.getClientSecret())
+                .setRedirectURI(provider.getRedirectURI())
+                .setCode(code)
+                .buildBodyMessage();
 
-    OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+        OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 
-    OAuthAccessTokenResponse oAuthResponse = provider.getAccessTokenResponse(oAuthClient, request);
+        OAuthAccessTokenResponse oAuthResponse = provider.getAccessTokenResponse(oAuthClient, request);
 
-    OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(provider.getUserInfoURI()).buildQueryMessage();
-    bearerClientRequest.addHeader("Authorization", "Bearer " + oAuthResponse.getAccessToken());
+        OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(provider.getUserInfoURI()).buildQueryMessage();
+        bearerClientRequest.addHeader("Authorization", "Bearer " + oAuthResponse.getAccessToken());
 
-    OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
+        OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
 
-    String body = resourceResponse.getBody();
-    UserDTO user = provider.mapUser(mapper, body);
-    user.setCreationDate(new Date(DateTime.now().getMillis()));
+        String body = resourceResponse.getBody();
+        UserDTO user = provider.mapUser(mapper, body);
+        user.setCreationDate(new Date(DateTime.now().getMillis()));
 
-    UserDTO savedUser = userService.saveUser(user);
-    Tokens tokens = issueNativeTokens();
+        UserDTO savedUser = userService.saveUser(user);
+        Tokens tokens = issueNativeTokens(savedUser.getId());
 
-    return getResponseBuilder()
-    .header(ACCESS_TOKEN, tokens.getAccessToken())
-            .header(REFRESH_TOKEN, tokens.getRefreshToken())
-            .header(EXPIRES_IN, tokens.getAccessExpirationDate()).entity(savedUser).build();
-}
+        return getResponseBuilder()
+                .header(ACCESS_TOKEN, tokens.getAccessToken())
+                .header(REFRESH_TOKEN, tokens.getRefreshToken())
+                .header(EXPIRES_IN, tokens.getAccessExpirationDate()).entity(savedUser).build();
+    }
 
     private UserDTO validateClient(OAuthTokenRequest request) throws OAuthProblemException {
         UserDTO user = userService.findByEmail(request.getUsername());
@@ -182,7 +182,7 @@ public class TokenController extends Controller {
         return user;
     }
 
-    private Tokens issueNativeTokens() throws OAuthSystemException {
+    private Tokens issueNativeTokens(Long userId) throws OAuthSystemException {
 
         OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
 
@@ -190,10 +190,10 @@ public class TokenController extends Controller {
         String refreshToken = oauthIssuerImpl.refreshToken();
 
         long accessExpirationDate = getAccessExpirationDate();
-        tokenService.saveAccessToken(accessToken, accessExpirationDate);
+        tokenService.saveAccessToken(accessToken, accessExpirationDate, userId);
 
         long refreshExpirationDate = getRefreshExpirationDate();
-        tokenService.saveRefreshToken(refreshToken, refreshExpirationDate);
+        tokenService.saveRefreshToken(refreshToken, refreshExpirationDate, userId);
 
         return new Tokens(accessToken, accessExpirationDate, refreshToken, refreshExpirationDate);
     }

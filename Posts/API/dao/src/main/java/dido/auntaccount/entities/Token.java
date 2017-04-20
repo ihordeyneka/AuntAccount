@@ -10,6 +10,7 @@ public class Token {
     @Id
     private String token;
     private Date expirationDate;
+    private Long userId;
 
     public Token() {
     }
@@ -17,6 +18,12 @@ public class Token {
     public Token(String token, Date expirationDate) {
         this.token = token;
         this.expirationDate = expirationDate;
+    }
+
+    public Token(String token, Date expirationDate, Long userId) {
+        this.token = token;
+        this.expirationDate = expirationDate;
+        this.userId = userId;
     }
 
     public String getToken() {
@@ -37,4 +44,11 @@ public class Token {
         return this;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

@@ -20,6 +20,7 @@ public class Controller {
     private ResponseBuilder setHeaders(ResponseBuilder builder) {
         return builder.header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "GET, DELETE, PUT, OPTIONS, POST")
-                .header("Access-Control-Allow-Headers", "Content-Type, x-http-method-override");
+                .header("Access-Control-Allow-Headers", "Content-Type, x-http-method-override, If-Modified-Since, Authentication, Authorization")
+                .header("Access-Control-Expose-Headers", "access-token, refresh-token, expires_in");
     }
 }

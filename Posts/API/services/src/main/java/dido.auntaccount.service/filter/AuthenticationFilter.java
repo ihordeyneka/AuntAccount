@@ -2,6 +2,7 @@ package dido.auntaccount.service.filter;
 
 import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.service.business.TokenService;
+import dido.auntaccount.service.rest.controller.TokenController;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.ParameterStyle;
@@ -38,19 +39,21 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
             String accessToken = oauthRequest.getAccessToken();
 
-            validateToken(accessToken);
+            TokenDTO tokenDTO = validateToken(accessToken);
+            requestContext.getHeaders().add(TokenController.ACCESS_TOKEN, tokenDTO.getToken());
 
         } catch (OAuthProblemException | OAuthSystemException e) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
         }
     }
 
-    private void validateToken(String token) throws OAuthProblemException {
+    private TokenDTO validateToken(String token) throws OAuthProblemException {
         TokenDTO serverToken = tokenService.getToken(token);
         Date now = DateTime.now().toDate();
         if (serverToken == null || serverToken.getExpirationDate().before(now)) {
             throw OAuthProblemException.error("Token is not valid");
         }
+        return serverToken;
     }
 
 }

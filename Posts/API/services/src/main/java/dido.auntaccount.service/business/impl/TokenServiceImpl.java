@@ -43,8 +43,8 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public RefreshTokenDTO saveRefreshToken(String token, long expirationDate) {
-        RefreshToken refreshToken = new RefreshToken(token, new Date(expirationDate));
+    public RefreshTokenDTO saveRefreshToken(String token, long expirationDate, long userId) {
+        RefreshToken refreshToken = new RefreshToken(token, new Date(expirationDate), userId);
         RefreshToken savedRefreshToken = null;
         try {
             savedRefreshToken = refreshTokenDAO.save(refreshToken);
@@ -55,8 +55,8 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public TokenDTO saveAccessToken(String token, long expirationDate) {
-        Token accessToken = new Token(token, new Date(expirationDate));
+    public TokenDTO saveAccessToken(String token, long expirationDate, long userId) {
+        Token accessToken = new Token(token, new Date(expirationDate), userId);
         Token savedToken = null;
         try {
             savedToken = tokenDAO.save(accessToken);

@@ -1,12 +1,16 @@
 package dido.auntaccount.service.rest.controller;
 
 
+import dido.auntaccount.dao.TokenDAO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.ReviewDTO;
+import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.service.business.PasswordService;
+import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
 import dido.auntaccount.service.filter.Secured;
+import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.inject.Inject;
@@ -25,13 +29,23 @@ public class UserController extends Controller {
     @Inject
     PasswordService passwordService;
 
+    @Inject
+    TokenService tokenService;
+
     @GET
     @Path("/{param}")
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("param") Long userId) {
         UserDTO user = userService.getUser(userId);
-        return getResponseBuilder().status(200).entity(user).build();
+        return getResponseBuilder().entity(user).build();
+    }
+
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserPreflight(@PathParam("param") Long userId) {
+        return getResponseBuilder().build();
     }
 
     @GET
@@ -40,7 +54,7 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserByEmail(@PathParam("param") String email) {
         UserDTO user = userService.findByEmail(email);
-        return getResponseBuilder().status(200).entity(user).build();
+        return getResponseBuilder().entity(user).build();
     }
 
     @POST
@@ -53,7 +67,7 @@ public class UserController extends Controller {
         String hashedPassword = passwordService.createHash(password);
         user.setPassword(hashedPassword);
         UserDTO savedUser = userService.saveUser(user);
-        return getResponseBuilder().status(200).entity(savedUser).build();
+        return getResponseBuilder().entity(savedUser).build();
     }
 
 
@@ -70,7 +84,7 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserPosts(@PathParam("param") Long userId) {
         List<PostDTO> posts = userService.getUserPosts(userId);
-        return getResponseBuilder().status(200).entity(posts).build();
+        return getResponseBuilder().entity(posts).build();
     }
 
     @OPTIONS
@@ -87,7 +101,7 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserReviews(@PathParam("param") Long userId) {
         List<ReviewDTO> reviews = userService.getUserReviews(userId);
-        return getResponseBuilder().status(200).entity(reviews).build();
+        return getResponseBuilder().entity(reviews).build();
     }
 
     @POST
@@ -95,8 +109,10 @@ public class UserController extends Controller {
     @Path("/profile")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProfile(UserDTO user) throws Exception {
-        //TODO get user from token and update name and surname and return user
+    public Response updateProfile(UserDTO user, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
+        TokenDTO foundToken = tokenService.getToken(token);
+        user.setId(foundToken.getUserId());
+        userService.updateUser(user);
         return getResponseBuilder().entity("{}").build();
     }
 
@@ -111,9 +127,10 @@ public class UserController extends Controller {
     @Path("/picture")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updatePicture(@FormDataParam("file_data") InputStream uploadedInputStream) throws Exception {
-        //TODO get user from token and update name and surname and return user
-        return getResponseBuilder().entity("{}").build();
+    public Response updatePicture(@FormDataParam("file_data") InputStream uploadedInputStream, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
+        TokenDTO foundToken = tokenService.getToken(token);
+        userService.updatePicture(foundToken.getUserId(), IOUtils.toByteArray(uploadedInputStream));
+        return getResponseBuilder().build();
     }
 
     @OPTIONS

@@ -296,7 +296,7 @@ define(["jquery"], function ($) {
         'If-Modified-Since',
         'Mon, 26 Jul 1997 05:00:00 GMT'
       );
-      xhr.setRequestHeader("Authentication", "Bearer " + accessToken);
+      xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
     }
   };
 

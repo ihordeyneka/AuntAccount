@@ -62,5 +62,12 @@ public class UserServiceImpl implements UserService {
         return reviews.stream().map(ReviewDTO::new).collect(Collectors.toList());
     }
 
+    public void updateUser(UserDTO user) {
+        userDAO.updateUser(user.buildEntity());
+    }
+
+    public void updatePicture(Long userId, byte[] picture) {
+        userDAO.updatePicture(userId, picture);
+    }
 
 }

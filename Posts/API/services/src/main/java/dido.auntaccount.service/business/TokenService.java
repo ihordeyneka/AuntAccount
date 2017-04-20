@@ -9,8 +9,8 @@ public interface TokenService {
 
     RefreshTokenDTO getRefreshToken(String token);
 
-    RefreshTokenDTO saveRefreshToken(String token, long expirationDate);
+    RefreshTokenDTO saveRefreshToken(String token, long expirationDate, long userId);
 
-    TokenDTO saveAccessToken(String token, long expirationDate);
+    TokenDTO saveAccessToken(String token, long expirationDate, long userId);
 
 }

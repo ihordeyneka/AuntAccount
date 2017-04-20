@@ -9,6 +9,7 @@ import dido.auntaccount.entities.User;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
 
     public List<PostDTO> getUserPostsWithOfferCount(Long userId) {
         List<Object[]> resultList = entityManager.createNativeQuery("SELECT p.*, count(o.id) as offerCount" +
-                " FROM POST p LEFT JOIN OFFER o ON p.id = o.postId WHERE p.userId=?1 GROUP BY p.id",
+                        " FROM POST p LEFT JOIN OFFER o ON p.id = o.postId WHERE p.userId=?1 GROUP BY p.id",
                 "PostOfferCountMapping")
                 .setParameter(1, userId).getResultList();
         List<PostDTO> posts = new ArrayList<>();
@@ -55,6 +56,34 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
             posts.add(new PostDTO(post, offerCount.intValue()));
         });
         return posts;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        EntityTransaction et = entityManager.getTransaction();
+        try {
+            et.begin();
+            final Query query = entityManager.createQuery("UPDATE User SET firstName=:firstName, lastName=:lastName WHERE id=:userId");
+            query.setParameter("firstName", user.getFirstName())
+                    .setParameter("lastName", user.getLastName())
+                    .setParameter("userId", user.getId())
+                    .executeUpdate();
+            et.commit();
+
+        } catch (Exception e) {
+            rollback(et);
+            throw e;
+        }
+    }
+
+    @Override
+    public void updatePicture(Long id, byte[] image) {
+        final User user = find(id);
+        if (user == null) {
+            return;
+        }
+        user.setPhoto(image);
+        entityManager.merge(user);
     }
 
 

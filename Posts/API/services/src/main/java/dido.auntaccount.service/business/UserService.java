@@ -18,4 +18,8 @@ public interface UserService {
 
     List<ReviewDTO> getUserReviews(Long userId);
 
+    void updateUser(UserDTO user);
+
+    void updatePicture(Long userId, byte[] picture);
+
 }

@@ -8,6 +8,7 @@ public class TokenDTO {
 
     private String token;
     private Date expirationDate;
+    private Long userId;
 
     public TokenDTO() {
     }
@@ -15,6 +16,7 @@ public class TokenDTO {
     public TokenDTO(Token token) {
         this.token = token.getToken();
         this.expirationDate = token.getExpirationDate();
+        this.userId = token.getUserId();
     }
 
     public String getToken() {
@@ -33,4 +35,11 @@ public class TokenDTO {
         this.expirationDate = expirationDate;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

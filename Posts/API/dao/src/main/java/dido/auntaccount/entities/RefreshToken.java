@@ -12,12 +12,15 @@ public class RefreshToken {
 
     private Date expirationDate;
 
+    private Long userId;
+
     public RefreshToken() {
     }
 
-    public RefreshToken(String token, Date expirationDate) {
+    public RefreshToken(String token, Date expirationDate, Long userId) {
         this.token = token;
         this.expirationDate = expirationDate;
+        this.userId = userId;
     }
 
     public String getToken() {
@@ -35,6 +38,14 @@ public class RefreshToken {
     public RefreshToken setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
         return this;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 }
