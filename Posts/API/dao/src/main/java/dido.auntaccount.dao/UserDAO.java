@@ -23,8 +23,10 @@ public interface UserDAO {
 
     List<PostDTO> getUserPostsWithOfferCount(Long userId);
 
-    void updateUser(User user);
+    void updateUserProfile(User user);
 
     void updatePicture(Long id, byte[] image);
+
+    void updateUser(User user);
 
 }

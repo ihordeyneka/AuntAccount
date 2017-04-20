@@ -4,7 +4,6 @@ import dido.auntaccount.dao.UserDAO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.ReviewDTO;
 import dido.auntaccount.dto.UserDTO;
-import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.UserService;
@@ -62,12 +61,17 @@ public class UserServiceImpl implements UserService {
         return reviews.stream().map(ReviewDTO::new).collect(Collectors.toList());
     }
 
-    public void updateUser(UserDTO user) {
-        userDAO.updateUser(user.buildEntity());
+    public void updateUserProfile(UserDTO user) {
+        userDAO.updateUserProfile(user.buildEntity());
     }
 
     public void updatePicture(Long userId, byte[] picture) {
         userDAO.updatePicture(userId, picture);
+    }
+
+    @Override
+    public void updateUser(UserDTO user) {
+        userDAO.updateUser(user.buildEntity());
     }
 
 }

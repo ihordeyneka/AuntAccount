@@ -27,7 +27,7 @@ define(["../core/globals", "../core/config"], function(globals, config) {
           };
 
           $.post({
-              url: config.apiRoot + "/user/password",
+              url: config.apiRoot + "/users/password",
               dataType: "json",
               contentType: "application/json",
               data: JSON.stringify(passwordData)

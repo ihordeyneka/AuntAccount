@@ -59,7 +59,7 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUserProfile(User user) {
         EntityTransaction et = entityManager.getTransaction();
         try {
             et.begin();
@@ -74,6 +74,11 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
             rollback(et);
             throw e;
         }
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 
     @Override

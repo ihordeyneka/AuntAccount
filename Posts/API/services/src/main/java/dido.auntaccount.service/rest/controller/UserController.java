@@ -2,10 +2,7 @@ package dido.auntaccount.service.rest.controller;
 
 
 import dido.auntaccount.dao.TokenDAO;
-import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.dto.ReviewDTO;
-import dido.auntaccount.dto.TokenDTO;
-import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
@@ -136,6 +133,27 @@ public class UserController extends Controller {
     @OPTIONS
     @Path("/picture")
     public Response updatePicturePreflight() throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @POST
+    @Secured
+    @Path("/password")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response changePassword(PasswordDTO passwordDTO, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
+        TokenDTO foundToken = tokenService.getToken(token);
+        final UserDTO user = userService.getUser(foundToken.getUserId());
+        boolean passwordCorrect = passwordService.verifyPassword(passwordDTO.getOldPassword(), user.getPassword());
+        if (passwordCorrect) {
+            user.setPassword(passwordService.createHash(passwordDTO.getNewPassword()));
+            userService.updateUser(user);
+        }
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/password")
+    public Response changePasswordPreflight() throws Exception {
         return getResponseBuilder().build();
     }
 

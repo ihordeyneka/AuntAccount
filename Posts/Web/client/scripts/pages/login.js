@@ -43,7 +43,7 @@ define(["../core/globals", "../core/config"], function(globals, config) {
           };
           globals.loading(validatorForm, true);
           $.post({
-              url: config.apiRoot + "/user/passwordReset",
+              url: config.apiRoot + "/users/passwordReset",
               dataType: "json",
               contentType: "application/json",
               data: JSON.stringify(passwordData)
