@@ -76,8 +76,7 @@ define(["jquery"], function ($) {
     this.configured = true;
 
     // intercept requests to the API, append auth headers
-    $.ajaxSetup({beforeSend: root.didoauth.appendAuthHeaders});
-    _currentPrefilterFunc = root.didoauth.tokenPrefilter;
+    _currentPrefilterFunc = root.didoauth.prefilterInterceptor;
     $.ajaxPrefilter(function(opts, originalOpts, jqXHR) {
       return _currentPrefilterFunc(opts, originalOpts, jqXHR);
     });
@@ -91,7 +90,6 @@ define(["jquery"], function ($) {
     this.configured = false;
 
     // remove global ajax "interceptors"
-    $.ajaxSetup({beforeSend: undefined});
     _currentPrefilterFunc = function() {};
   };
 
@@ -300,7 +298,9 @@ define(["jquery"], function ($) {
     }
   };
 
-  Auth.prototype.tokenPrefilter = function(opts, originalOpts, jqXHR) {
+  Auth.prototype.prefilterInterceptor = function(opts, originalOpts, jqXHR) {
+    root.didoauth.appendAuthHeaders(jqXHR, opts);
+
     var refreshToken = root.didoauth.retrieveData(REFRESH_TOKEN_KEY);
 
     // you could pass this option in on a "retry" so that it doesn't

@@ -181,7 +181,7 @@ exports.init = function(router) {
   });
 
   router.delete(mockApiRoot + '/auth/sign_out', function(req, res) {
-    var data = req.get('Authentication');
+    var data = req.get('Authorization');
     res.statusCode = data == "Bearer NEW-ACCESS-TOKEN-SECRET" ? 200 : 401;
     res.send(data);
   });
