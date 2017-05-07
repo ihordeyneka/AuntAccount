@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var minimist = require('minimist');
 var mock_router = require('./mock_router')
+var bodyParser = require('body-parser');
 
 // Express App
 var app = express();
@@ -9,6 +10,10 @@ var args = minimist(process.argv.slice(2));
 
 var PORT = args.port;
 var DIST_DIR = path.join(__dirname, '..', 'dist');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+//app.use(multer()); // for parsing multipart/form-data
 
 // Send static files from client directory
 app.use('/client', express.static(DIST_DIR + '/client'));
