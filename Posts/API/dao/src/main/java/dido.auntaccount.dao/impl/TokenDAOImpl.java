@@ -24,8 +24,8 @@ public class TokenDAOImpl extends GeneralDAO<Token> implements TokenDAO {
         return persistEntity(token);
     }
 
-    public void delete(Token token) throws Exception {
-        throw new UnsupportedOperationException("not implemented yet");
+    public void delete(String token) throws Exception {
+        deleteEntity(token, Token.class);
     }
 
     public void deleteExpiredTokens() {

@@ -8,7 +8,7 @@ public interface TokenDAO {
 
     Token save(Token token) throws Exception;
 
-    void delete(Token token) throws Exception;
+    void delete(String token) throws Exception;
 
     void deleteExpiredTokens();
 

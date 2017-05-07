@@ -13,4 +13,6 @@ public interface TokenService {
 
     TokenDTO saveAccessToken(String token, long expirationDate, long userId);
 
+    void deleteToken(String token);
+
 }

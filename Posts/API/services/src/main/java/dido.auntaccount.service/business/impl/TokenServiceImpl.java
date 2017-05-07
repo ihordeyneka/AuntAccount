@@ -67,4 +67,13 @@ public class TokenServiceImpl implements TokenService {
         return new TokenDTO(savedToken);
     }
 
+    @Override
+    public void deleteToken(String token) {
+        try {
+            tokenDAO.delete(token);
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "Couldn't delete token", e);
+        }
+    }
+
 }
