@@ -2,14 +2,19 @@ package dido.auntaccount.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 @Entity
 public class Token {
 
     @Id
     private String token;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date expirationDate;
+
     private Long userId;
 
     public Token() {

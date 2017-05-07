@@ -3,7 +3,7 @@ package dido.auntaccount.dto;
 import dido.auntaccount.entities.RefreshToken;
 import org.joda.time.DateTime;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class RefreshTokenDTO {
 

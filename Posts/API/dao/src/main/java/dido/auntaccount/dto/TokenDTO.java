@@ -2,7 +2,7 @@ package dido.auntaccount.dto;
 
 import dido.auntaccount.entities.Token;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class TokenDTO {
 

@@ -44,7 +44,7 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 @Path("/token")
 public class TokenController extends Controller {
 
-    private static final int ACCESS_EXPIRATION_MILLIS = 3600;
+    private static final int ACCESS_EXPIRATION_HOURS = 1;
     private static final int REFRESH_EXPIRATION_YEARS = 1;
     public static final String ACCESS_TOKEN = "access-token";
     public static final String REFRESH_TOKEN = "refresh-token";
@@ -203,7 +203,7 @@ public class TokenController extends Controller {
     }
 
     private static long getAccessExpirationDate() {
-        return DateTime.now().plus(ACCESS_EXPIRATION_MILLIS).getMillis();
+        return DateTime.now().plusHours(ACCESS_EXPIRATION_HOURS).getMillis();
     }
 
 }
