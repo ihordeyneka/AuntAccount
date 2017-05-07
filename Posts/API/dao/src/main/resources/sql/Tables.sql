@@ -116,7 +116,7 @@ CREATE TABLE `TOKEN` (
 
 CREATE TABLE `RefreshToken` (
   `Token` varchar(255) NOT NULL,
-  `ExpirationDate` date NOT NULL,
+  `ExpirationDate` datetime NOT NULL,
   PRIMARY KEY (`Token`)
 );
 
