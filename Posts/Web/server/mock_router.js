@@ -43,6 +43,18 @@ exports.init = function(router) {
     res.send(JSON.stringify(result));
   });
 
+  router.post(mockApiRoot + '/offers/:offer/messages', function(req, res) {
+    var result = {};
+    result.description = req.body.description;
+    result.id = 5;
+    result.sender = { id: 8, firstName: "Hugo", lastName: "Reyes" };
+    result.creationDate = "03-05-2017 12:37";
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
   router.get(mockApiRoot + '/users/:user/posts', function(req, res) {
     var result = [
       { id: 1, creationDate: "15-12-2016", offerCount: 5, newMessages: true, postTags: "Food, Gamburger", description: "We've just survived a plane crash<br/>We need to find something to eat..." },

@@ -5,6 +5,18 @@
   </div>
   <div class="row aa-conversation-container">
   </div>
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-6" tabindex="-1">
+      <div class="input-group form-group">
+        <input type="text" class="form-control" id="inputNewReply" placeholder="Type your reply here">
+        <span class="input-group-btn">
+          <button id="btnSendReply" class="btn btn-default" type="button" data-toggle="tooltip" title="Reply">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 <script id="templateReply" type="text/x-jsrender">
     <div class="col-sm-offset-{{:replyOffset}} col-sm-6 aa-conversation-reply {{:replyCss}}">
