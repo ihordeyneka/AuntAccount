@@ -54,6 +54,12 @@ public class PostController extends Controller {
         return getResponseBuilder().entity(offers).build();
     }
 
+    @OPTIONS
+    @Path("/{param}/offers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPostOffersPreflight() {
+        return getResponseBuilder().build();
+    }
 
     @POST
     @Path("/upload")

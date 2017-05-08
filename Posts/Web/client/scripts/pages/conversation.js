@@ -36,11 +36,15 @@ define(["../core/globals", "../core/config"], function(globals, config) {
   self.initNewReply = function(conversationId) {
     var sendReply = function() {
       var description = $("#inputNewReply").val();
-
+      var messageData = {
+                  description: description,
+                  offerId: conversationId
+             };
       $.post({
-          url: config.apiRoot + "/offers/" + conversationId + "/messages",
+          url: config.apiRoot + "/messages",
           dataType: "json",
-          data: { description: description },
+          contentType: "application/json",
+          data: JSON.stringify(messageData),
       }).done(function(reply) {
         appendReply(reply);
         $("#inputNewReply").val("").blur().focus(); //clear input and focus it

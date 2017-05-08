@@ -3,7 +3,7 @@ package dido.auntaccount.dto;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.User;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class MessageDTO implements DTO<Message> {
 
@@ -54,8 +54,9 @@ public class MessageDTO implements DTO<Message> {
         return description;
     }
 
-    public void setDescription(String description) {
+    public MessageDTO setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public byte[] getPhoto() {
@@ -70,24 +71,27 @@ public class MessageDTO implements DTO<Message> {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public MessageDTO setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+        return this;
     }
 
     public UserDTO getSender() {
         return sender;
     }
 
-    public void setSender(UserDTO sender) {
+    public MessageDTO setSender(UserDTO sender) {
         this.sender = sender;
+        return this;
     }
 
     public Long getOfferId() {
         return offerId;
     }
 
-    public void setOfferId(Long offerId) {
+    public MessageDTO setOfferId(Long offerId) {
         this.offerId = offerId;
+        return this;
     }
 
     public boolean isRead() {

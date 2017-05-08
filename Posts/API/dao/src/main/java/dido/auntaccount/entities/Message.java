@@ -1,7 +1,7 @@
 package dido.auntaccount.entities;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class Message {
@@ -12,6 +12,7 @@ public class Message {
     private String description;
     private byte[] photo;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
