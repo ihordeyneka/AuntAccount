@@ -34,7 +34,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
     self.initAttachmentUpload();
     self.addButtonHandlers();
     if (!self.googleApiLoaded) {
-      require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
+      require(["googleapi"], function() { initMap(); });
     }
     else {
       initMap();

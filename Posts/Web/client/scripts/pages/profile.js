@@ -1,5 +1,6 @@
 define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(globals, didoauth, config, fileinput) {
   var self = {};
+  self.googleApiLoaded = false;
 
   self.init = function() {
     $(".btn-signout").click(function() {
@@ -11,6 +12,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
     initPictureUpload();
+    initAutocomplete();
 
     globals.loading($('body'), true);
     $.ajax({
@@ -34,6 +36,25 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
       self.notificationArea.error();
     }).always(function() {
       globals.loading($('body'), false);
+    });
+  }
+
+  var initAutocomplete = function() {
+    if (!self.googleApiLoaded) {
+      require(["googleapi"], function() { initPrimaryLocationTypeahead(); });
+    }
+    else {
+      initPrimaryLocationTypeahead();
+    }
+  }
+
+  window.initPrimaryLocationTypeahead = function() {
+    var input = document.getElementById('inputPrimaryLocation');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function (e) {
+      var location = autocomplete.getPlace();
+      console.log(location);
     });
   }
 
