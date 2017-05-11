@@ -55,4 +55,33 @@ public class OfferController extends Controller {
         return getResponseBuilder().status(200).entity(messages).build();
     }
 
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOfferPreflight(@PathParam("param") Long offerId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveOfferPreflight(OfferDTO offer) throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/supplier")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOfferSupplierPreflight(@PathParam("param") Long offerId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/messages")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOfferMessagesPreflight(@PathParam("param") Long offerId) {
+        return getResponseBuilder().build();
+    }
+
 }

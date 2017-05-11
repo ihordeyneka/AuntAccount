@@ -39,12 +39,6 @@ public class PostController extends Controller {
         return getResponseBuilder().entity(savedPost).build();
     }
 
-    @OPTIONS
-    @Path("/")
-    public Response savePostPreflight(PostDTO post) throws Exception {
-        return getResponseBuilder().build();
-    }
-
     @GET
     @Path("/{param}/offers")
     @Secured
@@ -54,19 +48,32 @@ public class PostController extends Controller {
         return getResponseBuilder().entity(offers).build();
     }
 
-    @OPTIONS
-    @Path("/{param}/offers")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPostOffersPreflight() {
-        return getResponseBuilder().build();
-    }
-
     @POST
     @Path("/upload")
     @Secured
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("postId") Long postId) throws IOException {
         postService.updatePhoto(uploadedInputStream, postId);
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPostPreflight(@PathParam("param") Long postId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/")
+    public Response savePostPreflight(PostDTO post) throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/offers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPostOffersPreflight() {
         return getResponseBuilder().build();
     }
 

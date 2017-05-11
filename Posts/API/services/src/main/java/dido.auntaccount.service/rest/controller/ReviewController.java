@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/reviews")
-public class ReviewController {
+public class ReviewController extends Controller {
 
     @Inject
     ReviewService reviewService;
@@ -33,6 +33,21 @@ public class ReviewController {
     public Response saveReview(ReviewDTO review) throws Exception {
         ReviewDTO savedReview = reviewService.saveReview(review);
         return Response.status(200).entity(savedReview).build();
+    }
+
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReviewPreflight(@PathParam("param") Long reviewId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveReviewPreflight(ReviewDTO review) throws Exception {
+        return getResponseBuilder().build();
     }
 
 }

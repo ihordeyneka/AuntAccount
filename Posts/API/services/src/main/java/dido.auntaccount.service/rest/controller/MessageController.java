@@ -57,4 +57,12 @@ public class MessageController extends Controller {
         return getResponseBuilder().build();
     }
 
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMessagePreflight(@PathParam("param") Long messageId) {
+        return getResponseBuilder().build();
+    }
+
+
 }

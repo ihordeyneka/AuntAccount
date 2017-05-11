@@ -1,13 +1,11 @@
 package dido.auntaccount.service.rest.controller;
 
-import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.rest.FacebookProvider;
 import dido.auntaccount.service.rest.GoogleProvider;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
 import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
-import org.elasticsearch.common.recycler.Recycler;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -62,6 +60,18 @@ public class AuthController extends Controller {
     @OPTIONS
     @Path("/sign_out")
     public Response signOutPreflight() {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/fb")
+    public Response authFacebookPreflight() throws URISyntaxException, OAuthSystemException {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/google")
+    public Response authGooglePreflight() throws URISyntaxException, OAuthSystemException {
         return getResponseBuilder().build();
     }
 
