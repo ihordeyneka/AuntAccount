@@ -1,7 +1,6 @@
 package dido.auntaccount.service.rest.controller;
 
 
-import dido.auntaccount.dao.TokenDAO;
 import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
@@ -38,13 +37,6 @@ public class UserController extends Controller {
         return getResponseBuilder().entity(user).build();
     }
 
-    @OPTIONS
-    @Path("/{param}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserPreflight(@PathParam("param") Long userId) {
-        return getResponseBuilder().build();
-    }
-
     @GET
     @Path("/email/{param}")
     @Secured
@@ -67,14 +59,6 @@ public class UserController extends Controller {
         return getResponseBuilder().entity(savedUser).build();
     }
 
-
-    /// TODO: remove later
-    @OPTIONS
-    @Path("/")
-    public Response saveUserPreflight(UserDTO user) {
-        return getResponseBuilder().build();
-    }
-
     @GET
     @Path("/{param}/posts")
     @Secured
@@ -82,23 +66,6 @@ public class UserController extends Controller {
     public Response getUserPosts(@PathParam("param") Long userId) {
         List<PostDTO> posts = userService.getUserPosts(userId);
         return getResponseBuilder().entity(posts).build();
-    }
-
-    @OPTIONS
-    @Path("/{param}/posts")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserPostsPreflight(@PathParam("param") Long userId) {
-        return getResponseBuilder().build();
-    }
-
-
-    @GET
-    @Path("/{param}/reviews")
-    @Secured
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserReviews(@PathParam("param") Long userId) {
-        List<ReviewDTO> reviews = userService.getUserReviews(userId);
-        return getResponseBuilder().entity(reviews).build();
     }
 
     @POST
@@ -113,10 +80,13 @@ public class UserController extends Controller {
         return getResponseBuilder().entity("{}").build();
     }
 
-    @OPTIONS
-    @Path("/profile")
-    public Response updateProfilePreflight() throws Exception {
-        return getResponseBuilder().build();
+    @GET
+    @Path("/{param}/reviews")
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserReviews(@PathParam("param") Long userId) {
+        List<ReviewDTO> reviews = userService.getUserReviews(userId);
+        return getResponseBuilder().entity(reviews).build();
     }
 
     @POST
@@ -127,12 +97,6 @@ public class UserController extends Controller {
     public Response updatePicture(@FormDataParam("file_data") InputStream uploadedInputStream, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
         TokenDTO foundToken = tokenService.getToken(token);
         userService.updatePicture(foundToken.getUserId(), IOUtils.toByteArray(uploadedInputStream));
-        return getResponseBuilder().build();
-    }
-
-    @OPTIONS
-    @Path("/picture")
-    public Response updatePicturePreflight() throws Exception {
         return getResponseBuilder().build();
     }
 
@@ -148,6 +112,53 @@ public class UserController extends Controller {
             user.setPassword(passwordService.createHash(passwordDTO.getNewPassword()));
             userService.updateUser(user);
         }
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/reviews")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserReviewsPreflight(@PathParam("param") Long userId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserPreflight(@PathParam("param") Long userId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/email/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserByEmailPreflight(@PathParam("param") String email) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/")
+    public Response saveUserPreflight(UserDTO user) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/posts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserPostsPreflight(@PathParam("param") Long userId) {
+        return getResponseBuilder().build();
+    }
+
+
+    @OPTIONS
+    @Path("/profile")
+    public Response updateProfilePreflight() throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/picture")
+    public Response updatePicturePreflight() throws Exception {
         return getResponseBuilder().build();
     }
 

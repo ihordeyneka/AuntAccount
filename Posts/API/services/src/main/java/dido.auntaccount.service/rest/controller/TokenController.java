@@ -133,6 +133,30 @@ public class TokenController extends Controller {
 
     }
 
+    @OPTIONS
+    @Consumes("application/x-www-form-urlencoded")
+    @Path("/client")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTokenPreflight(@FormParam("provider") String provider, @FormParam("code") String code) throws URISyntaxException, OAuthSystemException, OAuthProblemException {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response authorizePreflight(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("refresh")
+    public Response refreshTokenPreflight(@PathParam("refreshToken") String refreshToken) throws URISyntaxException, OAuthSystemException {
+        return getResponseBuilder().build();
+
+    }
+
     private Response buildResponse(ClientProvider provider, String code) throws OAuthProblemException, OAuthSystemException {
         OAuthClientRequest request = OAuthClientRequest
                 .tokenProvider(provider.getProvider())

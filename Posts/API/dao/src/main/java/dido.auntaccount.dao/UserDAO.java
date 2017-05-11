@@ -25,8 +25,8 @@ public interface UserDAO {
 
     void updateUserProfile(User user);
 
-    void updatePicture(Long id, byte[] image);
+    void updatePicture(Long id, byte[] image) throws Exception;
 
-    void updateUser(User user);
+    void updateUser(User user) throws Exception;
 
 }

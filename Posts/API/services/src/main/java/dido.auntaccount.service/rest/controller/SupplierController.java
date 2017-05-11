@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/suppliers")
-public class SupplierController {
+public class SupplierController extends Controller {
 
     @Inject
     SupplierService supplierService;
@@ -51,6 +51,28 @@ public class SupplierController {
     public Response getSupplierPosts(@PathParam("param") Long supplierId) {
         List<PostDTO> supplierPosts = supplierService.getSupplierPosts(supplierId);
         return Response.status(200).entity(supplierPosts).build();
+    }
+
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSupplierPreflight(@PathParam("param") Long supplierId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveSupplierPreflight(SupplierDTO supplier) throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/posts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSupplierPostsPreflight(@PathParam("param") Long supplierId) {
+        return getResponseBuilder().build();
     }
 
 }
