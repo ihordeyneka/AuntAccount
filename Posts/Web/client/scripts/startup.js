@@ -1,4 +1,5 @@
 requirejs.config({
+  waitSeconds: 30,
   baseUrl: '/client/scripts',
   paths: {
     domReady: ["../../lib/dom_ready/dom_ready"],
