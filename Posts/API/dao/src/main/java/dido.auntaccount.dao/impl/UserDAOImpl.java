@@ -77,18 +77,18 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     }
 
     @Override
-    public void updateUser(User user) {
-        entityManager.merge(user);
+    public void updateUser(User user) throws Exception {
+        updateEntity(user);
     }
 
     @Override
-    public void updatePicture(Long id, byte[] image) {
+    public void updatePicture(Long id, byte[] image) throws Exception {
         final User user = find(id);
         if (user == null) {
             return;
         }
         user.setPhoto(image);
-        entityManager.merge(user);
+        updateEntity(user);
     }
 
 

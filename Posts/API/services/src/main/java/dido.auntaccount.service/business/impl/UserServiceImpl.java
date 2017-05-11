@@ -66,12 +66,20 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updatePicture(Long userId, byte[] picture) {
-        userDAO.updatePicture(userId, picture);
+        try {
+            userDAO.updatePicture(userId, picture);
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "Couldn't update user's picture", e);
+        }
     }
 
     @Override
     public void updateUser(UserDTO user) {
-        userDAO.updateUser(user.buildEntity());
+        try {
+            userDAO.updateUser(user.buildEntity());
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "Couldn't update user", e);
+        }
     }
 
 }
