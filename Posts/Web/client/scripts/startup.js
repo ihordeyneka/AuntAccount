@@ -10,7 +10,8 @@ requirejs.config({
     underscore: ["../../lib/underscore/underscore-min"],
     typeahead: ["../../lib/bootstrap3_typeahead/bootstrap3-typeahead.min"],
     fileinput: ["../../lib/bootstrap_fileinput/js/fileinput.min"],
-    slider: ["../../lib/bootstrap_slider/bootstrap-slider.min"]
+    slider: ["../../lib/bootstrap_slider/bootstrap-slider.min"],
+    googleapi: ["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&libraries=places"]
   },
   shim: {
     bootstrap: { deps: ["jquery"] },

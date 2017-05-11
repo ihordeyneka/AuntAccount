@@ -4,7 +4,6 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
 
-  self.googleApiLoaded = false;
   self.map = null;
   self.marker = null;
   self.circle = null;
@@ -33,19 +32,15 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
     self.initRadiusSlider();
     self.initAttachmentUpload();
     self.addButtonHandlers();
-    if (!self.googleApiLoaded) {
-      require(["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&callback=initMap&libraries=places"]);
-    }
-    else {
-      initMap();
-    }
+
+    require(["googleapi"], function() { self.initMap(); });
+
     self.validatorForm = $("#formPost");
     self.validatorForm.validator({ focus: false });
     self.notificationArea = $(".aa-notification-area").notificationArea();
   }
 
-  window.initMap = function() {
-    self.googleApiLoaded = true;
+  self.initMap = function() {
     self.map = new google.maps.Map($(".aa-post-map").get(0), {
       zoom: MIN_ZOOM_FOR_PLACE
     });

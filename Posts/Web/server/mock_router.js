@@ -96,7 +96,7 @@ exports.init = function(router) {
     res.send(JSON.stringify(result));
   });
 
-  router.get(mockApiRoot + '/locations/:query', function(req, res) {
+  router.get(mockApiRoot + '/location/:query', function(req, res) {
     var result = [
       {id: 1, type: 3, name: "Lviv"},
       {id: 2, type: 3, name: "New York"},

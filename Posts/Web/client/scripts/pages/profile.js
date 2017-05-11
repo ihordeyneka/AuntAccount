@@ -11,6 +11,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
     initPictureUpload();
+    initAutocomplete();
 
     globals.loading($('body'), true);
     $.ajax({
@@ -34,6 +35,53 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
       self.notificationArea.error();
     }).always(function() {
       globals.loading($('body'), false);
+    });
+  }
+
+  var initAutocomplete = function() {
+    self.primaryLocation = null;
+    require(["googleapi"], function() { self.initPrimaryLocationTypeahead(); });
+  }
+
+  self.initPrimaryLocationTypeahead = function() {
+    var input = document.getElementById('inputPrimaryLocation');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function (e) {
+      var googleLocation = autocomplete.getPlace();
+      //convert google location to our format
+      self.location = {};
+      self.location.name = googleLocation.name;
+      self.location.latitude = googleLocation.geometry.location.lat();
+      self.location.longitude = googleLocation.geometry.location.lng();
+      for (var i=0; i<googleLocation.address_components.length; i++) {
+        var addressComponent = googleLocation.address_components[i];
+        for (var j=0; j<addressComponent.types.length; j++) {
+          switch (addressComponent.types[j]) {
+            case "country":
+              self.location.country = addressComponent.long_name;
+              break;
+            case "administrative_area_level_1":
+              self.location.region1 = addressComponent.long_name;
+              break;
+            case "administrative_area_level_2":
+              self.location.region2 = addressComponent.long_name;
+              break;
+            case "locality":
+              self.location.city = addressComponent.long_name;
+              break;
+            case "neighborhood":
+              self.location.neighborhood = addressComponent.long_name;
+              break;
+            case "route":
+              self.location.route = addressComponent.long_name;
+              break;
+            case "street_number":
+              self.location.street_number = addressComponent.long_name;
+              break;
+          }
+        }
+      }
     });
   }
 
@@ -66,7 +114,8 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
           globals.loading($('body'), true);
           var profileData = {
             firstName: $("#inputFirst").val(),
-            lastName: $("#inputLast").val()
+            lastName: $("#inputLast").val(),
+            location: self.location
           };
 
           $.post({
