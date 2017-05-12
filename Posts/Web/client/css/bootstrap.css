@@ -184,3 +184,8 @@ div.slider-selection {
 .bootstrap-tagsinput {
   width: 100%;
 }
+
+/*---Slider---*/
+.tooltip.tooltip-main {
+  z-index: 900;
+}

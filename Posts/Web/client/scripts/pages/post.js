@@ -3,6 +3,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
   var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
+  var MIN_RADIUS = 100;
 
   self.map = null;
   self.marker = null;
@@ -51,6 +52,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
         self.circle.setRadius(0);
         self.radiusSlider.disable();
       } else {
+        self.circle.setRadius(self.radiusSlider.getValue() || MIN_RADIUS);
         self.radiusSlider.enable();
       }
       self.radiusSlider.relayout();
@@ -59,14 +61,16 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
       map: self.map
     });
     self.circle = new google.maps.Circle({
-        radius: 1000, // 1 mile
-        strokeColor: '#0000FF',
+        radius: MIN_RADIUS,
+        map: self.map,
+        strokeColor: '#888877',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#0000FF',
+        fillColor: '#888877',
         fillOpacity: 0.35,
     });
     self.circle.bindTo('center', self.marker, 'position');
+
     self.updatePosition();
   }
 
@@ -155,34 +159,22 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
       });
     }
 
-    self.typeahead = $("#inputLocation").typeahead({
-      items: "all",
-      minLength: 3,
-      delay: 300,
-      fitToElement: true,
-      source: function(query, process) {
-        $.ajax({
-            url: config.apiRoot + "/location/" + query,
-            dataType: "json"
-        }).done(function(data) {
-            process(data);
-        }).fail(function(result) {
-          self.notificationArea.error();
-        });
-      },
-      afterSelect: function(item) {
-        self.selectedLocationId = item.id;
-        if (item.location) {
-          self.updatePosition(item.location);
-        }
-        processPlace(item.name);
-      }
-    });
+    var initLocation = function() {
+      var input = document.getElementById('inputLocation');
+      var autocomplete = new google.maps.places.Autocomplete(input);
 
-    self.typeahead.keypress(function(e) {
-      if (e.which == 13) //key is Enter
-        processPlace(self.typeahead.val());
-    });
+      google.maps.event.addListener(autocomplete, 'place_changed', function (e) {
+        var googleLocation = autocomplete.getPlace();
+        processPlace($(input).val());
+      });
+
+      $(input).keypress(function(e) {
+        if (e.which == 13) //key is Enter
+          processPlace($(input).val());
+      });
+    }
+
+    require(["googleapi"], function() { initLocation(); });
 
     $(".btn-location-search").click(function() {
       processPlace(self.typeahead.val());
@@ -211,15 +203,21 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
         });
       }
     });
+
+    $(".btn-location-globe").click(function(e) {
+      $("#inputLocation").val("");
+      self.updatePosition(self.userPosition || DEF_POSITION);
+      self.map.setZoom(1);
+    });
   }
 
   self.initRadiusSlider = function() {
     self.radiusSlider = $("#inputRadius").slider({
       handle: 'square',
       value: 0,
-      min: 0,
+      min: MIN_RADIUS,
       max: 5000,
-      step: 500,
+      step: 100,
       tooltip: 'always',
       tooltip_position: 'bottom',
       formatter: function(value) {
