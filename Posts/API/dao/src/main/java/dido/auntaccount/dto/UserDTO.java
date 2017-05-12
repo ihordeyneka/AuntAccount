@@ -13,9 +13,7 @@ public class UserDTO implements DTO<User>, Serializable {
     private String lastName;
     private String password;
     private String email;
-    private String phone;
     private byte[] photo;
-    private String website;
     private Date creationDate;
     private LocationDTO location;
     private String clientId;
@@ -36,9 +34,7 @@ public class UserDTO implements DTO<User>, Serializable {
         this.lastName = user.getLastName();
         this.password = user.getPassword();
         this.email = user.getEmail();
-        this.phone = user.getPhone();
         this.photo = user.getPhoto();
-        this.website = user.getWebsite();
         this.creationDate = user.getCreationDate();
         Location location = user.getLocation();
         this.location = location != null ? new LocationDTO(user.getLocation()) : null;
@@ -54,9 +50,7 @@ public class UserDTO implements DTO<User>, Serializable {
                 .setLastName(lastName)
                 .setPassword(password)
                 .setEmail(email)
-                .setPhone(phone)
                 .setPhoto(photo)
-                .setWebsite(website)
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation)
                 .setClientId(clientId);
@@ -94,28 +88,12 @@ public class UserDTO implements DTO<User>, Serializable {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public byte[] getPhoto() {
         return photo;
     }
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
     }
 
     public Date getCreationDate() {

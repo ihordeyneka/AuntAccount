@@ -2,20 +2,19 @@ package dido.auntaccount.dto;
 
 import dido.auntaccount.entities.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SupplierDTO implements DTO<Supplier> {
 
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String email;
+    private String name;
+    private Long userId;
     private String phone;
     private byte[] photo;
     private String website;
+    private double rate;
     private Date creationDate;
     private LocationDTO location;
     private List<TagDTO> tags;
@@ -27,41 +26,35 @@ public class SupplierDTO implements DTO<Supplier> {
     @Override
     public Supplier buildEntity() {
         Location entityLocation = location != null ? location.buildEntity() : null;
-        User entityUser = new User()
+        Supplier entitySupplier = new Supplier()
                 .setId(id)
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setPassword(password)
-                .setEmail(email)
+                .setName(name)
+                .setUserId(userId)
                 .setPhone(phone)
-                .setPhoto(photo)
                 .setWebsite(website)
+                .setPhoto(photo)
+                .setRate(rate)
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation);
         List<Tag> entityTags = tags.stream().map(TagDTO::buildEntity).collect(Collectors.toList());
         List<Post> entityPosts = posts.stream().map(PostDTO::buildEntity).collect(Collectors.toList());
-        return new Supplier()
-                .setId(id)
-                .setUser(entityUser)
+        return entitySupplier
                 .setSupplierTags(entityTags)
                 .setSupplierPosts(entityPosts);
     }
 
     public SupplierDTO(Supplier supplier) {
-        User user = supplier.getUser();
-        this.id = user.getId();
+        this.id = supplier.getId();
         this.tags = supplier.getSupplierTags().stream().map(TagDTO::new).collect(Collectors.toList());
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.phone = user.getPhone();
-        this.photo = user.getPhoto();
-        this.website = user.getWebsite();
-        this.creationDate = user.getCreationDate();
-        Location location = user.getLocation();
-        this.location = location != null ? new LocationDTO(user.getLocation()) : null;
-
+        this.name = supplier.getName();
+        this.userId = supplier.getUserId();
+        this.photo = supplier.getPhoto();
+        this.phone = supplier.getPhone();
+        this.creationDate = supplier.getCreationDate();
+        this.rate = supplier.getRate();
+        Location location = supplier.getLocation();
+        this.location = location != null ? new LocationDTO(location) : null;
+        this.website = supplier.getWebsite();
         this.posts = supplier.getSupplierPosts().stream().map(PostDTO::new).collect(Collectors.toList());
     }
 
@@ -89,36 +82,12 @@ public class SupplierDTO implements DTO<Supplier> {
         this.posts = posts;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {
@@ -159,5 +128,21 @@ public class SupplierDTO implements DTO<Supplier> {
 
     public void setLocation(LocationDTO location) {
         this.location = location;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 }
