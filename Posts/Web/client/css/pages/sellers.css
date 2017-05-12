@@ -1,0 +1,7 @@
+.aa-seller-row .aa-icon {
+  padding: 6px;
+  cursor: pointer;
+}
+.aa-seller-row .aa-icon:hover {
+  color: #979797;
+}

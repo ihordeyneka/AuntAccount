@@ -6,7 +6,7 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
     globals.loading($('body'), true);
     var userId = $.didoauth.user.id;
     $.ajax({
-        url: config.apiRoot + "/users/"+ userId +"/posts", //TODO: use actual user id here
+        url: config.apiRoot + "/users/"+ userId +"/posts",
         dataType: "json"
     }).done(function(data) {
       var element = $(".aa-recent-container");
