@@ -1,19 +1,26 @@
 package dido.auntaccount.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Supplier {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.TABLE)
     private Long id;
+    private String name;
+    private Long userId;
+    private String phone;
+    private byte[] photo;
+    private String website;
+    private double rate;
 
-    @JoinColumn(name = "Id")
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    private User user;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LocationId")
+    private Location location;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "SupplierTag",
@@ -54,12 +61,75 @@ public class Supplier {
         return this;
     }
 
-    public User getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public Supplier setUser(User user) {
-        this.user = user;
+    public Supplier setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Supplier setUserId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Supplier setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public Supplier setWebsite(String website) {
+        this.website = website;
+        return this;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Supplier setLocation(Location location) {
+        this.location = location;
+        return this;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Supplier setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+        return this;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public Supplier setPhoto(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public Supplier setRate(double rate) {
+        this.rate = rate;
         return this;
     }
 }

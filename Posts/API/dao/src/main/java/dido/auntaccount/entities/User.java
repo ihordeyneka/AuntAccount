@@ -15,9 +15,7 @@ public class User implements Serializable {
     private String lastName;
     private String password;
     private String email;
-    private String phone;
     private byte[] photo;
-    private String website;
     private Date creationDate;
     private String clientId;
 
@@ -61,30 +59,12 @@ public class User implements Serializable {
         return this;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public User setPhone(String phone) {
-        this.phone = phone;
-        return this;
-    }
-
     public byte[] getPhoto() {
         return photo;
     }
 
     public User setPhoto(byte[] photo) {
         this.photo = photo;
-        return this;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public User setWebsite(String website) {
-        this.website = website;
         return this;
     }
 

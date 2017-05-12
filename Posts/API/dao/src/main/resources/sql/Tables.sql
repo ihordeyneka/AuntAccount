@@ -19,11 +19,19 @@ CREATE TABLE `dido`.`Tag` (
 );
 
 
-CREATE TABLE `dido`.`SUPPLIER` (
-  `Id` bigint(10) NOT NULL,
+CREATE TABLE `SUPPLIER` (
+  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `Rate` float DEFAULT NULL,
   `UserId` bigint(10) NOT NULL,
+  `Name` varchar(45) DEFAULT NULL,
+  `Website` varchar(100) DEFAULT NULL,
+  `Phone` varchar(45) DEFAULT NULL,
+  `CreationDate` datetime DEFAULT NULL,
+  `LocationId` bigint(10) DEFAULT NULL,
+  `Photo` blob,
   PRIMARY KEY (`Id`)
 );
+
 
 CREATE TABLE `dido`.`PostTag` (
   `TagId` bigint(10) NOT NULL,
