@@ -27,9 +27,10 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
         $("#inputLast").val(data.lastName);
         $(".aa-profile-picture").empty();
         if (data.profilePicture) {
-          $("img").width("100%").attr("src", data.profilePicture).appendTo(".aa-profile-picture");
+          $("<img>").width("100%").attr("src", data.profilePicture).appendTo(".aa-profile-picture");
         }
         initButtonHandlers();
+        initSellersButtons(data);
       }
     }).fail(function(result) {
       self.notificationArea.error();
@@ -88,7 +89,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
   var initPictureUpload = function() {
     self.pictureUpload = $("#inputPicture").fileinput({
       browseLabel: 'Change Picture',
-      browseIcon: '',
+      browseIcon: '<i class="fa fa-user"></i>',
       showUpload: false,
       showRemove: false,
       showPreview: false,
@@ -139,6 +140,17 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput"], function(g
       });
     });
   };
+
+  var initSellersButtons = function(user) {
+    var hasSellers = user.sellers && user.sellers.length > 0;
+    if (hasSellers) {
+      $("#btnRegisterSeller").hide();
+      $("#btnViewSellers").show();
+    } else {
+      $("#btnRegisterSeller").show();
+      $("#btnViewSellers").hide();
+    }
+  }
 
   return self;
 });
