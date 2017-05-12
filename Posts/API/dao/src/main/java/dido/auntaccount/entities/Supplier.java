@@ -7,6 +7,8 @@ import java.util.List;
 @Entity
 public class Supplier {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Long userId;
