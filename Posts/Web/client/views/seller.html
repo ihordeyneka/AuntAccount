@@ -1,0 +1,52 @@
+<form id="formSellerRegister">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="aa-notification-area no-outline col-sm-offset-3 col-sm-6" tabindex="-1">
+            </div>
+        </div>
+        <div class="row aa-sellerregister-section">
+            <div class="col-sm-offset-3 col-sm-6">
+                <div class="aa-seller-picture left">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <label for="inputName" class="lb">Name</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputName" required placeholder="Name">
+                </div>
+                <label for="inputPhone" class="lb">Phone</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputPhone" required placeholder="Phone">
+                </div>
+                <label for="inputWebsite" class="lb">Website</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputWebsite" required placeholder="Website">
+                </div>
+                <label for="inputTags" class="lb">Keywords</label>
+                <div class="form-group">
+                    <input type="text" class="form-control input" id="inputTags" required placeholder="What do you sell?" />
+                </div>
+                <label for="inputPrimaryLocation" class="lb">Primary Location</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputPrimaryLocation" placeholder="Primary Location">
+                </div>
+                <label for="inputPicture" class="lb">Profile Picture</label>
+                <div class="form-group">
+                    <input type="file" class="form-control input" id="inputPicture" placeholder="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <button type="button" id="btnRegisterSeller" class="btn btn-primary left btn-register-seller">Register</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+  require(["pages/seller"], function(seller) { seller.init(); });
+</script>
