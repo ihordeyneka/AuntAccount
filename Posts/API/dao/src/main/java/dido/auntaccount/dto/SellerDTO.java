@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SupplierDTO implements DTO<Supplier> {
+public class SellerDTO implements DTO<Seller> {
 
     private Long id;
     private String name;
@@ -20,13 +20,13 @@ public class SupplierDTO implements DTO<Supplier> {
     private List<TagDTO> tags;
     private List<PostDTO> posts;
 
-    public SupplierDTO() {
+    public SellerDTO() {
     }
 
     @Override
-    public Supplier buildEntity() {
+    public Seller buildEntity() {
         Location entityLocation = location != null ? location.buildEntity() : null;
-        Supplier entitySupplier = new Supplier()
+        Seller entitySeller = new Seller()
                 .setId(id)
                 .setName(name)
                 .setUserId(userId)
@@ -38,24 +38,24 @@ public class SupplierDTO implements DTO<Supplier> {
                 .setLocation(entityLocation);
         List<Tag> entityTags = tags.stream().map(TagDTO::buildEntity).collect(Collectors.toList());
         List<Post> entityPosts = posts.stream().map(PostDTO::buildEntity).collect(Collectors.toList());
-        return entitySupplier
-                .setSupplierTags(entityTags)
-                .setSupplierPosts(entityPosts);
+        return entitySeller
+                .setSellerTags(entityTags)
+                .setSellerPosts(entityPosts);
     }
 
-    public SupplierDTO(Supplier supplier) {
-        this.id = supplier.getId();
-        this.tags = supplier.getSupplierTags().stream().map(TagDTO::new).collect(Collectors.toList());
-        this.name = supplier.getName();
-        this.userId = supplier.getUserId();
-        this.photo = supplier.getPhoto();
-        this.phone = supplier.getPhone();
-        this.creationDate = supplier.getCreationDate();
-        this.rate = supplier.getRate();
-        Location location = supplier.getLocation();
+    public SellerDTO(Seller seller) {
+        this.id = seller.getId();
+        this.tags = seller.getSellerTags().stream().map(TagDTO::new).collect(Collectors.toList());
+        this.name = seller.getName();
+        this.userId = seller.getUserId();
+        this.photo = seller.getPhoto();
+        this.phone = seller.getPhone();
+        this.creationDate = seller.getCreationDate();
+        this.rate = seller.getRate();
+        Location location = seller.getLocation();
         this.location = location != null ? new LocationDTO(location) : null;
-        this.website = supplier.getWebsite();
-        this.posts = supplier.getSupplierPosts().stream().map(PostDTO::new).collect(Collectors.toList());
+        this.website = seller.getWebsite();
+        this.posts = seller.getSellerPosts().stream().map(PostDTO::new).collect(Collectors.toList());
     }
 
     public Long getId() {

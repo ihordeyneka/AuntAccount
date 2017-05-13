@@ -3,10 +3,9 @@ package dido.auntaccount.service.business.impl;
 import dido.auntaccount.dao.PostDAO;
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.service.business.PostService;
-import dido.auntaccount.service.business.SupplierService;
+import dido.auntaccount.service.business.SellerService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PostServiceImpl implements PostService {
 
@@ -28,7 +26,7 @@ public class PostServiceImpl implements PostService {
     private PostDAO postDAO;
 
     @Inject
-    private SupplierService supplierService;
+    private SellerService sellerService;
 
     @Override
     public PostDTO getPost(Long postId) {
@@ -43,7 +41,7 @@ public class PostServiceImpl implements PostService {
             long currentMillis = DateTime.now().getMillis();
             post.setCreationDate(new Date(currentMillis));
             savedPost = new PostDTO(postDAO.save(post.buildEntity()));
-            supplierService.savePostForSuppliers(savedPost);
+            sellerService.savePostForSellers(savedPost);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save post", e);
         }

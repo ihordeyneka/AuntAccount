@@ -15,7 +15,7 @@ public class TagServiceImpl implements TagService {
    /* curl -XPOST 'localhost:9200/dido/_search?pretty&pretty' -H 'Content-Type: application/json' -d'
     {
         "suggest": {
-        "supplier" : {
+        "seller" : {
             "prefix" : "amer",
                     "completion" : {
                 "field" : "tags"
@@ -24,7 +24,7 @@ public class TagServiceImpl implements TagService {
     }
     }'
 
-    curl -XPUT localhost:9200/dido/_mapping/supplier -d '
+    curl -XPUT localhost:9200/dido/_mapping/seller -d '
     {
       "properties" : {
         "tags" : {
@@ -39,12 +39,12 @@ public class TagServiceImpl implements TagService {
 
     public static final String INDEX = "dido";
     public static final String TAGS_FIELD = "tags";
-    public static final String SUPPLIER_TYPE = "supplier";
+    public static final String SELLER_TYPE = "seller";
 
     @Override
     public List<String> queryTags(String tag) {
         SearchResponse searchResponse = clientService.getClient().prepareSearch(INDEX).suggest(new SuggestBuilder()
-                .addSuggestion(SUPPLIER_TYPE, SuggestBuilders.completionSuggestion(TAGS_FIELD).text(tag))).get();
+                .addSuggestion(SELLER_TYPE, SuggestBuilders.completionSuggestion(TAGS_FIELD).text(tag))).get();
 
         List<String> results = new ArrayList<>();
         searchResponse.getSuggest().forEach(suggestion -> suggestion.forEach(entry -> entry.forEach(option -> results.add(option.getText().string()))));

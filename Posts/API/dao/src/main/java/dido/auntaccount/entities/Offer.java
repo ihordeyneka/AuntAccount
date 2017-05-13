@@ -1,7 +1,6 @@
 package dido.auntaccount.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @SqlResultSetMapping(
@@ -15,8 +14,8 @@ public class Offer {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "SupplierId")
-    private Supplier supplier;
+    @JoinColumn(name = "SellerId")
+    private Seller seller;
 
     private Long postId;
 
@@ -38,12 +37,12 @@ public class Offer {
         return this;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public Seller getSeller() {
+        return seller;
     }
 
-    public Offer setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public Offer setSeller(Seller seller) {
+        this.seller = seller;
         return this;
     }
 

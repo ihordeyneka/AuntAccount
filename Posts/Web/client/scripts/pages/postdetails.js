@@ -15,12 +15,12 @@ define(["../core/globals", "../core/config"], function(globals, config) {
       } else {
         for (var i=0; i<data.length; i++) {
           var offer = data[i];
-          var supplier = offer.supplier;
-          var supplierDisplayName = supplier.firstName + " " + supplier.lastName;
+          var seller = offer.seller;
+          var sellerDisplayName = seller.firstName + " " + seller.lastName;
           element.append($.templates("#templateOffer").render({
             offerId: offer.id,
             time: offer.time,
-            supplier: supplierDisplayName,
+            seller: sellerDisplayName,
             newReplies: offer.replyCount,
             badgeCss: offer.replyCount == 0 ? "is-hidden" : "badge-highlighted"
           }));

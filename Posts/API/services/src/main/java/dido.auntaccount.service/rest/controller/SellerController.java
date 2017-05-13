@@ -1,9 +1,9 @@
 package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.dto.SupplierDTO;
+import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.service.business.PasswordService;
-import dido.auntaccount.service.business.SupplierService;
+import dido.auntaccount.service.business.SellerService;
 import dido.auntaccount.service.filter.Secured;
 
 import javax.inject.Inject;
@@ -12,11 +12,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/suppliers")
-public class SupplierController extends Controller {
+@Path("/sellers")
+public class SellerController extends Controller {
 
     @Inject
-    SupplierService supplierService;
+    SellerService sellerService;
 
     @Inject
     PasswordService passwordService;
@@ -25,9 +25,9 @@ public class SupplierController extends Controller {
     @Path("/{param}")
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSupplier(@PathParam("param") Long supplierId) {
-        SupplierDTO supplier = supplierService.getSupplier(supplierId);
-        return getResponseBuilder().entity(supplier).build();
+    public Response getSeller(@PathParam("param") Long sellerId) {
+        SellerDTO seller = sellerService.getSeller(sellerId);
+        return getResponseBuilder().entity(seller).build();
     }
 
     @POST
@@ -35,24 +35,24 @@ public class SupplierController extends Controller {
     @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveSupplier(SupplierDTO supplier) throws Exception {
-        SupplierDTO savedSupplier = supplierService.saveSupplier(supplier);
-        return getResponseBuilder().entity(savedSupplier).build();
+    public Response saveSeller(SellerDTO seller) throws Exception {
+        SellerDTO savedSeller = sellerService.saveSeller(seller);
+        return getResponseBuilder().entity(savedSeller).build();
     }
 
     @GET
     @Path("/{param}/posts")
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSupplierPosts(@PathParam("param") Long supplierId) {
-        List<PostDTO> supplierPosts = supplierService.getSupplierPosts(supplierId);
-        return getResponseBuilder().entity(supplierPosts).build();
+    public Response getSellerPosts(@PathParam("param") Long sellerId) {
+        List<PostDTO> sellerPosts = sellerService.getSellerPosts(sellerId);
+        return getResponseBuilder().entity(sellerPosts).build();
     }
 
     @OPTIONS
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSupplierPreflight(@PathParam("param") Long supplierId) {
+    public Response getSellerPreflight(@PathParam("param") Long sellerId) {
         return getResponseBuilder().build();
     }
 
@@ -60,14 +60,14 @@ public class SupplierController extends Controller {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveSupplierPreflight(SupplierDTO supplier) throws Exception {
+    public Response saveSellerPreflight(SellerDTO seller) throws Exception {
         return getResponseBuilder().build();
     }
 
     @OPTIONS
     @Path("/{param}/posts")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSupplierPostsPreflight(@PathParam("param") Long supplierId) {
+    public Response getSellerPostsPreflight(@PathParam("param") Long sellerId) {
         return getResponseBuilder().build();
     }
 

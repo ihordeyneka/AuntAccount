@@ -2,7 +2,7 @@ package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.MessageDTO;
 import dido.auntaccount.dto.OfferDTO;
-import dido.auntaccount.dto.SupplierDTO;
+import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.service.business.OfferService;
 import dido.auntaccount.service.filter.Secured;
 
@@ -38,12 +38,12 @@ public class OfferController extends Controller {
     }
 
     @GET
-    @Path("/{param}/supplier")
+    @Path("/{param}/seller")
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOfferSupplier(@PathParam("param") Long offerId) {
-        SupplierDTO supplier = service.getOfferSupplier(offerId);
-        return getResponseBuilder().status(200).entity(supplier).build();
+    public Response getOfferSeller(@PathParam("param") Long offerId) {
+        SellerDTO seller = service.getOfferSeller(offerId);
+        return getResponseBuilder().status(200).entity(seller).build();
     }
 
     @GET
@@ -71,9 +71,9 @@ public class OfferController extends Controller {
     }
 
     @OPTIONS
-    @Path("/{param}/supplier")
+    @Path("/{param}/seller")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOfferSupplierPreflight(@PathParam("param") Long offerId) {
+    public Response getOfferSellerPreflight(@PathParam("param") Long offerId) {
         return getResponseBuilder().build();
     }
 

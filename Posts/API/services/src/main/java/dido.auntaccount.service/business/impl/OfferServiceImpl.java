@@ -3,10 +3,9 @@ package dido.auntaccount.service.business.impl;
 import dido.auntaccount.dao.OfferDAO;
 import dido.auntaccount.dto.MessageDTO;
 import dido.auntaccount.dto.OfferDTO;
-import dido.auntaccount.dto.SupplierDTO;
+import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
-import dido.auntaccount.entities.Supplier;
 import dido.auntaccount.service.business.OfferService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -41,9 +40,9 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public SupplierDTO getOfferSupplier(Long offerId) {
+    public SellerDTO getOfferSeller(Long offerId) {
         Offer offer = offerDAO.find(offerId);
-        return new SupplierDTO(offer.getSupplier());
+        return new SellerDTO(offer.getSeller());
     }
 
     @Override

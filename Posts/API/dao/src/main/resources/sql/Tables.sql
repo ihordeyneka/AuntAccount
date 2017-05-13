@@ -19,7 +19,7 @@ CREATE TABLE `dido`.`Tag` (
 );
 
 
-CREATE TABLE `SUPPLIER` (
+CREATE TABLE `SELLER` (
   `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `Rate` float DEFAULT NULL,
   `UserId` bigint(10) NOT NULL,
@@ -85,22 +85,22 @@ CREATE TABLE `dido`.`Country` (
 );
 
 
-CREATE TABLE `dido`.`SupplierTag` (
-     `SupplierId` BIGINT(10) NOT NULL,
+CREATE TABLE `dido`.`SellerTag` (
+     `SellerId` BIGINT(10) NOT NULL,
      `TagId`      BIGINT(10) NOT NULL,
-     PRIMARY KEY (`SupplierId`, `TagId`)
+     PRIMARY KEY (`SellerId`, `TagId`)
 );
 
-CREATE TABLE `dido`.`SupplierPost` (
-    `supplierId` BIGINT(10) NOT NULL,
-    `postId` BIGINT(10) NOT NULL,
-    PRIMARY KEY (`supplierId`, `postId`)
+CREATE TABLE `dido`.`SellerPost` (
+    `SellerId` BIGINT(10) NOT NULL,
+    `PostId` BIGINT(10) NOT NULL,
+    PRIMARY KEY (`SellerId`, `PostId`)
 );
 
 CREATE TABLE `dido`.`Offer` (
      `Id`         BIGINT(10) NOT NULL,
      `PostId`     BIGINT(10) NOT NULL,
-     `SupplierId` BIGINT(10) NOT NULL,
+     `SellerId` BIGINT(10) NOT NULL,
      PRIMARY KEY (`Id`)
   ); 
 
@@ -129,7 +129,7 @@ CREATE TABLE `RefreshToken` (
 );
 
 
---fix post table - remove latitude and longitude, add supplierTag table
+--fix post table - remove latitude and longitude, add sellerTag table
 
 insert into COUNTRY (id, country) values (1, "Ukraine");
 insert into LOCATION (id, city, latitude, longitude, region, street, countryId) values (1, 'Lviv', 5, 4, 'Lvivska', 'Perf', 1);

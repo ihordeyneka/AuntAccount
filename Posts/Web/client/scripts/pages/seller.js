@@ -171,7 +171,7 @@ function(globals, config, tagsinputControl, typeaheadControl, fileinputControl) 
           };
 
           $.post({
-            url: config.apiRoot + "/suppliers",
+            url: config.apiRoot + "/sellers",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(sellerData)
