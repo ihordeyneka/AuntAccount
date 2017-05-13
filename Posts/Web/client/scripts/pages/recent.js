@@ -21,7 +21,7 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
             time: post.creationDate,
             title: post.postTags,
             content: post.description,
-            conversations: post.offerCount,
+            offers: post.offerCount,
             badgeCss: post.offerCount == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
           }));
         }

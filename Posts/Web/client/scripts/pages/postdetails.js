@@ -14,15 +14,15 @@ define(["../core/globals", "../core/config"], function(globals, config) {
         element.append("<h3>Nobody added any offers yet.</h3>");
       } else {
         for (var i=0; i<data.length; i++) {
-          var conversation = data[i];
-          var supplier = conversation.supplier;
+          var offer = data[i];
+          var supplier = offer.supplier;
           var supplierDisplayName = supplier.firstName + " " + supplier.lastName;
-          element.append($.templates("#templateConversation").render({
-            conversationId: conversation.id,
-            time: conversation.time,
+          element.append($.templates("#templateOffer").render({
+            offerId: offer.id,
+            time: offer.time,
             supplier: supplierDisplayName,
-            newReplies: conversation.replyCount,
-            badgeCss: conversation.replyCount == 0 ? "is-hidden" : "badge-highlighted"
+            newReplies: offer.replyCount,
+            badgeCss: offer.replyCount == 0 ? "is-hidden" : "badge-highlighted"
           }));
         }
       }

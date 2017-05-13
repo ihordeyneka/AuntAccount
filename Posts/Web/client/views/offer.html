@@ -3,7 +3,7 @@
     <div class="aa-notification-area no-outline col-sm-offset-2 col-sm-8" tabindex="-1">
     </div>
   </div>
-  <div class="row aa-conversation-container">
+  <div class="row aa-offer-container">
   </div>
   <div class="row">
     <div class="col-sm-offset-2 col-sm-6" tabindex="-1">
@@ -19,7 +19,7 @@
   </div>
 </div>
 <script id="templateReply" type="text/x-jsrender">
-    <div class="col-sm-offset-{{:replyOffset}} col-sm-6 aa-conversation-reply {{:replyCss}}">
+    <div class="col-sm-offset-{{:replyOffset}} col-sm-6 aa-offer-reply {{:replyCss}}">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
@@ -35,5 +35,5 @@
   </div>
 </script>
 <script>
-  require(["pages/conversation"], function(conversation) { conversation.init({{:0}}); });
+  require(["pages/offer"], function(offer) { offer.init({{:0}}); });
 </script>
