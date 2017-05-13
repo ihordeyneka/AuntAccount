@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Supplier {
+public class Seller {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,32 +25,32 @@ public class Supplier {
     private Location location;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "SupplierTag",
-            joinColumns = @JoinColumn(name = "SupplierId"),
+    @JoinTable(name = "SellerTag",
+            joinColumns = @JoinColumn(name = "SellerId"),
             inverseJoinColumns = @JoinColumn(name = "TagId"))
-    private List<Tag> supplierTags;
+    private List<Tag> sellerTags;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "SupplierPost",
-            joinColumns = @JoinColumn(name = "SupplierId"),
+    @JoinTable(name = "SellerPost",
+            joinColumns = @JoinColumn(name = "SellerId"),
             inverseJoinColumns = @JoinColumn(name = "PostId"))
-    private List<Post> supplierPosts;
+    private List<Post> sellerPosts;
 
-    public List<Tag> getSupplierTags() {
-        return supplierTags;
+    public List<Tag> getSellerTags() {
+        return sellerTags;
     }
 
-    public Supplier setSupplierTags(List<Tag> supplierTags) {
-        this.supplierTags = supplierTags;
+    public Seller setSellerTags(List<Tag> sellerTags) {
+        this.sellerTags = sellerTags;
         return this;
     }
 
-    public List<Post> getSupplierPosts() {
-        return supplierPosts;
+    public List<Post> getSellerPosts() {
+        return sellerPosts;
     }
 
-    public Supplier setSupplierPosts(List<Post> supplierPosts) {
-        this.supplierPosts = supplierPosts;
+    public Seller setSellerPosts(List<Post> sellerPosts) {
+        this.sellerPosts = sellerPosts;
         return this;
     }
 
@@ -58,7 +58,7 @@ public class Supplier {
         return id;
     }
 
-    public Supplier setId(Long id) {
+    public Seller setId(Long id) {
         this.id = id;
         return this;
     }
@@ -67,7 +67,7 @@ public class Supplier {
         return name;
     }
 
-    public Supplier setName(String name) {
+    public Seller setName(String name) {
         this.name = name;
         return this;
     }
@@ -76,7 +76,7 @@ public class Supplier {
         return userId;
     }
 
-    public Supplier setUserId(Long userId) {
+    public Seller setUserId(Long userId) {
         this.userId = userId;
         return this;
     }
@@ -85,7 +85,7 @@ public class Supplier {
         return phone;
     }
 
-    public Supplier setPhone(String phone) {
+    public Seller setPhone(String phone) {
         this.phone = phone;
         return this;
     }
@@ -94,7 +94,7 @@ public class Supplier {
         return website;
     }
 
-    public Supplier setWebsite(String website) {
+    public Seller setWebsite(String website) {
         this.website = website;
         return this;
     }
@@ -103,7 +103,7 @@ public class Supplier {
         return location;
     }
 
-    public Supplier setLocation(Location location) {
+    public Seller setLocation(Location location) {
         this.location = location;
         return this;
     }
@@ -112,7 +112,7 @@ public class Supplier {
         return creationDate;
     }
 
-    public Supplier setCreationDate(Date creationDate) {
+    public Seller setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
         return this;
     }
@@ -121,7 +121,7 @@ public class Supplier {
         return photo;
     }
 
-    public Supplier setPhoto(byte[] photo) {
+    public Seller setPhoto(byte[] photo) {
         this.photo = photo;
         return this;
     }
@@ -130,7 +130,7 @@ public class Supplier {
         return rate;
     }
 
-    public Supplier setRate(double rate) {
+    public Seller setRate(double rate) {
         this.rate = rate;
         return this;
     }

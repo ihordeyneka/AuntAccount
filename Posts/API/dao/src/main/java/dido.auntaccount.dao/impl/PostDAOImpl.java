@@ -40,7 +40,7 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
         return query.setParameter("postId", postId).getResultList();
     }
 
-    //TODO: get back offer-supplier FK
+    //TODO: get back offer-seller FK
     public List<OfferDTO> getPostOffersWithReplies(Long postId) {
         Post post = find(postId);
         List<Object[]> resultList = entityManager.createNativeQuery("SELECT o.*, count(m.id) as replyCount " +

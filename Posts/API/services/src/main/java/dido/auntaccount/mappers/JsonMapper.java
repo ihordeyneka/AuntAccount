@@ -2,7 +2,7 @@ package dido.auntaccount.mappers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dido.auntaccount.dto.SupplierDTO;
+import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.dto.UserDTO;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -18,20 +18,20 @@ public class JsonMapper {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    public SupplierDTO jsonToSupplierDTO(byte[] json) {
+    public SellerDTO jsonToSellerDTO(byte[] json) {
         try {
-            return mapper.readValue(json, SupplierDTO.class);
+            return mapper.readValue(json, SellerDTO.class);
         } catch (IOException e) {
-            logger.log(Level.ERROR, "Couldn't get supplier from json", e);
+            logger.log(Level.ERROR, "Couldn't get seller from json", e);
         }
         return null;
     }
 
-    public byte[] supplierDTOToJson(SupplierDTO supplierDTO) {
+    public byte[] sellerDTOToJson(SellerDTO sellerDTO) {
         try {
-            return mapper.writeValueAsBytes(supplierDTO);
+            return mapper.writeValueAsBytes(sellerDTO);
         } catch (JsonProcessingException e) {
-            logger.log(Level.ERROR, "Couldn't get json from supplier", e);
+            logger.log(Level.ERROR, "Couldn't get json from seller", e);
         }
         return null;
     }

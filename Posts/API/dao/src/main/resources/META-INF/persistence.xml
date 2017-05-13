@@ -15,7 +15,7 @@
         <class>dido.auntaccount.entities.Review</class>
         <class>dido.auntaccount.entities.Tag</class>
         <class>dido.auntaccount.entities.User</class>
-        <class>dido.auntaccount.entities.Supplier</class>
+        <class>dido.auntaccount.entities.Seller</class>
         <class>dido.auntaccount.entities.Token</class>
         <class>dido.auntaccount.entities.RefreshToken</class>
 
