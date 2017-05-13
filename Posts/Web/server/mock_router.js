@@ -84,7 +84,13 @@ exports.init = function(router) {
     res.send("{}");
   });
 
-  router.get(mockApiRoot + '/tags/:query', function(req, res) {
+  router.post(mockApiRoot + '/sellers', function(req, res) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send("{}");
+  });
+
+  router.get(mockApiRoot + '/tag/:query', function(req, res) {
     var result = [
       "Shoes",
       "Boots",

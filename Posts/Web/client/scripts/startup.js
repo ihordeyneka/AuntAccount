@@ -6,7 +6,7 @@ requirejs.config({
     jquery: ["../../lib/jquery/jquery.min"],
     bootstrap: ["../../lib/bootstrap/js/bootstrap.min"],
     jsrender: ["../../lib/jsrender/jsrender.min"],
-    validator: ["../../lib/bootstrap_validator/validator.min"],
+    validator: ["../../lib/bootstrap_validator/validator"],
     tagsinput: ["../../lib/bootstrap_tagsinput/bootstrap-tagsinput.min"],
     underscore: ["../../lib/underscore/underscore-min"],
     typeahead: ["../../lib/bootstrap3_typeahead/bootstrap3-typeahead.min"],
