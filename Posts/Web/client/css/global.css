@@ -27,3 +27,6 @@
 .no-outline {
   outline-width: 0;
 }
+.half-width {
+  width: 50%;
+}

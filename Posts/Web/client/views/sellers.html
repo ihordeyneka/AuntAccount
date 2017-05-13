@@ -1,1 +1,37 @@
-sellers
+<div class="container-fluid">
+  <div class="row">
+    <div class="aa-notification-area no-outline col-sm-offset-3 col-sm-6" tabindex="-1">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-3 col-sm-6">
+      <a id="btnRegisterSeller" href="#sellerregister" class="btn btn-primary btn-register-seller">
+        <i class="fa fa-plus"></i>
+        Add Seller
+      </a>
+    </div>
+  </div>
+  <div class="row margin-top">
+    <div class="col-sm-offset-3 col-sm-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="half-width">Seller</th>
+            <th class="half-width">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="aa-sellers-container">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script id="templateSeller" type="text/x-jsrender">
+  <tr class="aa-seller-row" data-seller-id="{{:id}}">
+    <td><a href="#seller/{{:id}}">{{:name}}</a></td>
+    <td><i class="aa-icon aa-remove fa fa-trash-o"></i></td>
+  </tr>
+</script>
+<script>
+  require(["pages/sellers"], function(sellers) { sellers.init(); });
+</script>

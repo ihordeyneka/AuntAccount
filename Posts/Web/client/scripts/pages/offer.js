@@ -2,17 +2,17 @@ define(["../core/globals", "../core/config"], function(globals, config) {
   var self = {};
   self.element = null;
 
-  self.init = function(conversationId) {
+  self.init = function(offerId) {
 
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
     globals.loading($('body'), true);
     $.ajax({
-        url: config.apiRoot + "/offers/" + conversationId + "/messages",
+        url: config.apiRoot + "/offers/" + offerId + "/messages",
         dataType: "json"
     }).done(function(data) {
 
-      self.element = $(".aa-conversation-container");
+      self.element = $(".aa-offer-container");
       self.element.empty();
       if (data.length == 0) {
         self.element.append("<h3>There are no replies yet.</h3>");
@@ -23,7 +23,7 @@ define(["../core/globals", "../core/config"], function(globals, config) {
         }
       }
 
-      self.initNewReply(conversationId);
+      self.initNewReply(offerId);
 
     }).fail(function(result) {
       self.notificationArea.error();
@@ -33,12 +33,12 @@ define(["../core/globals", "../core/config"], function(globals, config) {
 
   }
 
-  self.initNewReply = function(conversationId) {
+  self.initNewReply = function(offerId) {
     var sendReply = function() {
       var description = $("#inputNewReply").val();
       var messageData = {
                   description: description,
-                  offerId: conversationId
+                  offerId: offerId
              };
       $.post({
           url: config.apiRoot + "/messages",

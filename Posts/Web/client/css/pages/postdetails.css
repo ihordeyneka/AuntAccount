@@ -1,23 +1,23 @@
-.aa-conversation-block {
+.aa-offer-block {
   margin-bottom: 15px;
 }
 
-.aa-conversation-navigate-button {
+.aa-offer-navigate-button {
   width: 140px;
 }
 
-.aa-conversation-header {
+.aa-offer-header {
   min-height: 34px;
   padding-top: 7px;
 }
 
-.aa-conversation-supplier {
+.aa-offer-supplier {
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline;
 }
 
-.aa-conversation-time {
+.aa-offer-time {
   width: 90px;
 }
