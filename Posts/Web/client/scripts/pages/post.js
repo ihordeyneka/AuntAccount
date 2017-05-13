@@ -1,5 +1,5 @@
-define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinput", "slider"],
-  function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, sliderControl) {
+define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinput", "slider", "components/google_autocomplete"],
+  function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, sliderControl, google_autocomplete) {
   var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
@@ -10,8 +10,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
   self.circle = null;
   self.userPosition = null;
   self.radiusSlider = null;
-  self.typeahead = null;
-  self.selectedLocationId = null;
+  self.locationTypeahead = null;
   self.attachmentUpload = null;
   self.lastPostId = null;
 
@@ -159,25 +158,17 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
       });
     }
 
-    var initLocation = function() {
-      var input = document.getElementById('inputLocation');
-      var autocomplete = new google.maps.places.Autocomplete(input);
-
-      google.maps.event.addListener(autocomplete, 'place_changed', function (e) {
-        var googleLocation = autocomplete.getPlace();
-        processPlace($(input).val());
-      });
-
-      $(input).keypress(function(e) {
-        if (e.which == 13) //key is Enter
-          processPlace($(input).val());
-      });
-    }
-
-    require(["googleapi"], function() { initLocation(); });
+    self.locationTypeahead = new google_autocomplete($("#inputLocation"));
+    self.locationTypeahead.element.bind("place_changed", function() {
+      processPlace(self.locationTypeahead.element.val());
+    })
+    self.locationTypeahead.element.keypress(function(e) {
+      if (e.which == 13) //key is Enter
+        processPlace(self.locationTypeahead.element.val());
+    });
 
     $(".btn-location-search").click(function() {
-      processPlace(self.typeahead.val());
+      processPlace(self.locationTypeahead.element.val());
     });
 
     $(".btn-location-nearby").popover({
@@ -276,14 +267,12 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
             postTags: $("#inputKeywords").val(),
             description: $("#inputPost").val(),
             location: {
-                id: self.selectedLocationId,
+                value: self.locationTypeahead.location,
                 latitude: self.marker.position.lat(),
                 longitude: self.marker.position.lng(),
                 radius: self.radiusSlider.getValue()
             },
             userId: $.didoauth.user.id
-           // place: $("#inputLocation").val(),
-
           };
 
           $.post({
