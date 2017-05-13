@@ -9,8 +9,8 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
 
         self.init = function() {
             initAutocomplete();
+            initPictureUpload();
             self.initSearchTagsInput();
-            self.initAttachmentUpload();
             self.addButtonHandlers();
 
             self.validatorForm = $("#formSellerRegister");
@@ -134,27 +134,25 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
             });
         }
 
-        self.initAttachmentUpload = function() {
-            self.attachmentUpload = $("#inputAttachment").fileinput({
-                browseLabel: 'Browse',
-                browseIcon: '<i class="fa fa-search"></i>',
-                showUpload: false,
-                showRemove: false,
-                showPreview: false,
-                uploadUrl: config.apiRoot + "/posts/upload",
-                uploadAsync: false,
-                layoutTemplates: {
-                    progress: '', //hide progress
-                },
-                uploadExtraData: function() {
-                    return {
-                        postId: self.lastPostId
-                    };
-                },
-                maxFileCount: 1,
-                allowedFileExtensions: ["jpg", "jpeg", "bmp", "gif", "png"]
+          var initPictureUpload = function() {
+            self.pictureUpload = $("#inputPicture").fileinput({
+              browseLabel: 'Change Picture',
+              browseIcon: '<i class="fa fa-user"></i>',
+              showUpload: false,
+              showRemove: false,
+              showPreview: false,
+              uploadUrl: config.apiRoot + "/users/picture",
+              uploadAsync: false,
+              layoutTemplates: {
+                progress: '', //hide progress
+              },
+              uploadExtraData: function () {
+                return { userId: didoauth.user.id };
+              },
+              maxFileCount: 1,
+              allowedFileExtensions: ["jpg", "jpeg", "bmp", "gif", "png"]
             });
-        }
+          }
 
         self.addButtonHandlers = function() {
             $("#btnRegisterSeller").click(function() {
