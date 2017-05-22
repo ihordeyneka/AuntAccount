@@ -3,6 +3,7 @@ package dido.auntaccount.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -22,6 +23,10 @@ public class User implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LocationId")
     private Location location;
+
+    @OneToMany
+    @JoinColumn(name = "UserId", referencedColumnName = "Id")
+    private List<Seller> sellers;
 
     public Long getId() {
         return id;
@@ -101,6 +106,15 @@ public class User implements Serializable {
 
     public User setClientId(String clientId) {
         this.clientId = clientId;
+        return this;
+    }
+
+    public List<Seller> getSellers() {
+        return sellers;
+    }
+
+    public User setSellers(List<Seller> sellers) {
+        this.sellers = sellers;
         return this;
     }
 }

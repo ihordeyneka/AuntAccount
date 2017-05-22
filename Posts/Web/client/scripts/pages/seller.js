@@ -93,13 +93,13 @@ function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, 
       showUpload: false,
       showRemove: false,
       showPreview: false,
-      uploadUrl: config.apiRoot + "/users/picture",
+      uploadUrl: config.apiRoot + "/sellers/picture",
       uploadAsync: false,
       layoutTemplates: {
         progress: '', //hide progress
       },
       uploadExtraData: function () {
-        return { userId: didoauth.user.id };
+        return { sellerId: self.savedSellerId };
       },
       maxFileCount: 1,
       allowedFileExtensions: ["jpg", "jpeg", "bmp", "gif", "png"]
@@ -118,7 +118,7 @@ function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, 
             name: $("#inputName").val(),
             phone: $("#inputPhone").val(),
             website: $("#inputWebsite").val(),
-            keywords: $("#inputTags").val(),
+            tags: $("#inputTags").val(),
             location: self.locationTypeahead.location,
             userId: $.didoauth.user.id
           };

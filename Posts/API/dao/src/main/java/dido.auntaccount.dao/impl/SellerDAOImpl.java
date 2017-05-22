@@ -33,4 +33,9 @@ public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
         }
     }
 
+    @Override
+    public void deleteSeller(Long sellerId) throws Exception {
+        deleteEntity(sellerId, Seller.class);
+    }
+
 }

@@ -11,6 +11,7 @@ import dido.auntaccount.service.business.SellerService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class SellerServiceImpl implements SellerService {
     public SellerDTO saveSeller(SellerDTO seller) {
         Seller savedSeller = null;
         try {
+            seller.setCreationDate(DateTime.now().toDate());
             savedSeller = sellerDAO.save(seller.buildEntity());
             searchSellerService.saveSeller(new SellerDTO(savedSeller));
         } catch (Exception e) {
@@ -62,5 +64,17 @@ public class SellerServiceImpl implements SellerService {
 
         List<Long> sellerIds = searchSellerService.getSellerIdsByTags(tags);
         sellerIds.stream().forEach(s -> sellerDAO.addSellerPost(s, post.buildEntity()));
+    }
+
+    @Override
+    public void updatePicture(SellerDTO seller, byte[] picture) throws Exception {
+        final Seller entity = seller.buildEntity();
+        entity.setPhoto(picture);
+        sellerDAO.save(entity);
+    }
+
+    @Override
+    public void deleteSeller(Long sellerId) throws Exception {
+        sellerDAO.deleteSeller(sellerId);
     }
 }

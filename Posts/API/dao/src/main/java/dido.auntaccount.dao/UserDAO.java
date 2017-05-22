@@ -3,6 +3,7 @@ package dido.auntaccount.dao;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
+import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface UserDAO {
     void delete(User user) throws Exception;
 
     List<Post> getPostsByUserId(Long userId);
+
+    List<Seller> getSellersByUserId(Long userId);
 
     List<Review> getReviewsByUserId(Long userId);
 

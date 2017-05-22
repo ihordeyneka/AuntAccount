@@ -2,6 +2,11 @@ package dido.auntaccount.dto;
 
 import dido.auntaccount.entities.Tag;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TagDTO implements DTO<Tag> {
 
     private Long id;
@@ -35,6 +40,15 @@ public class TagDTO implements DTO<Tag> {
 
     public String getTag() {
         return tag;
+    }
+
+    public static List<TagDTO> getTags(String tagsList) {
+        List<String> tags = parsePostTags(tagsList);
+        return tags.stream().map(TagDTO::new).collect(Collectors.toList());
+    }
+
+    public static List<String> parsePostTags(String tags) {
+        return !tags.isEmpty() ? Arrays.asList(tags.split(",")) : Collections.emptyList();
     }
 }
 

@@ -2,6 +2,7 @@ package dido.auntaccount.dto;
 
 import dido.auntaccount.entities.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +18,8 @@ public class SellerDTO implements DTO<Seller> {
     private double rate;
     private Date creationDate;
     private LocationDTO location;
-    private List<TagDTO> tags;
-    private List<PostDTO> posts;
+    private String tags;
+    private List<PostDTO> posts = new ArrayList<>();
 
     public SellerDTO() {
     }
@@ -36,7 +37,7 @@ public class SellerDTO implements DTO<Seller> {
                 .setRate(rate)
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation);
-        List<Tag> entityTags = tags.stream().map(TagDTO::buildEntity).collect(Collectors.toList());
+        List<Tag> entityTags = TagDTO.parsePostTags(tags).stream().map(Tag::new).collect(Collectors.toList());
         List<Post> entityPosts = posts.stream().map(PostDTO::buildEntity).collect(Collectors.toList());
         return entitySeller
                 .setSellerTags(entityTags)
@@ -45,7 +46,7 @@ public class SellerDTO implements DTO<Seller> {
 
     public SellerDTO(Seller seller) {
         this.id = seller.getId();
-        this.tags = seller.getSellerTags().stream().map(TagDTO::new).collect(Collectors.toList());
+        this.tags = seller.getSellerTags().stream().map(Tag::getTag).collect(Collectors.joining(", "));
         this.name = seller.getName();
         this.userId = seller.getUserId();
         this.photo = seller.getPhoto();
@@ -66,11 +67,11 @@ public class SellerDTO implements DTO<Seller> {
         this.id = id;
     }
 
-    public List<TagDTO> getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(List<TagDTO> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 

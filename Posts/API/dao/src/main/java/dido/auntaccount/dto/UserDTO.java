@@ -1,10 +1,13 @@
 package dido.auntaccount.dto;
 
 import dido.auntaccount.entities.Location;
+import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDTO implements DTO<User>, Serializable {
 
@@ -17,6 +20,7 @@ public class UserDTO implements DTO<User>, Serializable {
     private Date creationDate;
     private LocationDTO location;
     private String clientId;
+    private List<SellerDTO> sellers;
 
     public UserDTO() {
     }
@@ -39,11 +43,14 @@ public class UserDTO implements DTO<User>, Serializable {
         Location location = user.getLocation();
         this.location = location != null ? new LocationDTO(user.getLocation()) : null;
         this.clientId = user.getClientId();
+        final List<Seller> sellerList = user.getSellers();
+        this.sellers = sellerList != null ? sellerList.stream().map(SellerDTO::new).collect(Collectors.toList()) : null;
     }
 
     @Override
     public User buildEntity() {
         Location entityLocation = location != null ? location.buildEntity() : null;
+        List<Seller> sellerList = sellers != null ? sellers.stream().map(SellerDTO::buildEntity).collect(Collectors.toList()) : null;
         return new User()
                 .setId(id)
                 .setFirstName(firstName)
@@ -53,7 +60,8 @@ public class UserDTO implements DTO<User>, Serializable {
                 .setPhoto(photo)
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation)
-                .setClientId(clientId);
+                .setClientId(clientId)
+                .setSellers(sellerList);
     }
 
     public Long getId() {
@@ -127,4 +135,13 @@ public class UserDTO implements DTO<User>, Serializable {
     public void setClientId(String clientId) {
         this.clientId = clientId;
     }
+
+    public List<SellerDTO> getSellers() {
+        return sellers;
+    }
+
+    public void setSellers(List<SellerDTO> sellers) {
+        this.sellers = sellers;
+    }
+
 }

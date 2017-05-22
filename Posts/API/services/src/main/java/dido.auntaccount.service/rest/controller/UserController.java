@@ -68,6 +68,15 @@ public class UserController extends Controller {
         return getResponseBuilder().entity(posts).build();
     }
 
+    @GET
+    @Path("/{param}/sellers")
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserSellers(@PathParam("param") Long userId) {
+        List<SellerDTO> sellers = userService.getUserSellers(userId);
+        return getResponseBuilder().entity(sellers).build();
+    }
+
     @POST
     @Secured
     @Path("/profile")
@@ -165,6 +174,13 @@ public class UserController extends Controller {
     @OPTIONS
     @Path("/password")
     public Response changePasswordPreflight() throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/sellers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserSellersPreflight(@PathParam("param") Long userId) {
         return getResponseBuilder().build();
     }
 

@@ -3,8 +3,10 @@ package dido.auntaccount.service.business.impl;
 import dido.auntaccount.dao.UserDAO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.ReviewDTO;
+import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.entities.Review;
+import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.UserService;
 import org.apache.logging.log4j.Level;
@@ -53,6 +55,12 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserPostsWithOfferCount(userId);
         /*List<Post> posts = userDAO.getPostsByUserId(userId);
         return posts.stream().map(PostDTO::new).collect(Collectors.toList());*/
+    }
+
+    @Override
+    public List<SellerDTO> getUserSellers(Long userId) {
+        final List<Seller> sellers = userDAO.getSellersByUserId(userId);
+        return sellers.stream().map(SellerDTO::new).collect(Collectors.toList());
     }
 
     @Override

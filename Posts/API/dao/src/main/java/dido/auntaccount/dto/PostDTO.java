@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static dido.auntaccount.dto.TagDTO.getTags;
+import static dido.auntaccount.dto.TagDTO.parsePostTags;
+
 public class PostDTO implements DTO<Post> {
 
     private long id;
@@ -46,7 +49,7 @@ public class PostDTO implements DTO<Post> {
     }
 
     public Post buildEntity() {
-        List<Tag> tags = parsePostTags().stream().map(Tag::new).collect(Collectors.toList());
+        List<Tag> tags = parsePostTags(postTags).stream().map(Tag::new).collect(Collectors.toList());
         Location entityLocation = location.buildEntity();
         return new Post()
                 .setId(id)
@@ -141,11 +144,6 @@ public class PostDTO implements DTO<Post> {
     }
 
     public List<TagDTO> getTags() {
-        List<String> tags = parsePostTags();
-        return tags.stream().map(TagDTO::new).collect(Collectors.toList());
-    }
-
-    private List<String> parsePostTags() {
-        return !postTags.isEmpty() ? Arrays.asList(postTags.split(",")) : Collections.emptyList();
+        return TagDTO.getTags(postTags);
     }
 }

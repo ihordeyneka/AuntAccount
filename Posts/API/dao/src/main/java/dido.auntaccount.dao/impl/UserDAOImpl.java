@@ -5,6 +5,7 @@ import dido.auntaccount.dao.GeneralDAO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
+import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
 
 import javax.inject.Inject;
@@ -41,6 +42,12 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
 
     public List<Post> getPostsByUserId(Long userId) {
         TypedQuery<Post> query = entityManager.createQuery("SELECT p FROM Post p WHERE p.userId = :userId", Post.class);
+        return query.setParameter("userId", userId).getResultList();
+    }
+
+    @Override
+    public List<Seller> getSellersByUserId(Long userId) {
+        TypedQuery<Seller> query = entityManager.createQuery("SELECT s FROM Seller s WHERE s.userId = :userId", Seller.class);
         return query.setParameter("userId", userId).getResultList();
     }
 
