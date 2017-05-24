@@ -52,7 +52,7 @@ public class SellerController extends Controller {
         } else {
             throw new AuthenticationException("Can't delete seller of not logged in user");
         }
-        return getResponseBuilder().build();
+        return getResponseBuilder().entity("{}").build();
     }
 
     @POST
