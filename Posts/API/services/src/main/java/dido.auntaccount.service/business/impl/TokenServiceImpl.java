@@ -19,7 +19,7 @@ import java.sql.Date;
 public class TokenServiceImpl implements TokenService {
 
     private static final Logger logger = LogManager.getLogger(TokenServiceImpl.class);
-    private static final CacheMap<String, Long> tokenCacheMap = new CacheMap<>(1000);
+    private static final CacheMap<String, Token> tokenCacheMap = new CacheMap<>(1000);
 
     @Inject
     TokenDAO tokenDAO;
@@ -30,8 +30,7 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public TokenDTO getToken(String token) {
         Token foundToken = tokenCacheMap.containsKey(token) ?
-                new Token(token, new Date(tokenCacheMap.get(token)))
-                : tokenDAO.find(token);
+                tokenCacheMap.get(token) : tokenDAO.find(token);
 
         return new TokenDTO(foundToken);
     }
@@ -60,7 +59,7 @@ public class TokenServiceImpl implements TokenService {
         Token savedToken = null;
         try {
             savedToken = tokenDAO.save(accessToken);
-            tokenCacheMap.put(token, expirationDate);
+            tokenCacheMap.put(token, savedToken);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save token", e);
         }
@@ -71,6 +70,7 @@ public class TokenServiceImpl implements TokenService {
     public void deleteToken(String token) {
         try {
             tokenDAO.delete(token);
+            tokenCacheMap.remove(token);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't delete token", e);
         }
