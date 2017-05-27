@@ -39,8 +39,8 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
         $("#inputName").val(data.name);
         $("#inputPhone").val(data.phone);
         $("#inputWebsite").val(data.website);
-        $("#inputTags").val(data.tags);
         $("#inputPrimaryLocation").val(data.location);
+        self.tagsInput.setTags(data.tags);
         if (data.picture) {
           $("<img>").width("100%").attr("src", data.picture).appendTo(".aa-seller-picture");
         }

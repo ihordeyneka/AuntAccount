@@ -6,6 +6,12 @@ define(["core/config", "tagsinput"], function(config, tagsinputControl) {
     self.getTags = function() {
       return self.element.val();
     };
+    self.setTags = function(tags) {
+      self.element.tagsinput('removeAll');
+      for (var i=0; i<tags.length; i++) {
+        self.element.tagsinput('add', tags[i]);
+      }
+    };
 
     element.tagsinput({
       typeahead: {
