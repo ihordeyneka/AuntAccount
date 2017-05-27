@@ -4,6 +4,7 @@ requirejs.config({
   paths: {
     domReady: ["../../lib/dom_ready/dom_ready"],
     jquery: ["../../lib/jquery/jquery.min"],
+    jqueryRaty: ["../../lib/jquery_raty/jquery.raty-fa"],
     bootstrap: ["../../lib/bootstrap/js/bootstrap.min"],
     jsrender: ["../../lib/jsrender/jsrender.min"],
     validator: ["../../lib/bootstrap_validator/validator"],
