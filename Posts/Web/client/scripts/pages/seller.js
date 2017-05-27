@@ -40,7 +40,7 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
         $("#inputPhone").val(data.phone);
         $("#inputWebsite").val(data.website);
         $("#inputPrimaryLocation").val(data.location);
-        self.tagsInput.setTags(data.tags);
+        self.tagsInput.setTags(data.tagList);
         if (data.picture) {
           $("<img>").width("100%").attr("src", data.picture).appendTo(".aa-seller-picture");
         }
