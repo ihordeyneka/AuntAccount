@@ -20,6 +20,7 @@ public class SellerDTO implements DTO<Seller> {
     private LocationDTO location;
     private String tags;
     private List<PostDTO> posts = new ArrayList<>();
+    private List<String> tagList;
 
     public SellerDTO() {
     }
@@ -46,7 +47,8 @@ public class SellerDTO implements DTO<Seller> {
 
     public SellerDTO(Seller seller) {
         this.id = seller.getId();
-        this.tags = seller.getSellerTags().stream().map(Tag::getTag).collect(Collectors.joining(", "));
+        this.tagList = seller.getSellerTags().stream().map(Tag::getTag).collect(Collectors.toList());
+        this.tags = this.tagList.stream().collect(Collectors.joining(", "));
         this.name = seller.getName();
         this.userId = seller.getUserId();
         this.photo = seller.getPhoto();
@@ -145,5 +147,13 @@ public class SellerDTO implements DTO<Seller> {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public List<String> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<String> tagList) {
+        this.tagList = tagList;
     }
 }
