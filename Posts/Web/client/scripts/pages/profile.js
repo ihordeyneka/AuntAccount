@@ -1,5 +1,5 @@
 define(["core/globals", "core/didoauth", "core/config", "fileinput", "components/google_autocomplete"],
-  function(globals, didoauth, config, fileinput, google_autocomplete) {
+  function(globals, didoauth, config, fileinput, googleAutocompleteControl) {
   var self = {};
 
   self.init = function() {
@@ -12,7 +12,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
     initPictureUpload();
-    self.locationTypeahead = new google_autocomplete($("#inputPrimaryLocation"));
+    self.locationTypeahead = new googleAutocompleteControl($("#inputPrimaryLocation"));
 
     globals.loading($('body'), true);
     $.ajax({

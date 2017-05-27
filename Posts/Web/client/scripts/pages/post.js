@@ -1,5 +1,5 @@
-define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinput", "slider", "components/google_autocomplete"],
-  function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, sliderControl, google_autocomplete) {
+define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider", "components/google_autocomplete", "components/tags_input"],
+  function(globals, config, typeaheadControl, fileinputControl, sliderControl, googleAutocompleteControl, tagsInputControl) {
   var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
@@ -27,7 +27,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
   }
 
   self.init = function(){
-    self.initSearchTagsInput();
+    self.tagsInput = new tagsInputControl($("#inputKeywords"));
     self.initLocationTypeahead();
     self.initRadiusSlider();
     self.initAttachmentUpload();
@@ -73,71 +73,6 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
     self.updatePosition();
   }
 
-  self.initSearchTagsInput = function() {
-    $("#inputKeywords").tagsinput({
-      typeahead: {
-        afterSelect: function(val) {
-          this.$element.val(""); //clear input when tag is added
-        },
-        source: function(query) {
-          var result = [];
-
-          $.ajax({
-              url: config.apiRoot + "/tag/" + query,
-              dataType: "json",
-              async: false
-          }).done(function(data) {
-              result = data;
-          }).fail(function(result) {
-            self.notificationArea.error();
-          });
-
-          return result;
-        }
-      }
-    });
-
-    var tagsinput = $("#inputKeywords").data("tagsinput");
-
-    //normally shifting of controls should be possible to reuse in other instances of tags input
-    //this code should be moved to a separate place to override the behavior of tags input control
-    tagsinput.currentShift = 0;
-    var updateTagsPosition = function() {
-      var shiftStepPixels = 100;
-      var inputRight = tagsinput.$input.position().left + tagsinput.$input.width();
-      var containerRight = tagsinput.$container.position().left + tagsinput.$container.width();
-      if (inputRight > containerRight) {
-        tagsinput.currentShift -= shiftStepPixels;
-      } else if (tagsinput.currentShift < 0) {
-        var restoreStepsCount = (containerRight - inputRight) / shiftStepPixels;
-        tagsinput.currentShift += restoreStepsCount * shiftStepPixels;
-      }
-      if (tagsinput.currentShift > 0)
-        tagsinput.currentShift = 0;
-      //update left css property for input and tags within the tagsinput
-      tagsinput.$container.children('span.tag, input')
-        .css("left", tagsinput.currentShift.toString() + "px");
-    }
-
-    $("#inputKeywords").on("itemAdded", function() {
-      updateTagsPosition();
-      tagsinput.$input.attr('placeholder', ''); //remove placeholder if at least one tag is added
-    });
-    $("#inputKeywords").on("itemRemoved", function() {
-      updateTagsPosition();
-      if (tagsinput.itemsArray.length === 0)
-        tagsinput.$input.attr('placeholder', tagsinput.placeholderText); //restore placeholder if there are no tags again
-    });
-    tagsinput.$input.keypress(function() {
-      updateTagsPosition();
-    });
-    tagsinput.$input.keydown(function(e) {
-      if (e.which === 37 && tagsinput.$input.val() === '') { //LEFT ARROW and input is empty
-        e.stopPropagation(); //avoid moving input between tags, see keydown event handler in bootstrap-tagsinput.js
-      }
-    });
-  }
-
   self.initLocationTypeahead = function() {
     var processPlace = function(place) {
       if (!place)
@@ -158,7 +93,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
       });
     }
 
-    self.locationTypeahead = new google_autocomplete($("#inputLocation"));
+    self.locationTypeahead = new googleAutocompleteControl($("#inputLocation"));
     self.locationTypeahead.element.bind("place_changed", function() {
       processPlace(self.locationTypeahead.element.val());
     })
@@ -264,7 +199,7 @@ define(["../core/globals", "../core/config", "tagsinput", "typeahead", "fileinpu
         success: function() {
           globals.loading($('body'), true);
           var postData = {
-            postTags: $("#inputKeywords").val(),
+            postTags: self.tagsInput.getTags(),
             description: $("#inputPost").val(),
             location: {
                 value: self.locationTypeahead.location,
