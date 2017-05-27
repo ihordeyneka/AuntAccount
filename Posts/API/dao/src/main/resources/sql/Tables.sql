@@ -52,13 +52,16 @@ CREATE TABLE `dido`.`Review` (
 );
 
 CREATE TABLE `LOCATION` (
-  `Id` bigint(10) NOT NULL,
+  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `Latitude` varchar(45) NOT NULL,
   `Longitude` varchar(45) NOT NULL,
   `Country` varchar(45) DEFAULT NULL,
   `City` varchar(45) DEFAULT NULL,
-  `Region` varchar(45) DEFAULT NULL,
-  `Street` varchar(45) DEFAULT NULL,
+  `Region1` varchar(45) DEFAULT NULL,
+  `Region2` varchar(45) DEFAULT NULL,
+  `Name` varchar(45) DEFAULT NULL,
+  `StreetNumber` int(11) DEFAULT NULL,
+  `Neighborhood` varchar(45) DEFAULT NULL,
   `Radius` double DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );

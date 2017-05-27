@@ -11,8 +11,12 @@ public class Location {
     private double latitude;
     private double longitude;
     private String city;
-    private String region;
-    private String street;
+    private String region1;
+    private String region2;
+    private String name;
+    private String route;
+    private String neighborhood;
+    private Integer streetNumber;
     private double radius;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,21 +59,21 @@ public class Location {
         return this;
     }
 
-    public String getRegion() {
-        return region;
+    public String getRegion1() {
+        return region1;
     }
 
-    public Location setRegion(String region) {
-        this.region = region;
+    public Location setRegion1(String region1) {
+        this.region1 = region1;
         return this;
     }
 
-    public String getStreet() {
-        return street;
+    public Integer getStreetNumber() {
+        return streetNumber;
     }
 
-    public Location setStreet(String street) {
-        this.street = street;
+    public Location setStreetNumber(Integer streetNumber) {
+        this.streetNumber = streetNumber;
         return this;
     }
 
@@ -88,6 +92,42 @@ public class Location {
 
     public Location setRadius(double radius) {
         this.radius = radius;
+        return this;
+    }
+
+    public String getRegion2() {
+        return region2;
+    }
+
+    public Location setRegion2(String region2) {
+        this.region2 = region2;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Location setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getRoute() {
+        return route;
+    }
+
+    public Location setRoute(String route) {
+        this.route = route;
+        return this;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public Location setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
         return this;
     }
 }

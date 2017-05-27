@@ -9,10 +9,15 @@ public class LocationDTO implements DTO<Location> {
     private double latitude;
     private double longitude;
     private String city;
-    private String region;
-    private String street;
+    private String region1;
+    private String region2;
+    private String name;
+    private Integer streetNumber;
+    private String route;
+    private String neighborhood;
     private CountryDTO country;
     private double radius;
+
 
     public LocationDTO() {
     }
@@ -22,8 +27,12 @@ public class LocationDTO implements DTO<Location> {
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
         this.city = location.getCity();
-        this.region = location.getRegion();
-        this.street = location.getStreet();
+        this.region1 = location.getRegion1();
+        this.region2 = location.getRegion2();
+        this.name = location.getName();
+        this.neighborhood = location.getNeighborhood();
+        this.streetNumber = location.getStreetNumber();
+        this.route = location.getRoute();
         Country country = location.getCountry();
         this.country = country != null ? new CountryDTO(country) : null;
         this.radius = location.getRadius();
@@ -37,8 +46,12 @@ public class LocationDTO implements DTO<Location> {
                 .setLatitude(latitude)
                 .setLongitude(longitude)
                 .setCity(city)
-                .setRegion(region)
-                .setStreet(street)
+                .setRegion1(region1)
+                .setRegion2(region2)
+                .setName(name)
+                .setNeighborhood(neighborhood)
+                .setRoute(route)
+                .setStreetNumber(streetNumber)
                 .setCountry(entityCountry)
                 .setRadius(radius);
     }
@@ -75,16 +88,16 @@ public class LocationDTO implements DTO<Location> {
         this.city = city;
     }
 
-    public String getRegion() {
-        return region;
+    public String getRegion1() {
+        return region1;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setRegion1(String region1) {
+        this.region1 = region1;
     }
 
-    public String getStreet() {
-        return street;
+    public Integer getStreetNumber() {
+        return streetNumber;
     }
 
     public CountryDTO getCountry() {
@@ -95,8 +108,8 @@ public class LocationDTO implements DTO<Location> {
         this.country = country;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setStreetNumber(Integer streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
     public double getRadius() {
@@ -105,5 +118,37 @@ public class LocationDTO implements DTO<Location> {
 
     public void setRadius(double radius) {
         this.radius = radius;
+    }
+
+    public String getRegion2() {
+        return region2;
+    }
+
+    public void setRegion2(String region2) {
+        this.region2 = region2;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRoute() {
+        return route;
+    }
+
+    public void setRoute(String route) {
+        this.route = route;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
     }
 }
