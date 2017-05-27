@@ -1,9 +1,6 @@
 package dido.auntaccount.service.business;
 
-import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.dto.ReviewDTO;
-import dido.auntaccount.dto.SellerDTO;
-import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.dto.*;
 
 import java.util.List;
 
@@ -11,9 +8,11 @@ public interface UserService {
 
     UserDTO getUser(Long userId);
 
-    UserDTO findByEmail(String userName);
+    UserProfileDTO getUserProfile(Long userId);
 
-    UserDTO saveUser(UserDTO user);
+    UserProfileDTO findByEmail(String userName);
+
+    UserDTO saveUser(UserProfileDTO user);
 
     List<PostDTO> getUserPosts(Long userId);
 
@@ -25,6 +24,6 @@ public interface UserService {
 
     void updatePicture(Long userId, byte[] picture);
 
-    void updateUser(UserDTO user);
+    void updateUser(UserProfileDTO user);
 
 }

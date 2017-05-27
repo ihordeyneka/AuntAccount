@@ -24,7 +24,7 @@ public class User implements Serializable {
     @JoinColumn(name = "LocationId")
     private Location location;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "UserId", referencedColumnName = "Id")
     private List<Seller> sellers;
 

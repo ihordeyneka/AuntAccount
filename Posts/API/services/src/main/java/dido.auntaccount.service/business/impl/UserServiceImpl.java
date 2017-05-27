@@ -1,10 +1,7 @@
 package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.UserDAO;
-import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.dto.ReviewDTO;
-import dido.auntaccount.dto.SellerDTO;
-import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.dto.*;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
@@ -32,13 +29,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findByEmail(String email) {
-        User user = userDAO.findByEmail(email);
-        return new UserDTO(user);
+    public UserProfileDTO getUserProfile(Long userId) {
+        return new UserProfileDTO(userDAO.find(userId));
     }
 
     @Override
-    public UserDTO saveUser(UserDTO user) {
+    public UserProfileDTO findByEmail(String email) {
+        User user = userDAO.findByEmail(email);
+        return new UserProfileDTO(user);
+    }
+
+    @Override
+    public UserDTO saveUser(UserProfileDTO user) {
         User savedUser = null;
         try {
             User entity = user.buildEntity();
@@ -82,7 +84,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserDTO user) {
+    public void updateUser(UserProfileDTO user) {
         try {
             userDAO.updateUser(user.buildEntity());
         } catch (Exception e) {

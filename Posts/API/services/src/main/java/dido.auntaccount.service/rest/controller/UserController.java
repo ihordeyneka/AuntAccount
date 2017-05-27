@@ -38,11 +38,11 @@ public class UserController extends Controller {
     }
 
     @GET
-    @Path("/email/{param}")
+    @Path("/profile/{param}")
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserByEmail(@PathParam("param") String email) {
-        UserDTO user = userService.findByEmail(email);
+    public Response getUserProfile(@PathParam("param") Long userId) {
+        UserProfileDTO user = userService.getUserProfile(userId);
         return getResponseBuilder().entity(user).build();
     }
 
@@ -52,7 +52,7 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveUser(@FormParam("email") String email, @FormParam("firstName") String firstName,
                              @FormParam("lastName") String lastName, @FormParam("password") String password) throws Exception {
-        UserDTO user = new UserDTO(email, firstName, lastName, password);
+        UserProfileDTO user = new UserProfileDTO(email, firstName, lastName, password);
         String hashedPassword = passwordService.createHash(password);
         user.setPassword(hashedPassword);
         UserDTO savedUser = userService.saveUser(user);
@@ -82,7 +82,7 @@ public class UserController extends Controller {
     @Path("/profile")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProfile(UserDTO user, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
+    public Response updateProfile(UserProfileDTO user, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
         TokenDTO foundToken = tokenService.getToken(token);
         user.setId(foundToken.getUserId());
         userService.updateUser(user);
@@ -115,7 +115,7 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response changePassword(PasswordDTO passwordDTO, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
         TokenDTO foundToken = tokenService.getToken(token);
-        final UserDTO user = userService.getUser(foundToken.getUserId());
+        final UserProfileDTO user = userService.getUserProfile(foundToken.getUserId());
         boolean passwordCorrect = passwordService.verifyPassword(passwordDTO.getOldPassword(), user.getPassword());
         if (passwordCorrect) {
             user.setPassword(passwordService.createHash(passwordDTO.getNewPassword()));
@@ -135,13 +135,6 @@ public class UserController extends Controller {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserPreflight(@PathParam("param") Long userId) {
-        return getResponseBuilder().build();
-    }
-
-    @OPTIONS
-    @Path("/email/{param}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserByEmailPreflight(@PathParam("param") String email) {
         return getResponseBuilder().build();
     }
 

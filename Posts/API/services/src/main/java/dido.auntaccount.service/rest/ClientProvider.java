@@ -1,6 +1,7 @@
 package dido.auntaccount.service.rest;
 
 import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.dto.UserProfileDTO;
 import dido.auntaccount.mappers.JsonMapper;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
@@ -24,7 +25,7 @@ public interface ClientProvider {
 
     String getUserInfoURI();
 
-    UserDTO mapUser(JsonMapper mapper, String jsonUser);
+    UserProfileDTO mapUser(JsonMapper mapper, String jsonUser);
 
     OAuthAccessTokenResponse getAccessTokenResponse(OAuthClient oAuthClient, OAuthClientRequest request) throws OAuthProblemException, OAuthSystemException;
 

@@ -18,21 +18,6 @@ CREATE TABLE `dido`.`Tag` (
   PRIMARY KEY (`Id`)
 );
 
-
-CREATE TABLE `SELLER` (
-  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `Rate` float DEFAULT NULL,
-  `UserId` bigint(10) NOT NULL,
-  `Name` varchar(45) DEFAULT NULL,
-  `Website` varchar(100) DEFAULT NULL,
-  `Phone` varchar(45) DEFAULT NULL,
-  `CreationDate` datetime DEFAULT NULL,
-  `LocationId` bigint(10) DEFAULT NULL,
-  `Photo` blob,
-  PRIMARY KEY (`Id`)
-);
-
-
 CREATE TABLE `dido`.`PostTag` (
   `TagId` bigint(10) NOT NULL,
   `PostId` bigint(10) NOT NULL,
@@ -126,6 +111,19 @@ CREATE TABLE `RefreshToken` (
   `Token` varchar(255) NOT NULL,
   `ExpirationDate` datetime NOT NULL,
   PRIMARY KEY (`Token`)
+);
+
+CREATE TABLE `SELLER` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Rate` float DEFAULT NULL,
+  `UserId` int(11) NOT NULL,
+  `Name` varchar(45) DEFAULT NULL,
+  `Website` varchar(100) DEFAULT NULL,
+  `Phone` varchar(45) DEFAULT NULL,
+  `CreationDate` datetime DEFAULT NULL,
+  `LocationId` int(11) DEFAULT NULL,
+  `Photo` longblob,
+  PRIMARY KEY (`Id`)
 );
 
 

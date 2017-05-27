@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.dto.UserProfileDTO;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,11 +37,11 @@ public class JsonMapper {
         return null;
     }
 
-    public UserDTO jsonFacebookToUserDTO(String json) {
-        UserDTO user = null;
+    public UserProfileDTO jsonFacebookToUserDTO(String json) {
+        UserProfileDTO user = null;
         try {
             JSONObject jsonObject = new JSONObject(json);
-            user = new UserDTO();
+            user = new UserProfileDTO();
             user.setClientId((String) jsonObject.get("id"));
             user.setEmail((String) jsonObject.get("email"));
             user.setFirstName((String) jsonObject.get("first_name"));
@@ -51,11 +52,11 @@ public class JsonMapper {
         return user;
     }
 
-    public UserDTO jsonGoogleToUserDTO(String json) {
-        UserDTO user = null;
+    public UserProfileDTO jsonGoogleToUserDTO(String json) {
+        UserProfileDTO user = null;
         try {
             JSONObject jsonObject = new JSONObject(json);
-            user = new UserDTO();
+            user = new UserProfileDTO();
             user.setClientId((String) jsonObject.get("id"));
             user.setEmail((String) jsonObject.get("email"));
             user.setFirstName((String) jsonObject.get("given_name"));

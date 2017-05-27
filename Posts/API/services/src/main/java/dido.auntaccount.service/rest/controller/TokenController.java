@@ -3,6 +3,7 @@ package dido.auntaccount.service.rest.controller;
 import dido.auntaccount.dido.auntaccount.utils.OAuthRequestWrapper;
 import dido.auntaccount.dto.RefreshTokenDTO;
 import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.dto.UserProfileDTO;
 import dido.auntaccount.mappers.JsonMapper;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
@@ -91,7 +92,7 @@ public class TokenController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response authorize(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
 
-        UserDTO userDTO = null;
+        UserProfileDTO userDTO = null;
 
         try {
             OAuthTokenRequest oauthRequest = new OAuthTokenRequest(new OAuthRequestWrapper(request, form));
@@ -177,7 +178,7 @@ public class TokenController extends Controller {
         OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
 
         String body = resourceResponse.getBody();
-        UserDTO user = provider.mapUser(mapper, body);
+        UserProfileDTO user = provider.mapUser(mapper, body);
         user.setCreationDate(new Date(DateTime.now().getMillis()));
 
         UserDTO savedUser = userService.saveUser(user);
@@ -189,8 +190,8 @@ public class TokenController extends Controller {
                 .header(EXPIRES_IN, tokens.getAccessExpirationDate()).entity(savedUser).build();
     }
 
-    private UserDTO validateClient(OAuthTokenRequest request) throws OAuthProblemException {
-        UserDTO user = userService.findByEmail(request.getUsername());
+    private UserProfileDTO validateClient(OAuthTokenRequest request) throws OAuthProblemException {
+        UserProfileDTO user = userService.findByEmail(request.getUsername());
         if (user == null) {
             throw OAuthProblemException.error("User is not valid " + request.getUsername());
         }
