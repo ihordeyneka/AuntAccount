@@ -95,15 +95,11 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
 
     self.locationTypeahead = new googleAutocompleteControl($("#inputLocation"));
     self.locationTypeahead.element.bind("place_changed", function() {
-      processPlace(self.locationTypeahead.element.val());
+      processPlace(self.locationTypeahead.getLocationString());
     })
-    self.locationTypeahead.element.keypress(function(e) {
-      if (e.which == 13) //key is Enter
-        processPlace(self.locationTypeahead.element.val());
-    });
 
     $(".btn-location-search").click(function() {
-      processPlace(self.locationTypeahead.element.val());
+      processPlace(self.locationTypeahead.getLocationString());
     });
 
     $(".btn-location-nearby").popover({
@@ -198,15 +194,16 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
         validatorForm: self.validatorForm,
         success: function() {
           globals.loading($('body'), true);
+
+          var location = $.extend(true, {}, self.locationTypeahead.getLocation());
+          location.latitude = self.marker.position.lat();
+          location.longitude = self.marker.position.lng();
+          location.radius = self.radiusSlider.isEnabled() ? self.radiusSlider.getValue() : 0;
+
           var postData = {
             postTags: self.tagsInput.getTags(),
             description: $("#inputPost").val(),
-            location: {
-                value: self.locationTypeahead.location,
-                latitude: self.marker.position.lat(),
-                longitude: self.marker.position.lng(),
-                radius: self.radiusSlider.getValue()
-            },
+            location: location,
             userId: $.didoauth.user.id
           };
 

@@ -39,7 +39,7 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
         $("#inputName").val(data.name);
         $("#inputPhone").val(data.phone);
         $("#inputWebsite").val(data.website);
-        $("#inputPrimaryLocation").val(data.location);
+        self.locationTypeahead.setLocation(data.location);
         self.tagsInput.setTags(data.tagList);
         if (data.picture) {
           $("<img>").width("100%").attr("src", data.picture).appendTo(".aa-seller-picture");
@@ -85,7 +85,7 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
             phone: $("#inputPhone").val(),
             website: $("#inputWebsite").val(),
             tags: self.tagsInput.getTags(),
-            location: self.locationTypeahead.location,
+            location: self.locationTypeahead.getLocation(),
             userId: $.didoauth.user.id
           };
 
