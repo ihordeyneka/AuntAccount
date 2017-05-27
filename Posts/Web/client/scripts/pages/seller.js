@@ -11,17 +11,48 @@ function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, 
     self.locationTypeahead = new google_autocomplete($("#inputPrimaryLocation"));
 
     initPictureUpload();
-    self.initSearchTagsInput();
-    self.addButtonHandlers();
+    initSearchTagsInput();
+    addButtonHandlers();
 
     self.validatorForm = $("#formSellerRegister");
     self.validatorForm.validator({
       focus: false
     });
     self.notificationArea = $(".aa-notification-area").notificationArea();
+
+    if (self.sellerId) {
+      fetchCurrentSeller();
+    }
   }
 
-  self.initSearchTagsInput = function() {
+  var fetchCurrentSeller = function() {
+    globals.loading($('body'), true);
+    $.ajax({
+        url: config.apiRoot + "/sellers/" + self.sellerId,
+        dataType: "json"
+    }).done(function(data) {
+      if (data == null) {
+        self.notificationArea.error({
+          message: "Seller was not found."
+        });
+      } else {
+        $("#inputName").val(data.name);
+        $("#inputPhone").val(data.phone);
+        $("#inputWebsite").val(data.website);
+        $("#inputTags").val(data.tags);
+        $("#inputPrimaryLocation").val(data.location);
+        if (data.picture) {
+          $("<img>").width("100%").attr("src", data.picture).appendTo(".aa-seller-picture");
+        }
+      }
+    }).fail(function(result) {
+      self.notificationArea.error();
+    }).always(function() {
+      globals.loading($('body'), false);
+    });
+  }
+
+  var initSearchTagsInput = function() {
     $("#inputTags").tagsinput({
       typeahead: {
         afterSelect: function(val) {
@@ -106,7 +137,7 @@ function(globals, config, tagsinputControl, typeaheadControl, fileinputControl, 
     });
   }
 
-  self.addButtonHandlers = function() {
+  var addButtonHandlers = function() {
     $("#btnSaveSeller")
     .click(function() {
       globals.validate({
