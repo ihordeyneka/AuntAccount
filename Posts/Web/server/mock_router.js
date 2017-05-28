@@ -69,9 +69,9 @@ exports.init = function(router) {
 
   router.get(mockApiRoot + '/users/:user/posts', function(req, res) {
     var result = [
-      { id: 1, creationDate: "15-12-2016", offerCount: 5, newMessages: true, postTags: "Food, Gamburger", description: "We've just survived a plane crash<br/>We need to find something to eat..." },
-      { id: 2, creationDate: "29-01-2017", offerCount: 0, newMessages: false, postTags: "Shelter", description: "Looks like we're stuck here." },
-      { id: 3, creationDate: "03-02-2017", offerCount: 1, newMessages: false, postTags: "Gun, AK-47", description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
+      { id: 1, creationDate: 1482616800000, offerCount: 5, newMessages: true, postTags: "Food, Gamburger", description: "We've just survived a plane crash<br/>We need to find something to eat..." },
+      { id: 2, creationDate: 1485640800000, offerCount: 0, newMessages: false, postTags: "Shelter", description: "Looks like we're stuck here." },
+      { id: 3, creationDate: 1486640800000, offerCount: 1, newMessages: false, postTags: "Gun, AK-47", description: "We need to defend ourselves against the Others<br/>Beretta will also work." },
     ];
 
     res.statusCode = 200;
