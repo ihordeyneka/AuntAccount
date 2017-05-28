@@ -139,6 +139,13 @@ public class UserController extends Controller {
     }
 
     @OPTIONS
+    @Path("/email/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserByEmailPreflight(@PathParam("param") String email) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
     @Path("/")
     public Response saveUserPreflight(UserDTO user) {
         return getResponseBuilder().build();
@@ -177,4 +184,10 @@ public class UserController extends Controller {
         return getResponseBuilder().build();
     }
 
+    @OPTIONS
+    @Path("/profile/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserProfilePreflight(@PathParam("param") Long userId) {
+        return getResponseBuilder().build();
+    }
 }
