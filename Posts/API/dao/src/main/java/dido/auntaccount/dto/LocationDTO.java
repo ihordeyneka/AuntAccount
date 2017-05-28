@@ -18,7 +18,6 @@ public class LocationDTO implements DTO<Location> {
     private CountryDTO country;
     private double radius;
 
-
     public LocationDTO() {
     }
 

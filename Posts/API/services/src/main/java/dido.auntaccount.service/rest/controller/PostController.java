@@ -2,11 +2,15 @@ package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.TokenDTO;
+import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.service.business.PostService;
+import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.filter.Secured;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.inject.Inject;
+import javax.security.sasl.AuthenticationException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,6 +23,9 @@ public class PostController extends Controller {
 
     @Inject
     PostService postService;
+
+    @Inject
+    TokenService tokenService;
 
     @GET
     @Path("/{param}")
@@ -52,7 +59,12 @@ public class PostController extends Controller {
     @Path("/upload")
     @Secured
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadFile(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("postId") Long postId) throws IOException {
+    public Response uploadFile(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("postId") Long postId,  @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
+        TokenDTO foundToken = tokenService.getToken(token);
+        final PostDTO postDTO = postService.getPost(postId);
+        if (!postDTO.getUserId().equals(foundToken.getUserId())) {
+            throw new AuthenticationException("Can't update post's photo of not logged in user");
+        }
         postService.updatePhoto(uploadedInputStream, postId);
         return getResponseBuilder().build();
     }

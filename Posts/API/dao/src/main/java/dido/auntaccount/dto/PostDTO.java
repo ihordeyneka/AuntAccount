@@ -4,14 +4,10 @@ import dido.auntaccount.entities.Location;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Tag;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static dido.auntaccount.dto.TagDTO.getTags;
 import static dido.auntaccount.dto.TagDTO.parsePostTags;
 
 public class PostDTO implements DTO<Post> {
