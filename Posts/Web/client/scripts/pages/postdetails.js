@@ -5,27 +5,10 @@ define(["../core/globals", "../core/config"], function(globals, config) {
 
     globals.loading($('body'), true);
     $.ajax({
-        url: config.apiRoot + "/posts/" + postId + "/offers",
+        url: config.apiRoot + "/posts/" + postId + "/offers", //TODO: udpate URL
         dataType: "json"
     }).done(function(data) {
-      var element = $(".aa-postdetails-container");
-      element.empty();
-      if (data.length == 0) {
-        element.append("<h3>Nobody added any offers yet.</h3>");
-      } else {
-        for (var i=0; i<data.length; i++) {
-          var offer = data[i];
-          var seller = offer.seller;
-          var sellerDisplayName = seller.firstName + " " + seller.lastName;
-          element.append($.templates("#templateOffer").render({
-            offerId: offer.id,
-            time: offer.time,
-            seller: sellerDisplayName,
-            newReplies: offer.replyCount,
-            badgeCss: offer.replyCount == 0 ? "is-hidden" : "badge-highlighted"
-          }));
-        }
-      }
+
     }).fail(function(result) {
       self.notificationArea = $(".aa-notification-area").notificationArea();
       self.notificationArea.error();
