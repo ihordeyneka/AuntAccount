@@ -6,23 +6,21 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
     globals.loading($('body'), true);
     var userId = $.didoauth.user.id;
     $.ajax({
-        url: config.apiRoot + "/users/"+ userId +"/posts",
+        url: config.apiRoot + "/posts/notifications/"+ userId,
         dataType: "json"
     }).done(function(data) {
-      var element = $(".aa-recent-container");
+      var element = $(".aa-alerts-container");
       element.empty();
       if (data.length == 0) {
-        element.append("<h3 class='center'>You haven't added any posts yet.</h3>");
+        element.append("<h3 class='center'>There were no posts added recently to match your subscriptions.</h3>");
       } else {
         for (var i=0; i<data.length; i++) {
           var post = data[i];
-          element.append($.templates("#templatePost").render({
+          element.append($.templates("#templateAlert").render({
             postId: post.id,
             time: post.creationDate,
             title: post.postTags,
-            content: post.description,
-            offers: post.offerCount,
-            badgeCss: post.offerCount == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
+            content: post.description
           }));
         }
       }

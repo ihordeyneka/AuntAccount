@@ -30,6 +30,18 @@ exports.init = function(router) {
     res.send(JSON.stringify(result));
   });
 
+  router.get(mockApiRoot + '/posts/notifications/:user', function(req, res) {
+    var result = [
+      { id: 1, creationDate: "15-12-2016", postTags: "Clothing, Shoes", description: "Suit, tuxedo, black leather shoes." },
+      { id: 2, creationDate: "29-01-2017", postTags: "Clothing", description: "Ralph Lauren Polo, Lacoste or Tommy Hilfiger." },
+      { id: 3, creationDate: "03-02-2017", postTags: "Shirts", description: "I'm looking for a blue denim shirt, send me a pic if you've got one." },
+    ];
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
   router.get(mockApiRoot + '/offers/:offer/messages', function(req, res) {
     var result = [
       { id: 1, sender: { id: 1, firstName: "Jack", lastName: "Shephard" }, creationDate: "03-02-2017 12:05", description: "I've got some food for you. Fruits, fish, even boar." },
@@ -147,7 +159,8 @@ exports.init = function(router) {
       id: 1,
       firstName: "Jack",
       lastName: "Shephard",
-      email: "jack.shephard@gmail.com"
+      email: "jack.shephard@gmail.com",
+      sellers: [{ id: 1, name: "BigBurger"}]
     };
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
@@ -198,7 +211,9 @@ exports.init = function(router) {
     var result = {
       id: 1,
       firstName: "Jack",
-      lastName: "Shephard"
+      lastName: "Shephard",
+      email: "jack.shephard@gmail.com",
+      sellers: [{ id: 1, name: "BigBurger"}]
     }
 
     res.statusCode = 200;

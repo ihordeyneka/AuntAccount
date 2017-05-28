@@ -4,13 +4,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="aa-recent-container col-sm-offset-2 col-sm-8">
+    <div class="aa-alerts-container col-sm-offset-2 col-sm-8">
     </div>
   </div>
 </div>
-<script id="templatePost" type="text/x-jsrender">
+<script id="templateAlert" type="text/x-jsrender">
   <div class="aa-section">
-    <a class="aa-post-navigate-button btn btn-primary right" href="#postdetails/{{:postId}}">Offers<span class="badge {{:badgeCss}}">{{:offers}}</span></a>
+    <a class="btn btn-primary right" href="#postdetails/{{:postId}}">Reply</a>
     <div class="aa-post-header">
       <span class="aa-post-time right">{{:time}}</span>
       <span class="aa-post-caption">{{:title}}</span>
@@ -21,5 +21,5 @@
   </div>
 </script>
 <script>
-  require(["pages/recent"], function(recent) { recent.init(); });
+  require(["pages/alerts"], function(alerts) { alerts.init(); });
 </script>
