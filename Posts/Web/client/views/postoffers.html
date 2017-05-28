@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="aa-notification-area no-outline col-sm-offset-2 col-sm-8" tabindex="-1">
+    </div>
+  </div>
+  <div class="row">
+    <div class="aa-postoffers-container col-sm-offset-2 col-sm-8">
+    </div>
+  </div>
+</div>
+<script id="templateOffer" type="text/x-jsrender">
+  <div class="aa-offer-block">
+    <a class="aa-offer-navigate-button btn btn-primary right" href="#offer/{{:offerId}}">Details<span class="badge {{:badgeCss}}">{{:newReplies}}</span></a>
+    <div class="aa-offer-header">
+      <span class="aa-offer-time right">{{:time}}</span>
+      <span class="aa-offer-seller">{{:seller}}</span>
+    </div>
+  </div>
+</script>
+<script>
+  require(["pages/postoffers"], function(postoffers) { postoffers.init({{:0}}); });
+</script>
