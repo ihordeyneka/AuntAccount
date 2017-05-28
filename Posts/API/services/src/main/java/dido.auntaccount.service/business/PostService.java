@@ -14,6 +14,6 @@ public interface PostService {
 
     List<OfferDTO> getPostOffers(Long postId);
 
-    PostDTO updatePhoto(InputStream stream, Long postId);
+    PostDTO updatePhoto(InputStream stream, Long postId) throws Exception;
 
 }

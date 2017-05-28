@@ -1,8 +1,10 @@
 package dido.auntaccount.service.business.impl;
 
+import dido.auntaccount.dao.CountryDAO;
 import dido.auntaccount.dao.PostDAO;
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.entities.Country;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.SellerService;
@@ -28,6 +30,9 @@ public class PostServiceImpl implements PostService {
     @Inject
     private SellerService sellerService;
 
+    @Inject
+    private CountryDAO countryDAO;
+
     @Override
     public PostDTO getPost(Long postId) {
         Post post = postDAO.find(postId);
@@ -40,7 +45,13 @@ public class PostServiceImpl implements PostService {
         try {
             long currentMillis = DateTime.now().getMillis();
             post.setCreationDate(new Date(currentMillis));
-            savedPost = new PostDTO(postDAO.save(post.buildEntity()));
+            final Post postEntity = post.buildEntity();
+            final String countryName = post.getLocation().getCountry().getCountry();
+            final Country existingCountry = countryDAO.find(countryName);
+            if (existingCountry != null) {
+                postEntity.getLocation().setCountry(existingCountry);
+            }
+            savedPost = new PostDTO(postDAO.save(postEntity));
             sellerService.savePostForSellers(savedPost);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save post", e);
@@ -56,7 +67,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO updatePhoto(InputStream stream, Long postId) {
+    public PostDTO updatePhoto(InputStream stream, Long postId) throws Exception {
         Post post = postDAO.find(postId);
         if (post == null) {
             return null;
@@ -68,6 +79,7 @@ public class PostServiceImpl implements PostService {
             e.printStackTrace();
         }
         Post updatedPost = postDAO.setPhoto(post, bytes);
+        postDAO.save(updatedPost);
         return new PostDTO(updatedPost);
     }
 

@@ -1,9 +1,7 @@
 package dido.auntaccount.entities;
 
-import dido.auntaccount.dto.PostDTO;
-
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,6 +20,7 @@ public class Post {
     private Double priceMax;
     private Double priceMin;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
