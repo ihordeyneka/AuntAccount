@@ -23,8 +23,9 @@ var PATHS = {
     { name: 'requirejs', files: 'node_modules/requirejs/require.js' },
     { name: 'font_awesome', files: 'node_modules/font-awesome/**/*' },
     { name: 'underscore', files: 'node_modules/underscore/**/*' },
+    { name: 'moment', files: 'node_modules/moment/**/*' },
     { name: 'dom_ready', files: 'other_modules/dom_ready/**/*' },
-    { name: 'jquery_raty', files: 'other_modules/jquery_raty/**/*' },
+    { name: 'jquery_raty', files: 'other_modules/jquery_raty/**/*' }
   ],
   client: {
     js: ['client/**/*.js'],

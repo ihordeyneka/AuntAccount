@@ -13,6 +13,7 @@ requirejs.config({
     typeahead: ["../../lib/bootstrap3_typeahead/bootstrap3-typeahead.min"],
     fileinput: ["../../lib/bootstrap_fileinput/js/fileinput.min"],
     slider: ["../../lib/bootstrap_slider/bootstrap-slider.min"],
+    moment: ["../../lib/moment/min/moment.min"],
     googleapi: ["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&libraries=places"]
   },
   shim: {

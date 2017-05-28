@@ -9,17 +9,20 @@ define(["core/didoauth"], function(didoauth) {
   var menu = [
     { hash: "#home", route: "recent", text: "Home" },
     { hash: "#post", route: "post", text: "Post" },
-    { hash: "#notifications", route: "notifications", text: "Notifications" },
+    { hash: "#notifications", route: "alerts", text: "Notifications" },
     { hash: "#login", route: "login", text: "Login", showFor: ShowFor.ANONYMOUS },
     { hash: "#signup", route: "signup", text: "Sign Up", showFor: ShowFor.ANONYMOUS },
     { hash: "#profile", route: "profile", text: "{{:user}}", showFor: ShowFor.AUTHENTICATED }
   ];
 
   var menuItemVisible = function(menuItem) {
-    if (menuItem.showFor == ShowFor.ANONYMOUS)
+    var route = menuItem.route;
+    if (route == "login" || route == "signup")
       return !didoauth.user.signedIn;
-    if (menuItem.showFor == ShowFor.AUTHENTICATED)
+    if (route == "profile")
       return didoauth.user.signedIn;
+    if (route == "alerts")
+      return didoauth.user.signedIn && didoauth.user.sellers != null && didoauth.user.sellers.length;
     return true;
   }
 
