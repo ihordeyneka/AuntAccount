@@ -2,6 +2,8 @@ package dido.auntaccount.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public abstract class GeneralDAO<T> implements AutoCloseable {
 
@@ -95,6 +97,16 @@ public abstract class GeneralDAO<T> implements AutoCloseable {
         if (entityManager.isOpen()) {
             entityManager.close();
         }
+    }
+
+    public static <T> T getSingleResultOrNull(TypedQuery<T> query) {
+        query.setMaxResults(1);
+        List<T> list = query.getResultList();
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+
+        return list.get(0);
     }
 
 }

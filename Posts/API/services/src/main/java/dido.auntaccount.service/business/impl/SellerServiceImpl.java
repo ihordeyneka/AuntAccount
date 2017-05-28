@@ -1,9 +1,11 @@
 package dido.auntaccount.service.business.impl;
 
+import dido.auntaccount.dao.CountryDAO;
 import dido.auntaccount.dao.SellerDAO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.dto.TagDTO;
+import dido.auntaccount.entities.Country;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Seller;
 import dido.auntaccount.search.SearchSellerService;
@@ -26,6 +28,9 @@ public class SellerServiceImpl implements SellerService {
     private SellerDAO sellerDAO;
 
     @Inject
+    private CountryDAO countryDAO;
+
+    @Inject
     SearchSellerService searchSellerService;
 
     @Override
@@ -38,8 +43,14 @@ public class SellerServiceImpl implements SellerService {
     public SellerDTO saveSeller(SellerDTO seller) {
         Seller savedSeller = null;
         try {
+            final String country = seller.getLocation().getCountry().getCountry();
+            final Country existingCountry = countryDAO.find(country);
             seller.setCreationDate(DateTime.now().toDate());
-            savedSeller = sellerDAO.save(seller.buildEntity());
+            final Seller sellerEntity = seller.buildEntity();
+            if (existingCountry != null) {
+                sellerEntity.getLocation().setCountry(existingCountry);
+            }
+            savedSeller = sellerDAO.save(sellerEntity);
             searchSellerService.saveSeller(new SellerDTO(savedSeller));
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save seller", e);
