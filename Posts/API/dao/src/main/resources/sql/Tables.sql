@@ -62,9 +62,11 @@ CREATE TABLE `LOCATION` (
   `Name` varchar(45) DEFAULT NULL,
   `StreetNumber` int(11) DEFAULT NULL,
   `Neighborhood` varchar(45) DEFAULT NULL,
+  `ROUTE` varchar(45) DEFAULT NULL,
   `Radius` double DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
+
 
 
 CREATE TABLE `dido`.`Country` (
