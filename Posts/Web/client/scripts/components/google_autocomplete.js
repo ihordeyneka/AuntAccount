@@ -1,9 +1,20 @@
 define([], function() {
   return function(element) {
     var self = {};
+    var currentLocation = null;
 
     self.element = element;
-    self.location = null;
+    self.getLocationString = function() {
+      return self.element.val();
+    };
+    self.getLocation = function() {
+      return currentLocation;
+    };
+    self.setLocation = function(location) {
+      currentLocation = location;
+      var name = location != null ? location.name : "";
+      self.element.val(name);
+    }
 
     require(["googleapi"], function() { self.initAutocomplete(); });
 
@@ -14,12 +25,12 @@ define([], function() {
       google.maps.event.addListener(autocomplete, 'place_changed', function (e) {
         var googleLocation = autocomplete.getPlace();
         //convert google location to our format
-        self.location = {};
-        self.location.name = googleLocation.name;
+        currentLocation = {};
+        currentLocation.name = googleLocation.name;
 
         if (googleLocation.geometry) {
-          self.location.latitude = googleLocation.geometry.location.lat();
-          self.location.longitude = googleLocation.geometry.location.lng();
+          currentLocation.latitude = googleLocation.geometry.location.lat();
+          currentLocation.longitude = googleLocation.geometry.location.lng();
         }
 
         if (googleLocation.address_components) {
@@ -28,34 +39,39 @@ define([], function() {
             for (var j=0; j<addressComponent.types.length; j++) {
               switch (addressComponent.types[j]) {
                 case "country":
-                  self.location.country = addressComponent.long_name;
+                  currentLocation.country = addressComponent.long_name;
                   break;
                 case "administrative_area_level_1":
-                  self.location.region1 = addressComponent.long_name;
+                  currentLocation.region1 = addressComponent.long_name;
                   break;
                 case "administrative_area_level_2":
-                  self.location.region2 = addressComponent.long_name;
+                  currentLocation.region2 = addressComponent.long_name;
                   break;
                 case "locality":
-                  self.location.city = addressComponent.long_name;
+                  currentLocation.city = addressComponent.long_name;
                   break;
                 case "neighborhood":
-                  self.location.neighborhood = addressComponent.long_name;
+                  currentLocation.neighborhood = addressComponent.long_name;
                   break;
                 case "route":
-                  self.location.route = addressComponent.long_name;
+                  currentLocation.route = addressComponent.long_name;
                   break;
                 case "street_number":
-                  self.location.street_number = addressComponent.long_name;
+                  currentLocation.street_number = addressComponent.long_name;
                   break;
               }
             }
           }
-        }        
+        }
 
         self.element.trigger("place_changed");
       });
     }
+
+    self.element.keypress(function(e) {
+      if (e.which == 13) //key is Enter
+        self.element.trigger("place_changed");
+    });
 
     return self;
   }

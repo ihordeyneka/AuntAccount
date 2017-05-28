@@ -16,7 +16,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
 
     globals.loading($('body'), true);
     $.ajax({
-        url: config.apiRoot + "/users/" + didoauth.user.id,
+        url: config.apiRoot + "/users/profile/" + didoauth.user.id,
         dataType: "json"
     }).done(function(data) {
       if (data == null) {
@@ -27,6 +27,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
         $("#inputFirst").val(data.firstName);
         $("#inputLast").val(data.lastName);
         $(".aa-profile-picture").empty();
+        self.locationTypeahead.setLocation(data.location);
         if (data.profilePicture) {
           $("<img>").width("100%").attr("src", data.profilePicture).appendTo(".aa-profile-picture");
         }
@@ -70,7 +71,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
           var profileData = {
             firstName: $("#inputFirst").val(),
             lastName: $("#inputLast").val(),
-            location: self.locationTypeahead.location
+            location: self.locationTypeahead.getLocation()
           };
 
           $.post({

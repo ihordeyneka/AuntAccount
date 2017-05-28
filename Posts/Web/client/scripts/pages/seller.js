@@ -1,5 +1,5 @@
-define(["core/globals", "core/config", "typeahead", "fileinput", "components/google_autocomplete", "components/tags_input"],
-function(globals, config, typeaheadControl, fileinputControl, googleAutocompleteControl, tagsInputControl) {
+define(["core/globals", "core/config", "typeahead", "fileinput", "jqueryRaty", "components/google_autocomplete", "components/tags_input"],
+function(globals, config, typeaheadControl, fileinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
   var self = {};
 
   self.locationTypeahead = null;
@@ -11,6 +11,7 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
     self.locationTypeahead = new googleAutocompleteControl($("#inputPrimaryLocation"));
     self.tagsInput = new tagsInputControl($("#inputTags"));
 
+    initRating();
     initPictureUpload();
     addButtonHandlers();
 
@@ -39,8 +40,9 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
         $("#inputName").val(data.name);
         $("#inputPhone").val(data.phone);
         $("#inputWebsite").val(data.website);
-        $("#inputTags").val(data.tags);
-        $("#inputPrimaryLocation").val(data.location);
+        self.sellerRating.raty('score', data.rate);
+        self.locationTypeahead.setLocation(data.location);
+        self.tagsInput.setTags(data.tagList);
         if (data.picture) {
           $("<img>").width("100%").attr("src", data.picture).appendTo(".aa-seller-picture");
         }
@@ -51,6 +53,18 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
       globals.loading($('body'), false);
     });
   }
+
+  var initRating = function(rating) {
+    var DEF_RATING = 5;
+    self.sellerRating = $(".aa-seller-rating");
+    self.sellerRating.raty({
+      score: DEF_RATING,
+      readOnly: true,
+      half: true,
+      size: 24,
+      hints: [null, null, null, null, null]
+    });
+  };
 
   var initPictureUpload = function() {
     self.pictureUpload = $("#inputPicture").fileinput({
@@ -85,7 +99,7 @@ function(globals, config, typeaheadControl, fileinputControl, googleAutocomplete
             phone: $("#inputPhone").val(),
             website: $("#inputWebsite").val(),
             tags: self.tagsInput.getTags(),
-            location: self.locationTypeahead.location,
+            location: self.locationTypeahead.getLocation(),
             userId: $.didoauth.user.id
           };
 
