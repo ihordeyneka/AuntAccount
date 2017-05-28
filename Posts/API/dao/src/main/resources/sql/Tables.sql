@@ -7,7 +7,7 @@ CREATE TABLE `dido`.`Post` (
   `LocationId` bigint(10) NOT NULL,
   `PriceMin` float DEFAULT NULL,
   `PriceMax` float DEFAULT NULL,
-  `Photo` binary(10) DEFAULT NULL,
+  `Photo` longblob DEFAULT NULL,
   `CreationDate` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
@@ -32,7 +32,7 @@ CREATE TABLE `USER` (
   `LocationId` bigint(10) DEFAULT NULL,
   `Email` varchar(45) NOT NULL,
   `Phone` varchar(45) DEFAULT NULL,
-  `Photo` binary(10) DEFAULT NULL,
+  `Photo` longblob DEFAULT NULL,
   `Website` varchar(45) DEFAULT NULL,
   `CreationDate` datetime NOT NULL,
   `ClientId` varchar(45) DEFAULT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE `dido`.`Message` (
   `SenderId` bigint(10) NOT NULL,
   `OfferId` bigint(10) NOT NULL,
   `Description` varchar(255) DEFAULT NULL,
-  `Photo` binary(10) DEFAULT NULL,
+  `Photo` longblob DEFAULT NULL,
   `CreationDate` datetime NOT NULL,
   `IsRead` tinyint(1) NOT NULL,
   PRIMARY KEY (`Id`)

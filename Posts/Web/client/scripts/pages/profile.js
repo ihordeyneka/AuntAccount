@@ -24,6 +24,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
           message: "User profile was not found."
         });
       } else {
+        self.profileData = data;
         $("#inputFirst").val(data.firstName);
         $("#inputLast").val(data.lastName);
         $(".aa-profile-picture").empty();
@@ -68,17 +69,15 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
         validatorForm: self.validatorForm,
         success: function() {
           globals.loading($('body'), true);
-          var profileData = {
-            firstName: $("#inputFirst").val(),
-            lastName: $("#inputLast").val(),
-            location: self.locationTypeahead.getLocation()
-          };
+          self.profileData.firstName = $("#inputFirst").val();
+          self.profileData.lastName = $("#inputLast").val();
+          self.profileData.location = self.locationTypeahead.getLocation();
 
           $.post({
               url: config.apiRoot + "/users/profile",
               dataType: "json",
               contentType: "application/json",
-              data: JSON.stringify(profileData)
+              data: JSON.stringify(self.profileData)
           }).done(function(data) {
             if (self.pictureUpload.fileinput("getFilesCount") > 0)
               self.pictureUpload.fileinput("upload");
