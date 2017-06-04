@@ -172,6 +172,52 @@ a.header-nav__navigation-link:hover {
 .table>thead>tr>td, .table>thead>tr>th {
   border-top: solid 1px #979797;
 }
+.table>tbody>tr>td, .table>thead>tr>th {
+  line-height: 30px;
+}
+
+/*---Grid---*/
+.fixed-table-container {
+  border: none;
+}
+.bootstrap-table .table>thead>tr>th {
+  border-color: #979797;
+}
+.fixed-table-container tbody td {
+  border-left: none;
+}
+.bootstrap-table .table {
+  border-bottom: none;
+}
+.table-hover>tbody>tr:hover {
+  background-color: transparent;
+  cursor: pointer;
+}
+.table-hover>tbody>tr:hover>td {
+  color: #979797;
+}
+.fixed-table-pagination {
+  margin-top: 15px;
+}
+
+/*---Pager---*/
+.pagination>li>a, .pagination>li>span {
+  color: #333;
+  background: transparent;
+  border: none;
+}
+.pagination>li>a:hover, .pagination>li>span:hover,
+.pagination>li>a:focus, .pagination>li>span:focus {
+  color: #979797;
+  background: transparent;
+}
+.pagination>li.active>a, .pagination>li.active>span,
+.pagination>li.active>a:hover, .pagination>li>span:hover,
+.pagination>li.active>a:focus, .pagination>li>span:focus {
+  color: #333;
+  background: transparent;
+  border: solid 1px #979797;
+}
 
 /*---Slider---*/
 div.slider.slider-horizontal {

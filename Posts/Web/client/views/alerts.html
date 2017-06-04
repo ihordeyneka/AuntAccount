@@ -5,21 +5,19 @@
   </div>
   <div class="row">
     <div class="aa-alerts-container col-sm-offset-2 col-sm-8">
+      <table id="gridAlerts" class="aa-alerts-grid">
+        <thead>
+          <tr>
+            <th data-field="seller.name">Recipient Seller</th>
+            <th data-field="creationDate">Received</th>
+            <th data-field="postTags">Tags</th>
+            <th data-field="description">Description</th>
+          </tr>
+        </thead>
+      </table>
     </div>
   </div>
 </div>
-<script id="templateAlert" type="text/x-jsrender">
-  <div class="aa-section">
-    <a class="btn btn-primary right" href="#postdetails/{{:postId}}">Reply</a>
-    <div class="aa-post-header">
-      <span class="aa-post-time right">{{:time}}</span>
-      <span class="aa-post-caption">{{:title}}</span>
-    </div>
-    <div class="aa-post-content">
-      {{:content}}
-    </div>
-  </div>
-</script>
 <script>
   require(["pages/alerts"], function(alerts) { alerts.init(); });
 </script>
