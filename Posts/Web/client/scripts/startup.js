@@ -6,6 +6,7 @@ requirejs.config({
     jquery: ["../../lib/jquery/jquery.min"],
     jqueryRaty: ["../../lib/jquery_raty/jquery.raty-fa"],
     bootstrap: ["../../lib/bootstrap/js/bootstrap.min"],
+    bootstraptable: ["../../lib/bootstrap_table/bootstrap-table.min"],
     jsrender: ["../../lib/jsrender/jsrender.min"],
     validator: ["../../lib/bootstrap_validator/validator"],
     tagsinput: ["../../lib/bootstrap_tagsinput/bootstrap-tagsinput.min"],
