@@ -1,11 +1,13 @@
 @media (max-width: 767px) {
   .aa-offer-reply.aa-reply-my {
-    margin-left: 10%;
+    margin-right: 10%;
   }
   .aa-offer-reply.aa-reply-their {
-    margin-right: 10%;
+    margin-left: 10%;
   }
 }
 
-.aa-reply-author {
+.aa-post-picture {
+  max-width: 100%;
+  max-height: 200px;
 }

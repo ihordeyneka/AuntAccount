@@ -37,9 +37,9 @@ define(["../core/globals", "../core/config"], function(globals, config) {
     var sendReply = function() {
       var description = $("#inputNewReply").val();
       var messageData = {
-                  description: description,
-                  offerId: offerId
-             };
+        description: description,
+        offerId: offerId
+      };
       $.post({
           url: config.apiRoot + "/messages",
           dataType: "json",
@@ -72,7 +72,7 @@ define(["../core/globals", "../core/config"], function(globals, config) {
       time: reply.creationDate,
       header: reply.sender.firstName.concat(" ").concat(reply.sender.lastName),
       content: reply.description,
-      replyOffset: reply.sender.id === userId ? "4" : "2", //bootstrap offsets
+      replyOffset: reply.sender.id === userId ? "2" : "4", //bootstrap offsets
       replyCss: reply.sender.id === userId  ? "aa-reply-my" : "aa-reply-their"
     }));
   }
