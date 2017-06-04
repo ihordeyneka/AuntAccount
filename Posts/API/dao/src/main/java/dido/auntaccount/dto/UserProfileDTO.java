@@ -1,22 +1,32 @@
 package dido.auntaccount.dto;
 
+import org.apache.commons.codec.binary.Base64;
 import dido.auntaccount.entities.Location;
 import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLConnection;
 import java.sql.Date;
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.stream.Collectors;
 
 public class UserProfileDTO implements DTO<User>, Serializable {
+
+    private static final Logger logger = LogManager.getLogger(UserProfileDTO.class);
 
     private Long id;
     private String firstName;
     private String lastName;
     private String password;
     private String email;
-    private byte[] photo;
+    private String photo;
     private Date creationDate;
     private LocationDTO location;
     private String clientId;
@@ -38,7 +48,7 @@ public class UserProfileDTO implements DTO<User>, Serializable {
         this.lastName = user.getLastName();
         this.password = user.getPassword();
         this.email = user.getEmail();
-        this.photo = user.getPhoto();
+        this.photo = encodeImage(user.getPhoto());
         this.creationDate = user.getCreationDate();
         Location location = user.getLocation();
         this.location = location != null ? new LocationDTO(user.getLocation()) : null;
@@ -57,7 +67,7 @@ public class UserProfileDTO implements DTO<User>, Serializable {
                 .setLastName(lastName)
                 .setPassword(password)
                 .setEmail(email)
-                .setPhoto(photo)
+                .setPhoto(decodeImage(photo))
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation)
                 .setClientId(clientId)
@@ -96,11 +106,11 @@ public class UserProfileDTO implements DTO<User>, Serializable {
         this.email = email;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -142,6 +152,23 @@ public class UserProfileDTO implements DTO<User>, Serializable {
 
     public void setSellers(List<SellerDTO> sellers) {
         this.sellers = sellers;
+    }
+
+    private String encodeImage(byte[] image) {
+        if (image == null) {
+            return null;
+        }
+        String contentType = null;
+        try {
+            contentType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(image));
+        } catch (IOException e) {
+            logger.error("Can't get extension of user's profile picture, userId " + id);
+        }
+        return "data:image/" + contentType + ";base64," + Base64.encodeBase64String(image);
+    }
+
+    private byte[] decodeImage(String image) {
+        return image != null ? Base64.decodeBase64(image) : null;
     }
 
 }

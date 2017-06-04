@@ -1,12 +1,10 @@
 package dido.auntaccount.service.rest.controller;
 
-import dido.auntaccount.dto.MessageDTO;
-import dido.auntaccount.dto.TokenDTO;
-import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.dto.*;
 import dido.auntaccount.entities.Message;
-import dido.auntaccount.service.business.MessageService;
-import dido.auntaccount.service.business.TokenService;
-import dido.auntaccount.service.business.UserService;
+import dido.auntaccount.entities.Offer;
+import dido.auntaccount.service.business.*;
+import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
 import org.joda.time.DateTime;
 
@@ -16,6 +14,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Date;
 
+import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
+
 @Path("/messages")
 public class MessageController extends Controller {
 
@@ -24,6 +24,12 @@ public class MessageController extends Controller {
 
     @Inject
     TokenService tokenService;
+
+    @Inject
+    OfferService offerService;
+
+    @Inject
+    PostService postService;
 
     @Inject
     private UserService userService;
@@ -42,9 +48,8 @@ public class MessageController extends Controller {
     @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveMessage(MessageDTO message, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
-        TokenDTO foundToken = tokenService.getToken(token);
-        UserDTO sender = userService.getUser(foundToken.getUserId());
+    public Response saveMessage(MessageDTO message, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
+        UserDTO sender = userService.getUser(Long.valueOf(loggedInUserId));
         final Date creationDate = new Date(DateTime.now().getMillis());
         message.setCreationDate(creationDate).setSender(sender);
         MessageDTO savedMessage = service.saveMessage(message);
