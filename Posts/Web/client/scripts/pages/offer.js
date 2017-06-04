@@ -1,4 +1,4 @@
-define(["../core/globals", "../core/config"], function(globals, config) {
+define(["../core/globals", "../core/config", "../components/message_input"], function(globals, config, messageInputControl) {
   var self = {};
   self.element = null;
 
@@ -34,10 +34,10 @@ define(["../core/globals", "../core/config"], function(globals, config) {
   }
 
   self.initNewReply = function(offerId) {
-    var sendReply = function() {
-      var description = $("#inputNewReply").val();
+    var input = new messageInputControl($(".aa-input-container"));
+    var sendReply = function(e, data) {
       var messageData = {
-        description: description,
+        description: data.description,
         offerId: offerId
       };
       $.post({
@@ -47,22 +47,14 @@ define(["../core/globals", "../core/config"], function(globals, config) {
           data: JSON.stringify(messageData),
       }).done(function(reply) {
         appendReply(reply);
-        $("#inputNewReply").val("").blur().focus(); //clear input and focus it
+        input.purge();
       }).fail(function(result) {
         self.notificationArea.clear();
         self.notificationArea.error();
       });
     };
 
-    $("#btnSendReply").click(sendReply);
-
-    $("#inputNewReply")
-      .focus()
-      .keypress(function(event) {
-        if(event.keyCode == 13) { //Enter Key Press event handler
-          sendReply();
-        }
-      });
+    input.element.on("replied", sendReply);
   }
 
   var appendReply = function(reply) {

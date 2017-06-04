@@ -18,6 +18,9 @@ define([], function() {
 
     self.input = self.element.find(".aa-new-reply-input");
     self.button = self.element.find(".aa-send-reply-button");
+    self.purge = function() {
+      self.input.val("").blur().focus(); //clear input and focus it
+    };
 
     var sendReply = function() {
       var description = self.input.val();

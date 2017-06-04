@@ -29,6 +29,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
   };
 
   var initNewReply = function(post) {
+    var input = new messageInputControl($(".aa-input-container"));
     var sendReply = function(e, data) {
       var messageData = {
         description: data.description,
@@ -47,7 +48,6 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
       });
     };
 
-    var input = new messageInputControl($(".aa-input-container"));
     input.element.on("replied", sendReply);
   }
 
