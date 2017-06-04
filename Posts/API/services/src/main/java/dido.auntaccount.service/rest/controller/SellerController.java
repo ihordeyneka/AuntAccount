@@ -2,10 +2,10 @@ package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.SellerDTO;
-import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.SellerService;
 import dido.auntaccount.service.business.TokenService;
+import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.auth.AuthenticationException;
@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
 import java.util.List;
+
+import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
 
 @Path("/sellers")
 public class SellerController extends Controller {
@@ -43,11 +45,9 @@ public class SellerController extends Controller {
     @DELETE
     @Path("/{param}")
     @Secured
-    public Response deleteSeller(@PathParam("param") Long sellerId, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
-        TokenDTO foundToken = tokenService.getToken(token);
-        final Long userId = foundToken.getUserId();
+    public Response deleteSeller(@PathParam("param") Long sellerId, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
         SellerDTO seller = sellerService.getSeller(sellerId);
-        if (seller.getUserId().equals(userId)) {
+        if (seller.getUserId().equals(Long.valueOf(loggedInUserId))) {
             sellerService.deleteSeller(sellerId);
         } else {
             throw new AuthenticationException("Can't delete seller of not logged in user");
@@ -79,10 +79,10 @@ public class SellerController extends Controller {
     @Path("/picture")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updatePicture(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("sellerId") Long sellerId, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
-        TokenDTO foundToken = tokenService.getToken(token);
+    public Response updatePicture(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("sellerId") Long sellerId,
+                                  @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
         final SellerDTO seller = sellerService.getSeller(sellerId);
-        if (!seller.getUserId().equals(foundToken.getUserId())) {
+        if (!seller.getUserId().equals(Long.valueOf(loggedInUserId))) {
             throw new AuthenticationException("Can't update seller of not logged in user");
         }
         sellerService.updatePicture(seller, IOUtils.toByteArray(uploadedInputStream));

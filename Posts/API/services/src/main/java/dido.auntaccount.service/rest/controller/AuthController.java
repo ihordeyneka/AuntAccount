@@ -13,6 +13,8 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static dido.auntaccount.service.rest.controller.TokenController.ACCESS_TOKEN;
+
 @Path("/auth")
 public class AuthController extends Controller {
 
@@ -52,7 +54,7 @@ public class AuthController extends Controller {
 
     @DELETE
     @Path("/sign_out")
-    public Response signOut(@HeaderParam(TokenController.ACCESS_TOKEN) String token) {
+    public Response signOut(@HeaderParam(ACCESS_TOKEN) String token) {
         tokenService.deleteToken(token);
         return getResponseBuilder().build();
     }

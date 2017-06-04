@@ -5,6 +5,7 @@ import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
+import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -15,6 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
 import java.util.List;
+
+import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
 
 @Path("/users")
 public class UserController extends Controller {
@@ -82,9 +85,8 @@ public class UserController extends Controller {
     @Path("/profile")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProfile(UserProfileDTO user, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
-        TokenDTO foundToken = tokenService.getToken(token);
-        user.setId(foundToken.getUserId());
+    public Response updateProfile(UserProfileDTO user, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
+        user.setId(Long.valueOf(loggedInUserId));
         userService.updateUser(user);
         return getResponseBuilder().entity("{}").build();
     }
@@ -103,9 +105,9 @@ public class UserController extends Controller {
     @Path("/picture")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updatePicture(@FormDataParam("file_data") InputStream uploadedInputStream, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
-        TokenDTO foundToken = tokenService.getToken(token);
-        userService.updatePicture(foundToken.getUserId(), IOUtils.toByteArray(uploadedInputStream));
+    public Response updatePicture(@FormDataParam("file_data") InputStream uploadedInputStream,
+                                  @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
+        userService.updatePicture(Long.valueOf(loggedInUserId), IOUtils.toByteArray(uploadedInputStream));
         return getResponseBuilder().build();
     }
 
@@ -113,9 +115,8 @@ public class UserController extends Controller {
     @Secured
     @Path("/password")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response changePassword(PasswordDTO passwordDTO, @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
-        TokenDTO foundToken = tokenService.getToken(token);
-        final UserProfileDTO user = userService.getUserProfile(foundToken.getUserId());
+    public Response changePassword(PasswordDTO passwordDTO, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
+        final UserProfileDTO user = userService.getUserProfile(Long.valueOf(loggedInUserId));
         boolean passwordCorrect = passwordService.verifyPassword(passwordDTO.getOldPassword(), user.getPassword());
         if (passwordCorrect) {
             user.setPassword(passwordService.createHash(passwordDTO.getNewPassword()));

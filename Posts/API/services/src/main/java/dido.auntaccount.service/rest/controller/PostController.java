@@ -2,10 +2,9 @@ package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
-import dido.auntaccount.dto.TokenDTO;
-import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.TokenService;
+import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
@@ -17,6 +16,8 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
 
 @Path("/posts")
 public class PostController extends Controller {
@@ -59,10 +60,10 @@ public class PostController extends Controller {
     @Path("/upload")
     @Secured
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadFile(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("postId") Long postId,  @HeaderParam(TokenController.ACCESS_TOKEN) String token) throws Exception {
-        TokenDTO foundToken = tokenService.getToken(token);
+    public Response uploadFile(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("postId") Long postId,
+                               @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
         final PostDTO postDTO = postService.getPost(postId);
-        if (!postDTO.getUserId().equals(foundToken.getUserId())) {
+        if (!postDTO.getUserId().equals(Long.valueOf(loggedInUserId))) {
             throw new AuthenticationException("Can't update post's photo of not logged in user");
         }
         postService.updatePhoto(uploadedInputStream, postId);

@@ -16,6 +16,7 @@ import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
@@ -25,6 +26,8 @@ import java.util.Date;
 @Secured
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
+
+    public static final String LOGGED_IN_USER = "loggedInUser";
 
     @Context
     private HttpServletRequest request;
@@ -40,7 +43,9 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             String accessToken = oauthRequest.getAccessToken();
 
             TokenDTO tokenDTO = validateToken(accessToken);
-            requestContext.getHeaders().add(TokenController.ACCESS_TOKEN, tokenDTO.getToken());
+            final MultivaluedMap<String, String> headers = requestContext.getHeaders();
+            headers.add(TokenController.ACCESS_TOKEN, tokenDTO.getToken());
+            headers.add(LOGGED_IN_USER, tokenDTO.getUserId().toString());
 
         } catch (OAuthProblemException | OAuthSystemException e) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
