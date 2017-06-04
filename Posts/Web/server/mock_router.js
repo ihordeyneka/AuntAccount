@@ -32,17 +32,30 @@ exports.init = function(router) {
 
   router.get(mockApiRoot + '/posts/notifications/:user', function(req, res) {
     var alerts = [
-      { id: 1, seller: { id: 1, name: "BigBurger" }, creationDate: "15-12-2016", postTags: "Clothing, Shoes", description: "Suit, tuxedo, black leather shoes." },
-      { id: 2, seller: { id: 1, name: "BigBurger" }, creationDate: "29-01-2017", postTags: "Clothing", description: "Ralph Lauren Polo, Lacoste or Tommy Hilfiger." },
-      { id: 3, seller: { id: 1, name: "BigBurger" }, creationDate: "03-02-2017", postTags: "Shirts", description: "I'm looking for a blue denim shirt, send me a pic if you've got one." },
-      { id: 4, seller: { id: 2, name: "Gelato" }, creationDate: "03-02-2017", postTags: "Shirts", description: "I'm looking for a blue denim shirt, send me a pic if you've got one." },
-      { id: 5, seller: { id: 2, name: "Gelato" }, creationDate: "03-02-2017", postTags: "Shirts", description: "I'm looking for a blue denim shirt, send me a pic if you've got one." }
+      { postId: 1, seller: { id: 1, name: "BigBurger" }, creationDate: "15-12-2016", postTags: "Clothing, Shoes", description: "Suit, tuxedo, black leather shoes." },
+      { postId: 2, seller: { id: 1, name: "BigBurger" }, creationDate: "29-01-2017", postTags: "Clothing", description: "Ralph Lauren Polo, Lacoste or Tommy Hilfiger." },
+      { postId: 3, seller: { id: 1, name: "BigBurger" }, creationDate: "03-02-2017", postTags: "Shirts", description: "I'm looking for a blue denim shirt, send me a pic if you've got one." },
+      { postId: 4, seller: { id: 2, name: "Gelato" }, creationDate: "03-02-2017", postTags: "Shirts", description: "I'm looking for a blue denim shirt, send me a pic if you've got one." },
+      { postId: 5, seller: { id: 2, name: "Gelato" }, creationDate: "03-02-2017", postTags: "Shirts", description: "I'm looking for a blue denim shirt, send me a pic if you've got one." }
     ];
 
     var result = {
       total: 33,
       rows: alerts
     };
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(result));
+  });
+
+  router.get(mockApiRoot + '/posts/:postId/myoffer', function(req, res) {
+
+    var result = { postId: req.params.postId };
+
+    if (req.params.postId == "2") {
+      result = { offerId: 1 };
+    }
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
