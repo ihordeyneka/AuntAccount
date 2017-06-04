@@ -191,9 +191,11 @@ a.header-nav__navigation-link:hover {
 }
 .table-hover>tbody>tr:hover {
   background-color: transparent;
+}
+.table-hover>tbody>tr:not(.no-records-found):hover {
   cursor: pointer;
 }
-.table-hover>tbody>tr:hover>td {
+.table-hover>tbody>tr:not(.no-records-found):hover>td {
   color: #979797;
 }
 .fixed-table-pagination {

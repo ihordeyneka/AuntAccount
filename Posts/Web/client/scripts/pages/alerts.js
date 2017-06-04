@@ -15,9 +15,8 @@ define(["../core/globals", "../core/config", "../components/grid", "underscore"]
       url: config.apiRoot + '/posts/notifications/' + userId
     });
 
-    $("#gridAlerts").on("click", "tbody tr", function() {
-      var postId = $(this).data("uniqueid");
-      navigateToAlert(postId);
+    $("#gridAlerts").on("click-row.bs.table", function(row, $element, field) {
+      navigateToAlert($element.postId);
     });
   }
 
