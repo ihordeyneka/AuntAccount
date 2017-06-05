@@ -69,4 +69,13 @@ public class PostDAOImpl extends GeneralDAO<Post> implements PostDAO {
         post.setPhoto(photo);
         return entityManager.merge(post);
     }
+
+    @Override
+    public Offer getPostOffer(Long postId, Long userId) {
+        TypedQuery<Offer> query = entityManager.createQuery("SELECT o FROM Offer o JOIN Seller s " +
+                "WHERE o.seller.id = s.id AND s.userId = :userId AND o.postId = :postId", Offer.class)
+                .setParameter("postId", postId)
+                .setParameter("userId", userId);
+        return getSingleResultOrNull(query);
+    }
 }

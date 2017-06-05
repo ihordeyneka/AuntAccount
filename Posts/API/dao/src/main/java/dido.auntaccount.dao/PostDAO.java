@@ -24,4 +24,5 @@ public interface PostDAO {
 
     Post setPhoto(Post post, byte[] photo);
 
+    Offer getPostOffer(Long postId, Long userId);
 }

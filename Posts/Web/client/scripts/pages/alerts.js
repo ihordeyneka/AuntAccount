@@ -23,7 +23,7 @@ define(["../core/globals", "../core/config", "../components/grid", "underscore"]
   var navigateToAlert = function(postId) {
     globals.loading($('body'), true);
     $.ajax({
-        url: config.apiRoot + "/posts/" + postId + "/myoffer",
+        url: config.apiRoot + "/posts/" + postId + "/offer",
         dataType: "json"
     }).done(function(data) {
       if (data && data.offerId)

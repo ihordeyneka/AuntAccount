@@ -56,6 +56,16 @@ public class PostController extends Controller {
         return getResponseBuilder().entity(offers).build();
     }
 
+    @GET
+    @Path("/{param}/offer")
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPostOffer(@PathParam("param") Long postId, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) {
+        Long userId = Long.valueOf(loggedInUserId);
+        OfferDTO offer = postService.getPostOffer(postId, userId);
+        return getResponseBuilder().entity(offer).build();
+    }
+
     @POST
     @Path("/upload")
     @Secured
@@ -96,5 +106,10 @@ public class PostController extends Controller {
         return getResponseBuilder().build();
     }
 
+    @OPTIONS
+    @Path("/{param}/offer")
+    public Response getPostOfferPreflight() {
+        return getResponseBuilder().build();
+    }
 
 }

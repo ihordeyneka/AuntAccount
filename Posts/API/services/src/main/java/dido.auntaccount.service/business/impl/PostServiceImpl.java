@@ -5,6 +5,7 @@ import dido.auntaccount.dao.PostDAO;
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.entities.Country;
+import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.SellerService;
@@ -81,6 +82,12 @@ public class PostServiceImpl implements PostService {
         Post updatedPost = postDAO.setPhoto(post, bytes);
         postDAO.save(updatedPost);
         return new PostDTO(updatedPost);
+    }
+
+    @Override
+    public OfferDTO getPostOffer(Long postId, Long userId) {
+        final Offer offer = postDAO.getPostOffer(postId, userId);
+        return offer != null ? new OfferDTO(offer) : null;
     }
 
 }
