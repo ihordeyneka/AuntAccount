@@ -59,6 +59,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
     input.element.on("replied", sendReply);
     input.element.on("uploadsuccess", function(e, data) {
       appendReply(data.response);
+      input.purge();
     });
     input.element.on("uploaderror", function(e, data) {
       self.notificationArea.error();
