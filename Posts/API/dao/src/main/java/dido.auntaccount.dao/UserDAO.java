@@ -35,4 +35,6 @@ public interface UserDAO {
 
     List<NotificationDTO> getUserNotifications(Long userId, int offset, int limit);
 
+    long getUserNotificationCount(Long userId);
+
 }

@@ -88,9 +88,8 @@ public class UserController extends Controller {
         if (!userId.equals(Long.valueOf(loggedInUserId))) {
             throw new NotAuthorizedException("Could't retrieve notification for not logged in user " + userId);
         }
-        final List<NotificationDTO> notifications = userService.getUserNotifications(userId, offset, limit);
-        NotificationListDTO notificationList = new NotificationListDTO(notifications.size(), notifications);
-        return getResponseBuilder().entity(notificationList).build();
+        final NotificationListDTO notifications = userService.getUserNotifications(userId, offset, limit);
+        return getResponseBuilder().entity(notifications).build();
     }
 
     @POST

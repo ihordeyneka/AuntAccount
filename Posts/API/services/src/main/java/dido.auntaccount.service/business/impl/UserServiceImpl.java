@@ -78,8 +78,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<NotificationDTO> getUserNotifications(Long userId, int offset, int limit) {
-        return userDAO.getUserNotifications(userId, offset, limit);
+    public NotificationListDTO getUserNotifications(Long userId, int offset, int limit) {
+        final List<NotificationDTO> notifications = userDAO.getUserNotifications(userId, offset, limit);
+        final long count = userDAO.getUserNotificationCount(userId);
+        return new NotificationListDTO(count, notifications);
     }
 
     public void updateUserProfile(UserDTO user) {

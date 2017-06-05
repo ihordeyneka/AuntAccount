@@ -94,7 +94,7 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     @Override
     public List<NotificationDTO> getUserNotifications(Long userId, int offset, int limit) {
         List<Object[]> resultList = entityManager.createNativeQuery("SELECT s.id, s.name, p.id, p.creationDate, p.description  " +
-                " FROM Seller s JOIN SellerPost sp on s.id = sp.sellerId AND s.userId=?1 JOIN Post p ON sp.postId = p.id LIMIT ?2 OFFSET ?3")
+                " FROM Seller s JOIN SellerPost sp ON s.id = sp.sellerId AND s.userId=?1 JOIN Post p ON sp.postId = p.id LIMIT ?2 OFFSET ?3")
                 .setParameter(1, userId)
                 .setParameter(2, limit)
                 .setParameter(3, offset).getResultList();
@@ -111,6 +111,14 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
             notifications.add(notification);
         });
         return notifications;
+    }
+
+    @Override
+    public long getUserNotificationCount(Long userId) {
+        Query query = entityManager.createNativeQuery("SELECT count(*)  " +
+                " FROM Seller s JOIN SellerPost sp ON s.id = sp.sellerId AND s.userId=?1 JOIN Post p ON sp.postId = p.id")
+                .setParameter(1, userId);
+        return (long) query.getSingleResult();
     }
 
     @Override
