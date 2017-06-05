@@ -1,5 +1,6 @@
 package dido.auntaccount.dao;
 
+import dido.auntaccount.dto.NotificationDTO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
@@ -31,5 +32,9 @@ public interface UserDAO {
     void updatePicture(Long id, byte[] image) throws Exception;
 
     void updateUser(User user) throws Exception;
+
+    List<NotificationDTO> getUserNotifications(Long userId, int offset, int limit);
+
+    long getUserNotificationCount(Long userId);
 
 }

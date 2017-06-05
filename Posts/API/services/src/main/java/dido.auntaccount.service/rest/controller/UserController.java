@@ -5,7 +5,6 @@ import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
-import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -78,6 +77,19 @@ public class UserController extends Controller {
     public Response getUserSellers(@PathParam("param") Long userId) {
         List<SellerDTO> sellers = userService.getUserSellers(userId);
         return getResponseBuilder().entity(sellers).build();
+    }
+
+    @GET
+    @Path("/{param}/notifications")
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserNotifications(@PathParam("param") Long userId, @QueryParam("offset") Integer offset,
+                                         @QueryParam("limit") Integer limit, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) {
+        if (!userId.equals(Long.valueOf(loggedInUserId))) {
+            throw new NotAuthorizedException("Could't retrieve notification for not logged in user " + userId);
+        }
+        final NotificationListDTO notifications = userService.getUserNotifications(userId, offset, limit);
+        return getResponseBuilder().entity(notifications).build();
     }
 
     @POST
@@ -189,6 +201,12 @@ public class UserController extends Controller {
     @Path("/profile/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserProfilePreflight(@PathParam("param") Long userId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/notifications")
+    public Response getUserNotificationsPreflight() {
         return getResponseBuilder().build();
     }
 }

@@ -12,7 +12,7 @@ define(["../core/globals", "../core/config", "../components/grid", "underscore"]
       pageSize: 5,
       pageList: [5],
       sidePagination: 'server',
-      url: config.apiRoot + '/posts/notifications/' + userId
+      url: config.apiRoot + '/users/' + userId + '/notifications'
     });
 
     $("#gridAlerts").on("click-row.bs.table", function(row, $element, field) {

@@ -2,7 +2,9 @@ package dido.auntaccount.dao.impl;
 
 import dido.auntaccount.dao.UserDAO;
 import dido.auntaccount.dao.GeneralDAO;
+import dido.auntaccount.dto.NotificationDTO;
 import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.Seller;
@@ -14,6 +16,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
@@ -86,6 +89,36 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     @Override
     public void updateUser(User user) throws Exception {
         updateEntity(user);
+    }
+
+    @Override
+    public List<NotificationDTO> getUserNotifications(Long userId, int offset, int limit) {
+        List<Object[]> resultList = entityManager.createNativeQuery("SELECT s.id, s.name, p.id, p.creationDate, p.description  " +
+                " FROM Seller s JOIN SellerPost sp ON s.id = sp.sellerId AND s.userId=?1 JOIN Post p ON sp.postId = p.id LIMIT ?2 OFFSET ?3")
+                .setParameter(1, userId)
+                .setParameter(2, limit)
+                .setParameter(3, offset).getResultList();
+        List<NotificationDTO> notifications = new ArrayList<>();
+        resultList.forEach((record) -> {
+            NotificationDTO notification = new NotificationDTO();
+            SellerDTO seller = new SellerDTO();
+            seller.setId(Long.valueOf((Integer) record[0]));
+            seller.setName((String) record[1]);
+            notification.setSeller(seller);
+            notification.setPostId((Long) record[2]);
+            notification.setCreationDate((Date) record[3]);
+            notification.setDescription((String) record[4]);
+            notifications.add(notification);
+        });
+        return notifications;
+    }
+
+    @Override
+    public long getUserNotificationCount(Long userId) {
+        Query query = entityManager.createNativeQuery("SELECT count(*)  " +
+                " FROM Seller s JOIN SellerPost sp ON s.id = sp.sellerId AND s.userId=?1 JOIN Post p ON sp.postId = p.id")
+                .setParameter(1, userId);
+        return (long) query.getSingleResult();
     }
 
     @Override
