@@ -1,0 +1,14 @@
+.message-input > span.input-group-btn > * {
+  vertical-align: top;
+  display: inline-block;
+}
+.message-input > span.input-group-btn > .file-zoom-dialog,
+.message-input > span.input-group-btn .file-caption {
+  display: none;
+}
+.message-input > span.input-group-btn .btn-file {
+  padding: 6px 12px;
+  border-color: #ccc;
+  color: #333;
+  background-color: #fff;
+}
