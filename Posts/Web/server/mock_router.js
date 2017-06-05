@@ -70,7 +70,7 @@ exports.init = function(router) {
     var result = { postId: req.params.postId };
 
     if (req.params.postId == "2") {
-      result = { offerId: 1 };
+      result = { id: 1 };
     }
 
     res.statusCode = 200;

@@ -26,8 +26,8 @@ define(["../core/globals", "../core/config", "../components/grid", "underscore"]
         url: config.apiRoot + "/posts/" + postId + "/offer",
         dataType: "json"
     }).done(function(data) {
-      if (data && data.offerId)
-        window.location = "#offer/" + data.offerId;
+      if (data && data.id)
+        window.location = "#offer/" + data.id;
       else
         window.location = "#postdetails/" + postId;
     }).fail(function(result) {
