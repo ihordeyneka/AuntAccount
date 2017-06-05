@@ -34,7 +34,9 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
   }
 
   self.initNewReply = function(offerId) {
-    var input = new messageInputControl($(".aa-input-container"));
+    var input = new messageInputControl($(".aa-input-container"), {
+      uploadUrl: config.apiRoot + "/offers/" + offerId + "/messages/upload"
+    });
     var sendReply = function(e, data) {
       var messageData = {
         description: data.description,
@@ -55,6 +57,12 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
     };
 
     input.element.on("replied", sendReply);
+    input.element.on("uploadsuccess", function(e, data) {
+      appendReply(data.response);
+    });
+    input.element.on("uploaderror", function(e, data) {
+      self.notificationArea.error();
+    });
   }
 
   var appendReply = function(reply) {
@@ -65,7 +73,8 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
       header: reply.sender.firstName.concat(" ").concat(reply.sender.lastName),
       content: reply.description,
       replyOffset: reply.sender.id === userId ? "2" : "4", //bootstrap offsets
-      replyCss: reply.sender.id === userId  ? "aa-reply-my" : "aa-reply-their"
+      replyCss: reply.sender.id === userId  ? "aa-reply-my" : "aa-reply-their",
+      picture: reply.picture != null ? '<img class="aa-post-picture" src="' + reply.picture + '"></img>' : ''
     }));
   }
 
