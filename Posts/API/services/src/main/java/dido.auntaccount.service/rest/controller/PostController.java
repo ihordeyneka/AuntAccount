@@ -2,8 +2,11 @@ package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.PostDetailsDTO;
+import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.TokenService;
+import dido.auntaccount.service.business.UserService;
 import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -26,6 +29,9 @@ public class PostController extends Controller {
     PostService postService;
 
     @Inject
+    UserService userService;
+
+    @Inject
     TokenService tokenService;
 
     @GET
@@ -33,8 +39,9 @@ public class PostController extends Controller {
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPost(@PathParam("param") Long postId) {
-        PostDTO post = postService.getPost(postId);
-        return getResponseBuilder().entity(post).build();
+        final PostDTO post = postService.getPost(postId);
+        final UserDTO user = userService.getUser(post.getUserId());
+        return getResponseBuilder().entity(new PostDetailsDTO(post, user)).build();
     }
 
     @POST

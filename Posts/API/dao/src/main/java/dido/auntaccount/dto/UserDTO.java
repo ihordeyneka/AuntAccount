@@ -40,8 +40,9 @@ public class UserDTO implements DTO<User>, Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserDTO setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstName() {
