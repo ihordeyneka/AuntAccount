@@ -1,7 +1,7 @@
 define(["../core/globals", "../core/config", "../components/message_input"], function(globals, config, messageInputControl) {
   var self = {};
 
-  self.init = function(postId) {
+  self.init = function(postId, sellerId) {
 
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
@@ -11,7 +11,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
         dataType: "json"
     }).done(function(data) {
       initDetails(data);
-      initNewReply(data);
+      initNewReply(data, sellerId);
     }).fail(function(result) {
       self.notificationArea.error();
     }).always(function() {
@@ -28,7 +28,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
     }
   };
 
-  var initNewReply = function(post) {
+  var initNewReply = function(post, sellerId) {
     var input = new messageInputControl($(".aa-input-container"), {
       uploadUrl: config.apiRoot + "/posts/" + post.postId + "/offers/upload"
     });
@@ -39,15 +39,18 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
     var sendReply = function(e, data) {
       var messageData = {
         description: data.description,
-        postId: post.postId
+        postId: post.id,
+        seller: {
+            id: sellerId
+        }
       };
       $.post({
-          url: config.apiRoot + "/offer/",
+          url: config.apiRoot + "/offers/",
           dataType: "json",
           contentType: "application/json",
           data: JSON.stringify(messageData),
       }).done(function(data) {
-        navigateToOffer(data.offerId);
+        navigateToOffer(data.id);
       }).fail(function(result) {
         self.notificationArea.clear();
         self.notificationArea.error();

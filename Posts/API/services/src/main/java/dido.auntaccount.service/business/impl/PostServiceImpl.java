@@ -87,7 +87,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public OfferDTO getPostOffer(Long postId, Long userId) {
         final Offer offer = postDAO.getPostOffer(postId, userId);
-        return offer != null ? new OfferDTO(offer) : null;
+        return offer != null ? new OfferDTO(offer) : new OfferDTO();
     }
 
 }

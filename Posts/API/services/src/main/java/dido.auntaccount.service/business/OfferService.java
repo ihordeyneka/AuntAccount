@@ -1,6 +1,7 @@
 package dido.auntaccount.service.business;
 
 import dido.auntaccount.dto.MessageDTO;
+import dido.auntaccount.dto.OfferMessageDTO;
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.SellerDTO;
 
@@ -10,7 +11,7 @@ public interface OfferService {
 
     OfferDTO getOffer(Long offerId);
 
-    OfferDTO saveOffer(OfferDTO offer);
+    OfferDTO saveOffer(OfferMessageDTO offer, Long loggedInUser);
 
     SellerDTO getOfferSeller(Long offerId);
 

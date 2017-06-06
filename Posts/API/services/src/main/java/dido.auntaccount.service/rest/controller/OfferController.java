@@ -1,9 +1,8 @@
 package dido.auntaccount.service.rest.controller;
 
-import dido.auntaccount.dto.MessageDTO;
-import dido.auntaccount.dto.OfferDTO;
-import dido.auntaccount.dto.SellerDTO;
+import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.OfferService;
+import dido.auntaccount.service.business.UserService;
 import dido.auntaccount.service.filter.Secured;
 
 import javax.inject.Inject;
@@ -12,11 +11,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
+
 @Path("/offers")
 public class OfferController extends Controller {
 
     @Inject
     OfferService service;
+
+    @Inject
+    UserService userService;
 
     @GET
     @Path("/{param}")
@@ -32,8 +36,8 @@ public class OfferController extends Controller {
     @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveOffer(OfferDTO offer) throws Exception {
-        OfferDTO savedOffer = service.saveOffer(offer);
+    public Response saveOffer(OfferMessageDTO offer, @HeaderParam(LOGGED_IN_USER) String loggedInUser) throws Exception {
+        OfferDTO savedOffer = service.saveOffer(offer, Long.valueOf(loggedInUser));
         return getResponseBuilder().status(200).entity(savedOffer).build();
     }
 
