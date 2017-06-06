@@ -19,7 +19,7 @@ define(["../core/globals", "../core/config"], function(globals, config) {
           var sellerDisplayName = seller.firstName + " " + seller.lastName;
           element.append($.templates("#templateOffer").render({
             offerId: offer.id,
-            time: offer.time,
+            time: globals.formatDateTime(offer.time),
             seller: sellerDisplayName,
             newReplies: offer.replyCount,
             badgeCss: offer.replyCount == 0 ? "is-hidden" : "badge-highlighted"

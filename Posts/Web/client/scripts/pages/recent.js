@@ -1,4 +1,4 @@
-define(["../core/globals", "../core/config", "underscore", "moment"], function(globals, config, _, moment) {
+define(["../core/globals", "../core/config", "underscore"], function(globals, config, _) {
   var self = {};
 
   self.init = function() {
@@ -18,7 +18,7 @@ define(["../core/globals", "../core/config", "underscore", "moment"], function(g
           var post = data[i];
           element.append($.templates("#templatePost").render({
             postId: post.id,
-            time: moment(post.creationDate).format("DD-MM-YYYY"),
+            time: globals.formatDate(post.creationDate),
             title: post.postTags,
             content: post.description,
             offers: post.offerCount,

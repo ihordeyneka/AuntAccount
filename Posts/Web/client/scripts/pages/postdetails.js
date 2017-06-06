@@ -21,7 +21,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
 
   var initDetails = function(post) {
     $("#spanUser").text(post.user.firstName.concat(" ").concat(post.user.lastName));
-    $("#spanTime").text(post.creationDate);
+    $("#spanTime").text(globals.formatDateTime(post.creationDate));
     $("#divDescription").text(post.description);
     if (post.picture) {
       $("<img>").addClass("aa-post-picture").attr("src", post.picture).appendTo("#divPicture");

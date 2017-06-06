@@ -1,4 +1,4 @@
-define([], function() {
+define(["moment"], function(moment) {
   var self = {};
 
   self.loading = function(element, show) {
@@ -41,6 +41,14 @@ define([], function() {
       if (settings.notificationArea)
         settings.notificationArea.validationWarning();
     }
+  }
+
+  self.formatDate = window.formatDate = function(unix) {
+    return moment(unix).format("MM/DD/YYYY");
+  }
+
+  self.formatDateTime = window.formatDateTime = function(unix) {
+    return moment(unix).format("MM/DD/YYYY HH:mm");
   }
 
   $.fn.notificationArea = function(options) {

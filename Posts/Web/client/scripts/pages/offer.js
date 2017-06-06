@@ -70,7 +70,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
     var userId = $.didoauth.user.id;
     self.element.append($.templates("#templateReply").render({
       replyId: reply.id,
-      time: reply.creationDate,
+      time: globals.formatDateTime(reply.creationDate),
       header: reply.sender.firstName.concat(" ").concat(reply.sender.lastName),
       content: reply.description,
       replyOffset: reply.sender.id === userId ? "2" : "4", //bootstrap offsets
