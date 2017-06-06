@@ -16,4 +16,5 @@ public interface PostService {
 
     PostDTO updatePhoto(InputStream stream, Long postId) throws Exception;
 
+    OfferDTO getPostOffer(Long postId, Long userId);
 }

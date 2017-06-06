@@ -85,7 +85,7 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserNotifications(@PathParam("param") Long userId, @QueryParam("offset") Integer offset,
                                          @QueryParam("limit") Integer limit, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) {
-        if (!userId.equals(Long.valueOf(loggedInUserId))) {
+            if (!userId.equals(Long.valueOf(loggedInUserId))) {
             throw new NotAuthorizedException("Could't retrieve notification for not logged in user " + userId);
         }
         final NotificationListDTO notifications = userService.getUserNotifications(userId, offset, limit);

@@ -48,7 +48,7 @@ public class TagDTO implements DTO<Tag> {
     }
 
     public static List<String> parsePostTags(String tags) {
-        return !tags.isEmpty() ? Arrays.asList(tags.split(",")) : Collections.emptyList();
+        return tags != null && !tags.isEmpty() ? Arrays.asList(tags.split(",")) : Collections.emptyList();
     }
 }
 

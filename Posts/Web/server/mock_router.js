@@ -65,12 +65,12 @@ exports.init = function(router) {
     res.send(JSON.stringify(result));
   });
 
-  router.get(mockApiRoot + '/posts/:postId/myoffer', function(req, res) {
+  router.get(mockApiRoot + '/posts/:postId/offer', function(req, res) {
 
     var result = { postId: req.params.postId };
 
     if (req.params.postId == "2") {
-      result = { offerId: 1 };
+      result = { id: 1 };
     }
 
     res.statusCode = 200;

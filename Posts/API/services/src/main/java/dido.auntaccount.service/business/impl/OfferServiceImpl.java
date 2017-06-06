@@ -1,15 +1,17 @@
 package dido.auntaccount.service.business.impl;
 
+import dido.auntaccount.dao.MessageDAO;
 import dido.auntaccount.dao.OfferDAO;
-import dido.auntaccount.dto.MessageDTO;
-import dido.auntaccount.dto.OfferDTO;
-import dido.auntaccount.dto.SellerDTO;
+import dido.auntaccount.dao.UserDAO;
+import dido.auntaccount.dto.*;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.Offer;
+import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.OfferService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -22,6 +24,12 @@ public class OfferServiceImpl implements OfferService {
     @Inject
     private OfferDAO offerDAO;
 
+    @Inject
+    private MessageDAO messageDAO;
+
+    @Inject
+    private UserDAO userDAO;
+
     @Override
     public OfferDTO getOffer(Long offerId) {
         Offer offer = offerDAO.find(offerId);
@@ -29,10 +37,17 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public OfferDTO saveOffer(OfferDTO offer) {
+    public OfferDTO saveOffer(OfferMessageDTO offer, Long loggedInUser) {
         Offer savedOffer = null;
         try {
             savedOffer = offerDAO.save(offer.buildEntity());
+            final User user = userDAO.find(loggedInUser);
+            final Message message = new Message()
+                    .setDescription(offer.getDescription())
+                    .setCreationDate(DateTime.now().toDate())
+                    .setOfferId(savedOffer.getId())
+                    .setSender(user);
+            messageDAO.save(message);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save offer", e);
         }
