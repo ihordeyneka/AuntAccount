@@ -1,4 +1,4 @@
-define(["../core/globals", "../core/config", "../components/message_input"], function(globals, config, messageInputControl) {
+define(["../core/globals", "../core/config", "../components/message_input", "../components/post_info"], function(globals, config, messageInputControl, postInfoControl) {
   var self = {};
 
   self.init = function(postId, sellerId) {
@@ -10,7 +10,8 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
         url: config.apiRoot + "/posts/" + postId,
         dataType: "json"
     }).done(function(data) {
-      initDetails(data);
+      var postInfo = new postInfoControl($(".aa-post-container"));
+      postInfo.init(data);
       initNewReply(data, sellerId);
     }).fail(function(result) {
       self.notificationArea.error();

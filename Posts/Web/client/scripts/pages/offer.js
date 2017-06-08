@@ -1,4 +1,4 @@
-define(["../core/globals", "../core/config", "../components/message_input"], function(globals, config, messageInputControl) {
+define(["../core/globals", "../core/config", "../components/message_input", "../components/post_info"], function(globals, config, messageInputControl, postInfoControl) {
   var self = {};
   self.element = null;
 
@@ -12,15 +12,15 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
         dataType: "json"
     }).done(function(data) {
 
+      var postInfo = new postInfoControl($(".aa-post-container"));
+      postInfo.init(data.post);
+
       self.element = $(".aa-offer-container");
       self.element.empty();
-      if (data.length == 0) {
-        self.element.append("<h3>There are no replies yet.</h3>");
-      } else {
-        for (var i=0; i<data.length; i++) {
-          var reply = data[i];
-          appendReply(reply);
-        }
+
+      for (var i=0; i<data.messages.length; i++) {
+        var reply = data.messages[i];
+        appendReply(reply);
       }
 
       self.initNewReply(offerId);
@@ -32,6 +32,15 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
     });
 
   }
+
+  var initDetails = function(post) {
+    $("#spanUser").text(post.user.firstName.concat(" ").concat(post.user.lastName));
+    $("#spanTime").text(globals.formatDateTime(post.creationDate));
+    $("#divDescription").text(post.description);
+    if (post.photo) {
+      $("<img>").addClass("aa-post-picture").attr("src", post.photo).appendTo("#divPicture");
+    }
+  };
 
   self.initNewReply = function(offerId) {
     var input = new messageInputControl($(".aa-input-container"), {
