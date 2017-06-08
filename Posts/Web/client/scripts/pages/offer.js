@@ -76,7 +76,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
       content: reply.description,
       replyOffset: reply.sender.id === userId ? "2" : "4", //bootstrap offsets
       replyCss: reply.sender.id === userId  ? "aa-reply-my" : "aa-reply-their",
-      picture: reply.picture != null ? '<img class="aa-post-picture" src="' + reply.picture + '"></img>' : ''
+      picture: reply.photo != null ? '<img class="aa-post-picture" src="' + reply.photo + '"></img>' : ''
     }));
   }
 

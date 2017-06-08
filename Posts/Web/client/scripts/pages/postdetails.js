@@ -23,8 +23,8 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
     $("#spanUser").text(post.user.firstName.concat(" ").concat(post.user.lastName));
     $("#spanTime").text(globals.formatDateTime(post.creationDate));
     $("#divDescription").text(post.description);
-    if (post.picture) {
-      $("<img>").addClass("aa-post-picture").attr("src", post.picture).appendTo("#divPicture");
+    if (post.photo) {
+      $("<img>").addClass("aa-post-picture").attr("src", post.photo).appendTo("#divPicture");
     }
   };
 
