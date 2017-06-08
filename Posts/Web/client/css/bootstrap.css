@@ -100,18 +100,18 @@ a.header-nav__navigation-link:hover {
   background-color: transparent;
 }
 
-.btn-primary .badge {
+.badge, .btn-primary .badge {
+  margin-left: 4px;
+  color: #333;
+  background-color: transparent;
+  border: 1px solid #333;
+}
+
+.table-hover>tbody>tr:hover .badge {
   margin-left: 4px;
   color: #979797;
   background-color: transparent;
   border: 1px solid #979797;
-}
-
-.btn-primary .badge.badge-highlighted {
-  margin-left: 4px;
-  color: #204d74;
-  background-color: transparent;
-  border: 1px solid #204d74;
 }
 
 .form-control {

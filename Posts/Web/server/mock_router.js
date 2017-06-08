@@ -35,10 +35,10 @@ exports.init = function(router) {
 
   router.get(mockApiRoot + '/posts/:post/offers', function(req, res) {
     var result = [
-      { id: 1, time: 1482616800000, seller: { id: 1, firstName: "Hugo", lastName: "Reyes" }, replyCount: 0 },
-      { id: 2, time: 1482616800000, seller: { id: 2, firstName: "Kate", lastName: "Austen" }, replyCount: 1 },
-      { id: 3, time: 1482616800000, seller: { id: 3, firstName: "John", lastName: "Locke" }, replyCount: 1 },
-      { id: 4, time: 1482616800000, seller: { id: 4, firstName: "Dharma", lastName: "Initiative" }, replyCount: 1 }
+      { id: 1, time: 1482616800000, seller: { id: 1, name: "BigBurger" }, replyCount: 0 },
+      { id: 2, time: 1482616800000, seller: { id: 2, name: "Gelato" }, replyCount: 1 },
+      { id: 3, time: 1482616800000, seller: { id: 3, name: "Dharma Initiative" }, replyCount: 1 },
+      { id: 4, time: 1482616800000, seller: { id: 4, name: "John Locke Inc" }, replyCount: 1 }
     ];
 
     res.statusCode = 200;
