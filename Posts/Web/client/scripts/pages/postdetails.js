@@ -60,7 +60,7 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
 
     input.element.on("replied", sendReply);
     input.element.on("uploadsuccess", function(e, data) {
-      navigateToOffer(data.response.offerId);
+      navigateToOffer(data.response.id);
     });
     input.element.on("uploaderror", function(e, data) {
       self.notificationArea.error();
