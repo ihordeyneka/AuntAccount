@@ -63,8 +63,9 @@ public class MessageDTO implements DTO<Message> {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public MessageDTO setPhoto(byte[] photo) {
         this.photo = photo;
+        return this;
     }
 
     public Date getCreationDate() {

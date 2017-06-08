@@ -30,7 +30,8 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
 
   var initNewReply = function(post, sellerId) {
     var input = new messageInputControl($(".aa-input-container"), {
-      uploadUrl: config.apiRoot + "/posts/" + post.postId + "/offers/upload"
+      uploadUrl: config.apiRoot + "/offers/upload",
+      uploadExtraData: function() { return { postId: post.id, sellerId: sellerId }; }
     });
 
     var navigateToOffer = function(offerId) {

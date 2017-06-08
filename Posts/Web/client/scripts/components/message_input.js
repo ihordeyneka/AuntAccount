@@ -39,6 +39,7 @@ define(["fileinput", "../core/globals"], function(fileinputControl, globals) {
         layoutTemplates: {
           progress: '', //hide progress
         },
+        uploadExtraData: settings.uploadExtraData,
         maxFileCount: 1,
         allowedFileExtensions: ["jpg", "jpeg", "bmp", "gif", "png"]
       }).on("filebatchselected", function(event, files) {

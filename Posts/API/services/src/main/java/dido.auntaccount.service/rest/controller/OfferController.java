@@ -1,14 +1,20 @@
 package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.*;
+import dido.auntaccount.service.business.MessageService;
 import dido.auntaccount.service.business.OfferService;
 import dido.auntaccount.service.business.UserService;
 import dido.auntaccount.service.filter.Secured;
+import org.apache.commons.io.IOUtils;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
@@ -20,7 +26,7 @@ public class OfferController extends Controller {
     OfferService service;
 
     @Inject
-    UserService userService;
+    MessageService messageService;
 
     @GET
     @Path("/{param}")
@@ -28,7 +34,7 @@ public class OfferController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOffer(@PathParam("param") Long offerId) {
         OfferDTO offer = service.getOffer(offerId);
-        return getResponseBuilder().status(200).entity(offer).build();
+        return getResponseBuilder().entity(offer).build();
     }
 
     @POST
@@ -38,7 +44,18 @@ public class OfferController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveOffer(OfferMessageDTO offer, @HeaderParam(LOGGED_IN_USER) String loggedInUser) throws Exception {
         OfferDTO savedOffer = service.saveOffer(offer, Long.valueOf(loggedInUser));
-        return getResponseBuilder().status(200).entity(savedOffer).build();
+        return getResponseBuilder().entity(savedOffer).build();
+    }
+
+    @POST
+    @Path("/upload")
+    @Secured
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveOfferPicture(@FormDataParam("file_data") InputStream uploadedInputStream, @FormDataParam("postId") Long postId,
+                                     @FormDataParam("sellerId") Long sellerId, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) throws Exception {
+        OfferDTO savedOffer = service.saveOfferPicture(uploadedInputStream, postId, sellerId, Long.valueOf(loggedInUserId));
+        return getResponseBuilder().entity(savedOffer).build();
     }
 
     @GET
@@ -47,7 +64,7 @@ public class OfferController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferSeller(@PathParam("param") Long offerId) {
         SellerDTO seller = service.getOfferSeller(offerId);
-        return getResponseBuilder().status(200).entity(seller).build();
+        return getResponseBuilder().entity(seller).build();
     }
 
     @GET
@@ -56,7 +73,7 @@ public class OfferController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferMessages(@PathParam("param") Long offerId) {
         List<MessageDTO> messages = service.getOfferMessages(offerId);
-        return getResponseBuilder().status(200).entity(messages).build();
+        return getResponseBuilder().entity(messages).build();
     }
 
     @OPTIONS
@@ -85,6 +102,12 @@ public class OfferController extends Controller {
     @Path("/{param}/messages")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferMessagesPreflight(@PathParam("param") Long offerId) {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/upload")
+    public Response saveOfferPicturePreflight() {
         return getResponseBuilder().build();
     }
 

@@ -65,8 +65,9 @@ public class SellerDTO implements DTO<Seller> {
         return id;
     }
 
-    public void setId(Long id) {
+    public SellerDTO setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getTags() {

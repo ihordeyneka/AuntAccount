@@ -47,16 +47,18 @@ public class OfferDTO implements DTO<Offer> {
         return postId;
     }
 
-    public void setPostId(Long postId) {
+    public OfferDTO setPostId(Long postId) {
         this.postId = postId;
+        return this;
     }
 
     public SellerDTO getSeller() {
         return seller;
     }
 
-    public void setSeller(SellerDTO seller) {
+    public OfferDTO setSeller(SellerDTO seller) {
         this.seller = seller;
+        return this;
     }
 
     public Integer getReplyCount() {

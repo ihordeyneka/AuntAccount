@@ -35,7 +35,8 @@ define(["../core/globals", "../core/config", "../components/message_input"], fun
 
   self.initNewReply = function(offerId) {
     var input = new messageInputControl($(".aa-input-container"), {
-      uploadUrl: config.apiRoot + "/offers/" + offerId + "/messages/upload"
+      uploadUrl: config.apiRoot + "/messages/upload",
+      uploadExtraData: function() { return { offerId: offerId }; }
     });
     var sendReply = function(e, data) {
       var messageData = {
