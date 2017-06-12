@@ -200,6 +200,12 @@ exports.init = function(router) {
     res.send("{}");
   });
 
+  router.post(mockApiRoot + '/sellers/picture', function(req, res) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send('{}');
+  });
+
   router.get(mockApiRoot + '/tag/:query', function(req, res) {
     var result = [
       "Shoes",

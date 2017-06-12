@@ -1,5 +1,5 @@
-define(["core/globals", "core/config", "typeahead", "fileinput", "jqueryRaty", "components/google_autocomplete", "components/tags_input"],
-function(globals, config, typeaheadControl, fileinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
+define(["core/globals", "core/config", "underscore", "typeahead", "fileinput", "jqueryRaty", "components/google_autocomplete", "components/tags_input"],
+function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
   var self = {};
 
   self.locationTypeahead = null;
@@ -11,7 +11,6 @@ function(globals, config, typeaheadControl, fileinputControl, jqueryRaty, google
     self.locationTypeahead = new googleAutocompleteControl($("#inputPrimaryLocation"));
     self.tagsInput = new tagsInputControl($("#inputTags"));
 
-    initRating();
     initPictureUpload();
     addButtonHandlers();
 
@@ -22,6 +21,7 @@ function(globals, config, typeaheadControl, fileinputControl, jqueryRaty, google
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
     if (self.sellerId) {
+      initRating();
       fetchCurrentSeller();
     }
   }
@@ -87,8 +87,7 @@ function(globals, config, typeaheadControl, fileinputControl, jqueryRaty, google
   }
 
   var addButtonHandlers = function() {
-    $("#btnSaveSeller")
-    .click(function() {
+    $("#btnSaveSeller").click(function() {
       globals.validate({
         notificationArea: self.notificationArea,
         validatorForm: self.validatorForm,
@@ -110,11 +109,16 @@ function(globals, config, typeaheadControl, fileinputControl, jqueryRaty, google
             data: JSON.stringify(sellerData)
           }).done(function(data) {
             self.savedSellerId = data.id;
-            if (self.pictureUpload.fileinput("getFilesCount") > 0)
-            self.pictureUpload.fileinput("upload");
             self.notificationArea.success({
               message: "Seller successfully registered."
             });
+            if (self.pictureUpload.fileinput("getFilesCount") > 0) {
+              self.pictureUpload
+                .on('filebatchuploadsuccess', goBackDelayed)
+                .fileinput("upload");
+            } else {
+              goBackDelayed();
+            }
           }).fail(function(result) {
             self.notificationArea.error();
           }).always(function() {
@@ -123,7 +127,17 @@ function(globals, config, typeaheadControl, fileinputControl, jqueryRaty, google
         }
       });
     });
+
+    $("#btnBackSeller").click(goBack);
   }
+
+  var goBack = function() {
+    window.location = "#sellers";
+  };
+
+  var goBackDelayed = function() {
+    _.delay(goBack, 1000);
+  };
 
   return self;
 });
