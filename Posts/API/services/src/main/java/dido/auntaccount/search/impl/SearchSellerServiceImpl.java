@@ -24,7 +24,7 @@ public class SearchSellerServiceImpl implements SearchSellerService {
     private static final Logger logger = LogManager.getLogger(SearchSellerServiceImpl.class);
     public static final String SELLER_TYPE = "seller";
     public static final String INDEX = "dido";
-    public static final String TAGS_FIELD = "tags";
+    public static final String TAGS_FIELD = "tagList";
     public static final String ID_FIELD = "id";
 
     @Inject
