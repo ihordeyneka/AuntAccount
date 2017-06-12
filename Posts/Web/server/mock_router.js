@@ -127,9 +127,9 @@ exports.init = function(router) {
     res.send(JSON.stringify(result));
   });
 
-  router.post(mockApiRoot + '/offer', function(req, res) {
+  router.post(mockApiRoot + '/offers', function(req, res) {
     var result = {
-      offerId: 1
+      id: 1
     };
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
