@@ -12,7 +12,7 @@ define(["core/didoauth"], function(didoauth) {
     { hash: "#notifications", route: "alerts", text: "Notifications" },
     { hash: "#login", route: "login", text: "Login", showFor: ShowFor.ANONYMOUS },
     { hash: "#signup", route: "signup", text: "Sign Up", showFor: ShowFor.ANONYMOUS },
-    { hash: "#profile", route: "profile", text: "{{:user}}", showFor: ShowFor.AUTHENTICATED }
+    { hash: "#profile", route: "profile", template: "{{:user}}", showFor: ShowFor.AUTHENTICATED }
   ];
 
   var menuItemVisible = function(menuItem) {
@@ -27,8 +27,8 @@ define(["core/didoauth"], function(didoauth) {
   }
 
   var processMenuItem = function(menuItem) {
-    if (didoauth.user.signedIn)
-      menuItem.text = menuItem.text.replace("{{:user}}", didoauth.user.firstName + " " + didoauth.user.lastName);
+    if (menuItem.template && didoauth.user.signedIn)
+      menuItem.text = menuItem.template.replace("{{:user}}", didoauth.user.firstName + " " + didoauth.user.lastName);
   }
 
   self.refresh = function() {
