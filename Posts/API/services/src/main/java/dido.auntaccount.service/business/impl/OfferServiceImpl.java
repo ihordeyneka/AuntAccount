@@ -4,10 +4,7 @@ import dido.auntaccount.dao.MessageDAO;
 import dido.auntaccount.dao.OfferDAO;
 import dido.auntaccount.dao.UserDAO;
 import dido.auntaccount.dto.*;
-import dido.auntaccount.entities.Message;
-import dido.auntaccount.entities.Offer;
-import dido.auntaccount.entities.Seller;
-import dido.auntaccount.entities.User;
+import dido.auntaccount.entities.*;
 import dido.auntaccount.service.business.OfferService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
@@ -87,6 +84,12 @@ public class OfferServiceImpl implements OfferService {
         Message message = new Message().setPhoto(bytes);
         saveMessage(message, loggedInUserId, savedOffer.getId());
         return savedOffer;
+    }
+
+    @Override
+    public PostDTO getOfferPost(Long offerId) {
+        final Post post = offerDAO.getOfferPost(offerId);
+        return post != null ? new PostDTO(post) : null;
     }
 
     private OfferDTO saveOffer(Offer offer) {

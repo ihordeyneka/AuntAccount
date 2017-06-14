@@ -10,7 +10,7 @@ public interface UserService {
 
     UserProfileDTO getUserProfile(Long userId);
 
-    UserProfileDTO findByEmail(String userName);
+    UserProfileDTO findByEmail(String email);
 
     UserDTO saveUser(UserProfileDTO user);
 

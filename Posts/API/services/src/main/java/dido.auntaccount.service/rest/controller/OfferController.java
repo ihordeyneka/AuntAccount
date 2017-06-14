@@ -3,6 +3,7 @@ package dido.auntaccount.service.rest.controller;
 import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.MessageService;
 import dido.auntaccount.service.business.OfferService;
+import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.UserService;
 import dido.auntaccount.service.filter.Secured;
 import org.apache.commons.io.IOUtils;
@@ -27,6 +28,9 @@ public class OfferController extends Controller {
 
     @Inject
     MessageService messageService;
+
+    @Inject
+    UserService userService;
 
     @GET
     @Path("/{param}")
@@ -73,7 +77,10 @@ public class OfferController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOfferMessages(@PathParam("param") Long offerId) {
         List<MessageDTO> messages = service.getOfferMessages(offerId);
-        return getResponseBuilder().entity(messages).build();
+        final PostDTO post = service.getOfferPost(offerId);
+        final UserDTO user = userService.getUser(post.getUserId());
+        final PostDetailsDTO postDetails = new PostDetailsDTO(post, user);
+        return getResponseBuilder().entity(new OfferMessagesDTO(postDetails, messages)).build();
     }
 
     @OPTIONS

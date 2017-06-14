@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.inject.Inject;
+import javax.naming.AuthenticationException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -54,6 +55,10 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveUser(@FormParam("email") String email, @FormParam("firstName") String firstName,
                              @FormParam("lastName") String lastName, @FormParam("password") String password) throws Exception {
+        final UserProfileDTO existingUser = userService.findByEmail(email);
+        if (existingUser != null) {
+            throw new AuthenticationException("Can't create user. Email already exists " + email);
+        }
         UserProfileDTO user = new UserProfileDTO(email, firstName, lastName, password);
         String hashedPassword = passwordService.createHash(password);
         user.setPassword(hashedPassword);
@@ -85,7 +90,7 @@ public class UserController extends Controller {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserNotifications(@PathParam("param") Long userId, @QueryParam("offset") Integer offset,
                                          @QueryParam("limit") Integer limit, @HeaderParam(LOGGED_IN_USER) String loggedInUserId) {
-            if (!userId.equals(Long.valueOf(loggedInUserId))) {
+        if (!userId.equals(Long.valueOf(loggedInUserId))) {
             throw new NotAuthorizedException("Could't retrieve notification for not logged in user " + userId);
         }
         final NotificationListDTO notifications = userService.getUserNotifications(userId, offset, limit);
