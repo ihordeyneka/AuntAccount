@@ -10,6 +10,8 @@ public interface SellerService {
 
     SellerDTO getSeller(Long sellerId);
 
+    SellerDTO getSeller(String name);
+
     SellerDTO saveSeller(SellerDTO seller);
 
     List<PostDTO> getSellerPosts(Long sellerId);

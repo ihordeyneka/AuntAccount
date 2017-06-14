@@ -40,6 +40,12 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
+    public SellerDTO getSeller(String name) {
+        Seller seller = sellerDAO.findByName(name);
+        return seller != null ? new SellerDTO(seller) : null;
+    }
+
+    @Override
     public SellerDTO saveSeller(SellerDTO seller) {
         Seller savedSeller = null;
         try {

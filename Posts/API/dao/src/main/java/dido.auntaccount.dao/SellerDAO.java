@@ -12,4 +12,6 @@ public interface SellerDAO {
     public void addSellerPost(Long sellerId, Post post);
 
     void deleteSeller(Long sellerId) throws Exception;
+
+    Seller findByName(String name);
 }

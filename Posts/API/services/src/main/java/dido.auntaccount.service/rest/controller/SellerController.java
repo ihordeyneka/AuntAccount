@@ -7,6 +7,7 @@ import dido.auntaccount.service.business.SellerService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
+import javassist.bytecode.DuplicateMemberException;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.auth.AuthenticationException;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -61,6 +62,11 @@ public class SellerController extends Controller {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveSeller(SellerDTO seller) throws Exception {
+        final String sellerName = seller.getName();
+        final SellerDTO existingSeller = sellerService.getSeller(sellerName);
+        if (existingSeller != null) {
+            throw new Exception("Seller with specified name already exists " + sellerName);
+        }
         SellerDTO savedSeller = sellerService.saveSeller(seller);
         return getResponseBuilder().entity(savedSeller).build();
     }
