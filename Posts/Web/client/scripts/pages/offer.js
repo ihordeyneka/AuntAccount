@@ -20,10 +20,10 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
 
       for (var i=0; i<data.messages.length; i++) {
         var reply = data.messages[i];
-        appendReply(reply);
+        appendReply(reply, data.seller);
       }
 
-      self.initNewReply(offerId);
+      self.initNewReply(offerId, data.seller);
 
     }).fail(function(result) {
       self.notificationArea.error();
@@ -33,16 +33,7 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
 
   }
 
-  var initDetails = function(post) {
-    $("#spanUser").text(post.user.firstName.concat(" ").concat(post.user.lastName));
-    $("#spanTime").text(globals.formatDateTime(post.creationDate));
-    $("#divDescription").text(post.description);
-    if (post.photo) {
-      $("<img>").addClass("aa-post-picture").attr("src", post.photo).appendTo("#divPicture");
-    }
-  };
-
-  self.initNewReply = function(offerId) {
+  self.initNewReply = function(offerId, seller) {
     var input = new messageInputControl($(".aa-input-container"), {
       uploadUrl: config.apiRoot + "/messages/upload",
       uploadExtraData: function() { return { offerId: offerId }; }
@@ -58,7 +49,7 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
           contentType: "application/json",
           data: JSON.stringify(messageData),
       }).done(function(reply) {
-        appendReply(reply);
+        appendReply(reply, seller);
         input.purge();
       }).fail(function(result) {
         self.notificationArea.clear();
@@ -68,7 +59,7 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
 
     input.element.on("replied", sendReply);
     input.element.on("uploadsuccess", function(e, data) {
-      appendReply(data.response);
+      appendReply(data.response, seller);
       input.purge();
     });
     input.element.on("uploaderror", function(e, data) {
@@ -76,12 +67,14 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
     });
   }
 
-  var appendReply = function(reply) {
+  var appendReply = function(reply, seller) {
     var userId = $.didoauth.user.id;
+    var header = reply.sender.id === seller.userId ? seller.name :
+      reply.sender.firstName.concat(" ").concat(reply.sender.lastName);
     self.element.append($.templates("#templateReply").render({
       replyId: reply.id,
       time: globals.formatDateTime(reply.creationDate),
-      header: reply.sender.firstName.concat(" ").concat(reply.sender.lastName),
+      header: header,
       content: reply.description,
       replyOffset: reply.sender.id === userId ? "2" : "4", //bootstrap offsets
       replyCss: reply.sender.id === userId  ? "aa-reply-my" : "aa-reply-their",
