@@ -2,11 +2,13 @@ package dido.auntaccount.dao.impl;
 
 import dido.auntaccount.dao.GeneralDAO;
 import dido.auntaccount.dao.SellerDAO;
+import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Seller;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
 
@@ -36,6 +38,13 @@ public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
     @Override
     public void deleteSeller(Long sellerId) throws Exception {
         deleteEntity(sellerId, Seller.class);
+    }
+
+    @Override
+    public Seller findByName(String name) {
+        TypedQuery<Seller> query = entityManager.createQuery("SELECT s FROM Seller s WHERE s.name = :name", Seller.class)
+                .setParameter("name", name);
+        return getSingleResultOrNull(query);
     }
 
 }

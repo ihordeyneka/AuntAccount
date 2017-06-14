@@ -31,8 +31,9 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     }
 
     public User findByEmail(String email) {
-        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
-        return query.setParameter("email", email).getSingleResult();
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
+                .setParameter("email", email);
+        return getSingleResultOrNull(query);
     }
 
     public User save(User user) throws Exception {

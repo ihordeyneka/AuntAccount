@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserProfileDTO findByEmail(String email) {
         User user = userDAO.findByEmail(email);
-        return new UserProfileDTO(user);
+        return user != null ? new UserProfileDTO(user) : null;
     }
 
     @Override

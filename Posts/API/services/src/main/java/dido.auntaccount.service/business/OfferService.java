@@ -1,9 +1,6 @@
 package dido.auntaccount.service.business;
 
-import dido.auntaccount.dto.MessageDTO;
-import dido.auntaccount.dto.OfferMessageDTO;
-import dido.auntaccount.dto.OfferDTO;
-import dido.auntaccount.dto.SellerDTO;
+import dido.auntaccount.dto.*;
 
 import java.io.InputStream;
 import java.util.List;
@@ -21,5 +18,7 @@ public interface OfferService {
     List<MessageDTO> getOfferMessages(Long offerId);
 
     OfferDTO saveOfferPicture(InputStream uploadedInputStream, Long postId, Long sellerId, Long loggedInUserId);
+
+    PostDTO getOfferPost(Long offerId);
 
 }

@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-public class UserProfileDTO implements DTO<User>, Serializable {
+public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializable  {
 
     private static final Logger logger = LogManager.getLogger(UserProfileDTO.class);
 
@@ -152,23 +152,6 @@ public class UserProfileDTO implements DTO<User>, Serializable {
 
     public void setSellers(List<SellerDTO> sellers) {
         this.sellers = sellers;
-    }
-
-    private String encodeImage(byte[] image) {
-        if (image == null) {
-            return null;
-        }
-        String contentType = null;
-        try {
-            contentType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(image));
-        } catch (IOException e) {
-            logger.error("Can't get extension of user's profile picture, userId " + id);
-        }
-        return "data:image/" + contentType + ";base64," + Base64.encodeBase64String(image);
-    }
-
-    private byte[] decodeImage(String image) {
-        return image != null ? Base64.decodeBase64(image) : null;
     }
 
 }
