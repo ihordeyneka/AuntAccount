@@ -5,6 +5,8 @@ function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, goo
   self.locationTypeahead = null;
   self.pictureUpload = null;
   self.savedSellerId = null;
+  self.sellerId = null;
+  self.seller = null;
 
   self.init = function(sellerId) {
     self.sellerId = sellerId || 0;
@@ -21,7 +23,6 @@ function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, goo
     self.notificationArea = $(".aa-notification-area").notificationArea();
 
     if (self.sellerId) {
-      initRating();
       fetchCurrentSeller();
     }
   }
@@ -40,12 +41,17 @@ function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, goo
         $("#inputName").val(data.name);
         $("#inputPhone").val(data.phone);
         $("#inputWebsite").val(data.website);
-        self.sellerRating.raty('score', data.rate);
         self.locationTypeahead.setLocation(data.location);
         self.tagsInput.setTags(data.tagList);
         if (data.picture) {
           $("<img>").width("100%").attr("src", data.picture).appendTo(".aa-seller-picture");
         }
+
+        var viewOnly = data.userId !== $.didoauth.user.id;
+        if (viewOnly) {
+          switchToReadOnly();
+        }
+        initRating(data.rate, !viewOnly);
       }
     }).fail(function(result) {
       self.notificationArea.error();
@@ -54,12 +60,12 @@ function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, goo
     });
   }
 
-  var initRating = function(rating) {
+  var initRating = function(rating, readonly) {
     var DEF_RATING = 5;
     self.sellerRating = $(".aa-seller-rating");
     self.sellerRating.raty({
-      score: DEF_RATING,
-      readOnly: true,
+      score: rating || DEF_RATING,
+      readOnly: readonly,
       half: true,
       size: 24,
       hints: [null, null, null, null, null]
@@ -130,6 +136,16 @@ function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, goo
 
     $("#btnBackSeller").click(goBack);
   }
+
+  var switchToReadOnly = function() {
+    $("#inputName").attr("disabled", "disabled");
+    $("#inputPhone").attr("disabled", "disabled");
+    $("#inputWebsite").attr("disabled", "disabled");
+    self.locationTypeahead.setReadonly();
+    self.tagsInput.setReadonly();
+    $(".aa-seller-picture-container").hide();
+    $(".aa-seller-buttons").hide();
+  };
 
   var goBack = function() {
     window.location = "#sellers";

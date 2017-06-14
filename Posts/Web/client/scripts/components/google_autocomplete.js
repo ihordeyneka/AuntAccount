@@ -68,6 +68,10 @@ define([], function() {
       });
     }
 
+    self.setReadonly = function() {
+      self.element.attr("disabled", "disabled");
+    };
+
     self.element.keypress(function(e) {
       if (e.which == 13) //key is Enter
         self.element.trigger("place_changed");

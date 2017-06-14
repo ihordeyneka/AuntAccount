@@ -12,6 +12,12 @@ define(["core/config", "tagsinput"], function(config, tagsinputControl) {
         self.element.tagsinput('add', tags[i]);
       }
     };
+    self.setReadonly = function() {
+      self.element.attr("disabled", "disabled");
+      var tagsinputElement = self.element.siblings(".bootstrap-tagsinput");
+      tagsinputElement.addClass("readonly");
+      tagsinputElement.find("input").attr("disabled", "disabled");
+    };
 
     element.tagsinput({
       typeahead: {

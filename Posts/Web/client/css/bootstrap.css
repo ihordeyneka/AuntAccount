@@ -68,6 +68,10 @@ a.header-nav__navigation-link:hover {
   position: relative;
 }
 
+.readonly.bootstrap-tagsinput > .tag span {
+  cursor: not-allowed;
+}
+
 .btn {
   border-radius: 0;
 }
@@ -118,7 +122,7 @@ a.header-nav__navigation-link:hover {
   margin-left: 4px;
   color: #204d74;
   background-color: transparent;
-  border: 1px solid #204d74;  
+  border: 1px solid #204d74;
 }
 
 .form-control {

@@ -30,3 +30,11 @@
 .half-width {
   width: 50%;
 }
+.readonly {
+  cursor: not-allowed;
+  background-color: #eee;
+}
+.readonly input {
+  cursor: not-allowed;
+  background-color: #eee;
+}

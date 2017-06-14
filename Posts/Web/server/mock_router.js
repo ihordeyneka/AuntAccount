@@ -180,6 +180,7 @@ exports.init = function(router) {
   router.get(mockApiRoot + '/sellers/:seller', function(req, res) {
     var result = {
       id: 1,
+      userId: req.params.seller == "1" ? 1 : 8,
       name: "BigBurger",
       phone: "+380681857379",
       website: "http://www.google.com.ua",
