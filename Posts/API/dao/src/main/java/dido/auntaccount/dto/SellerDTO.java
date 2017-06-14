@@ -7,13 +7,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SellerDTO implements DTO<Seller> {
+public class SellerDTO extends PictureDTO implements DTO<Seller> {
 
     private Long id;
     private String name;
     private Long userId;
     private String phone;
-    private byte[] photo;
+    private String photo;
     private String website;
     private double rate;
     private Date creationDate;
@@ -34,7 +34,7 @@ public class SellerDTO implements DTO<Seller> {
                 .setUserId(userId)
                 .setPhone(phone)
                 .setWebsite(website)
-                .setPhoto(photo)
+                .setPhoto(decodeImage(photo))
                 .setRate(rate)
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation);
@@ -51,7 +51,7 @@ public class SellerDTO implements DTO<Seller> {
         this.tags = this.tagList.stream().collect(Collectors.joining(", "));
         this.name = seller.getName();
         this.userId = seller.getUserId();
-        this.photo = seller.getPhoto();
+        this.photo = encodeImage(seller.getPhoto());
         this.phone = seller.getPhone();
         this.creationDate = seller.getCreationDate();
         this.rate = seller.getRate();
@@ -102,11 +102,11 @@ public class SellerDTO implements DTO<Seller> {
         this.phone = phone;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

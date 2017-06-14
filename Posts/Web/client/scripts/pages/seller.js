@@ -43,8 +43,8 @@ function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, goo
         self.sellerRating.raty('score', data.rate);
         self.locationTypeahead.setLocation(data.location);
         self.tagsInput.setTags(data.tagList);
-        if (data.picture) {
-          $("<img>").width("100%").attr("src", data.picture).appendTo(".aa-seller-picture");
+        if (data.photo) {
+          $("<img>").width("100%").attr("src", data.photo).appendTo(".aa-seller-picture");
         }
       }
     }).fail(function(result) {
