@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URLConnection;
 import java.util.Date;
 
-public class MessageDTO implements DTO<Message> {
+public class MessageDTO extends PictureDTO implements DTO<Message> {
 
     private static final Logger logger = LogManager.getLogger(MessageDTO.class);
 
@@ -109,23 +109,6 @@ public class MessageDTO implements DTO<Message> {
 
     public void setRead(boolean isRead) {
         this.isRead = isRead;
-    }
-
-    private String encodeImage(byte[] image) {
-        if (image == null) {
-            return null;
-        }
-        String contentType = null;
-        try {
-            contentType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(image));
-        } catch (IOException e) {
-            logger.error("Can't get extension of user's profile picture, userId " + id);
-        }
-        return "data:image/" + contentType + ";base64," + Base64.encodeBase64String(image);
-    }
-
-    private byte[] decodeImage(String image) {
-        return image != null ? Base64.decodeBase64(image) : null;
     }
 
 }

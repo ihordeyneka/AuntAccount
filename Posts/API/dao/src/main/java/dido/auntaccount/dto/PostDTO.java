@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 import static dido.auntaccount.dto.TagDTO.parsePostTags;
 
-public class PostDTO implements DTO<Post> {
+public class PostDTO extends PictureDTO implements DTO<Post> {
 
     private long id;
     private String description;
-    private byte[] photo;
+    private String photo;
     private Double priceMax;
     private Double priceMin;
     private Date creationDate;
@@ -29,7 +29,7 @@ public class PostDTO implements DTO<Post> {
     public PostDTO(Post post) {
         this.id = post.getId();
         this.description = post.getDescription();
-        this.photo = post.getPhoto();
+        this.photo = encodeImage(post.getPhoto());
         this.priceMax = post.getPriceMax();
         this.priceMin = post.getPriceMin();
         this.creationDate = post.getCreationDate();
@@ -50,7 +50,7 @@ public class PostDTO implements DTO<Post> {
         return new Post()
                 .setId(id)
                 .setDescription(description)
-                .setPhoto(photo)
+                .setPhoto(decodeImage(photo))
                 .setPriceMax(priceMax)
                 .setPriceMin(priceMin)
                 .setCreationDate(creationDate)
@@ -83,11 +83,11 @@ public class PostDTO implements DTO<Post> {
         this.userId = userId;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
