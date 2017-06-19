@@ -5,6 +5,7 @@ requirejs.config({
     domReady: ["../../lib/dom_ready/dom_ready"],
     jquery: ["../../lib/jquery/jquery.min"],
     jqueryRaty: ["../../lib/jquery_raty/jquery.raty-fa"],
+    maskedinput: ["../../lib/jquery_maskedinput/jquery.maskedinput"],
     bootstrap: ["../../lib/bootstrap/js/bootstrap.min"],
     bootstraptable: ["../../lib/bootstrap_table/bootstrap-table.min"],
     jsrender: ["../../lib/jsrender/jsrender.min"],

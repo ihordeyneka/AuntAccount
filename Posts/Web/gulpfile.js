@@ -14,6 +14,7 @@ var PATHS = {
     { name: 'jquery', files: 'node_modules/jquery.1/node_modules/jquery/dist/**/*' },
     { name: 'jquery_deparam', files: 'node_modules/jquery-deparam/jquery-deparam.js' },
     { name: 'jsrender', files: 'node_modules/jsrender/*.{js,map}' },
+    { name: 'jquery_maskedinput', files: 'node_modules/jquery.maskedinput/src/**/*' },
     { name: 'bootstrap', files: 'node_modules/bootstrap/dist/**/*' },
     { name: 'bootstrap_table', files: 'node_modules/bootstrap-table/dist/**/*' },
     { name: 'bootstrap_slider', files: 'node_modules/bootstrap-slider/dist/**/*' },

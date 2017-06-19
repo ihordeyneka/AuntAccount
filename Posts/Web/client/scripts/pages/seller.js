@@ -1,5 +1,5 @@
-define(["core/globals", "core/config", "underscore", "typeahead", "fileinput", "jqueryRaty", "components/google_autocomplete", "components/tags_input"],
-function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
+define(["core/globals", "core/config", "underscore", "typeahead", "fileinput", "maskedinput", "jqueryRaty", "components/google_autocomplete", "components/tags_input"],
+function(globals, config, _, typeaheadControl, fileinputControl, maskedinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
   var self = {};
 
   self.locationTypeahead = null;
@@ -12,6 +12,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, jqueryRaty, goo
     self.sellerId = sellerId || 0;
     self.locationTypeahead = new googleAutocompleteControl($("#inputPrimaryLocation"));
     self.tagsInput = new tagsInputControl($("#inputTags"));
+    $("#inputPhone").mask("(999) 999-99-99");
 
     initPictureUpload();
     addButtonHandlers();

@@ -182,7 +182,7 @@ exports.init = function(router) {
       id: 1,
       userId: req.params.seller == "1" ? 1 : 8,
       name: "BigBurger",
-      phone: "+380681857379",
+      phone: "(068) 185-73-78",
       website: "http://www.google.com.ua",
       tagList: ["Tag1", "Jeans"],
       location: { name: "Lviv, Dudajeva 11" },
