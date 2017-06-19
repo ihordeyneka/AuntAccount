@@ -39,6 +39,9 @@ require(["core/config", "core/didoauth", "navigation/router", "navigation/menu",
     signOut: function() {
       router.home();
     },
+    signUp: function() {
+      router.toLogin();
+    },
 
     authProviderPaths: {
       google:    '/auth/google',

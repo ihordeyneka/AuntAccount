@@ -16,6 +16,11 @@ define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
     location.hash = "";
   }
 
+  self.toLogin = function() {
+    menu.refresh();
+    location.hash = "#login";
+  }
+
   var navigate = function(hash) {
     var route = hash.slice(1) || "/";
 

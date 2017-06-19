@@ -10,6 +10,7 @@ define(["jquery"], function ($) {
   var USER_DATA_KEY = 'current-user';
   var ERROR_EMAIL_SIGNIN = 1;
   var ERROR_REFRESH_TOKEN = 2;
+  var ERROR_EMAIL_SIGNUP = 3;
   var ERROR_SIGN_OUT = 9;
 
   var isApiRequest = function(url) {
@@ -42,6 +43,7 @@ define(["jquery"], function ($) {
       refreshTokenPath:      '/token/refresh',
       signIn: function() {},
       signOut: function() {},
+      signUp: function() {},
       error: function(err, data) {},
 
       authProviderPaths: {
@@ -136,11 +138,13 @@ define(["jquery"], function ($) {
       data: data,
 
       success: function(resp) {
-        //TODO: do something
+        //trigger signUp event handler
+        this.config.signUp();
       },
 
       error: function(resp) {
-        //TODO: do something
+        //trigger error event handler
+        this.config.error(ERROR_EMAIL_SIGNUP, resp);
       }
     });
   };
