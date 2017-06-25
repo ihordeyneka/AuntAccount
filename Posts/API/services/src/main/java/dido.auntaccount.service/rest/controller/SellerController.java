@@ -2,12 +2,12 @@ package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.SellerDTO;
+import dido.auntaccount.dto.SellerReviewDTO;
 import dido.auntaccount.service.business.PasswordService;
+import dido.auntaccount.service.business.SellerReviewService;
 import dido.auntaccount.service.business.SellerService;
 import dido.auntaccount.service.business.TokenService;
-import dido.auntaccount.service.filter.AuthenticationFilter;
 import dido.auntaccount.service.filter.Secured;
-import javassist.bytecode.DuplicateMemberException;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.auth.AuthenticationException;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -32,6 +32,9 @@ public class SellerController extends Controller {
 
     @Inject
     TokenService tokenService;
+
+    @Inject
+    SellerReviewService reviewService;
 
     @GET
     @Path("/{param}")
@@ -80,6 +83,15 @@ public class SellerController extends Controller {
         return getResponseBuilder().entity(sellerPosts).build();
     }
 
+    @GET
+    @Path("/{param}/reviews")
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSellerReviews(@PathParam("param") Long sellerId) {
+        List<SellerReviewDTO> reviews = reviewService.getSellerReviews(sellerId);
+        return getResponseBuilder().entity(reviews).build();
+    }
+
     @POST
     @Secured
     @Path("/picture")
@@ -120,6 +132,12 @@ public class SellerController extends Controller {
     @OPTIONS
     @Path("/picture")
     public Response updatePicturePreflight() throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}/reviews")
+    public Response getSellerReviewsPreflight(@PathParam("param") Long sellerId) {
         return getResponseBuilder().build();
     }
 

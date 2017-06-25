@@ -6,7 +6,7 @@ import dido.auntaccount.dto.NotificationDTO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.entities.Post;
-import dido.auntaccount.entities.Review;
+import dido.auntaccount.entities.SellerReview;
 import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
 
@@ -130,12 +130,6 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
         }
         user.setPhoto(image);
         updateEntity(user);
-    }
-
-
-    public List<Review> getReviewsByUserId(Long userId) {
-        TypedQuery<Review> query = entityManager.createQuery("SELECT r FROM Review r WHERE r.objectId = :objectId", Review.class);
-        return query.setParameter("objectId", userId).getResultList();
     }
 
 }

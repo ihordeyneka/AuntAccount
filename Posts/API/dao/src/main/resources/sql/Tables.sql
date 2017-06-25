@@ -41,12 +41,12 @@ CREATE TABLE `USER` (
 
 
 
-CREATE TABLE `dido`.`Review` (
+CREATE TABLE `dido`.`SellerReview` (
   `Id` BIGINT(10) NOT NULL,
   `Description` VARCHAR(45) NULL,
   `Rate` INT NULL,
-  `AuthorId` BIGINT(10) NOT NULL,
-  `ObjectId` BIGINT(10) NOT NULL,
+  `UserId` BIGINT(10) NOT NULL,
+  `SellerId` BIGINT(10) NOT NULL,
   `CreationDate` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 );
@@ -130,7 +130,6 @@ CREATE TABLE `SELLER` (
   `Photo` longblob,
   PRIMARY KEY (`Id`)
 );
-
 
 --fix post table - remove latitude and longitude, add sellerTag table
 

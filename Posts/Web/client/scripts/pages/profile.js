@@ -103,7 +103,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
   };
 
   var initSellersButtons = function(user) {
-    var hasSellers = user.sellers && user.sellers.length > 0;
+    var hasSellers = user.hasSellers;
     if (hasSellers) {
       $("#btnRegisterSeller").hide();
       $("#btnViewSellers").show();

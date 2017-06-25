@@ -1,10 +1,7 @@
 package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dto.*;
-import dido.auntaccount.service.business.MessageService;
-import dido.auntaccount.service.business.OfferService;
-import dido.auntaccount.service.business.PostService;
-import dido.auntaccount.service.business.UserService;
+import dido.auntaccount.service.business.*;
 import dido.auntaccount.service.filter.Secured;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -31,6 +28,9 @@ public class OfferController extends Controller {
 
     @Inject
     UserService userService;
+
+    @Inject
+    SellerService sellerService;
 
     @GET
     @Path("/{param}")
@@ -80,7 +80,8 @@ public class OfferController extends Controller {
         final PostDTO post = service.getOfferPost(offerId);
         final UserDTO user = userService.getUser(post.getUserId());
         final PostDetailsDTO postDetails = new PostDetailsDTO(post, user);
-        return getResponseBuilder().entity(new OfferMessagesDTO(postDetails, messages)).build();
+        SellerDTO seller = service.getOfferSeller(offerId);
+        return getResponseBuilder().entity(new OfferMessagesDTO(seller, postDetails, messages)).build();
     }
 
     @OPTIONS

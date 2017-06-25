@@ -22,7 +22,7 @@ define(["core/didoauth"], function(didoauth) {
     if (route == "profile")
       return didoauth.user.signedIn;
     if (route == "alerts")
-      return didoauth.user.signedIn && didoauth.user.sellers != null && didoauth.user.sellers.length;
+      return didoauth.user.signedIn && didoauth.user.hasSellers;
     return true;
   }
 

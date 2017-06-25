@@ -24,10 +24,6 @@ public class User implements Serializable {
     @JoinColumn(name = "LocationId")
     private Location location;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "UserId", referencedColumnName = "Id")
-    private List<Seller> sellers;
-
     public Long getId() {
         return id;
     }
@@ -109,12 +105,4 @@ public class User implements Serializable {
         return this;
     }
 
-    public List<Seller> getSellers() {
-        return sellers;
-    }
-
-    public User setSellers(List<Seller> sellers) {
-        this.sellers = sellers;
-        return this;
-    }
 }
