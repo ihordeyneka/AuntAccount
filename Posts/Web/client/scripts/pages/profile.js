@@ -1,8 +1,11 @@
 define(["core/globals", "core/didoauth", "core/config", "fileinput", "components/google_autocomplete"],
   function(globals, didoauth, config, fileinput, googleAutocompleteControl) {
   var self = {};
+  self.profileId = null;
 
-  self.init = function() {
+  self.init = function(profileId) {
+    self.profileId = profileId || didoauth.user.id;
+
     $(".btn-signout").click(function() {
       didoauth.signOut();
     });
@@ -16,7 +19,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
 
     globals.loading($('body'), true);
     $.ajax({
-        url: config.apiRoot + "/users/profile/" + didoauth.user.id,
+        url: config.apiRoot + "/users/profile/" + self.profileId,
         dataType: "json"
     }).done(function(data) {
       if (data == null) {
@@ -34,6 +37,10 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
         }
         initButtonHandlers();
         initSellersButtons(data);
+        var viewOnly = self.profileId !== didoauth.user.id;
+        if (viewOnly) {
+          switchToReadOnly();
+        }
       }
     }).fail(function(result) {
       self.notificationArea.error();
@@ -105,6 +112,14 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
       $("#btnViewSellers").hide();
     }
   }
+
+  var switchToReadOnly = function() {
+    $("#inputFirst").attr("disabled", "disabled");
+    $("#inputLast").attr("disabled", "disabled");
+    self.locationTypeahead.setReadonly();
+    $(".aa-profile-picture-container").hide();
+    $(".aa-profile-buttons").hide();
+  };
 
   return self;
 });
