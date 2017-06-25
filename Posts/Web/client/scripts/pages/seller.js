@@ -209,8 +209,10 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
       globals.loading($('body'), false);
     });
 
+    $(".aa-place-review-button").off("click");
     $(".aa-place-review-button").click(function() { placeReview(true) });
 
+    $(".aa-new-review-input").off("keypress");
     $(".aa-new-review-input")
       .focus()
       .keypress(function(event) {
@@ -229,15 +231,14 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
     $.post({
         url: config.apiRoot + "/reviews",
         dataType: "json",
-        data: {
+        data: JSON.stringify({
           sellerId: self.sellerId,
           rate: self.sellerRating.raty("score"),
           review: review
-        }
+        })
     }).done(function(data) {
-      switchMode(true);
       $(".aa-new-review-input").val("");
-      initReviews();
+      switchMode(true);
     }).fail(function(result) {
       self.notificationArea.error();
     }).always(function() {
