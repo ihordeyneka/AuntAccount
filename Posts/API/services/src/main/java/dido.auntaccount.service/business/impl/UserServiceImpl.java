@@ -1,5 +1,6 @@
 package dido.auntaccount.service.business.impl;
 
+import dido.auntaccount.dao.SellerDAO;
 import dido.auntaccount.dao.UserDAO;
 import dido.auntaccount.dto.*;
 import dido.auntaccount.entities.Seller;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService {
     @Inject
     private SearchSellerService searchSellerService;
 
+    @Inject
+    private SellerDAO sellerDAO;
+
     @Override
     public UserDTO getUser(Long userId) {
         return new UserDTO(userDAO.find(userId));
@@ -33,7 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserProfileDTO getUserProfile(Long userId) {
-        return new UserProfileDTO(userDAO.find(userId));
+        final UserProfileDTO userProfileDTO = new UserProfileDTO(userDAO.find(userId));
+        final boolean hasSellers = sellerDAO.hasSellers(userId);
+        userProfileDTO.setHasSellers(hasSellers);
+        return userProfileDTO;
     }
 
     @Override

@@ -14,4 +14,6 @@ public interface SellerDAO {
     void deleteSeller(Long sellerId) throws Exception;
 
     Seller findByName(String name);
+
+    boolean hasSellers(Long userId);
 }

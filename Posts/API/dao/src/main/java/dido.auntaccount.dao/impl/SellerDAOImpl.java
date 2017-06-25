@@ -7,6 +7,7 @@ import dido.auntaccount.entities.Seller;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
@@ -44,6 +45,14 @@ public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
         TypedQuery<Seller> query = entityManager.createQuery("SELECT s FROM Seller s WHERE s.name = :name", Seller.class)
                 .setParameter("name", name);
         return getSingleResultOrNull(query);
+    }
+
+    @Override
+    public boolean hasSellers(Long userId) {
+        final Query query = entityManager.createQuery("SELECT count(s) FROM Seller s WHERE s.userId = :userId")
+                .setParameter("userId", userId);
+        final Long count = (Long) query.getSingleResult();
+        return count != 0;
     }
 
 }

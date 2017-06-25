@@ -1,21 +1,12 @@
 package dido.auntaccount.dto;
 
-import org.apache.commons.codec.binary.Base64;
 import dido.auntaccount.entities.Location;
-import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.URLConnection;
-import java.sql.Date;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.stream.Collectors;
+import java.io.Serializable;
+import java.sql.Date;
 
 public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializable  {
 
@@ -30,7 +21,7 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
     private Date creationDate;
     private LocationDTO location;
     private String clientId;
-    private List<SellerDTO> sellers;
+    private boolean hasSellers;
 
     public UserProfileDTO() {
     }
@@ -53,14 +44,11 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
         Location location = user.getLocation();
         this.location = location != null ? new LocationDTO(user.getLocation()) : null;
         this.clientId = user.getClientId();
-        final List<Seller> sellerList = user.getSellers();
-        this.sellers = sellerList != null ? sellerList.stream().map(SellerDTO::new).collect(Collectors.toList()) : null;
     }
 
     @Override
     public User buildEntity() {
         Location entityLocation = location != null ? location.buildEntity() : null;
-        List<Seller> sellerList = sellers != null ? sellers.stream().map(SellerDTO::buildEntity).collect(Collectors.toList()) : null;
         return new User()
                 .setId(id)
                 .setFirstName(firstName)
@@ -70,8 +58,7 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
                 .setPhoto(decodeImage(photo))
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation)
-                .setClientId(clientId)
-                .setSellers(sellerList);
+                .setClientId(clientId);
     }
 
     public Long getId() {
@@ -146,12 +133,11 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
         this.clientId = clientId;
     }
 
-    public List<SellerDTO> getSellers() {
-        return sellers;
+    public boolean isHasSellers() {
+        return hasSellers;
     }
 
-    public void setSellers(List<SellerDTO> sellers) {
-        this.sellers = sellers;
+    public void setHasSellers(boolean hasSellers) {
+        this.hasSellers = hasSellers;
     }
-
 }
