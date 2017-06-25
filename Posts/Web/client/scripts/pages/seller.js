@@ -40,6 +40,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
         });
       } else {
         $("#inputName").val(data.name);
+        $(".aa-seller-name-header").text(data.name);
         $("#inputPhone").val(data.phone);
         $("#inputWebsite").val(data.website);
         self.locationTypeahead.setLocation(data.location);
@@ -52,7 +53,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
         if (viewOnly) {
           switchToReadOnly();
         }
-        initRating(data.rate, !viewOnly);
+        initRating(data, viewOnly);
       }
     }).fail(function(result) {
       self.notificationArea.error();
@@ -61,16 +62,23 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
     });
   }
 
-  var initRating = function(rating, readonly) {
+  var initRating = function(data, enabled) {
+    var rating = enabled && data.userRate ? data.userRate : data.averageRate;
     var DEF_RATING = 5;
     self.sellerRating = $(".aa-seller-rating");
     self.sellerRating.raty({
       score: rating || DEF_RATING,
-      readOnly: readonly,
+      readOnly: !enabled,
       half: true,
       size: 24,
-      hints: [null, null, null, null, null]
+      hints: [null, null, null, null, null],
+      click: function(value, e) {
+        placeReview();
+      }
     });
+
+    if (!enabled) //for readonly view seller might go to reviews page by clicking anywhere in the stars plugin
+      self.sellerRating.click(function() { switchMode(true); });
   };
 
   var initPictureUpload = function() {
@@ -136,6 +144,9 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
     });
 
     $("#btnBackSeller").click(goBack);
+
+    $("#btnGoToReviews").click(function() { switchMode(true); });
+    $("#btnBackFromReviews").click(function() { switchMode(false); });
   }
 
   var switchToReadOnly = function() {
@@ -146,6 +157,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
     self.tagsInput.setReadonly();
     $(".aa-seller-picture-container").hide();
     $(".aa-seller-buttons").hide();
+    $(".aa-new-review-container").show();
   };
 
   var goBack = function() {
@@ -154,6 +166,83 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
 
   var goBackDelayed = function() {
     _.delay(goBack, 2000);
+  };
+
+  var switchMode = function(showReviews) {
+    if (showReviews) {
+      $(".aa-seller-info-container").hide();
+      $("#btnGoToReviews").hide();
+      $(".aa-seller-reviews-container").show();
+      $("#btnBackFromReviews").show();
+      initReviews();
+    } else {
+      $(".aa-seller-info-container").show();
+      $("#btnGoToReviews").show();
+      $(".aa-seller-reviews-container").hide();
+      $("#btnBackFromReviews").hide();
+    }
+  };
+
+  var initReviews = function() {
+    globals.loading($('body'), true);
+    $.get({
+        url: config.apiRoot + "/sellers/" + self.sellerId + "/reviews",
+        dataType: "json"
+    }).done(function(data) {
+      var element = $(".aa-reviews-template-container");
+      element.empty();
+      if (data.length == 0) {
+        element.append("<h3 class='center'>No reviews added for this seller yet.</h3>");
+      } else {
+        for (var i=0; i<data.length; i++) {
+          var review = data[i];
+          element.append($.templates("#templateReview").render({
+            time: globals.formatDate(review.time),
+            author: review.author != null ? review.author.firstName + " " + review.author.lastName : "Anonymous",
+            content: review.content
+          }));
+        }
+      }
+    }).fail(function(result) {
+      self.notificationArea.error();
+    }).always(function() {
+      globals.loading($('body'), false);
+    });
+
+    $(".aa-place-review-button").click(function() { placeReview(true) });
+
+    $(".aa-new-review-input")
+      .focus()
+      .keypress(function(event) {
+        if(event.keyCode == 13) { //Enter Key Press event handler
+          placeReview(true);
+        }
+      });
+  };
+
+  var placeReview = function(textRequired) {
+    var review = $(".aa-new-review-input").val();
+    if (textRequired && !review)
+      return;
+
+    globals.loading($('body'), true);
+    $.post({
+        url: config.apiRoot + "/reviews",
+        dataType: "json",
+        data: {
+          sellerId: self.sellerId,
+          rate: self.sellerRating.raty("score"),
+          review: review
+        }
+    }).done(function(data) {
+      switchMode(true);
+      $(".aa-new-review-input").val("");
+      initReviews();
+    }).fail(function(result) {
+      self.notificationArea.error();
+    }).always(function() {
+      globals.loading($('body'), false);
+    });
   };
 
   return self;

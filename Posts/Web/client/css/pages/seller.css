@@ -4,8 +4,17 @@
   background: transparent url("/client/images/blank-profile.png") no-repeat center center;
   background-size: 100px 100px;
 }
-.aa-seller-rating {
+.aa-seller-rating-container {
   line-height: 100px;
+  width: 170px;
+  float: right;
+}
+.aa-seller-rating-container .btn-primary {
+  width: 100%;
+}
+.aa-seller-rating {
+  cursor: pointer;
+  line-height: 60px;
 }
 .btn-save-seller {
   margin-right: 10px;
