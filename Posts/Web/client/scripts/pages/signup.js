@@ -1,5 +1,17 @@
-define(["../core/globals"], function(globals) {
+define(["../core/globals", "../core/didoauth", "../navigation/router", "underscore"], function(globals, didoauth, router, _) {
   var self = {};
+
+  didoauth.config.signUp = function() {
+    if (self.notificationArea) {
+      self.notificationArea.success({
+        message: "Successfully signed up. You can now log in with your account."
+      });
+    }
+
+    _.delay(function() {
+      router.toLogin();
+    }, 2000);
+  }
 
   self.init = function() {
     self.validatorForm = $("#formSignUp");
@@ -18,12 +30,6 @@ define(["../core/globals"], function(globals) {
             password: $("#inputPassword").val(),
             password_confirmation: $("#inputPassword").val()
           });
-
-          //TODO: use PubSub to handle events
-          //self.notificationArea.success({
-          //  message: "Your account has been successfully created. You should receive an email to activate it shortly."
-          //});
-          //self.notificationArea.error();
         }
       });
     });
