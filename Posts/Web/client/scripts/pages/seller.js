@@ -153,7 +153,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
   };
 
   var goBackDelayed = function() {
-    _.delay(goBack, 1000);
+    _.delay(goBack, 2000);
   };
 
   return self;
