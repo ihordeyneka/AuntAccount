@@ -2,8 +2,6 @@ package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.UserDAO;
 import dido.auntaccount.dto.*;
-import dido.auntaccount.entities.Post;
-import dido.auntaccount.entities.Review;
 import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
 import dido.auntaccount.search.SearchSellerService;
@@ -15,7 +13,6 @@ import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,12 +66,6 @@ public class UserServiceImpl implements UserService {
     public List<SellerDTO> getUserSellers(Long userId) {
         final List<Seller> sellers = userDAO.getSellersByUserId(userId);
         return sellers.stream().map(SellerDTO::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ReviewDTO> getUserReviews(Long userId) {
-        List<Review> reviews = userDAO.getReviewsByUserId(userId);
-        return reviews.stream().map(ReviewDTO::new).collect(Collectors.toList());
     }
 
     @Override

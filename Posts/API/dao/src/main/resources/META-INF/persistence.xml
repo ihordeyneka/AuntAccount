@@ -12,7 +12,7 @@
         <class>dido.auntaccount.entities.Message</class>
         <class>dido.auntaccount.entities.Offer</class>
         <class>dido.auntaccount.entities.Post</class>
-        <class>dido.auntaccount.entities.Review</class>
+        <class>dido.auntaccount.entities.SellerReview</class>
         <class>dido.auntaccount.entities.Tag</class>
         <class>dido.auntaccount.entities.User</class>
         <class>dido.auntaccount.entities.Seller</class>

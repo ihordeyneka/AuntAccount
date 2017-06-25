@@ -18,8 +18,6 @@ public interface UserService {
 
     List<SellerDTO> getUserSellers(Long userId);
 
-    List<ReviewDTO> getUserReviews(Long userId);
-
     NotificationListDTO getUserNotifications(Long userId, int offset, int limit);
 
     void updateUserProfile(UserDTO user);

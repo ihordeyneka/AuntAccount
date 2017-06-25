@@ -2,7 +2,6 @@ package dido.auntaccount.dao.impl;
 
 import dido.auntaccount.dao.GeneralDAO;
 import dido.auntaccount.dao.SellerDAO;
-import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Seller;
 

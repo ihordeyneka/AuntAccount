@@ -1,41 +1,41 @@
 package dido.auntaccount.dto;
 
-import dido.auntaccount.entities.Review;
+import dido.auntaccount.entities.SellerReview;
 import dido.auntaccount.entities.User;
 
 import java.sql.Date;
 
-public class ReviewDTO implements DTO<Review> {
+public class SellerReviewDTO implements DTO<SellerReview> {
 
     private Long id;
     private String description;
     private int rate;
     private Date creationDate;
-    private Long authorId;
-    private Long objectId;
+    private Long userId;
+    private Long sellerId;
 
-    public ReviewDTO() {
+    public SellerReviewDTO() {
     }
 
-    public ReviewDTO(Review review) {
+    public SellerReviewDTO(SellerReview review) {
         this.id = review.getId();
         this.description = review.getDescription();
         this.rate = review.getRate();
         this.creationDate = review.getCreationDate();
-        this.authorId = review.getAuthor().getId();
-        this.objectId = review.getObjectId();
+        this.userId = review.getUserId();
+        this.sellerId = review.getSellerId();
     }
 
     @Override
-    public Review buildEntity() {
-        User author = new User().setId(authorId);
-        return new Review()
+    public SellerReview buildEntity() {
+        User author = new User().setId(userId);
+        return new SellerReview()
                 .setId(id)
                 .setDescription(description)
                 .setRate(rate)
                 .setCreationDate(creationDate)
-                .setAuthor(author)
-                .setObjectId(objectId);
+                .setUserId(userId)
+                .setSellerId(sellerId);
     }
 
     public Long getId() {
@@ -62,20 +62,20 @@ public class ReviewDTO implements DTO<Review> {
         this.rate = rate;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getObjectId() {
-        return objectId;
+    public Long getSellerId() {
+        return sellerId;
     }
 
-    public void setObjectId(Long objectId) {
-        this.objectId = objectId;
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
     }
 
     public Date getCreationDate() {

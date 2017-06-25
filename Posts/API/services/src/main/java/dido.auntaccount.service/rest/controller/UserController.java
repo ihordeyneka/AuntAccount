@@ -108,15 +108,6 @@ public class UserController extends Controller {
         return getResponseBuilder().entity("{}").build();
     }
 
-    @GET
-    @Path("/{param}/reviews")
-    @Secured
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserReviews(@PathParam("param") Long userId) {
-        List<ReviewDTO> reviews = userService.getUserReviews(userId);
-        return getResponseBuilder().entity(reviews).build();
-    }
-
     @POST
     @Secured
     @Path("/picture")
