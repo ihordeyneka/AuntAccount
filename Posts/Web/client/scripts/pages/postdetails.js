@@ -20,15 +20,6 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
     });
   };
 
-  var initDetails = function(post) {
-    $("#spanUser").text(post.user.firstName.concat(" ").concat(post.user.lastName));
-    $("#spanTime").text(globals.formatDateTime(post.creationDate));
-    $("#divDescription").text(post.description);
-    if (post.photo) {
-      $("<img>").addClass("aa-post-picture").attr("src", post.photo).appendTo("#divPicture");
-    }
-  };
-
   var initNewReply = function(post, sellerId) {
     var input = new messageInputControl($(".aa-input-container"), {
       uploadUrl: config.apiRoot + "/offers/upload",

@@ -71,10 +71,13 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
     var userId = $.didoauth.user.id;
     var header = reply.sender.id === seller.userId ? seller.name :
       reply.sender.firstName.concat(" ").concat(reply.sender.lastName);
+    var headerUrl = reply.sender.id === seller.userId ? "#seller/" + seller.id :
+      "#profile/" + reply.sender.id;
     self.element.append($.templates("#templateReply").render({
       replyId: reply.id,
       time: globals.formatDateTime(reply.creationDate),
       header: header,
+      headerUrl: headerUrl,
       content: reply.description,
       replyOffset: reply.sender.id === userId ? "2" : "4", //bootstrap offsets
       replyCss: reply.sender.id === userId  ? "aa-reply-my" : "aa-reply-their",

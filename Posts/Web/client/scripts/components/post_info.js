@@ -8,7 +8,7 @@ define(["../core/globals"], function(globals) {
           <div class="panel-heading">\
             <h3 class="panel-title">\
               <span class="right aa-post-info-time"></span>\
-              <span class="aa-post-info-user"></span>\
+              <a class="aa-post-info-user"></a>\
             </h3>\
           </div>\
           <div class="panel-body">\
@@ -20,7 +20,10 @@ define(["../core/globals"], function(globals) {
     element.html(html);
 
     self.init = function(post) {
-      self.element.find(".aa-post-info-user").text(post.user.firstName.concat(" ").concat(post.user.lastName));
+      var profileUrl = "#profile/" + post.user.id;
+      var userName = post.user.firstName.concat(" ").concat(post.user.lastName);
+
+      self.element.find(".aa-post-info-user").attr("href", profileUrl).text(userName);
       self.element.find(".aa-post-info-time").text(globals.formatDateTime(post.creationDate));
       self.element.find(".aa-post-info-description").text(post.description);
       if (post.photo) {
