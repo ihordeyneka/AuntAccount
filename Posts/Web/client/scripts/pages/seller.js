@@ -106,6 +106,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
         success: function() {
           globals.loading($('body'), true);
           var sellerData = {
+            id: self.sellerId,
             name: $("#inputName").val(),
             phone: $("#inputPhone").val(),
             website: $("#inputWebsite").val(),
@@ -115,7 +116,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
           };
 
           $.post({
-            url: config.apiRoot + "/sellers",
+            url: config.apiRoot + "/sellers/profile",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(sellerData)

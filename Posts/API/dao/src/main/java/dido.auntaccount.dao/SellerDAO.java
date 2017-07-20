@@ -16,4 +16,6 @@ public interface SellerDAO {
     Seller findByName(String name);
 
     boolean hasSellers(Long userId);
+
+    void updateSeller(Seller seller);
 }

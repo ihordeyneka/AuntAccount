@@ -55,4 +55,14 @@ public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
         return count != 0;
     }
 
+    @Override
+    public void updateSeller(Seller seller) {
+        try {
+            updateEntity(seller);
+        } catch (Exception e) {
+            throw new IllegalStateException("Couldn't update seller");
+        }
+
+    }
+
 }
