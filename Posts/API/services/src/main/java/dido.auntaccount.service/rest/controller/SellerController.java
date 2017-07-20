@@ -3,6 +3,7 @@ package dido.auntaccount.service.rest.controller;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.dto.SellerReviewDTO;
+import dido.auntaccount.dto.UserProfileDTO;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.SellerReviewService;
 import dido.auntaccount.service.business.SellerService;
@@ -94,6 +95,16 @@ public class SellerController extends Controller {
 
     @POST
     @Secured
+    @Path("/profile")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateProfile(SellerDTO seller) throws Exception {
+        sellerService.updateSeller(seller);
+        return getResponseBuilder().entity("{}").build();
+    }
+
+    @POST
+    @Secured
     @Path("/picture")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
@@ -107,10 +118,12 @@ public class SellerController extends Controller {
         return getResponseBuilder().build();
     }
 
+
     @OPTIONS
-    @Path("/{param}")
+    @Path("/profile")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSellerPreflight(@PathParam("param") Long sellerId) {
+    public Response updateProfilePreflight(SellerDTO seller) throws Exception {
         return getResponseBuilder().build();
     }
 
@@ -119,6 +132,13 @@ public class SellerController extends Controller {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveSellerPreflight(SellerDTO seller) throws Exception {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSellerPreflight(@PathParam("param") Long sellerId) {
         return getResponseBuilder().build();
     }
 

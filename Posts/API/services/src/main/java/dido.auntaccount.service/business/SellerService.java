@@ -21,4 +21,5 @@ public interface SellerService {
 
     void deleteSeller(Long sellerId) throws Exception;
 
+    void updateSeller(SellerDTO seller);
 }

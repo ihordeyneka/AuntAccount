@@ -94,4 +94,13 @@ public class SellerServiceImpl implements SellerService {
     public void deleteSeller(Long sellerId) throws Exception {
         sellerDAO.deleteSeller(sellerId);
     }
+
+    @Override
+    public void updateSeller(SellerDTO seller) {
+        try {
+            sellerDAO.updateSeller(seller.buildEntity());
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "Couldn't update seller", e);
+        }
+    }
 }
