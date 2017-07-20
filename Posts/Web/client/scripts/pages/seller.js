@@ -49,11 +49,11 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
           $("<img>").width("100%").attr("src", data.photo).appendTo(".aa-seller-picture");
         }
 
-        var viewOnly = data.userId !== $.didoauth.user.id;
-        if (viewOnly) {
-          switchToReadOnly();
+        self.reviewerView = data.userId !== $.didoauth.user.id;
+        if (self.reviewerView) {
+          switchToReviewerView();
         }
-        initRating(data, viewOnly);
+        initRating(data);
       }
     }).fail(function(result) {
       self.notificationArea.error();
@@ -62,13 +62,13 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
     });
   }
 
-  var initRating = function(data, enabled) {
-    var rating = enabled && data.userRate ? data.userRate : data.averageRate;
+  var initRating = function(data) {
+    var rating = self.reviewerView && data.userRate ? data.userRate : data.averageRate;
     var DEF_RATING = 5;
     self.sellerRating = $(".aa-seller-rating");
     self.sellerRating.raty({
       score: rating || DEF_RATING,
-      readOnly: !enabled,
+      readOnly: true,
       half: true,
       size: 24,
       hints: [null, null, null, null, null],
@@ -76,9 +76,6 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
         placeReview();
       }
     });
-
-    if (!enabled) //for readonly view seller might go to reviews page by clicking anywhere in the stars plugin
-      self.sellerRating.click(function() { switchMode(true); });
   };
 
   var initPictureUpload = function() {
@@ -149,7 +146,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
     $("#btnBackFromReviews").click(function() { switchMode(false); });
   }
 
-  var switchToReadOnly = function() {
+  var switchToReviewerView = function() {
     $("#inputName").attr("disabled", "disabled");
     $("#inputPhone").attr("disabled", "disabled");
     $("#inputWebsite").attr("disabled", "disabled");
@@ -181,6 +178,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
       $(".aa-seller-reviews-container").hide();
       $("#btnBackFromReviews").hide();
     }
+    self.sellerRating.raty("readOnly", self.reviewerView && !showReviews);
   };
 
   var initReviews = function() {
