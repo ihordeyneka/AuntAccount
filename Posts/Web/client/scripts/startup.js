@@ -16,7 +16,7 @@ requirejs.config({
     fileinput: ["../../lib/bootstrap_fileinput/js/fileinput.min"],
     slider: ["../../lib/bootstrap_slider/bootstrap-slider.min"],
     moment: ["../../lib/moment/min/moment.min"],
-    googleapi: ["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&libraries=places"]
+    googleapi: ["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&libraries=places&language=en-US"]
   },
   shim: {
     bootstrap: { deps: ["jquery"] },

@@ -26,7 +26,10 @@ define([], function() {
         var googleLocation = autocomplete.getPlace();
         //convert google location to our format
         currentLocation = {};
-        currentLocation.name = googleLocation.name;
+        currentLocation.name = self.element.val();
+        currentLocation.place = googleLocation.name;
+        currentLocation.placeId = googleLocation.place_id;
+        //TODO: add another property to currentLocation where we would store user entered name
 
         if (googleLocation.geometry) {
           currentLocation.latitude = googleLocation.geometry.location.lat();
