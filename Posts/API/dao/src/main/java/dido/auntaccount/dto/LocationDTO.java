@@ -11,6 +11,8 @@ public class LocationDTO implements DTO<Location> {
     private String city;
     private String region1;
     private String region2;
+    private String place;
+    private String placeId;
     private String name;
     private Integer streetNumber;
     private String route;
@@ -35,6 +37,8 @@ public class LocationDTO implements DTO<Location> {
         Country country = location.getCountry();
         this.country = country != null ? new CountryDTO(country) : null;
         this.radius = location.getRadius();
+        this.place = location.getPlace();
+        this.placeId = location.getPlaceId();
     }
 
     @Override
@@ -52,7 +56,9 @@ public class LocationDTO implements DTO<Location> {
                 .setRoute(route)
                 .setStreetNumber(streetNumber)
                 .setCountry(entityCountry)
-                .setRadius(radius);
+                .setRadius(radius)
+                .setPlace(place)
+                .setPlaceId(placeId);
     }
 
     public Long getId() {
@@ -149,5 +155,21 @@ public class LocationDTO implements DTO<Location> {
 
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
     }
 }
