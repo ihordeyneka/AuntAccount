@@ -9,7 +9,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
   self.seller = null;
 
   self.init = function(sellerId) {
-    self.sellerId = sellerId || 0;
+    self.sellerId = sellerId || null;
     self.locationTypeahead = new googleAutocompleteControl($("#inputPrimaryLocation"));
     self.tagsInput = new tagsInputControl($("#inputTags"));
     $("#inputPhone").mask("(999) 999-99-99");
@@ -116,7 +116,7 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
           };
 
           $.post({
-            url: config.apiRoot + "/sellers/profile",
+            url: config.apiRoot + "/sellers",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(sellerData)

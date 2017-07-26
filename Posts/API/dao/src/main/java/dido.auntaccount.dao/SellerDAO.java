@@ -17,5 +17,5 @@ public interface SellerDAO {
 
     boolean hasSellers(Long userId);
 
-    void updateSeller(Seller seller);
+    Seller updateSeller(Seller seller);
 }

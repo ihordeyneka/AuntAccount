@@ -66,12 +66,9 @@ public class SellerController extends Controller {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveSeller(SellerDTO seller) throws Exception {
-        final String sellerName = seller.getName();
-        final SellerDTO existingSeller = sellerService.getSeller(sellerName);
-        if (existingSeller != null) {
-            throw new Exception("Seller with specified name already exists " + sellerName);
-        }
-        SellerDTO savedSeller = sellerService.saveSeller(seller);
+        SellerDTO savedSeller = seller.getId() != null
+                ? sellerService.updateSeller(seller)
+                : sellerService.saveSeller(seller);
         return getResponseBuilder().entity(savedSeller).build();
     }
 
@@ -95,16 +92,6 @@ public class SellerController extends Controller {
 
     @POST
     @Secured
-    @Path("/profile")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProfile(SellerDTO seller) throws Exception {
-        sellerService.updateSeller(seller);
-        return getResponseBuilder().entity("{}").build();
-    }
-
-    @POST
-    @Secured
     @Path("/picture")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
@@ -115,15 +102,6 @@ public class SellerController extends Controller {
             throw new AuthenticationException("Can't update seller of not logged in user");
         }
         sellerService.updatePicture(seller, IOUtils.toByteArray(uploadedInputStream));
-        return getResponseBuilder().build();
-    }
-
-
-    @OPTIONS
-    @Path("/profile")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProfilePreflight(SellerDTO seller) throws Exception {
         return getResponseBuilder().build();
     }
 
