@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Location {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double latitude;
     private double longitude;
@@ -14,6 +14,8 @@ public class Location {
     private String region1;
     private String region2;
     private String name;
+    private String place;
+    private String placeId;
     private String route;
     private String neighborhood;
     private Integer streetNumber;
@@ -128,6 +130,24 @@ public class Location {
 
     public Location setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+        return this;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public Location setPlace(String place) {
+        this.place = place;
+        return this;
+    }
+
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public Location setPlaceId(String placeId) {
+        this.placeId = placeId;
         return this;
     }
 }
