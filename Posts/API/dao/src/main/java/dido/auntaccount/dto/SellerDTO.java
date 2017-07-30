@@ -15,7 +15,7 @@ public class SellerDTO extends PictureDTO implements DTO<Seller> {
     private String phone;
     private String photo;
     private String website;
-    private double rate;
+    private double averageRate;
     private Date creationDate;
     private LocationDTO location;
     private String tags;
@@ -35,7 +35,7 @@ public class SellerDTO extends PictureDTO implements DTO<Seller> {
                 .setPhone(phone)
                 .setWebsite(website)
                 .setPhoto(decodeImage(photo))
-                .setRate(rate)
+                .setRate(averageRate)
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation);
         List<Tag> entityTags = TagDTO.parsePostTags(tags).stream().map(Tag::new).collect(Collectors.toList());
@@ -54,7 +54,7 @@ public class SellerDTO extends PictureDTO implements DTO<Seller> {
         this.photo = encodeImage(seller.getPhoto());
         this.phone = seller.getPhone();
         this.creationDate = seller.getCreationDate();
-        this.rate = seller.getRate();
+        this.averageRate = seller.getRate();
         Location location = seller.getLocation();
         this.location = location != null ? new LocationDTO(location) : null;
         this.website = seller.getWebsite();
@@ -142,12 +142,12 @@ public class SellerDTO extends PictureDTO implements DTO<Seller> {
         this.userId = userId;
     }
 
-    public double getRate() {
-        return rate;
+    public double getAverageRate() {
+        return averageRate;
     }
 
-    public void setRate(double rate) {
-        this.rate = rate;
+    public void setAverageRate(double averageRate) {
+        this.averageRate = averageRate;
     }
 
     public List<String> getTagList() {

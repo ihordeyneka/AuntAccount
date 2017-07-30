@@ -196,9 +196,9 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
         for (var i=0; i<data.length; i++) {
           var review = data[i];
           element.append($.templates("#templateReview").render({
-            time: globals.formatDate(review.time),
+            time: globals.formatDate(review.creationDate),
             author: review.author != null ? review.author.firstName + " " + review.author.lastName : "Anonymous",
-            content: review.content
+            content: review.description
           }));
         }
       }
@@ -228,12 +228,13 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
 
     globals.loading($('body'), true);
     $.post({
-        url: config.apiRoot + "/reviews",
+        url: config.apiRoot + "/seller/reviews",
         dataType: "json",
+        contentType: "application/json",
         data: JSON.stringify({
           sellerId: self.sellerId,
           rate: self.sellerRating.raty("score"),
-          review: review
+          description: review
         })
     }).done(function(data) {
       $(".aa-new-review-input").val("");
