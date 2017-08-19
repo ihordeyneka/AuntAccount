@@ -14,4 +14,7 @@ public interface SellerReviewDAO {
 
     List<SellerReview> getSellerReviews(Long sellerId);
 
+    SellerReview getUserReview(Long sellerId, Long userId);
+
+    SellerReview update(SellerReview sellerReview) throws Exception;
 }

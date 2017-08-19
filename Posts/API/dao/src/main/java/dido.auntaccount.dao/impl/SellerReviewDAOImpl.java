@@ -35,4 +35,18 @@ public class SellerReviewDAOImpl extends GeneralDAO<SellerReview> implements Sel
         return query.getResultList();
     }
 
+    @Override
+    public SellerReview getUserReview(Long sellerId, Long userId) {
+        TypedQuery<SellerReview> query = entityManager.createQuery("SELECT r FROM SellerReview r WHERE r.sellerId = :sellerId and r.userId = :userId", SellerReview.class)
+                .setParameter("sellerId", sellerId)
+                .setParameter("userId", userId);
+        return getSingleResultOrNull(query);
+    }
+
+    @Override
+    public SellerReview update(SellerReview sellerReview) throws Exception {
+        updateEntity(sellerReview);
+        return sellerReview;
+    }
+
 }

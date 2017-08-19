@@ -57,6 +57,8 @@ CREATE TABLE `LOCATION` (
   `Longitude` varchar(45) NOT NULL,
   `Country` varchar(45) DEFAULT NULL,
   `City` varchar(45) DEFAULT NULL,
+  `Place` varchar(45) NOT NULL,
+  `PlaceId` varchar(45) NOT NULL,
   `Region1` varchar(45) DEFAULT NULL,
   `Region2` varchar(45) DEFAULT NULL,
   `Name` varchar(45) DEFAULT NULL,

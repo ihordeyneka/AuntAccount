@@ -46,7 +46,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserProfileDTO findByEmail(String email) {
         User user = userDAO.findByEmail(email);
-        return user != null ? new UserProfileDTO(user) : null;
+        if (user != null) {
+            final UserProfileDTO userProfileDTO = new UserProfileDTO(user);
+            final boolean hasSellers = sellerDAO.hasSellers(user.getId());
+            userProfileDTO.setHasSellers(hasSellers);
+            return userProfileDTO;
+        }
+        return null;
     }
 
     @Override
