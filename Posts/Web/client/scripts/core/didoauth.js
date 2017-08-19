@@ -8,6 +8,7 @@ define(["jquery"], function ($) {
   var ACCESS_TOKEN_KEY = 'access-token';
   var REFRESH_TOKEN_KEY = 'refresh-token';
   var USER_DATA_KEY = 'current-user';
+  var TEMPORARY_USER_ID = "temp-user-id";
   var ERROR_EMAIL_SIGNIN = 1;
   var ERROR_REFRESH_TOKEN = 2;
   var ERROR_EMAIL_SIGNUP = 3;
@@ -54,6 +55,16 @@ define(["jquery"], function ($) {
     };
   };
 
+  Auth.prototype.getTemporaryUserId = function() {
+    var id = root.didoauth.retrieveData(TEMPORARY_USER_ID);
+    if (!id) {
+      var rand = Math.floor(Math.random() * 100000000000000000); //create better temporary user id
+      id = -rand; //temporary user IDs are negative numbers long enough to avoid guesses
+      root.didoauth.persistData(TEMPORARY_USER_ID, id);
+    }
+    return id;
+  }
+
   Auth.prototype.configure = function(opts, reset) {
     // destroy all session data
     if (reset) {
@@ -72,6 +83,9 @@ define(["jquery"], function ($) {
     var user = root.didoauth.retrieveData(USER_DATA_KEY);
     if (user)
       root.didoauth.setCurrentUser(user, false);
+    else {
+      this.user.id = root.didoauth.getTemporaryUserId();
+    }
 
     // set configured
     this.config = $.extend({}, this.configBase, opts);
@@ -104,6 +118,7 @@ define(["jquery"], function ($) {
     root.didoauth.deleteData(ACCESS_TOKEN_KEY);
     root.didoauth.deleteData(REFRESH_TOKEN_KEY);
     root.didoauth.deleteData(USER_DATA_KEY);
+    root.didoauth.deleteData(TEMPORARY_USER_ID);
   };
 
   Auth.prototype.setCurrentUser = function(user, persist) {
