@@ -43,10 +43,11 @@ function(globals, config, _, typeaheadControl, fileinputControl, maskedinputCont
         $(".aa-seller-name-header").text(data.name);
         $("#inputPhone").val(data.phone);
         $("#inputWebsite").val(data.website);
+        $(".aa-seller-picture").empty();
         self.locationTypeahead.setLocation(data.location);
         self.tagsInput.setTags(data.tagList);
         if (data.photo) {
-          $("<img>").width("100%").attr("src", data.photo).appendTo(".aa-seller-picture");
+          $("<img>").attr("src", data.photo).appendTo(".aa-seller-picture");
         }
 
         self.reviewerView = data.userId !== $.didoauth.user.id;
