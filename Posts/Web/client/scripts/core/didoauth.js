@@ -114,6 +114,7 @@ define(["jquery"], function ($) {
     for (var key in this.user) {
       delete this.user[key];
     }
+    this.user.id = root.didoauth.getTemporaryUserId();
 
     root.didoauth.deleteData(ACCESS_TOKEN_KEY);
     root.didoauth.deleteData(REFRESH_TOKEN_KEY);
