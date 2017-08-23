@@ -56,6 +56,10 @@ define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
         }
         $("#router").html(cleanHtml(html));
       });
+    }).error(function(e) {
+      if (e.status === 404) {
+        $("#router").html(e.responseText);
+      }
     });
   }
 
