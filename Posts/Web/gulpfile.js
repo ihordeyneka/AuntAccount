@@ -27,10 +27,11 @@ var PATHS = {
     { name: 'underscore', files: 'node_modules/underscore/**/*' },
     { name: 'moment', files: 'node_modules/moment/**/*' },
     { name: 'dom_ready', files: 'other_modules/dom_ready/**/*' },
-    { name: 'jquery_raty', files: 'other_modules/jquery_raty/**/*' }
+    { name: 'jquery_raty', files: 'other_modules/jquery_raty/**/*' },
+    { name: 'jquery_i18n', files: 'other_modules/jquery_i18n/**/*' }
   ],
   client: {
-    js: ['client/**/*.js'],
+    js: ['client/**/*.{js,json}'],
     html: 'client/**/*.html',
     css: 'client/**/*.css',
     img: 'client/**/*.{svg,jpg,png,ico}',

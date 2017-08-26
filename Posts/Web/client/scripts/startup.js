@@ -5,6 +5,12 @@ requirejs.config({
     domReady: ["../../lib/dom_ready/dom_ready"],
     jquery: ["../../lib/jquery/jquery.min"],
     jqueryRaty: ["../../lib/jquery_raty/jquery.raty-fa"],
+    i18n: ["../../../lib/jquery_i18n/jquery.i18n"],
+    i18n_messagestore: ["../../../lib/jquery_i18n/jquery.i18n.messagestore"],
+    i18n_fallbacks: ["../../../lib/jquery_i18n/jquery.i18n.fallbacks"],
+    i18n_parser: ["../../../lib/jquery_i18n/jquery.i18n.parser"],
+    i18n_emitter: ["../../../lib/jquery_i18n/jquery.i18n.emitter"],
+    i18n_language: ["../../../lib/jquery_i18n/jquery.i18n.language"],
     maskedinput: ["../../lib/jquery_maskedinput/jquery.maskedinput"],
     bootstrap: ["../../lib/bootstrap/js/bootstrap.min"],
     bootstraptable: ["../../lib/bootstrap_table/bootstrap-table.min"],
@@ -21,12 +27,17 @@ requirejs.config({
   shim: {
     bootstrap: { deps: ["jquery"] },
     jsrender: { deps: ["jquery"] },
-    validator: { deps: ["jquery"] }
+    validator: { deps: ["jquery"] },
+    i18n_messagestore: { deps: ["i18n"] },
+    i18n_fallbacks: { deps: ["i18n"] },
+    i18n_parser: { deps: ["i18n"] },
+    i18n_emitter: { deps: ["i18n"] },
+    i18n_language: { deps: ["i18n"] }
   }
 });
 
-require(["core/config", "core/didoauth", "navigation/router", "navigation/menu", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
-  function(config, didoauth, router, menu, domReady) {
+require(["core/config", "core/didoauth", "core/resources", "navigation/router", "navigation/menu", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
+  function(config, didoauth, resources, router, menu, domReady) {
   didoauth.configure({
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
