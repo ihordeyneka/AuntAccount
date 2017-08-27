@@ -1,4 +1,4 @@
-define(["jquery"], function ($) {
+define(["jquery", "core/persistence"], function ($, persistence) {
   var root = Function('return this')();
 
   if (root.didoauth) {
@@ -16,10 +16,6 @@ define(["jquery"], function ($) {
 
   var isApiRequest = function(url) {
     return (url.match(root.didoauth.config.apiUrl));
-  };
-
-  var unescapeQuotes = function(val) {
-    return val && val.replace(/("|')/g, '');
   };
 
   var _currentPrefilterFunc = null;
@@ -56,11 +52,11 @@ define(["jquery"], function ($) {
   };
 
   Auth.prototype.getTemporaryUserId = function() {
-    var id = root.didoauth.retrieveData(TEMPORARY_USER_ID);
+    var id = persistence.retrieveData(TEMPORARY_USER_ID);
     if (!id) {
       var rand = Math.floor(Math.random() * 100000000000000000); //create better temporary user id
       id = -rand; //temporary user IDs are negative numbers long enough to avoid guesses
-      root.didoauth.persistData(TEMPORARY_USER_ID, id);
+      persistence.persistData(TEMPORARY_USER_ID, id);
     }
     return id;
   }
@@ -80,7 +76,7 @@ define(["jquery"], function ($) {
       opts = {};
     }
 
-    var user = root.didoauth.retrieveData(USER_DATA_KEY);
+    var user = persistence.retrieveData(USER_DATA_KEY);
     if (user)
       root.didoauth.setCurrentUser(user, false);
     else {
@@ -116,10 +112,10 @@ define(["jquery"], function ($) {
     }
     this.user.id = root.didoauth.getTemporaryUserId();
 
-    root.didoauth.deleteData(ACCESS_TOKEN_KEY);
-    root.didoauth.deleteData(REFRESH_TOKEN_KEY);
-    root.didoauth.deleteData(USER_DATA_KEY);
-    root.didoauth.deleteData(TEMPORARY_USER_ID);
+    persistence.deleteData(ACCESS_TOKEN_KEY);
+    persistence.deleteData(REFRESH_TOKEN_KEY);
+    persistence.deleteData(USER_DATA_KEY);
+    persistence.deleteData(TEMPORARY_USER_ID);
   };
 
   Auth.prototype.setCurrentUser = function(user, persist) {
@@ -133,7 +129,7 @@ define(["jquery"], function ($) {
     this.user.signedIn = true;
 
     if (persist)
-      root.didoauth.persistData(USER_DATA_KEY, JSON.stringify(user));
+      persistence.persistData(USER_DATA_KEY, JSON.stringify(user));
 
     return this.user;
   };
@@ -295,16 +291,16 @@ define(["jquery"], function ($) {
   Auth.prototype.updateAuthHeaders = function(request) {
     var accessToken = request.getResponseHeader(ACCESS_TOKEN_KEY);
     if (accessToken)
-      root.didoauth.persistData(ACCESS_TOKEN_KEY, accessToken);
+      persistence.persistData(ACCESS_TOKEN_KEY, accessToken);
 
     var refreshToken = request.getResponseHeader(REFRESH_TOKEN_KEY);
     if (refreshToken)
-      root.didoauth.persistData(REFRESH_TOKEN_KEY, refreshToken);
+      persistence.persistData(REFRESH_TOKEN_KEY, refreshToken);
   }
 
   Auth.prototype.appendAuthHeaders = function(xhr, settings) {
     // fetch current auth headers from storage
-    var accessToken = root.didoauth.retrieveData(ACCESS_TOKEN_KEY);
+    var accessToken = persistence.retrieveData(ACCESS_TOKEN_KEY);
 
     // check config apiUrl matches the current request url
     if (isApiRequest(settings.url) && accessToken) {
@@ -321,7 +317,7 @@ define(["jquery"], function ($) {
   Auth.prototype.prefilterInterceptor = function(opts, originalOpts, jqXHR) {
     root.didoauth.appendAuthHeaders(jqXHR, opts);
 
-    var refreshToken = root.didoauth.retrieveData(REFRESH_TOKEN_KEY);
+    var refreshToken = persistence.retrieveData(REFRESH_TOKEN_KEY);
 
     // you could pass this option in on a "retry" so that it doesn't
     // get all recursive on you.
@@ -370,36 +366,6 @@ define(["jquery"], function ($) {
 
     // NOW override the jqXHR's promise functions with our deferred
     return dfd.promise(jqXHR);
-  };
-
-  // abstract storing of session data
-  Auth.prototype.persistData = function(key, val) {
-    if (root.localStorage)
-      root.localStorage.setItem(key, val);
-  };
-
-  // abstract reading of session data
-  Auth.prototype.retrieveData = function(key) {
-    var val = null;
-
-    if (root.localStorage)
-      val = root.localStorage.getItem(key);
-
-    // if value is a simple string, the parser will fail. in that case, simply
-    // unescape the quotes and return the string.
-    try {
-      // return parsed json response
-      return $.parseJSON(val);
-    } catch (err) {
-      // unescape quotes
-      return unescapeQuotes(val);
-    }
-  };
-
-  // abstract deletion of session data
-  Auth.prototype.deleteData = function(key) {
-    if (root.localStorage)
-      root.localStorage.removeItem(key);
   };
 
   // export service

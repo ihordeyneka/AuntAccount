@@ -58,7 +58,9 @@ require(["core/config", "core/didoauth", "core/resources", "navigation/router", 
   });
 
   domReady(function(){
-    menu.refresh();
-    router.init();
+    resources.load().done(function() {
+      menu.refresh();
+      router.init();
+    });
   });
 });
