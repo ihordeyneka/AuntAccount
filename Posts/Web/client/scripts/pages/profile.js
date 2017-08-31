@@ -33,7 +33,7 @@ define(["core/globals", "core/didoauth", "core/config", "fileinput", "components
         $(".aa-profile-picture").empty();
         self.locationTypeahead.setLocation(data.location);
         if (data.photo) {
-          $("<img>").width("100%").attr("src", data.photo).appendTo(".aa-profile-picture");
+          $("<img>").attr("src", data.photo).appendTo(".aa-profile-picture");
         }
         initButtonHandlers();
         initSellersButtons(data);
