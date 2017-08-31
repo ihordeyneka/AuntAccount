@@ -196,8 +196,10 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
           globals.loading($('body'), true);
 
           var location = $.extend(true, {}, self.locationTypeahead.getLocation());
-          location.latitude = self.marker.position.lat();
-          location.longitude = self.marker.position.lng();
+          location.point = {
+            lat: self.marker.position.lat(),
+            lon: self.marker.position.lng()
+          };
           location.radius = self.radiusSlider.isEnabled() ? self.radiusSlider.getValue() : 0;
 
           var postData = {

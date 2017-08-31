@@ -32,8 +32,10 @@ define([], function() {
         //TODO: add another property to currentLocation where we would store user entered name
 
         if (googleLocation.geometry) {
-          currentLocation.latitude = googleLocation.geometry.location.lat();
-          currentLocation.longitude = googleLocation.geometry.location.lng();
+          currentLocation.point = {
+            lat: googleLocation.geometry.location.lat(),
+            lon: googleLocation.geometry.location.lng()
+          };
         }
 
         if (googleLocation.address_components) {

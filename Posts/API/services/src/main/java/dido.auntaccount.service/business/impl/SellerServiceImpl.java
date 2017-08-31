@@ -79,7 +79,7 @@ public class SellerServiceImpl implements SellerService {
         List<TagDTO> postTags = post.getTags();
         List<String> tags = postTags.stream().map(TagDTO::getTag).collect(Collectors.toList());
 
-        List<Long> sellerIds = searchSellerService.getSellerIdsByTags(tags);
+        List<Long> sellerIds = searchSellerService.getSellerIdsByTagsAndLocation(tags, post.getLocation());
         sellerIds.stream().forEach(s -> sellerDAO.addSellerPost(s, post.buildEntity()));
     }
 

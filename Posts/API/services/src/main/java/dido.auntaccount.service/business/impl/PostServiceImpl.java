@@ -2,6 +2,7 @@ package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.CountryDAO;
 import dido.auntaccount.dao.PostDAO;
+import dido.auntaccount.dto.CountryDTO;
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.entities.Country;
@@ -47,10 +48,12 @@ public class PostServiceImpl implements PostService {
             long currentMillis = DateTime.now().getMillis();
             post.setCreationDate(new Date(currentMillis));
             final Post postEntity = post.buildEntity();
-            final String countryName = post.getLocation().getCountry().getCountry();
-            final Country existingCountry = countryDAO.find(countryName);
-            if (existingCountry != null) {
-                postEntity.getLocation().setCountry(existingCountry);
+            final CountryDTO country = post.getLocation().getCountry();
+            if (country != null) {
+                final Country existingCountry = countryDAO.find(country.getCountry());
+                if (existingCountry != null) {
+                    postEntity.getLocation().setCountry(existingCountry);
+                }
             }
             savedPost = new PostDTO(postDAO.save(postEntity));
             sellerService.savePostForSellers(savedPost);
