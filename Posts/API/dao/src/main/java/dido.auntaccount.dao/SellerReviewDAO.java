@@ -17,4 +17,6 @@ public interface SellerReviewDAO {
     SellerReview getUserReview(Long sellerId, Long userId);
 
     SellerReview update(SellerReview sellerReview) throws Exception;
+
+    double calculateSellerRate(Long sellerId);
 }

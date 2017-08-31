@@ -1,7 +1,9 @@
 package dido.auntaccount.service.business.impl;
 
+import dido.auntaccount.dao.SellerDAO;
 import dido.auntaccount.dao.SellerReviewDAO;
 import dido.auntaccount.dto.SellerReviewDTO;
+import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.SellerReview;
 import dido.auntaccount.service.business.SellerReviewService;
 import org.apache.logging.log4j.Level;
@@ -19,6 +21,9 @@ public class SellerReviewServiceImpl implements SellerReviewService {
     @Inject
     private SellerReviewDAO reviewDAO;
 
+    @Inject
+    private SellerDAO sellerDAO;
+
     @Override
     public SellerReviewDTO getReview(Long reviewId) {
         SellerReview review = reviewDAO.find(reviewId);
@@ -33,10 +38,10 @@ public class SellerReviewServiceImpl implements SellerReviewService {
 
     @Override
     public SellerReviewDTO saveReview(SellerReviewDTO review) {
-        //TODO : update avg rate
         SellerReview savedReview = null;
         try {
             savedReview = reviewDAO.save(review.buildEntity());
+            updateSellerRate(review.getSellerId());
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save review", e);
         }
@@ -54,10 +59,18 @@ public class SellerReviewServiceImpl implements SellerReviewService {
         SellerReview savedReview = null;
         try {
             savedReview = reviewDAO.update(review.buildEntity());
+            updateSellerRate(review.getSellerId());
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't update review", e);
         }
         return new SellerReviewDTO(savedReview);
+    }
+
+    private void updateSellerRate(Long sellerId) {
+        final Seller seller = sellerDAO.find(sellerId);
+        final double rate = reviewDAO.calculateSellerRate(sellerId);
+        seller.setRate(rate);
+        sellerDAO.updateSeller(seller);
     }
 
 }

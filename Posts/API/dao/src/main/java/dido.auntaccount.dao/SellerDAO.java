@@ -18,4 +18,6 @@ public interface SellerDAO {
     boolean hasSellers(Long userId);
 
     Seller updateSeller(Seller seller);
+
+    void updateSellerRate(Long sellerId, double rate);
 }

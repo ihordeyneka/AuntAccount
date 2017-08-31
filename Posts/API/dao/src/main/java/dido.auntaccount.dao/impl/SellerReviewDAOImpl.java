@@ -6,6 +6,7 @@ import dido.auntaccount.entities.SellerReview;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class SellerReviewDAOImpl extends GeneralDAO<SellerReview> implements Sel
     }
 
     public SellerReview save(SellerReview review) throws Exception {
-        return persistEntity(review);
+        return  persistEntity(review);
     }
 
     public void delete(SellerReview review) throws Exception {
@@ -47,6 +48,13 @@ public class SellerReviewDAOImpl extends GeneralDAO<SellerReview> implements Sel
     public SellerReview update(SellerReview sellerReview) throws Exception {
         updateEntity(sellerReview);
         return sellerReview;
+    }
+
+    @Override
+    public double calculateSellerRate(Long sellerId) {
+        Query query = entityManager.createQuery("SELECT avg(r.rate) FROM SellerReview r WHERE r.sellerId = :sellerId")
+                .setParameter("sellerId", sellerId);
+        return (double) query.getSingleResult();
     }
 
 }
