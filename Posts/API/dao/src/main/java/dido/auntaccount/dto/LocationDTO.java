@@ -6,8 +6,6 @@ import dido.auntaccount.entities.Location;
 public class LocationDTO implements DTO<Location> {
 
     private Long id;
-    private double latitude;
-    private double longitude;
     private String city;
     private String region1;
     private String region2;
@@ -19,14 +17,14 @@ public class LocationDTO implements DTO<Location> {
     private String neighborhood;
     private CountryDTO country;
     private double radius;
+    private PointDTO point;
 
     public LocationDTO() {
     }
 
     public LocationDTO(Location location) {
         this.id = location.getId();
-        this.latitude = location.getLatitude();
-        this.longitude = location.getLongitude();
+        this.point = new PointDTO(location.getLatitude(), location.getLongitude());
         this.city = location.getCity();
         this.region1 = location.getRegion1();
         this.region2 = location.getRegion2();
@@ -46,8 +44,8 @@ public class LocationDTO implements DTO<Location> {
         Country entityCountry = country != null ? country.buildEntity() : null;
         return new Location()
                 .setId(id)
-                .setLatitude(latitude)
-                .setLongitude(longitude)
+                .setLatitude(point.getLat())
+                .setLongitude(point.getLon())
                 .setCity(city)
                 .setRegion1(region1)
                 .setRegion2(region2)
@@ -69,20 +67,9 @@ public class LocationDTO implements DTO<Location> {
         this.id = id;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public PointDTO getPoint() {
+        return point;
     }
 
     public String getCity() {

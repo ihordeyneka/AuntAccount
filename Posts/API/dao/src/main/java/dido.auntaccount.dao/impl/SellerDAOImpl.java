@@ -4,9 +4,12 @@ import dido.auntaccount.dao.GeneralDAO;
 import dido.auntaccount.dao.SellerDAO;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.entities.Seller;
+import org.eclipse.persistence.config.HintValues;
+import org.eclipse.persistence.config.QueryHints;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -63,7 +66,24 @@ public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
         } catch (Exception e) {
             throw new IllegalStateException("Couldn't update seller");
         }
+    }
 
+    @Override
+    public void updateSellerRate(Long sellerId, double rate) {
+        EntityTransaction et = entityManager.getTransaction();
+        try {
+            et.begin();
+            Query query = entityManager.createQuery("UPDATE Seller SET rate = :rate WHERE sellerId = :sellerId");
+            query.setParameter("sellerId", sellerId)
+                    .setParameter("rate", rate)
+                    .executeUpdate();
+            et.commit();
+            entityManager.flush();
+            entityManager.clear();
+        } catch (Exception e) {
+            rollback(et);
+            throw e;
+        }
     }
 
 }

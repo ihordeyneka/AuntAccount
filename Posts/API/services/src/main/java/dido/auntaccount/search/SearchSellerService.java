@@ -1,5 +1,6 @@
 package dido.auntaccount.search;
 
+import dido.auntaccount.dto.LocationDTO;
 import dido.auntaccount.dto.SellerDTO;
 
 import java.util.List;
@@ -10,6 +11,6 @@ public interface SearchSellerService {
 
     SellerDTO getSeller(String id);
 
-    List<Long> getSellerIdsByTags(List<String> tags);
+    List<Long> getSellerIdsByTagsAndLocation(List<String> tags, LocationDTO location);
 
 }

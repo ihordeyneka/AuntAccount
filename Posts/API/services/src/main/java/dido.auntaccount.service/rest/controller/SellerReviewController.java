@@ -43,6 +43,8 @@ public class SellerReviewController extends Controller {
         if (existingReview == null) {
             savedReview = reviewService.saveReview(review);
         } else {
+            final String description = review.getDescription();
+            review.setDescription(description == null || description.isEmpty() ? existingReview.getDescription() : description);
             review.setId(existingReview.getId());
             savedReview = reviewService.updateReview(review);
         }
