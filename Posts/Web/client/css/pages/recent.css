@@ -1,3 +1,7 @@
+.aa-badge-container {
+  display: inline-block;
+  width: 25px;
+}
 .aa-post-header {
   min-height: 34px;
   padding-top: 7px;
