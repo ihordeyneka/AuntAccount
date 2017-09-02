@@ -22,7 +22,7 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
             title: post.postTags,
             content: post.description,
             offers: post.offerCount,
-            badgeCss: post.offerCount == 0 ? "is-hidden" : (post.newMessages ? "badge-highlighted" : "")
+            badgeCss: post.newMessages ? "badge-highlighted" : ""
           }));
         }
       }
