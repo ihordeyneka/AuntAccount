@@ -13,4 +13,6 @@ public interface SearchSellerService {
 
     List<Long> getSellerIdsByTagsAndLocation(List<String> tags, LocationDTO location);
 
+    void updateSeller(SellerDTO sellerDTO);
+
 }
