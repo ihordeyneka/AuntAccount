@@ -44,18 +44,6 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
     self.map = new google.maps.Map($(".aa-post-map").get(0), {
       zoom: MIN_ZOOM_FOR_PLACE
     });
-    self.map.addListener('zoom_changed', function() {
-      var zoom = self.map.getZoom();
-      if (zoom < MIN_ZOOM_FOR_PLACE) {
-        self.radiusSlider.setValue(0);
-        self.circle.setRadius(0);
-        self.radiusSlider.disable();
-      } else {
-        self.circle.setRadius(self.radiusSlider.getValue() || MIN_RADIUS);
-        self.radiusSlider.enable();
-      }
-      self.radiusSlider.relayout();
-    });
     self.marker = new google.maps.Marker({
       map: self.map
     });
@@ -89,6 +77,7 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
           self.map.fitBounds(data.viewport);
           var location = { lat: data.location.lat(), lng: data.location.lng() };
           self.marker.setPosition(location);
+          self.updateSlider();
         }
       });
     }
@@ -153,7 +142,21 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
       var radius = e.newValue;
       self.circle.setRadius(radius);
       self.circle.setMap(radius > 0 ? self.map : null); //toggle visibility
+      self.map.fitBounds(self.circle.getBounds());
     });
+
+    self.updateSlider = function() {
+      var zoom = self.map.getZoom();
+      if (zoom < MIN_ZOOM_FOR_PLACE) {
+        self.radiusSlider.setValue(0);
+        self.circle.setRadius(0);
+        self.radiusSlider.disable();
+      } else {
+        self.circle.setRadius(self.radiusSlider.getValue() || MIN_RADIUS);
+        self.radiusSlider.enable();
+      }
+      self.radiusSlider.relayout();
+    };
   }
 
   self.initAttachmentUpload = function() {
