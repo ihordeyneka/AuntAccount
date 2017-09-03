@@ -3,6 +3,7 @@ package dido.auntaccount.search.impl;
 import dido.auntaccount.dto.LocationDTO;
 import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.mappers.JsonMapper;
+import dido.auntaccount.search.LocationSearchQuery;
 import dido.auntaccount.search.SearchSellerService;
 import dido.auntaccount.search.client.SearchClientService;
 import org.apache.logging.log4j.LogManager;
@@ -220,14 +221,15 @@ curl -XPOST 'localhost:9200/dido/seller/946/_update?pretty' -H 'Content-Type: ap
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         tags.stream().forEach(t -> boolQueryBuilder.should(QueryBuilders.matchQuery(TAGS_FIELD, t)));
 
-        QueryBuilder distanceQuery = QueryBuilders.geoDistanceQuery("location.point")
-                .point(location.getPoint().getLat(), location.getPoint().getLon())
-                .distance(location.getRadius(), DistanceUnit.METERS);
+        boolQueryBuilder.minimumShouldMatch("1<80%");
+
+        LocationSearchQuery locationSearchQuery = LocationSearchQuery.getSearchQuery(location);
+        locationSearchQuery.filter(boolQueryBuilder);
 
         SearchResponse response = clientService.getClient().prepareSearch(INDEX)
                 .setTypes(SELLER_TYPE)
                 .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-                .setQuery(boolQueryBuilder.minimumShouldMatch("1<80%").filter(distanceQuery))
+                .setQuery(boolQueryBuilder)
                 .setFrom(0).setSize(60).setExplain(true)
                 .execute()
                 .actionGet();
