@@ -28,6 +28,7 @@ requirejs.config({
     bootstrap: { deps: ["jquery"] },
     jsrender: { deps: ["jquery"] },
     validator: { deps: ["jquery"] },
+    i18n: { deps: ["jquery"] },
     i18n_messagestore: { deps: ["i18n"] },
     i18n_fallbacks: { deps: ["i18n"] },
     i18n_parser: { deps: ["i18n"] },
