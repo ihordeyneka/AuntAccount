@@ -6,33 +6,31 @@
     </div>
     <div class="col-sm-offset-2 col-sm-4 clearfix">
       <div class="aa-social">
-        <label class="lb-lg lb-social">Social</label>
+        <label class="lb-lg lb-social" data-i18n="Social">Social</label>
         <button class="btn btn-lg btn-primary btn-google aa-mbl clear" id="btnGoogleSignIn">
-          <i class="fa fa-google-plus pull-left"></i> Google Login
+          <i class="fa fa-google-plus pull-left"></i> <span data-i18n="GoogleLogin">Google Login</span>
         </button>
         <button class="btn btn-lg btn-primary btn-facebook aa-mbl" id="btnFbSignIn">
-          <i class="fa fa-facebook-official pull-left"></i> Facebook Login
+          <i class="fa fa-facebook-official pull-left"></i> <span data-i18n="FacebookLogin">Facebook Login</span>
         </button>
       </div>
     </div>
     <div class="col-sm-5">
-      <label for="inputEmail" class="lb-lg">Email</label>
+      <label for="inputEmail" class="lb-lg" data-i18n="Email">Email</label>
       <div class="form-group">
         <input type="email" class="form-control input-lg" id="inputEmail" placeholder="Email">
       </div>
-      <label for="inputPassword" class="lb-lg">Password</label>
+      <label for="inputPassword" class="lb-lg" data-i18n="Password">Password</label>
       <div class="form-group">
         <input type="password" class="form-control input-lg" id="inputPassword" placeholder="Password">
       </div>
       <div class="checkbox clearfix">
         <input type="checkbox" id="inputRememberMe" class="aa-lg-checkbox" />
-        <label class="lb-lg left lb-remember-me" for="inputRememberMe">
-          Remember me
-        </label>
-        <button type="button" id="btnLogin" class="btn btn-lg btn-primary right btn-login">Login</button>
+        <label class="lb-lg left lb-remember-me" for="inputRememberMe" data-i18n="RememberMe">Remember me</label>
+        <button type="button" id="btnLogin" class="btn btn-lg btn-primary right btn-login" data-i18n="Login">Login</button>
       </div>
       <div class="form-group">
-        <button id="btnForgotPassword" class="btn btn-lg btn-primary right btn-forgot-password" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</button>
+        <button id="btnForgotPassword" class="btn btn-lg btn-primary right btn-forgot-password" data-toggle="modal" data-target="#forgotPasswordModal" data-i18n="ForgotPassword">Forgot Password?</button>
       </div>
     </div>
   </div>
@@ -43,18 +41,18 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Forgot Password</h4>
+          <h4 class="modal-title" data-i18n="PasswordRecovery">Password Recovery</h4>
         </div>
         <div class="modal-body">
           <div class="password-reset-notification-area"></div>
-          <p>Enter your email address and we'll send you a recovery link.</p>
+          <p data-i18n="PasswordRecoveryDescription">Enter your email address and we'll send you a recovery link.</p>
           <div class="form-group">
             <input type="email" class="form-control" id="inputRecoveryEmail" required placeholder="Email">
           </div>
         </div>
         <div class="modal-footer">
-          <button id="btnRecoveryEmail" type="button" class="btn btn-primary">Reset Password</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          <button id="btnRecoveryEmail" type="button" class="btn btn-primary" data-i18n="ResetPassword">Reset Password</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-i18n="Cancel">Cancel</button>
         </div>
       </div>
     </div>
