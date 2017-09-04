@@ -13,7 +13,7 @@ public class CitySearchQuery extends LocationSearchQuery {
 
     @Override
     public void filter(BoolQueryBuilder queryBuilder) {
-        QueryBuilder countryQuery = QueryBuilders.matchQuery("location.country.country", location.getCountry());
+        QueryBuilder countryQuery = QueryBuilders.matchQuery("location.country.country", location.getCountry().getCountry());
         QueryBuilder cityQuery = QueryBuilders.matchQuery("location.city", location.getCity());
         queryBuilder.must(countryQuery).must(cityQuery);
     }

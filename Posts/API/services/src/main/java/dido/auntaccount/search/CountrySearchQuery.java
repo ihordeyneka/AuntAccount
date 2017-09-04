@@ -13,7 +13,7 @@ public class CountrySearchQuery extends LocationSearchQuery {
 
     @Override
     public void filter(BoolQueryBuilder queryBuilder) {
-        QueryBuilder countryQuery = QueryBuilders.matchQuery("location.country.country", location.getCountry());
+        QueryBuilder countryQuery = QueryBuilders.matchQuery("location.country.country", location.getCountry().getCountry());
         queryBuilder.must(countryQuery);
     }
 }
