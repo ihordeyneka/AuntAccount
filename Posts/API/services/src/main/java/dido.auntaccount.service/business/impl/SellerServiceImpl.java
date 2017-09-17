@@ -98,9 +98,10 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public SellerDTO updateSeller(SellerDTO seller) {
         try {
-            //TODO update in elastic as well
             final Seller updatedSeller = sellerDAO.updateSeller(seller.buildEntity());
-            return new SellerDTO(updatedSeller);
+            final SellerDTO sellerDTO = new SellerDTO(updatedSeller);
+            searchSellerService.updateSeller(sellerDTO);
+            return sellerDTO;
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't update seller", e);
         }

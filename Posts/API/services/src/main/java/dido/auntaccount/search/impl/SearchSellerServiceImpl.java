@@ -3,6 +3,7 @@ package dido.auntaccount.search.impl;
 import dido.auntaccount.dto.LocationDTO;
 import dido.auntaccount.dto.SellerDTO;
 import dido.auntaccount.mappers.JsonMapper;
+import dido.auntaccount.search.LocationSearchQuery;
 import dido.auntaccount.search.SearchSellerService;
 import dido.auntaccount.search.client.SearchClientService;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,7 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -21,6 +23,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class SearchSellerServiceImpl implements SearchSellerService {
 
@@ -82,8 +85,8 @@ public class SearchSellerServiceImpl implements SearchSellerService {
         "query" : {
         "bool" :{
             "should":[
-            {"match":{"tagsList":"hello"}},
-            {"match":{"tagsList":"world"}}
+            {"match":{"tagsList":"dogs"}},
+            {"match":{"tagsList":"cats"}}
             ],
             "minimum_should_match":"1<80%"
         }
@@ -168,6 +171,47 @@ public class SearchSellerServiceImpl implements SearchSellerService {
         }
     }
     }';
+
+
+curl -XPOST 'localhost:9200/dido/seller/946/_update?pretty' -H 'Content-Type: application/json' -d'
+        {
+        "doc":{
+        "id":946,
+        "name":"Dogs food",
+        "userId":928,
+        "phone":"0961818306",
+        "photo":null,
+        "website":"www.cats.com",
+        "rate":0.0,
+        "creationDate":1497288689356,
+        "location":{
+        "id":58,
+        "latitude":49.83968300000001,
+        "longitude":24.029717000000005,
+        "city":"Львів",
+        "region1":"Львівська область",
+        "region2":null,
+        "name":"Львів",
+        "streetNumber":null,
+        "route":null,
+        "neighborhood":null,
+        "country":{
+        "id":28,
+        "country":"Україна"
+        },
+        "radius":0.0
+        },
+        "tags":"food, dogs, cats",
+        "posts":[],
+        "tagList":[
+        "food",
+        "dogs",
+        "cats"
+        ]
+        }
+        }'
+
+
     */
 
     @Override
@@ -177,20 +221,31 @@ public class SearchSellerServiceImpl implements SearchSellerService {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         tags.stream().forEach(t -> boolQueryBuilder.should(QueryBuilders.matchQuery(TAGS_FIELD, t)));
 
-        QueryBuilder distanceQuery = QueryBuilders.geoDistanceQuery("location.point")
-                .point(location.getPoint().getLat(), location.getPoint().getLon())
-                .distance(location.getRadius(), DistanceUnit.METERS);
+        boolQueryBuilder.minimumShouldMatch("1<80%");
+
+        LocationSearchQuery locationSearchQuery = LocationSearchQuery.getSearchQuery(location);
+        locationSearchQuery.filter(boolQueryBuilder);
 
         SearchResponse response = clientService.getClient().prepareSearch(INDEX)
                 .setTypes(SELLER_TYPE)
                 .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-                .setQuery(boolQueryBuilder.minimumShouldMatch("1<80%").filter(distanceQuery))
+                .setQuery(boolQueryBuilder)
                 .setFrom(0).setSize(60).setExplain(true)
                 .execute()
                 .actionGet();
         SearchHit[] hits = response.getHits().getHits();
         Arrays.stream(hits).forEach(h -> sellerIds.add(Long.valueOf(h.getSource().get(ID_FIELD).toString())));
         return sellerIds;
+    }
+
+    public void updateSeller(SellerDTO sellerDTO) {
+        try {
+            UpdateRequest updateRequest = new UpdateRequest(INDEX, SELLER_TYPE, sellerDTO.getId().toString())
+                    .doc(mapper.sellerDTOToJson(sellerDTO));
+            clientService.getClient().update(updateRequest).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 }
