@@ -12,6 +12,7 @@ define(["../core/globals", "../core/config", "../components/message_input", "../
         dataType: "json"
     }).done(function(data) {
 
+      $(".aa-post-container").addClass(data.post.user.id == $.didoauth.user.id ? "col-sm-offset-2" : "col-sm-offset-4");
       var postInfo = new postInfoControl($(".aa-post-container"));
       postInfo.init(data.post);
 
