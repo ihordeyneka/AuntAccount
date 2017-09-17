@@ -19,6 +19,7 @@ public class User implements Serializable {
     private byte[] photo;
     private Date creationDate;
     private String clientId;
+    private boolean enabled;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LocationId")
@@ -105,4 +106,11 @@ public class User implements Serializable {
         return this;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

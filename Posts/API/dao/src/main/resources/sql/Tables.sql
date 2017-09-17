@@ -36,6 +36,7 @@ CREATE TABLE `USER` (
   `Website` varchar(45) DEFAULT NULL,
   `CreationDate` datetime NOT NULL,
   `ClientId` varchar(45) DEFAULT NULL,
+  `Enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`Id`)
 );
 
@@ -132,6 +133,13 @@ CREATE TABLE `SELLER` (
   `Photo` longblob,
   PRIMARY KEY (`Id`)
 );
+
+CREATE TABLE `VerificationToken` (
+  `Token` VARCHAR(45) NOT NULL,
+  `UserId` BIGINT(10) NOT NULL,
+  `ExpirationDate` datetime NOT NULL,
+  PRIMARY KEY (`Id`));
+
 
 --fix post table - remove latitude and longitude, add sellerTag table
 

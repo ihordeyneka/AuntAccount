@@ -2,10 +2,13 @@ package dido.auntaccount.service.business.impl;
 
 import dido.auntaccount.dao.SellerDAO;
 import dido.auntaccount.dao.UserDAO;
+import dido.auntaccount.dao.VerificationTokenDAO;
 import dido.auntaccount.dto.*;
 import dido.auntaccount.entities.Seller;
 import dido.auntaccount.entities.User;
+import dido.auntaccount.entities.VerificationToken;
 import dido.auntaccount.search.SearchSellerService;
+import dido.auntaccount.service.business.EmailService;
 import dido.auntaccount.service.business.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -15,11 +18,13 @@ import org.joda.time.DateTime;
 import javax.inject.Inject;
 import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
+    public static final int EXPIRY_TIME_IN_HOURS = 24;
 
     @Inject
     private UserDAO userDAO;
@@ -29,6 +34,12 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private SellerDAO sellerDAO;
+
+    @Inject
+    private VerificationTokenDAO verificationTokenDAO;
+
+    @Inject
+    private EmailService emailService;
 
     @Override
     public UserDTO getUser(Long userId) {
@@ -65,7 +76,15 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save user", e);
         }
-        return new UserDTO(savedUser);
+        final UserProfileDTO userDTO = new UserProfileDTO(savedUser);
+        final String token = generateVerificationToken();
+        createVerificationToken(userDTO, token);
+        emailService.sendCompleteRegistration(userDTO.getEmail(), token);
+        return userDTO.buildUserDTO();
+    }
+
+    private String generateVerificationToken() {
+        return UUID.randomUUID().toString();
     }
 
     @Override
@@ -102,11 +121,45 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(UserProfileDTO user) {
+        updateUser(user.buildEntity());
+    }
+
+    private void updateUser(User user) {
         try {
-            userDAO.updateUser(user.buildEntity());
+            userDAO.updateUser(user);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't update user", e);
         }
+    }
+
+    private void createVerificationToken(UserProfileDTO user, String token) {
+        VerificationToken verificationToken = new VerificationToken();
+        verificationToken.setToken(token)
+                .setUser(user.buildEntity())
+                .setExpirationDate(calculateExpiryDate(EXPIRY_TIME_IN_HOURS));
+        try {
+            verificationTokenDAO.save(verificationToken);
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "Couldn't create verification token", e);
+        }
+
+    }
+
+    @Override
+    public VerificationTokenDTO getVerificationToken(String token) {
+        final VerificationToken verificationToken = verificationTokenDAO.find(token);
+        return verificationToken != null ? new VerificationTokenDTO(verificationToken) : null;
+    }
+
+    @Override
+    public void activateUser(UserDTO userDTO) {
+        final User entity = userDTO.buildEntity();
+        entity.setEnabled(true);
+        updateUser(entity);
+    }
+
+    private Date calculateExpiryDate(int expiryTimeInHours) {
+        return new Date(DateTime.now().plusHours(expiryTimeInHours).getMillis());
     }
 
 }

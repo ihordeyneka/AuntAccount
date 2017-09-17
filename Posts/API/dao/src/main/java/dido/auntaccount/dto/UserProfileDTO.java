@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializable  {
+public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializable {
 
     private static final Logger logger = LogManager.getLogger(UserProfileDTO.class);
 
@@ -59,6 +59,12 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation)
                 .setClientId(clientId);
+    }
+
+    public UserDTO buildUserDTO() {
+        final UserDTO userDTO = new UserDTO(email, firstName, lastName);
+        userDTO.setId(id);
+        return userDTO;
     }
 
     public Long getId() {
