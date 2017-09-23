@@ -63,7 +63,7 @@ require(["core/config", "core/didoauth", "core/resources", "navigation/router", 
       menu.refresh();
       router.init();
 
-      var languageSelector = new languageSelectorControl($(".aa-language-selector-container"));
+      var languageSelector = new languageSelectorControl($(".aa-language-selector-container"), resources.getSupportedLocales());
       languageSelector.setLanguage(resources.getLocale());
       languageSelector.element.on("localeChanged", function(e, data) {
         resources.setLocale(data.locale);
