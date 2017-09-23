@@ -110,7 +110,8 @@ public class User implements Serializable {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public User setEnabled(boolean enabled) {
         this.enabled = enabled;
+        return this;
     }
 }

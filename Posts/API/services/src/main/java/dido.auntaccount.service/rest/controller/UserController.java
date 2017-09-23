@@ -78,7 +78,7 @@ public class UserController extends Controller {
         if (token == null || token.getExpirationDate().before(now)) {
             throw OAuthProblemException.error("Token is not valid");
         }
-        final UserDTO user = token.getUser();
+        final UserProfileDTO user = token.getUser();
         userService.activateUser(user);
         return getResponseBuilder().build();
     }

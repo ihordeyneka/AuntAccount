@@ -8,7 +8,7 @@ public class VerificationTokenDTO {
 
     private String token;
     private Date expirationDate;
-    private UserDTO user;
+    private UserProfileDTO user;
 
     public VerificationTokenDTO() {
     }
@@ -16,7 +16,7 @@ public class VerificationTokenDTO {
     public VerificationTokenDTO(VerificationToken token) {
         this.token = token.getToken();
         this.expirationDate = token.getExpirationDate();
-        this.user = new UserDTO(token.getUser());
+        this.user = new UserProfileDTO(token.getUser());
     }
 
     public String getToken() {
@@ -35,11 +35,11 @@ public class VerificationTokenDTO {
         this.expirationDate = expirationDate;
     }
 
-    public UserDTO getUser() {
+    public UserProfileDTO getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserProfileDTO user) {
         this.user = user;
     }
 }

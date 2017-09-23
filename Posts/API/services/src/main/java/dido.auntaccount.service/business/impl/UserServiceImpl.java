@@ -73,14 +73,13 @@ public class UserServiceImpl implements UserService {
             User entity = user.buildEntity();
             entity.setCreationDate(new Date(DateTime.now().getMillis()));
             savedUser = userDAO.save(entity);
+            final String token = generateVerificationToken();
+            createVerificationToken(savedUser, token);
+            emailService.sendCompleteRegistration(savedUser.getEmail(), token);
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save user", e);
         }
-        final UserProfileDTO userDTO = new UserProfileDTO(savedUser);
-        final String token = generateVerificationToken();
-        createVerificationToken(userDTO, token);
-        emailService.sendCompleteRegistration(userDTO.getEmail(), token);
-        return userDTO.buildUserDTO();
+        return new UserDTO(savedUser);
     }
 
     private String generateVerificationToken() {
@@ -132,10 +131,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private void createVerificationToken(UserProfileDTO user, String token) {
+    private void createVerificationToken(User user, String token) {
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(token)
-                .setUser(user.buildEntity())
+                .setUser(user)
                 .setExpirationDate(calculateExpiryDate(EXPIRY_TIME_IN_HOURS));
         try {
             verificationTokenDAO.save(verificationToken);
@@ -152,9 +151,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void activateUser(UserDTO userDTO) {
+    public void activateUser(UserProfileDTO userDTO) {
         final User entity = userDTO.buildEntity();
         entity.setEnabled(true);
+
         updateUser(entity);
     }
 

@@ -28,5 +28,5 @@ public interface UserService {
 
     VerificationTokenDTO getVerificationToken(String token);
 
-    void activateUser(UserDTO userDTO);
+    void activateUser(UserProfileDTO userDTO);
 }
