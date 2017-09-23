@@ -21,6 +21,10 @@ define(["core/persistence",
         });
   };
 
+  self.getLocale = function() {
+    return $.i18n().locale;
+  };
+
   self.setLocale = function(locale) {
     persistence.persistData(LOCALE_KEY, locale);
     $.i18n({ locale: locale });
