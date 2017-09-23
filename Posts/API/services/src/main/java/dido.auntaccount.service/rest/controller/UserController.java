@@ -1,6 +1,7 @@
 package dido.auntaccount.service.rest.controller;
 
 
+import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
 import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
@@ -24,6 +25,8 @@ import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USE
 
 @Path("/users")
 public class UserController extends Controller {
+
+    private static final String GUI_URI = PropertiesHandler.getProperty("gui.uri");
 
     @Inject
     private UserService userService;
@@ -80,7 +83,8 @@ public class UserController extends Controller {
         }
         final UserProfileDTO user = token.getUser();
         userService.activateUser(user);
-        return getResponseBuilder().build();
+        java.net.URI location = new java.net.URI(GUI_URI + "#login");
+        return getResponseBuilder(Response.Status.MOVED_PERMANENTLY.getStatusCode()).location(location).build();
     }
 
     @GET

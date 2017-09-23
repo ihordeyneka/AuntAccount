@@ -14,7 +14,7 @@ import org.apache.oltu.oauth2.common.message.types.GrantType;
 
 public class GoogleProvider implements ClientProvider {
 
-    public static final String REDIRECT_URI = "http://localhost:8282/authcode?provider=google";
+    public static final String REDIRECT_URI = PropertiesHandler.getProperty("gui.uri") + "authcode?provider=google";
     public static final String USER_INFO_URI = "https://www.googleapis.com/oauth2/v2/userinfo";
     private static final String GOOGLE_CLIENT_ID = PropertiesHandler.getProperty("google.client.id");
     private static final String GOOGLE_CLIENT_SECRET = PropertiesHandler.getProperty("google.client.secret");
