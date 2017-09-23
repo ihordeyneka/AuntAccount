@@ -26,4 +26,7 @@ public interface UserService {
 
     void updateUser(UserProfileDTO user);
 
+    VerificationTokenDTO getVerificationToken(String token);
+
+    void activateUser(UserProfileDTO userDTO);
 }

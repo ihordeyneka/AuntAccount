@@ -1,13 +1,16 @@
 package dido.auntaccount.service.rest.controller;
 
 
+import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
 import dido.auntaccount.dto.*;
 import dido.auntaccount.service.business.PasswordService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
 import dido.auntaccount.service.filter.Secured;
 import org.apache.commons.io.IOUtils;
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import javax.naming.AuthenticationException;
@@ -15,12 +18,15 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
 
 @Path("/users")
 public class UserController extends Controller {
+
+    private static final String GUI_URI = PropertiesHandler.getProperty("gui.uri");
 
     @Inject
     private UserService userService;
@@ -64,6 +70,21 @@ public class UserController extends Controller {
         user.setPassword(hashedPassword);
         UserDTO savedUser = userService.saveUser(user);
         return getResponseBuilder().entity(savedUser).build();
+    }
+
+    @GET
+    @Path("/activate")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response activateUser(@QueryParam("token") String verificationToken) throws Exception {
+        final VerificationTokenDTO token = userService.getVerificationToken(verificationToken);
+        Date now = DateTime.now().toDate();
+        if (token == null || token.getExpirationDate().before(now)) {
+            throw OAuthProblemException.error("Token is not valid");
+        }
+        final UserProfileDTO user = token.getUser();
+        userService.activateUser(user);
+        java.net.URI location = new java.net.URI(GUI_URI + "#login");
+        return getResponseBuilder(Response.Status.MOVED_PERMANENTLY.getStatusCode()).location(location).build();
     }
 
     @GET
@@ -203,6 +224,12 @@ public class UserController extends Controller {
     @OPTIONS
     @Path("/{param}/notifications")
     public Response getUserNotificationsPreflight() {
+        return getResponseBuilder().build();
+    }
+
+    @OPTIONS
+    @Path("/activate")
+    public Response activateUserPreflight(@PathParam("token") String verificationToken) throws Exception {
         return getResponseBuilder().build();
     }
 }

@@ -18,6 +18,7 @@
         <class>dido.auntaccount.entities.Seller</class>
         <class>dido.auntaccount.entities.Token</class>
         <class>dido.auntaccount.entities.RefreshToken</class>
+        <class>dido.auntaccount.entities.VerificationToken</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

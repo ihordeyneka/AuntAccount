@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializable  {
+public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializable {
 
     private static final Logger logger = LogManager.getLogger(UserProfileDTO.class);
 
@@ -22,6 +22,7 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
     private LocationDTO location;
     private String clientId;
     private boolean hasSellers;
+    private boolean enabled;
 
     public UserProfileDTO() {
     }
@@ -44,6 +45,7 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
         Location location = user.getLocation();
         this.location = location != null ? new LocationDTO(user.getLocation()) : null;
         this.clientId = user.getClientId();
+        this.enabled = user.isEnabled();
     }
 
     @Override
@@ -58,7 +60,14 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
                 .setPhoto(decodeImage(photo))
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation)
-                .setClientId(clientId);
+                .setClientId(clientId)
+                .setEnabled(enabled);
+    }
+
+    public UserDTO buildUserDTO() {
+        final UserDTO userDTO = new UserDTO(email, firstName, lastName);
+        userDTO.setId(id);
+        return userDTO;
     }
 
     public Long getId() {
@@ -139,5 +148,13 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
 
     public void setHasSellers(boolean hasSellers) {
         this.hasSellers = hasSellers;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
