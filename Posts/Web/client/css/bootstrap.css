@@ -166,6 +166,11 @@ a.header-nav__navigation-link:hover {
   background-color: #9F9F82;
 }
 
+.btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 /*---Modal---*/
 .modal-content {
   border-radius: 0;

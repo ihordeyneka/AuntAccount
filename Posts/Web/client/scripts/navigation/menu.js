@@ -7,12 +7,12 @@ define(["core/didoauth"], function(didoauth) {
   };
 
   var menu = [
-    { hash: "#home", route: "recent", text: "Home" },
-    { hash: "#post", route: "post", text: "Post" },
-    { hash: "#notifications", route: "alerts", text: "Notifications" },
-    { hash: "#login", route: "login", text: "Login", showFor: ShowFor.ANONYMOUS },
-    { hash: "#signup", route: "signup", text: "Sign Up", showFor: ShowFor.ANONYMOUS },
-    { hash: "#profile", route: "profile", template: "{{:user}}", showFor: ShowFor.AUTHENTICATED }
+    { hash: "#home", route: "recent", key: "Home" },
+    { hash: "#post", route: "post", key: "Post" },
+    { hash: "#notifications", route: "alerts", key: "Notifications" },
+    { hash: "#login", route: "login", key: "Login", showFor: ShowFor.ANONYMOUS },
+    { hash: "#signup", route: "signup", key: "SignUp", showFor: ShowFor.ANONYMOUS },
+    { hash: "#profile", route: "profile", key: "", template: "{{:user}}", showFor: ShowFor.AUTHENTICATED }
   ];
 
   var menuItemVisible = function(menuItem) {
@@ -41,6 +41,7 @@ define(["core/didoauth"], function(didoauth) {
         element.append($.templates("#templateMenuItem").render({
           hash: menuItem.hash,
           route: menuItem.route,
+          key: menuItem.key,
           text: menuItem.text
         }));
       }

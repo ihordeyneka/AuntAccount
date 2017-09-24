@@ -9,21 +9,38 @@ define(["core/persistence",
   var self = {};
   var LOCALE_KEY = "aa-locale";
 
+  self.defaultLocale = "en";
+  self.localeMapping = {
+        'en': './client/scripts/i18n/en.json',
+        'ua': './client/scripts/i18n/ua.json'
+      };
+
   self.load = function() {
     var locale = persistence.retrieveData(LOCALE_KEY);
     if (locale)
       $.i18n({ locale: locale });
+    else
+      locale = self.getLocale();
 
-    //TODO: do not load all locales at once
-    return $.i18n().load({
-          'en': './client/scripts/i18n/en.json',
-          'ua': './client/scripts/i18n/ua.json'
-        });
+    var store = {};
+    store[locale] = self.localeMapping[locale];
+    return $.i18n().load(store);
+  };
+
+  self.getSupportedLocales = function() {
+    return Object.keys(self.localeMapping);
+  };
+
+  self.getLocale = function() {
+    return $.i18n().locale;
   };
 
   self.setLocale = function(locale) {
+    if (!self.localeMapping[locale]) {
+      locale = self.defaultLocale;
+    }
     persistence.persistData(LOCALE_KEY, locale);
-    $.i18n({ locale: locale });
+    return self.load();
   };
 
   self.translate = function() {

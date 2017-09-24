@@ -19,9 +19,7 @@
 <body>
   <header class="navbar navbar-fixed-top aa-page-header">
     <nav role="navigation">
-      <div class="aa-language-selector">
-        <a href="javascript:void(0)" class="header-nav__navigation-link">EN</a>
-      </div>      
+      <div class="aa-language-selector-container"></div>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle header-nav__button" data-toggle="collapse" data-target=".navbar-main">
           <span class="icon-bar header-nav__button-line"></span>
@@ -45,7 +43,7 @@
   </main>
   <script id="templateMenuItem" type="text/x-jsrender">
     <li class="header-nav__navigation-item">
-      <a href="{{:hash}}" data-route="{{:route}}" class="header-nav__navigation-link router-link">{{:text}}</a>
+      <a href="{{:hash}}" data-route="{{:route}}" class="header-nav__navigation-link router-link" data-i18n="{{:key}}">{{:text}}</a>
     </li>
   </script>
   <script id="templateSuccess" type="text/x-jsrender">
