@@ -37,8 +37,8 @@ requirejs.config({
   }
 });
 
-require(["core/config", "core/didoauth", "core/resources", "navigation/router", "navigation/menu", "components/language_selector", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
-  function(config, didoauth, resources, router, menu, languageSelectorControl, domReady) {
+require(["core/globals", "core/config", "core/didoauth", "core/resources", "navigation/router", "navigation/menu", "components/language_selector", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
+  function(globals, config, didoauth, resources, router, menu, languageSelectorControl, domReady) {
   didoauth.configure({
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
@@ -66,9 +66,14 @@ require(["core/config", "core/didoauth", "core/resources", "navigation/router", 
       var languageSelector = new languageSelectorControl($(".aa-language-selector-container"), resources.getSupportedLocales());
       languageSelector.setLanguage(resources.getLocale());
       languageSelector.element.on("localeChanged", function(e, data) {
-        resources.setLocale(data.locale);
-        resources.translate();
+        globals.loading($('body'), true);
+        resources.setLocale(data.locale).done(function() {
+          resources.translate();
+          globals.loading($('body'), false);
+        });
       });
+
+      resources.translate();
     });
   });
 });

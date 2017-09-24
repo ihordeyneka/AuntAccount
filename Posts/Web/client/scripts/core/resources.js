@@ -19,9 +19,12 @@ define(["core/persistence",
     var locale = persistence.retrieveData(LOCALE_KEY);
     if (locale)
       $.i18n({ locale: locale });
+    else
+      locale = self.getLocale();
 
-    //TODO: do not load all locales at once
-    return $.i18n().load(self.localeMapping);
+    var store = {};
+    store[locale] = self.localeMapping[locale];
+    return $.i18n().load(store);
   };
 
   self.getSupportedLocales = function() {
@@ -37,7 +40,7 @@ define(["core/persistence",
       locale = self.defaultLocale;
     }
     persistence.persistData(LOCALE_KEY, locale);
-    $.i18n({ locale: locale });
+    return self.load();
   };
 
   self.translate = function() {

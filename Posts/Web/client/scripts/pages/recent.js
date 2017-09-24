@@ -1,4 +1,4 @@
-define(["../core/globals", "../core/config", "underscore"], function(globals, config, _) {
+define(["../core/globals", "../core/config", "../core/resources", "underscore"], function(globals, config, resources, _) {
   var self = {};
 
   self.init = function() {
@@ -25,6 +25,7 @@ define(["../core/globals", "../core/config", "underscore"], function(globals, co
             badgeCss: post.newMessages ? "badge-highlighted" : ""
           }));
         }
+        resources.translate();
       }
     }).fail(function(result) {
       self.notificationArea = $(".aa-notification-area").notificationArea();
