@@ -24,8 +24,7 @@ define(["../core/globals", "../core/config"], function(globals, config) {
         password: $("#inputPassword").val(),
         grant_type: "password",
         client_secret: config.clientSecret,
-        client_id: config.clientId,
-        remember_me: $("#inputRememberMe").is(":checked")
+        client_id: config.clientId
       });
     });
 
