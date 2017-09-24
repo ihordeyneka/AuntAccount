@@ -11,13 +11,6 @@
   width: 315px;
 }
 
-.lb-remember-me {
-  line-height: 46px;
-}
-.lb-remember-me:before {
-  top: 15px;
-}
-
 .lb-social {
   display: block;
   float: left;
