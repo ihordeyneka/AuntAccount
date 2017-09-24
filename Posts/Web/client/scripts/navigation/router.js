@@ -1,4 +1,4 @@
-define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
+define(["core/didoauth", "navigation/menu", "core/resources"], function(didoauth, menu, resources) {
   var self = {};
 
   var cleanHtml = function(html) {
@@ -55,6 +55,7 @@ define(["core/didoauth", "navigation/menu"], function(didoauth, menu) {
           html = html.replaceAll(token, routeParts[i]);
         }
         $("#router").html(cleanHtml(html));
+        resources.translate();
       });
     }).error(function(e) {
       if (e.status === 404) {

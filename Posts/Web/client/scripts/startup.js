@@ -25,6 +25,7 @@ requirejs.config({
     googleapi: ["https://maps.googleapis.com/maps/api/js?key=AIzaSyANyEK-JVHb9DFlEN1igkGQUD0cT6deZkU&libraries=places&language=en-US"]
   },
   shim: {
+    globals: { deps: ["jquery"] },
     bootstrap: { deps: ["jquery"] },
     jsrender: { deps: ["jquery"] },
     validator: { deps: ["jquery"] },
