@@ -1,4 +1,4 @@
-create database if not exists dido;
+create database if not exists dido  DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;;
 
 CREATE TABLE `dido`.`Post` (
   `Id` bigint(20) NOT NULL,
