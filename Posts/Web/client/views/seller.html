@@ -22,23 +22,23 @@
         <div class="col-sm-offset-3 col-sm-6">
           <label for="inputName" class="lb" data-i18n="Name">Name</label>
           <div class="form-group">
-            <input type="text" class="form-control" id="inputName" required placeholder="Name">
+            <input type="text" class="form-control" id="inputName" required data-i18n="[placeholder]Name" placeholder="Name">
           </div>
           <label for="inputPhone" class="lb" data-i18n="Phone">Phone</label>
           <div class="form-group">
-            <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+            <input type="text" class="form-control" id="inputPhone" data-i18n="[placeholder]Phone" placeholder="Phone">
           </div>
           <label for="inputWebsite" class="lb" data-i18n="Website">Website</label>
           <div class="form-group">
-            <input type="text" class="form-control" id="inputWebsite" pattern="^(http://|https://)?(([A-Za-z0-9]{1,})(\.)?){2,}$" placeholder="Website">
+            <input type="text" class="form-control" id="inputWebsite" pattern="^(http://|https://)?(([A-Za-z0-9]{1,})(\.)?){2,}$" data-i18n="[placeholder]Website" placeholder="Website">
           </div>
           <label for="inputTags" class="lb" data-i18n="Keywords">Keywords</label>
           <div class="form-group">
-            <input type="text" class="form-control input" id="inputTags" required placeholder="What do you sell?" />
+            <input type="text" class="form-control input" id="inputTags" required data-i18n="[placeholder]SellerKeywordsPlaceholder" placeholder="What do you sell?" />
           </div>
           <label for="inputPrimaryLocation" class="lb" data-i18n="PrimaryLocation">Primary Location</label>
           <div class="form-group">
-            <input type="text" class="form-control" id="inputPrimaryLocation" placeholder="Primary Location">
+            <input type="text" class="form-control" id="inputPrimaryLocation" data-i18n="[placeholder]PrimaryLocation" placeholder="Primary Location">
           </div>
           <div class="aa-seller-picture-container">
             <label for="inputPicture" class="lb" data="ProfilePicture">Profile Picture</label>
@@ -64,7 +64,7 @@
       <div class="row margin-bottom aa-new-review-container is-hidden">
         <div class="col-sm-offset-3 col-sm-6">
           <div class="input-group form-group">
-            <input type="text" class="form-control aa-new-review-input" placeholder="Type your review here">
+            <input type="text" class="form-control aa-new-review-input" data-i18n="[placeholder]SellerReviewPlaceholder" placeholder="Type your review here">
             <span class="input-group-btn">
               <button class="btn btn-default aa-place-review-button" type="button" data-toggle="tooltip" title="Place Review">
                 <i class="fa fa-paper-plane"></i>
