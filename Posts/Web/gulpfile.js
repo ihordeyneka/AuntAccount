@@ -37,9 +37,11 @@ var PATHS = {
     img: 'client/**/*.{svg,jpg,png,ico}',
     fonts: 'client/**/*.{ttf,otf,woff,woff2}'
   },
+  pwa: 'client/{manifest.json,sw.js}',
   dist: 'dist',
   distClient: 'dist/client',
   distLib: 'dist/lib',
+  distPwa: 'dist/{manifest.json,sw.js}',
   port: 8282
 };
 
@@ -108,6 +110,7 @@ gulp.task('fonts', function() {
 gulp.task('clean', function() {
   del([PATHS.distClient], function(){ });
   del([PATHS.distLib], function(){ });
+  del([PATHS.distPwa], function(){ });
 });
 
 gulp.task('watch', function() {
@@ -117,8 +120,16 @@ gulp.task('watch', function() {
   gulp.watch(PATHS.client.img, ['img']);
 });
 
+gulp.task('pwa', function() {
+  return gulp
+    .src(PATHS.pwa)
+    .pipe(changed(PATHS.dist))
+    .pipe(gulp.dest(PATHS.dist));
+});
+
+
 gulp.task('bundle', function() {
-  runSequence(['html', 'css', 'libs', 'js', 'img', 'fonts']);
+  runSequence(['html', 'css', 'libs', 'js', 'img', 'fonts', 'pwa']);
 });
 
 gulp.task('default', ['server', 'bundle'], function() {
