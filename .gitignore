@@ -1,2 +1,5 @@
 */target/*
 */.idea/*
+/Posts/Web/.vs
+/Posts/Web/package-lock.json
+/package-lock.json
