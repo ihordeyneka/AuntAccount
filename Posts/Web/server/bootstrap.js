@@ -21,6 +21,13 @@ app.use('/lib', express.static(DIST_DIR + '/lib'));
 
 var router = express.Router();
 
+router.get('/manifest.json', function(req, res) {
+  res.sendFile(DIST_DIR + '/manifest.json');
+});
+router.get('/sw.js', function(req, res) {
+  res.sendFile(DIST_DIR + '/sw.js');
+});
+
 // Send home url to index.html.
 router.get('/', function(req, res) {
   res.sendFile(DIST_DIR + '/client/index.html');

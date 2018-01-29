@@ -1,7 +1,6 @@
 package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.service.business.TokenService;
-import dido.auntaccount.service.filter.Secured;
 import dido.auntaccount.service.rest.FacebookProvider;
 import dido.auntaccount.service.rest.GoogleProvider;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
@@ -54,7 +53,6 @@ public class AuthController extends Controller {
     }
 
     @DELETE
-    @Secured
     @Path("/sign_out")
     public Response signOut(@HeaderParam(ACCESS_TOKEN) String token) {
         tokenService.deleteToken(token);

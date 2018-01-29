@@ -1,7 +1,9 @@
 requirejs.config({
   waitSeconds: 30,
+
   baseUrl: '/client/scripts',
   paths: {
+    globals: ["core/globals"],
     domReady: ["../../lib/dom_ready/dom_ready"],
     jquery: ["../../lib/jquery/jquery.min"],
     jqueryRaty: ["../../lib/jquery_raty/jquery.raty-fa"],
@@ -38,7 +40,7 @@ requirejs.config({
   }
 });
 
-require(["core/globals", "core/config", "core/didoauth", "core/resources", "navigation/router", "navigation/menu", "components/language_selector", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
+require(["globals", "core/config", "core/didoauth", "core/resources", "navigation/router", "navigation/menu", "components/language_selector", "domReady", "jquery", "bootstrap", "jsrender", "validator"],
   function(globals, config, didoauth, resources, router, menu, languageSelectorControl, domReady) {
   didoauth.configure({
     apiUrl:                config.apiRoot,
