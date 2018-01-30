@@ -13,7 +13,7 @@
  * @licence MIT License
  */
 
-( function ( $ ) {
+define(["jquery", "./jquery.i18n"], function ( $ ) {
 	'use strict';
 
 	var MessageParserEmitter = function () {
@@ -165,4 +165,4 @@
 	};
 
 	$.extend( $.i18n.parser.emitter, new MessageParserEmitter() );
-}( jQuery ) );
+});

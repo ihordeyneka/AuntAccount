@@ -8,6 +8,10 @@ var spawn = require('child_process').spawn;
 var del = require('del');
 var nodeServer = null;
 
+var webpack = require('webpack');
+var webpackStream = require('webpack-stream');
+var webpackConfig = require('./webpack.config.js');
+
 var packageJson = require('./package.json');
 var PATHS = {
   lib: [
@@ -86,6 +90,12 @@ gulp.task('libs', function() {
   return merge(streams);
 });
 
+gulp.task('webpack', function () {
+  return gulp.src('./client/scripts/startup.js')
+    .pipe(webpackStream(webpackConfig), webpack)
+    .pipe(gulp.dest(PATHS.distClient + "/scripts"));
+});
+
 gulp.task('js', function() {
   return gulp
     .src(PATHS.client.js)
@@ -114,7 +124,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(PATHS.client.js, ['js']);
+  gulp.watch(PATHS.client.js, ['webpack']);
   gulp.watch(PATHS.client.html, ['html']);
   gulp.watch(PATHS.client.css, ['css']);
   gulp.watch(PATHS.client.img, ['img']);
@@ -129,7 +139,7 @@ gulp.task('pwa', function() {
 
 
 gulp.task('bundle', function() {
-  runSequence(['html', 'css', 'libs', 'js', 'img', 'fonts', 'pwa']);
+  runSequence(['html', 'css', 'webpack', 'libs', 'img', 'fonts', 'pwa']);
 });
 
 gulp.task('default', ['server', 'bundle'], function() {

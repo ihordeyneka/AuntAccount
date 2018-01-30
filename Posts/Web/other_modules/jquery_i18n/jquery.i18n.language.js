@@ -1,5 +1,5 @@
 /* global pluralRuleParser */
-( function ( $ ) {
+define(["jquery", "./jquery.i18n"], function ( $ ) {
 	'use strict';
 
 	// jscs:disable
@@ -833,4 +833,4 @@
 	$.extend( $.i18n.languages, {
 		'default': language
 	} );
-}( jQuery ) );
+});

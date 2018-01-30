@@ -13,7 +13,7 @@
  * @licence MIT License
  */
 
-( function ( $ ) {
+define(["jquery"], function ( $ ) {
 	'use strict';
 
 	var nav, I18N,
@@ -297,4 +297,4 @@
 
 	// Expose constructor
 	$.i18n.constructor = I18N;
-}( jQuery ) );
+});

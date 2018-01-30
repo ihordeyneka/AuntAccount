@@ -13,7 +13,7 @@
  * @licence MIT License
  */
 
-( function ( $ ) {
+define(["jquery", "./jquery.i18n"], function ( $ ) {
 	'use strict';
 	var strongDirRegExp;
 
@@ -91,4 +91,4 @@
 			return nodes[ 0 ];
 		}
 	} );
-}( jQuery ) );
+});

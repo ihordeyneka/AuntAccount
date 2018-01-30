@@ -1,4 +1,4 @@
-define(["core/globals", "core/config", "underscore", "typeahead", "fileinput", "maskedinput", "jqueryRaty", "components/google_autocomplete", "components/tags_input"],
+define(["../core/globals", "../core/config", "underscore", "typeahead", "fileinput", "maskedinput", "jqueryRaty", "../components/google_autocomplete", "../components/tags_input"],
 function(globals, config, _, typeaheadControl, fileinputControl, maskedinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
   var self = {};
 

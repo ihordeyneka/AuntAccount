@@ -1,4 +1,4 @@
-define(["core/didoauth", "navigation/menu", "core/resources"], function(didoauth, menu, resources) {
+define(["../core/globals", "../core/didoauth", "./menu", "../core/resources"], function(globals, didoauth, menu, resources) {
   var self = {};
 
   var cleanHtml = function(html) {
@@ -44,24 +44,34 @@ define(["core/didoauth", "navigation/menu", "core/resources"], function(didoauth
     if (routeParts.length > 0)
       page = routeParts[0];
 
-    var href = "client/views/" + page + ".html";
+    //var href = "./client/views/" + page + ".html";
 
-    $.ajax({
-      url: href
-    }).done(function(html) {
-      require(["core/globals"], function(globals) { // make sure String.replaceAll is defined
-        for(var i = 1; i < routeParts.length; i++) {
-          var token = "{{:" + (i - 1) + "}}"
-          html = html.replaceAll(token, routeParts[i]);
-        }
-        $("#router").html(cleanHtml(html));
-        resources.translate();
-      });
-    }).error(function(e) {
-      if (e.status === 404) {
-        $("#router").html(e.responseText);
-      }
+    require(["../../views/" + page + ".html", "../pages/" + page + ".js"], function (html, script) {
+      $("#router").html(cleanHtml(html));
+      script.init.apply(this, routeParts);
+      resources.translate();
     });
+
+    //import("../../views/" + page + ".html")
+    //  .then(function (module) {
+    //    $("#router").html(cleanHtml(module));
+    //    resources.translate();
+    //  });
+
+    //$.ajax({
+    //  url: href
+    //}).done(function(html) {
+    //  for (var i = 1; i < routeParts.length; i++) {
+    //    var token = "{{:" + (i - 1) + "}}"
+    //    html = html.replaceAll(token, routeParts[i]);
+    //  }
+    //  $("#router").html(cleanHtml(html));
+    //  resources.translate();
+    //}).error(function(e) {
+    //  if (e.status === 404) {
+    //    $("#router").html(e.responseText);
+    //  }
+    //});
   }
 
   window.onhashchange = self.init;

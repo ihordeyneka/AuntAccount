@@ -1,4 +1,4 @@
-define(["core/config", "tagsinput"], function(config, tagsinputControl) {
+define(["../core/config", "tagsinput"], function(config, tagsinputControl) {
   return function(element) {
     var self = {};
 

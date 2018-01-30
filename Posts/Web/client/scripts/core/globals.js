@@ -1,4 +1,4 @@
-define(["moment"], function(moment) {
+define(["jquery", "moment"], function($, moment) {
   var self = {};
 
   self.loading = function(element, show) {

@@ -1,4 +1,4 @@
-define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider", "components/google_autocomplete", "components/tags_input"],
+define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider", "../components/google_autocomplete", "../components/tags_input"],
   function(globals, config, typeaheadControl, fileinputControl, sliderControl, googleAutocompleteControl, tagsInputControl) {
   var self = {};
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
@@ -33,7 +33,7 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
     self.initAttachmentUpload();
     self.addButtonHandlers();
 
-    require(["googleapi"], function() { self.initMap(); });
+    require(["../components/google_api"], function (googleApi) { googleApi.then(self.initMap); });
 
     self.validatorForm = $("#formPost");
     self.validatorForm.validator({ focus: false });

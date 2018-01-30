@@ -1,4 +1,4 @@
-define(["core/didoauth"], function(didoauth) {
+define(["../core/didoauth"], function(didoauth) {
 
   var ShowFor = {
     ALL: 0,

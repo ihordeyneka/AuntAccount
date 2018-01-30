@@ -1,19 +1,21 @@
-define(["core/persistence",
+define(["./persistence",
+        "../i18n/en.json",
+        "../i18n/ua.json",
         "i18n",
         "i18n_messagestore",
         "i18n_fallbacks",
         "i18n_parser",
         "i18n_emitter",
-        "i18n_language",
-      ], function(persistence) {
+        "i18n_language"
+      ], function(persistence, vocabularyEN, vocabularyUA) { //TODO: load translations on demand
   var self = {};
   var LOCALE_KEY = "aa-locale";
 
   self.defaultLocale = "en";
   self.localeMapping = {
-        'en': './client/scripts/i18n/en.json',
-        'ua': './client/scripts/i18n/ua.json'
-      };
+    'en': vocabularyEN,
+    'ua': vocabularyUA
+  };
 
   self.load = function() {
     var locale = persistence.retrieveData(LOCALE_KEY);

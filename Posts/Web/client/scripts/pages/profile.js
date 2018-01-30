@@ -1,4 +1,4 @@
-define(["core/globals", "core/didoauth", "core/config", "fileinput", "components/google_autocomplete"],
+define(["../core/globals", "../core/didoauth", "../core/config", "fileinput", "../components/google_autocomplete"],
   function(globals, didoauth, config, fileinput, googleAutocompleteControl) {
   var self = {};
   self.profileId = null;

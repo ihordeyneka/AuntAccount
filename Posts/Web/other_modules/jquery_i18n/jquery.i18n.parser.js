@@ -13,7 +13,7 @@
  * @licence MIT License
  */
 
-( function ( $ ) {
+define(["jquery", "./jquery.i18n"], function ( $ ) {
 	'use strict';
 
 	var MessageParser = function ( options ) {
@@ -306,4 +306,4 @@
 	};
 
 	$.extend( $.i18n.parser, new MessageParser() );
-}( jQuery ) );
+});

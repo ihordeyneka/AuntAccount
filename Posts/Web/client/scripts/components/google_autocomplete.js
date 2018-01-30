@@ -16,7 +16,7 @@ define([], function() {
       self.element.val(name);
     }
 
-    require(["googleapi"], function() { self.initAutocomplete(); });
+    require(["./google_api"], function (googleApi) { googleApi.then(self.initAutocomplete); });
 
     self.initAutocomplete = function() {
       var input = self.element.get(0);

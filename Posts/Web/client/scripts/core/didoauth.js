@@ -1,4 +1,4 @@
-define(["jquery", "core/persistence"], function ($, persistence) {
+define(["jquery", "./persistence"], function ($, persistence) {
   var root = Function('return this')();
 
   if (root.didoauth) {

@@ -11,7 +11,7 @@
  * @licence GNU General Public Licence 2.0 or later
  * @licence MIT License
  */
-( function ( $ ) {
+define(["jquery", "./jquery.i18n"], function ( $ ) {
 	'use strict';
 
 	$.i18n = $.i18n || {};
@@ -183,4 +183,4 @@
 		'zh-tw': [ 'zh-hant', 'zh-hans' ],
 		'zh-yue': [ 'yue' ]
 	} );
-}( jQuery ) );
+});
