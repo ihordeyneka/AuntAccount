@@ -1,6 +1,9 @@
-define(["../core/globals", "../core/didoauth", "../core/config", "fileinput", "../components/google_autocomplete"],
-  function(globals, didoauth, config, fileinput, googleAutocompleteControl) {
+define(["../../views/profile.html", "../core/globals", "../core/didoauth", "../core/config", "fileinput", "../components/google_autocomplete"],
+  function(source, globals, didoauth, config, fileinput, googleAutocompleteControl) {
   var self = {};
+
+  self.source = source;
+
   self.profileId = null;
 
   self.init = function(profileId) {

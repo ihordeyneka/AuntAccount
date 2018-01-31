@@ -1,6 +1,9 @@
-define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider", "../components/google_autocomplete", "../components/tags_input"],
-  function(globals, config, typeaheadControl, fileinputControl, sliderControl, googleAutocompleteControl, tagsInputControl) {
+define(["../../views/post.html", "../core/globals", "../core/config", "typeahead", "fileinput", "slider", "../components/google_autocomplete", "../components/tags_input"],
+  function(source, globals, config, typeaheadControl, fileinputControl, sliderControl, googleAutocompleteControl, tagsInputControl) {
   var self = {};
+
+  self.source = source;
+
   var DEF_POSITION = { lat: 40.75773, lng: -73.985708  }; //New York Times Square by default
   var MIN_ZOOM_FOR_PLACE = 15;
   var MIN_RADIUS = 100;
@@ -33,7 +36,7 @@ define(["../core/globals", "../core/config", "typeahead", "fileinput", "slider",
     self.initAttachmentUpload();
     self.addButtonHandlers();
 
-    require(["../components/google_api"], function (googleApi) { googleApi.then(self.initMap); });
+    import("../components/google_api" /* webpackChunkName: "chunk-googleapi" */).then(self.initMap);
 
     self.validatorForm = $("#formPost");
     self.validatorForm.validator({ focus: false });

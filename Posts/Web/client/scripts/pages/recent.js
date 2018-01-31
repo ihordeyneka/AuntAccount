@@ -1,5 +1,7 @@
-define(["../core/globals", "../core/config", "../core/resources", "underscore"], function(globals, config, resources, _) {
+define(["../../views/recent.html", "../core/globals", "../core/config", "../core/resources", "underscore"], function(source, globals, config, resources, _) {
   var self = {};
+
+  self.source = source;
 
   self.init = function() {
 

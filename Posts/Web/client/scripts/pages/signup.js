@@ -1,5 +1,7 @@
-define(["../core/globals", "../core/didoauth", "../navigation/router", "underscore"], function(globals, didoauth, router, _) {
+define(["../../views/signup.html", "../core/globals", "../core/didoauth", "../navigation/router", "underscore"], function(source, globals, didoauth, router, _) {
   var self = {};
+
+  self.source = source;
 
   didoauth.config.signUp = function() {
     if (self.notificationArea) {

@@ -6,6 +6,7 @@ module.exports = {
   entry: "./startup",
   output: {
     filename: "bundle.js",
+    chunkFilename: "[name].js",
     publicPath: "/client/scripts/"
   },
   resolve: {

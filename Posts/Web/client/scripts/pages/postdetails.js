@@ -1,5 +1,7 @@
-define(["../core/globals", "../core/config", "../components/message_input", "../components/post_info"], function(globals, config, messageInputControl, postInfoControl) {
+define(["../../views/postdetails.html", "../core/globals", "../core/config", "../components/message_input", "../components/post_info"], function(source, globals, config, messageInputControl, postInfoControl) {
   var self = {};
+
+  self.source = source;
 
   self.init = function(postId, sellerId) {
 

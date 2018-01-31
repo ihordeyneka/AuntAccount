@@ -38,40 +38,20 @@ define(["../core/globals", "../core/didoauth", "./menu", "../core/resources"], f
     }
 
     var routeParts = route.split("/");
-
+    
     //default route is #page/{param1}/{param2}/... where id is optional
     var page = "recent";
     if (routeParts.length > 0)
-      page = routeParts[0];
+      page = routeParts[0]; 
 
-    //var href = "./client/views/" + page + ".html";
-
-    require(["../../views/" + page + ".html", "../pages/" + page + ".js"], function (html, script) {
-      $("#router").html(cleanHtml(html));
-      script.init.apply(this, routeParts);
-      resources.translate();
-    });
-
-    //import("../../views/" + page + ".html")
-    //  .then(function (module) {
-    //    $("#router").html(cleanHtml(module));
-    //    resources.translate();
-    //  });
-
-    //$.ajax({
-    //  url: href
-    //}).done(function(html) {
-    //  for (var i = 1; i < routeParts.length; i++) {
-    //    var token = "{{:" + (i - 1) + "}}"
-    //    html = html.replaceAll(token, routeParts[i]);
-    //  }
-    //  $("#router").html(cleanHtml(html));
-    //  resources.translate();
-    //}).error(function(e) {
-    //  if (e.status === 404) {
-    //    $("#router").html(e.responseText);
-    //  }
-    //});
+    import("../pages/" + page  /* webpackChunkName: "chunk-[request]" */ )
+      .then(function (script) {
+        $("#router").html(cleanHtml(script.source));
+        script.init.apply(this, routeParts);
+        resources.translate();
+      }, function () {
+        window.location = "/notfound.html";
+      });
   }
 
   window.onhashchange = self.init;

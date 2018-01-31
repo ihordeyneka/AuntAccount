@@ -1,5 +1,7 @@
-define(["../core/globals", "../core/config", "../components/grid"], function(globals, config, grid) {
+define(["../../views/post.html", "../core/globals", "../core/config", "../components/grid"], function(source, globals, config, grid) {
   var self = {};
+
+  self.source = source;
 
   self.init = function(postId) {
 

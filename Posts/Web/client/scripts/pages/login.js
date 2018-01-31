@@ -1,5 +1,7 @@
-define(["../core/globals", "../core/config"], function(globals, config) {
+define(["../../views/login.html", "../core/globals", "../core/config"], function(source, globals, config) {
   var self = {};
+
+  self.source = source;
 
   self.init = function() {
     self.notificationArea = $(".aa-notification-area").notificationArea();
