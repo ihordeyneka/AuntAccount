@@ -1,5 +1,7 @@
 var path = require("path");
 var webpack = require('webpack');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
   devtool: "source-map",
   context: path.resolve(__dirname, "client/scripts"),
@@ -41,6 +43,8 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery",
       _: "underscore"
-    })
+    }),
+    new BundleAnalyzerPlugin({ openAnalyzer: false }), //don't use in PROD
+    //new webpack.optimize.UglifyJsPlugin({ minimize: true }) //use in PROD
   ]
 };

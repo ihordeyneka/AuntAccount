@@ -45,6 +45,7 @@
     "raw-loader": "^0.5.1",
     "run-sequence": "^1.2.2",
     "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.2",
     "webpack-stream": "^4.0.0"
   }
 }
