@@ -3,9 +3,12 @@ var webpack = require('webpack');
 module.exports = {
   devtool: "source-map",
   context: path.resolve(__dirname, "client/scripts"),
-  entry: "./startup",
+  entry: {
+    main: "./entries/startup",
+    authcode: "./entries/authcode"
+  },
   output: {
-    filename: "bundle.js",
+    filename: "bundle-[name].js",
     chunkFilename: "[name].js",
     publicPath: "/client/scripts/"
   },

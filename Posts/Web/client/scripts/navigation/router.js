@@ -42,7 +42,9 @@ define(["../core/globals", "../core/didoauth", "./menu", "../core/resources"], f
     //default route is #page/{param1}/{param2}/... where id is optional
     var page = "recent";
     if (routeParts.length > 0)
-      page = routeParts[0]; 
+      page = routeParts[0];
+
+    routeParts.shift(); //remove the first entry
 
     import("../pages/" + page  /* webpackChunkName: "chunk-[request]" */ )
       .then(function (script) {

@@ -1,4 +1,4 @@
-require(["./core/globals", "./core/config", "./core/didoauth", "./core/resources", "./navigation/router", "./navigation/menu", "./components/language_selector", "dom_ready/dom_ready", "jquery", "bootstrap", "jsrender", "bootstrap-validator"],
+require(["../core/globals", "../core/config", "../core/didoauth", "../core/resources", "../navigation/router", "../navigation/menu", "../components/language_selector", "dom_ready/dom_ready", "jquery", "bootstrap", "jsrender", "bootstrap-validator"],
   function(globals, config, didoauth, resources, router, menu, languageSelectorControl, domReady, $, bootstrap, jsrender, bootstrapValidator) {
 
   window.jQuery = $;
@@ -8,7 +8,7 @@ require(["./core/globals", "./core/config", "./core/didoauth", "./core/resources
     apiUrl:                config.apiRoot,
     signOutPath:           '/auth/sign_out',
     emailSignInPath:       '/token',
-    emailRegistrationPath: '/users',
+    emailRegistrationPath: '/users', 
 
     signIn: function() {
       router.home();

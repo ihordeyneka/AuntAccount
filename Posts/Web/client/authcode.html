@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/client/css/app.css">
   <title>Aunt Account</title>
-  <script src="/lib/requirejs/require.js"></script>
+  <script src="/client/scripts/bundle-authcode.js"></script>
   <link rel="manifest" href="/client/manifest.json" />
 </head>
 <body>
@@ -27,28 +27,5 @@
       </div>
     </div>
   </main>
-  <script>
-  requirejs.config({
-    baseUrl: '/client/scripts',
-    paths: {
-      jquery: ["../../lib/jquery/jquery.min"],
-      jquery_deparam: ["../../lib/jquery_deparam/jquery-deparam"],
-    }
-  });
-  require(["core/config", "core/didoauth", "jquery", "jquery_deparam"],
-    function(config, didoauth) {
-      $.didoauth.configure({
-        apiUrl: config.apiRoot,
-        provideAuthCodePath: "/token/client",
-        signIn: function() {
-          window.location = "/";
-        },
-        error: function() {
-          $("#status").html('<div class="alert alert-danger" role="alert">Authentication failed. <br/><a href="/">Go to home.</a></div>');
-        }
-      });
-      $.didoauth.provideAuthCode($.deparam(window.location.search.slice(1)));
-    });
-  </script>
 </body>
 </html>
