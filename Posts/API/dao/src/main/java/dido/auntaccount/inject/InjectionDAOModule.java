@@ -24,6 +24,7 @@ public class InjectionDAOModule extends AbstractModule {
         bind(RefreshTokenDAO.class).to(RefreshTokenDAOImpl.class);
         bind(CountryDAO.class).to(CountryDAOImpl.class);
         bind(VerificationTokenDAO.class).to(VerificationTokenDAOImpl.class);
+        bind(SubscriptionDAO.class).to(SubscriptionDAOImpl.class);
     }
 
     @Singleton

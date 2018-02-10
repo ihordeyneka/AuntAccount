@@ -75,12 +75,13 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public void savePostForSellers(PostDTO post) {
+    public List<Long> savePostForSellers(PostDTO post) {
         List<TagDTO> postTags = post.getTags();
         List<String> tags = postTags.stream().map(TagDTO::getTag).collect(Collectors.toList());
 
         List<Long> sellerIds = searchSellerService.getSellerIdsByTagsAndLocation(tags, post.getLocation());
         sellerIds.stream().forEach(s -> sellerDAO.addSellerPost(s, post.buildEntity()));
+        return sellerIds;
     }
 
     @Override

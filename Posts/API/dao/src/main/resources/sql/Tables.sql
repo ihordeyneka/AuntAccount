@@ -140,6 +140,14 @@ CREATE TABLE `VerificationToken` (
   `ExpirationDate` datetime NOT NULL,
   PRIMARY KEY (`Id`));
 
+CREATE TABLE `Subscription` (
+  `Id` INT NOT NULL,
+  `UserId` INT NOT NULL,
+  `Endpoint` VARCHAR(2000) NOT NULL,
+  `PublicKey` VARCHAR(2000) NOT NULL,
+  `Auth` VARCHAR(2000) NOT NULL,
+  PRIMARY KEY (`Id`));
+
 
 --fix post table - remove latitude and longitude, add sellerTag table
 

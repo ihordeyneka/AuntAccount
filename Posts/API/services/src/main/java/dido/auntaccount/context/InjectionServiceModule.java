@@ -2,6 +2,7 @@ package dido.auntaccount.context;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import dido.auntaccount.dao.impl.SubscriptionDAOImpl;
 import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
 import dido.auntaccount.search.SearchSellerService;
 import dido.auntaccount.search.client.SearchClientService;
@@ -27,6 +28,7 @@ public class InjectionServiceModule extends AbstractModule {
         bind(TagService.class).to(TagServiceImpl.class);
         bind(LocationService.class).to(LocationServiceImpl.class);
         bind(EmailService.class).to(EmailServiceImpl.class);
+        bind(SubscriptionService.class).to(SubscriptionServiceImpl.class);
 
         Names.bindProperties(binder(), PropertiesHandler.initProperties());
     }

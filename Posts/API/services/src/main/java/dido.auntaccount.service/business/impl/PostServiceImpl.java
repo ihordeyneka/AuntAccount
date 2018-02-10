@@ -5,22 +5,34 @@ import dido.auntaccount.dao.PostDAO;
 import dido.auntaccount.dto.CountryDTO;
 import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
+import dido.auntaccount.dto.SubscriptionDTO;
 import dido.auntaccount.entities.Country;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.SellerService;
+import dido.auntaccount.service.business.SubscriptionService;
+import nl.martijndwars.webpush.Notification;
+import nl.martijndwars.webpush.PushService;
+import nl.martijndwars.webpush.Utils;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.Security;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Date;
 import java.util.List;
+import java.util.concurrent.Future;
 
 public class PostServiceImpl implements PostService {
 
@@ -34,6 +46,9 @@ public class PostServiceImpl implements PostService {
 
     @Inject
     private CountryDAO countryDAO;
+
+    @Inject
+    private SubscriptionService subscriptionService;
 
     @Override
     public PostDTO getPost(Long postId) {
@@ -56,12 +71,14 @@ public class PostServiceImpl implements PostService {
                 }
             }
             savedPost = new PostDTO(postDAO.save(postEntity));
-            sellerService.savePostForSellers(savedPost);
+            final List<Long> sellerIds = sellerService.savePostForSellers(savedPost);
+            sellerIds.forEach(id -> subscriptionService.sendNotifications(id, post.getDescription()));
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save post", e);
         }
         return savedPost;
     }
+
 
     @Override
     public List<OfferDTO> getPostOffers(Long postId) {

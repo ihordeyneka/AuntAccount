@@ -15,7 +15,7 @@ public interface SellerService {
 
     List<PostDTO> getSellerPosts(Long sellerId);
 
-    void savePostForSellers(PostDTO post);
+    List<Long> savePostForSellers(PostDTO post);
 
     void updatePicture(SellerDTO seller, byte[] picture) throws Exception;
 
