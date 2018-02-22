@@ -8,7 +8,7 @@ define(["../core/didoauth"], function(didoauth) {
 
   var menu = [
     { hash: "#home", route: "recent", key: "Home" },
-    { hash: "#post", route: "post", key: "Post" },
+    { hash: "#post", route: "post", key: "Push" },
     { hash: "#notifications", route: "alerts", key: "Notifications" },
     { hash: "#login", route: "login", key: "Login", showFor: ShowFor.ANONYMOUS },
     { hash: "#signup", route: "signup", key: "SignUp", showFor: ShowFor.ANONYMOUS },
