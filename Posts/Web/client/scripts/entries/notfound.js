@@ -1,0 +1,6 @@
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../../fonts/_fonts.css"
+import "../../css/bootstrap.css"
+import "../../css/global.css"
+import "../../css/reset.css"
+import "../../css/site.css"
