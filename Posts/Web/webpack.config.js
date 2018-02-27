@@ -7,7 +7,8 @@ module.exports = {
   context: path.resolve(__dirname, "client/scripts"),
   entry: {
     main: "./entries/startup",
-    authcode: "./entries/authcode"
+    authcode: "./entries/authcode",
+    notfound: "./entries/notfound"
   },
   output: {
     filename: "bundle-[name].js",
@@ -34,8 +35,10 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
-      { test: /\.html$/, loader: "raw-loader" }
+    rules: [
+      { test: /\.html$/, use: { loader: "html-loader" }  },
+      { test: /\.css/, use: [{ loader: "style-loader" }, { loader: "css-loader" }] },
+      { test: /\.(gif|png|woff|woff2|eot|ttf|svg)$/, use: { loader: "url-loader?limit=100000" } }
     ]
   },
   plugins: [
