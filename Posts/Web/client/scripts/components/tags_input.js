@@ -44,6 +44,9 @@ define(["../core/config", "tagsinput"], function(config, tagsinputControl) {
 
     var tagsinput = element.data("tagsinput");
 
+    //copy i18n attribute from source input to tagsinput generated input for localization
+    tagsinput.$input.attr("data-i18n", element.data("i18n"));
+
     tagsinput.currentShift = 0;
     var updateTagsPosition = function() {
       var shiftStepPixels = 100;
@@ -62,12 +65,12 @@ define(["../core/config", "tagsinput"], function(config, tagsinputControl) {
       .css("left", tagsinput.currentShift.toString() + "px");
     }
 
-    $("#inputTags").on("itemAdded", function() {
+    element.on("itemAdded", function() {
       updateTagsPosition();
       tagsinput.$input.attr('placeholder', ''); //remove placeholder if at least one tag is added
     });
 
-    $("#inputTags").on("itemRemoved", function() {
+    element.on("itemRemoved", function() {
       updateTagsPosition();
       if (tagsinput.itemsArray.length === 0)
         tagsinput.$input.attr('placeholder', tagsinput.placeholderText); //restore placeholder if there are no tags again

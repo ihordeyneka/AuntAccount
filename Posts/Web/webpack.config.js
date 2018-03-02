@@ -28,7 +28,7 @@ module.exports = {
       i18n_language: "jquery_i18n/jquery.i18n.language",
       typeahead: "bootstrap-3-typeahead",
       fileinput: "bootstrap-fileinput",
-      maskedinput: "jquery.maskedinput",
+      maskedinput: "jquery.maskedinput/src/jquery.maskedinput",
       slider: "bootstrap-slider",
       bootstraptable: "bootstrap-table",
       tagsinput: "bootstrap-tagsinput"

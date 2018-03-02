@@ -98,7 +98,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
       placement: "bottom",
       container: ".aa-post-location-container",
       trigger: "manual",
-      content: "Sorry, you've denied access to your geolocation."
+      content: $.i18n('GeolocationAccessDenied')
     })
     .data("bs.popover")
     .tip()
@@ -162,10 +162,11 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
     };
   }
 
-  self.initAttachmentUpload = function() {
+  self.initAttachmentUpload = function () {
     self.attachmentUpload = $("#inputAttachment").fileinput({
-      browseLabel: 'Browse',
+      browseLabel: $.i18n('Browse'),
       browseIcon: '<i class="fa fa-search"></i>',
+      msgPlaceholder: $.i18n('SelectFile'),
       showUpload: false,
       showRemove: false,
       showPreview: false,
@@ -226,7 +227,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
               self.attachmentUpload.fileinput("upload");
 
             self.notificationArea.success({
-              message: "Your message has been posted, we've notified our subscribers."
+              message: $.i18n('MessagePosted')
             });
           }).fail(function(result) {
             self.notificationArea.error();

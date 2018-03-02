@@ -1,5 +1,5 @@
-define(["../../views/seller.html", "../core/globals", "../core/config", "underscore", "typeahead", "fileinput", "maskedinput", "jqueryRaty", "../components/google_autocomplete", "../components/tags_input"],
-function(source, globals, config, _, typeaheadControl, fileinputControl, maskedinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
+define(["../../views/seller.html", "../core/globals", "../core/config", "../core/resources", "underscore", "typeahead", "fileinput", "maskedinput", "jqueryRaty", "../components/google_autocomplete", "../components/tags_input"],
+function(source, globals, config, resources, _, typeaheadControl, fileinputControl, maskedinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
   var self = {};
 
   self.source = source;
@@ -38,7 +38,7 @@ function(source, globals, config, _, typeaheadControl, fileinputControl, maskedi
     }).done(function(data) {
       if (data == null) {
         self.notificationArea.error({
-          message: "Seller was not found."
+          message: $.i18n('SellerNotFound')
         });
       } else {
         $("#inputName").val(data.name);
@@ -79,12 +79,14 @@ function(source, globals, config, _, typeaheadControl, fileinputControl, maskedi
         placeReview();
       }
     });
+    $("#btnGoToReviews").show();
   };
 
   var initPictureUpload = function() {
     self.pictureUpload = $("#inputPicture").fileinput({
-      browseLabel: 'Change Picture',
+      browseLabel: $.i18n('ChangePicture'),
       browseIcon: '<i class="fa fa-user"></i>',
+      msgPlaceholder: $.i18n('SelectFile'),
       showUpload: false,
       showRemove: false,
       showPreview: false,
@@ -126,7 +128,7 @@ function(source, globals, config, _, typeaheadControl, fileinputControl, maskedi
           }).done(function(data) {
             self.savedSellerId = data.id;
             self.notificationArea.success({
-              message: "Seller successfully registered."
+              message: $.i18n('SellerRegistered')
             });
             if (self.pictureUpload.fileinput("getFilesCount") > 0) {
               self.pictureUpload
@@ -172,15 +174,15 @@ function(source, globals, config, _, typeaheadControl, fileinputControl, maskedi
   var switchMode = function(showReviews) {
     if (showReviews) {
       $(".aa-seller-info-container").hide();
-      $("#btnGoToReviews").hide();
       $(".aa-seller-reviews-container").show();
       $("#btnBackFromReviews").show();
+      $("#btnGoToReviews").hide();
       initReviews();
     } else {
       $(".aa-seller-info-container").show();
-      $("#btnGoToReviews").show();
       $(".aa-seller-reviews-container").hide();
       $("#btnBackFromReviews").hide();
+      $("#btnGoToReviews").show();
     }
     self.sellerRating.raty("readOnly", self.reviewerView && !showReviews);
   };
@@ -194,7 +196,7 @@ function(source, globals, config, _, typeaheadControl, fileinputControl, maskedi
       var element = $(".aa-reviews-template-container");
       element.empty();
       if (data.length == 0) {
-        element.append("<h3 class='center'>No reviews added for this seller yet.</h3>");
+        element.append("<h3 class='center' data-i18n='NoSellerReviews'>No reviews added for this seller yet.</h3>");
       } else {
         for (var i=0; i<data.length; i++) {
           var review = data[i];
@@ -205,6 +207,7 @@ function(source, globals, config, _, typeaheadControl, fileinputControl, maskedi
           }));
         }
       }
+      resources.translate();
     }).fail(function(result) {
       self.notificationArea.error();
     }).always(function() {

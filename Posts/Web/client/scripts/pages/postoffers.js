@@ -14,7 +14,10 @@ define(["../../views/post.html", "../core/globals", "../core/config", "../compon
       pageSize: 5,
       pageList: [5],
       sidePagination: 'client',
-      url: config.apiRoot + "/posts/" + postId + "/offers"
+      url: config.apiRoot + "/posts/" + postId + "/offers",
+      formatShowingRows: function (pageFrom, pageTo, totalRows) { return globals.formatString($.i18n('FormatShowingRows'), pageFrom, pageTo, totalRows); },
+      formatLoadingMessage: function () { return $.i18n('FormatLoadingMessage'); },
+      formatNoMatches: function () { return $.i18n('FormatNoMatches'); }
     });
 
     $("#gridOffers").on("click-row.bs.table", function(row, $element, field) {

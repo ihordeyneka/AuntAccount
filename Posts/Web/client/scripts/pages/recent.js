@@ -14,7 +14,7 @@ define(["../../views/recent.html", "../core/globals", "../core/config", "../core
       var element = $(".aa-recent-container");
       element.empty();
       if (data.length == 0) {
-        element.append("<h3 class='center'>You haven't added any posts yet.</h3>");
+        element.append("<h3 class='center' data-i18n='NoPosts'>You haven't added any posts yet.</h3>");
       } else {
         for (var i=0; i<data.length; i++) {
           var post = data[i];
@@ -27,8 +27,8 @@ define(["../../views/recent.html", "../core/globals", "../core/config", "../core
             badgeCss: post.newMessages ? "badge-highlighted" : ""
           }));
         }
-        resources.translate();
       }
+      resources.translate();
     }).fail(function(result) {
       self.notificationArea = $(".aa-notification-area").notificationArea();
       self.notificationArea.error();
