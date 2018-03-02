@@ -141,7 +141,7 @@ CREATE TABLE `VerificationToken` (
   PRIMARY KEY (`Id`));
 
 CREATE TABLE `Subscription` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `UserId` INT NOT NULL,
   `Endpoint` VARCHAR(2000) NOT NULL,
   `PublicKey` VARCHAR(2000) NOT NULL,

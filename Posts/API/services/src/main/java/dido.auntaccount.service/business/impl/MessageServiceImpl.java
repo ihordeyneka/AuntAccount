@@ -7,6 +7,7 @@ import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.entities.Message;
 import dido.auntaccount.entities.User;
 import dido.auntaccount.service.business.MessageService;
+import dido.auntaccount.service.business.SubscriptionService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -27,6 +28,8 @@ public class MessageServiceImpl implements MessageService {
     @Inject
     private UserDAO userDAO;
 
+    @Inject
+    private SubscriptionService subscriptionService;
 
     @Override
     public MessageDTO getMessage(Long id) {

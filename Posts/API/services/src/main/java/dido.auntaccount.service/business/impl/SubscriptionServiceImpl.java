@@ -34,11 +34,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
             Security.addProvider(new BouncyCastleProvider());
             pushService.setPublicKey(Utils.loadPublicKey(PUBLIC_KEY));
             pushService.setPrivateKey(Utils.loadPrivateKey(PRIVATE_KEY));
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (NoSuchProviderException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
     }

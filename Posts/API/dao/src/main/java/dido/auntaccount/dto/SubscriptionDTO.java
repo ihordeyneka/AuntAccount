@@ -4,7 +4,6 @@ import dido.auntaccount.entities.Subscription;
 
 public class SubscriptionDTO {
 
-
     private String endpoint;
 
     private String publicKey;
@@ -12,6 +11,9 @@ public class SubscriptionDTO {
     private String auth;
 
     private Long userId;
+
+    public SubscriptionDTO() {
+    }
 
     public SubscriptionDTO(Subscription s) {
         this.endpoint = s.getEndpoint();

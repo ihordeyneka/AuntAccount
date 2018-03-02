@@ -37,6 +37,8 @@ import bootstrap from "bootstrap"
 import jsrender from "jsrender"
 import bootstrapValidator from "bootstrap-validator"
 
+import "../pages/subscription.js"
+
 window.jQuery = $;
 jsrender($);
 

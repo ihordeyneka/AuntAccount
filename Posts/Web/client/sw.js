@@ -2,3 +2,27 @@
 self.addEventListener('fetch', function(event) {
   /** An empty fetch handler! */
 });
+
+//TODO show message
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+  console.log('[Service Worker] Push had this data: "${event.data.text()}"');
+
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+//TODO: redirect to message with ID
+self.addEventListener('notificationclick', function(event) {
+  console.log('[Service Worker] Notification click Received.');
+
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('http://localhost:8282/#post')
+  );
+});
