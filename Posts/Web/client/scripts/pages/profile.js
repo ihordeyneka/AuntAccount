@@ -27,7 +27,7 @@ define(["../../views/profile.html", "../core/globals", "../core/didoauth", "../c
     }).done(function(data) {
       if (data == null) {
         self.notificationArea.error({
-          message: "User profile was not found."
+          message: $.i18n('UserProfileNotFound')
         });
       } else {
         self.profileData = data;
@@ -54,8 +54,9 @@ define(["../../views/profile.html", "../core/globals", "../core/didoauth", "../c
 
   var initPictureUpload = function() {
     self.pictureUpload = $("#inputPicture").fileinput({
-      browseLabel: 'Change Picture',
+      browseLabel: $.i18n('ChangePicture'),
       browseIcon: '<i class="fa fa-user"></i>',
+      msgPlaceholder: $.i18n('SelectFile'),
       showUpload: false,
       showRemove: false,
       showPreview: false,
@@ -93,7 +94,7 @@ define(["../../views/profile.html", "../core/globals", "../core/didoauth", "../c
               self.pictureUpload.fileinput("upload");
 
             self.notificationArea.success({
-              message: "Profile is being updated, you should be able to see updated changes soon."
+              message: $.i18n('ProfileUpdating')
             });
           }).fail(function(result) {
             self.notificationArea.error();

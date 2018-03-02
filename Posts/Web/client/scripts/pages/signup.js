@@ -6,7 +6,7 @@ define(["../../views/signup.html", "../core/globals", "../core/didoauth", "../na
   didoauth.config.signUp = function() {
     if (self.notificationArea) {
       self.notificationArea.success({
-        message: "Successfully signed up. You can now log in with your account."
+        message: $.i18n('SignUpSuccessful')
       });
     }
 

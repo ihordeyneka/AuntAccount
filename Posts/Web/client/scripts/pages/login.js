@@ -50,7 +50,7 @@ define(["../../views/login.html", "../core/globals", "../core/config"], function
               data: JSON.stringify(passwordData)
           }).done(function(data) {
             notificationArea.success({
-              message: "You should receive an email with further instructions to reset your password soon."
+              message: $.i18n('PasswordResetConfirmed')
             });
           }).fail(function(result) {
             notificationArea.error();

@@ -1,4 +1,4 @@
-define(["fileinput", "../core/globals"], function(fileinputControl, globals) {
+define(["fileinput", "../core/globals", "../core/resources"], function(fileinputControl, globals, resources) {
   return function(element, settings) {
     var self = {};
     settings = settings || {};
@@ -7,16 +7,17 @@ define(["fileinput", "../core/globals"], function(fileinputControl, globals) {
 
     var html =
       '<div class="input-group form-group message-input">\
-        <input type="text" class="form-control aa-new-reply-input" placeholder="Type your reply here">\
+        <input type="text" class="form-control aa-new-reply-input" data-i18n="[placeholder]MessageInputPlaceholder" placeholder="Type your reply here">\
         <span class="input-group-btn">\
-          <button class="btn btn-default aa-send-reply-button" type="button" data-toggle="tooltip" title="Reply">\
+          <button class="btn btn-default aa-send-reply-button" type="button" data-toggle="tooltip" data-i18n="[title]Reply" title="Reply">\
             <i class="fa fa-paper-plane"></i>\
           </button>\
-          <input type="file" class="form-control input aa-message-upload-picture" placeholder="Upload" />\
+          <input type="file" class="form-control input aa-message-upload-picture" data-i18n="[placeholder]Upload" placeholder="Upload" />\
         </span>\
       </div>';
 
     element.html(html);
+    resources.translate();
 
     self.input = self.element.find(".aa-new-reply-input");
     self.button = self.element.find(".aa-send-reply-button");
@@ -67,7 +68,7 @@ define(["fileinput", "../core/globals"], function(fileinputControl, globals) {
     self.input
       .focus()
       .keypress(function(event) {
-        if(event.keyCode == 13) { //Enter Key Press event handler
+        if(event.keyCode == 13) { //"Enter" Key Press event handler
           sendReply();
         }
       });

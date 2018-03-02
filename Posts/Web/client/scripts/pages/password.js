@@ -35,7 +35,7 @@ define(["../../views/password.html", "../core/globals", "../core/config"], funct
               data: JSON.stringify(passwordData)
           }).done(function(data) {
             self.notificationArea.success({
-              message: "Password has been changed."
+              message: $.i18n('PasswordChanged')
             });
           }).fail(function(result) {
             self.notificationArea.error();

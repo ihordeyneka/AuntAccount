@@ -51,15 +51,32 @@ define(["jquery", "moment"], function($, moment) {
     return moment(unix).format("MM/DD/YYYY HH:mm");
   }
 
+  self.formatString = function (str) {
+    var args = arguments,
+      flag = true,
+      i = 1;
+
+    str = str.replace(/%s/g, function () {
+      var arg = args[i++];
+
+      if (typeof arg === 'undefined') {
+        flag = false;
+        return '';
+      }
+      return arg;
+    });
+    return flag ? str : '';
+  };
+
   $.fn.notificationArea = function(options) {
     var settings = {
       element: this,
-      successHeader: "Success!",
-      successMessage: "The operation was successful.",
-      validationWarningHeader: "Warning!",
-      validationWarningMessage: "One or more validation failed, please fix the errors and try again.",
-      errorHeader: "Error!",
-      errorMessage: "An error has occurred, please try again."
+      successHeader: $.i18n('Success'),
+      successMessage: $.i18n('OperationSuccessful'),
+      validationWarningHeader: $.i18n('Warning'),
+      validationWarningMessage: $.i18n('ValidationError'),
+      errorHeader: $.i18n('Error'),
+      errorMessage: $.i18n('ErrorOccurred')
     };
     $.extend(true, settings, options);
 

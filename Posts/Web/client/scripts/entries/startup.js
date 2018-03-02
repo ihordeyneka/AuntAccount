@@ -71,8 +71,9 @@ domReady(function(){
     languageSelector.element.on("localeChanged", function(e, data) {
       globals.loading($('body'), true);
       resources.setLocale(data.locale).done(function() {
-        resources.translate();
-        globals.loading($('body'), false);
+        //resources.translate();
+        //globals.loading($('body'), false);
+        window.location.reload();
       });
     });
 

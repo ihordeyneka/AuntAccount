@@ -14,7 +14,10 @@ define(["../../views/alerts.html", "../core/globals", "../core/config", "../comp
       pageSize: 5,
       pageList: [5],
       sidePagination: 'server',
-      url: config.apiRoot + '/users/' + userId + '/notifications'
+      url: config.apiRoot + '/users/' + userId + '/notifications',
+      formatShowingRows: function (pageFrom, pageTo, totalRows) { return globals.formatString($.i18n('FormatShowingRows'), pageFrom, pageTo, totalRows); },
+      formatLoadingMessage: function () { return $.i18n('FormatLoadingMessage'); },
+      formatNoMatches: function () { return $.i18n('FormatNoMatches'); }
     });
 
     $("#gridAlerts").on("click-row.bs.table", function(row, $element, field) {
