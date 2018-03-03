@@ -5,6 +5,7 @@ import dido.auntaccount.dao.OfferDAO;
 import dido.auntaccount.dao.UserDAO;
 import dido.auntaccount.dto.*;
 import dido.auntaccount.entities.*;
+import dido.auntaccount.service.business.MessageService;
 import dido.auntaccount.service.business.OfferService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
@@ -26,7 +27,7 @@ public class OfferServiceImpl implements OfferService {
     private OfferDAO offerDAO;
 
     @Inject
-    private MessageDAO messageDAO;
+    private MessageService messageService;
 
     @Inject
     private UserDAO userDAO;
@@ -107,13 +108,7 @@ public class OfferServiceImpl implements OfferService {
         message.setCreationDate(DateTime.now().toDate())
                 .setOfferId(offerId)
                 .setSender(user);
-        Message savedMessage = null;
-        try {
-            savedMessage = messageDAO.save(message);
-        } catch (Exception e) {
-            logger.log(Level.ERROR, "Couldn't save message", e);
-        }
-        return new MessageDTO(savedMessage);
+      return messageService.saveMessage(message);
     }
 
 }
