@@ -24,7 +24,7 @@ CREATE TABLE `dido`.`PostTag` (
   PRIMARY KEY (`PostId`,`TagId`)
 );
 
-CREATE TABLE `USER` (
+CREATE TABLE `dido`.`USER` (
   `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(45) CHARACTER SET 'utf8' NOT NULL,
   `LastName` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `dido`.`SellerReview` (
   PRIMARY KEY (`Id`)
 );
 
-CREATE TABLE `LOCATION` (
+CREATE TABLE `dido`.`LOCATION` (
   `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `Latitude` varchar(45) NOT NULL,
   `Longitude` varchar(45) NOT NULL,
@@ -108,20 +108,20 @@ CREATE TABLE `dido`.`Message` (
   PRIMARY KEY (`Id`)
 );
 
-CREATE TABLE `TOKEN` (
+CREATE TABLE `dido`.`TOKEN` (
   `Token` varchar(255) NOT NULL,
   `ExpirationDate` datetime NOT NULL,
   PRIMARY KEY (`Token`),
   UNIQUE KEY `Token_UNIQUE` (`Token`)
 );
 
-CREATE TABLE `RefreshToken` (
+CREATE TABLE `dido`.`RefreshToken` (
   `Token` varchar(255) NOT NULL,
   `ExpirationDate` datetime NOT NULL,
   PRIMARY KEY (`Token`)
 );
 
-CREATE TABLE `SELLER` (
+CREATE TABLE `dido`.`SELLER` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Rate` float DEFAULT NULL,
   `UserId` int(11) NOT NULL,
@@ -134,13 +134,13 @@ CREATE TABLE `SELLER` (
   PRIMARY KEY (`Id`)
 );
 
-CREATE TABLE `VerificationToken` (
+CREATE TABLE `dido`.`VerificationToken` (
   `Token` VARCHAR(45) NOT NULL,
   `UserId` BIGINT(10) NOT NULL,
   `ExpirationDate` datetime NOT NULL,
-  PRIMARY KEY (`Id`));
+  PRIMARY KEY (`Token`));
 
-CREATE TABLE `Subscription` (
+CREATE TABLE `dido`.`Subscription` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `UserId` INT NOT NULL,
   `Endpoint` VARCHAR(2000) NOT NULL,
