@@ -1,12 +1,10 @@
 package dido.auntaccount.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "RefreshToken")
 public class RefreshToken {
 
     @Id

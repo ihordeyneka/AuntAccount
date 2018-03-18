@@ -3,6 +3,7 @@ package dido.auntaccount.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name="Offer")
 @SqlResultSetMapping(
         name = "OfferReplyCountMapping",
         entities = {@EntityResult(entityClass = Offer.class)},

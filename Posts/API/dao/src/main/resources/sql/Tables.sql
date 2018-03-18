@@ -110,6 +110,7 @@ CREATE TABLE `dido`.`Message` (
 
 CREATE TABLE `TOKEN` (
   `Token` varchar(255) NOT NULL,
+  `UserId` INT NOT NULL,
   `ExpirationDate` datetime NOT NULL,
   PRIMARY KEY (`Token`),
   UNIQUE KEY `Token_UNIQUE` (`Token`)
@@ -117,6 +118,7 @@ CREATE TABLE `TOKEN` (
 
 CREATE TABLE `RefreshToken` (
   `Token` varchar(255) NOT NULL,
+  `UserId` INT NOT NULL,
   `ExpirationDate` datetime NOT NULL,
   PRIMARY KEY (`Token`)
 );

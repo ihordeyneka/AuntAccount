@@ -3,6 +3,7 @@ package dido.auntaccount.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name="Location")
 public class Location {
 
     @Id

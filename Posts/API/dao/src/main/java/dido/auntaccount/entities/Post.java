@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-
+@Table(name="Post")
 @SqlResultSetMapping(
         name = "PostOfferCountMapping",
         entities = {@EntityResult(entityClass = Post.class)},
