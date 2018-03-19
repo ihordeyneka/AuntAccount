@@ -16,7 +16,9 @@ define([], function() {
       self.element.val(name);
     }
 
-    import("./google_api" /* webpackChunkName: "chunk-googleapi" */).then(self.initAutocomplete);
+    import("./google_api" /* webpackChunkName: "chunk-googleapi" */).then(function () {
+      self.initAutocomplete();
+    });
 
     self.initAutocomplete = function() {
       var input = self.element.get(0);
