@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class JsonMapper {
 
@@ -28,13 +29,8 @@ public class JsonMapper {
         return null;
     }
 
-    public byte[] sellerDTOToJson(SellerDTO sellerDTO) {
-        try {
-            return mapper.writeValueAsBytes(sellerDTO);
-        } catch (JsonProcessingException e) {
-            logger.log(Level.ERROR, "Couldn't get json from seller", e);
-        }
-        return null;
+    public Map<String, Object> sellerDTOToJson(SellerDTO sellerDTO) {
+        return mapper.convertValue(sellerDTO, Map.class);
     }
 
     public UserProfileDTO jsonFacebookToUserDTO(String json) {

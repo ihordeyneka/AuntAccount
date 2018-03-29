@@ -80,15 +80,28 @@ public class SearchSellerServiceImpl implements SearchSellerService {
             }
     }';
 
-    curl -XGET 'localhost:9200/dido/seller/_search?pretty' -d'
+    curl -XGET 'localhost:9200/dido/seller/_search?pretty' -H 'Content-Type: application/json' -d'
     {
         "query" : {
         "bool" :{
             "should":[
-            {"match":{"tagsList":"dogs"}},
-            {"match":{"tagsList":"cats"}}
+            {"match":{"tagList":"boys"}},
+            {"match":{"tagList":"girls"}}
             ],
-            "minimum_should_match":"1<80%"
+            "minimum_should_match":"1<50%"
+        }
+    }
+    }';
+
+
+    curl -XGET 'localhost:9200/dido/seller/_search?pretty' -H 'Content-Type: application/json' -d'
+    {
+        "query" : {
+        "terms_set" :{
+            "tagList":{
+            "terms":["food","dogs","cats", "lll"],
+            "minimum_should_match_script": {"source" : "1"}
+            }
         }
     }
     }';
@@ -150,13 +163,14 @@ public class SearchSellerServiceImpl implements SearchSellerService {
     }
     }';
 
-     curl -XGET 'localhost:9200/dido/seller/_search?pretty' -d'
+     curl -XGET 'localhost:9200/dido/seller/_search?pretty'  -H 'Content-Type: application/json' -d'
     {
         "query" : {
         "bool" :{
             "should":[
-            {"match":{"tagList":"phone"}},
-            {"match":{"tagList":"cell"}}
+            {"match":{"tagList":"cats"}},
+            {"match":{"tagList":"food"}},
+            {"match":{"tagList":"dogs"}}
             ],
             "minimum_should_match":"1<80%",
              "filter" : {
@@ -171,6 +185,27 @@ public class SearchSellerServiceImpl implements SearchSellerService {
         }
     }
     }';
+
+
+     curl -XGET 'localhost:9200/dido/seller/_search?pretty'  -H 'Content-Type: application/json' -d'
+    {
+        "query" : {
+        "bool" :{
+            "should":[
+            {"match":{"tagList":"food"}},
+            {"match":{"tagList":"dogs"}},
+            {"match":{"tagList":"cats"}}
+            ]
+        }
+    }
+    }';
+
+
+curl -XGET 'localhost:9200/dido/_search?pretty' -H 'Content-Type: application/json'  -d ' {
+     "query" : {
+         "match_all" : {}
+     }
+ }'
 
 
 curl -XPOST 'localhost:9200/dido/seller/946/_update?pretty' -H 'Content-Type: application/json' -d'
@@ -211,6 +246,100 @@ curl -XPOST 'localhost:9200/dido/seller/946/_update?pretty' -H 'Content-Type: ap
         }
         }'
 
+curl -s -XGET 'localhost:9200/dido/_nodes/http?pretty=1'
+
+        curl -XPUT 'localhost:9200/dido/seller/1/?pretty' -H 'Content-Type: application/json' -d'
+        {
+        "doc":{
+        "id":946,
+        "name":"Dogs food",
+        "userId":928,
+        "phone":"0961818306",
+        "photo":null,
+        "website":"www.cats.com",
+        "rate":0.0,
+        "creationDate":1497288689356,
+        "location":{
+        "id":58,
+        "latitude":49.83968300000001,
+        "longitude":24.029717000000005,
+        "city":"Львів",
+        "region1":"Львівська область",
+        "region2":null,
+        "name":"Львів",
+        "streetNumber":null,
+        "route":null,
+        "neighborhood":null,
+        "country":{
+        "id":28,
+        "country":"Україна"
+        },
+        "radius":0.0
+        },
+        "tags":"food, dogs, cats",
+        "posts":[],
+        "tagList":[
+        "food",
+        "dogs",
+        "cats"
+        ]
+        }
+        }'
+
+{
+  "bool" : {
+    "should" : [
+      {
+        "match" : {
+          "tagList" : {
+            "query" : "dogs",
+            "operator" : "OR",
+            "prefix_length" : 0,
+            "max_expansions" : 50,
+            "fuzzy_transpositions" : true,
+            "lenient" : false,
+            "zero_terms_query" : "NONE",
+            "auto_generate_synonyms_phrase_query" : true,
+            "boost" : 1.0
+          }
+        }
+      },
+      {
+        "match" : {
+          "tagList" : {
+            "query" : " food",
+            "operator" : "OR",
+            "prefix_length" : 0,
+            "max_expansions" : 50,
+            "fuzzy_transpositions" : true,
+            "lenient" : false,
+            "zero_terms_query" : "NONE",
+            "auto_generate_synonyms_phrase_query" : true,
+            "boost" : 1.0
+          }
+        }
+      },
+      {
+        "match" : {
+          "tagList" : {
+            "query" : " cats",
+            "operator" : "OR",
+            "prefix_length" : 0,
+            "max_expansions" : 50,
+            "fuzzy_transpositions" : true,
+            "lenient" : false,
+            "zero_terms_query" : "NONE",
+            "auto_generate_synonyms_phrase_query" : true,
+            "boost" : 1.0
+          }
+        }
+      }
+    ],
+    "adjust_pure_negative" : true,
+    "minimum_should_match" : "1<80%",
+    "boost" : 1.0
+  }
+}
 
     */
 
@@ -222,9 +351,11 @@ curl -XPOST 'localhost:9200/dido/seller/946/_update?pretty' -H 'Content-Type: ap
         tags.stream().forEach(t -> boolQueryBuilder.should(QueryBuilders.matchQuery(TAGS_FIELD, t)));
 
         boolQueryBuilder.minimumShouldMatch("1<80%");
+/*
 
         LocationSearchQuery locationSearchQuery = LocationSearchQuery.getSearchQuery(location);
         locationSearchQuery.filter(boolQueryBuilder);
+*/
 
         SearchResponse response = clientService.getClient().prepareSearch(INDEX)
                 .setTypes(SELLER_TYPE)
@@ -234,7 +365,7 @@ curl -XPOST 'localhost:9200/dido/seller/946/_update?pretty' -H 'Content-Type: ap
                 .execute()
                 .actionGet();
         SearchHit[] hits = response.getHits().getHits();
-        Arrays.stream(hits).forEach(h -> sellerIds.add(Long.valueOf(h.getSource().get(ID_FIELD).toString())));
+        Arrays.stream(hits).forEach(h -> sellerIds.add(Long.valueOf(h.getSourceAsMap().get(ID_FIELD).toString())));
         return sellerIds;
     }
 

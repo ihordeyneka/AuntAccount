@@ -10,7 +10,7 @@ self.addEventListener('push', function(event) {
 
   const title = 'Push Codelab';
   const options = {
-    body: ${event.data.text()}
+    body: event.data.text()
   };
 
   event.waitUntil(self.registration.showNotification(title, options));

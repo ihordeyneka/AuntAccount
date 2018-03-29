@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.net.InetAddress;
@@ -34,7 +34,7 @@ public class SearchClientServiceImpl implements SearchClientService {
 
             try {
                 TransportClient transportClient = new PreBuiltTransportClient(Settings.EMPTY)
-                        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+                        .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
 
                 if (transportClient.connectedNodes().size() == 0) {
                     logger.error("There are no active nodes available for the transport, it will be automatically added once nodes are live!");

@@ -1,7 +1,7 @@
 create database if not exists dido  DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;;
 
 CREATE TABLE `dido`.`Post` (
-  `Id` bigint(20) NOT NULL,
+  `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserId` bigint(10) NOT NULL,
   `Description` varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
   `LocationId` bigint(10) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE `dido`.`Post` (
 );
 
 CREATE TABLE `dido`.`Tag` (
-  `Id` bigint(10) NOT NULL,
+  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `Tag` varchar(20) CHARACTER SET 'utf8' NOT NULL,
   PRIMARY KEY (`Id`)
 );
@@ -43,7 +43,7 @@ CREATE TABLE `dido`.`USER` (
 
 
 CREATE TABLE `dido`.`SellerReview` (
-  `Id` BIGINT(10) NOT NULL,
+  `Id` BIGINT(10) NOT NULL AUTO_INCREMENT,
   `Description` VARCHAR(45) CHARACTER SET 'utf8' NULL,
   `Rate` INT NULL,
   `UserId` BIGINT(10) NOT NULL,
@@ -73,8 +73,9 @@ CREATE TABLE `dido`.`LOCATION` (
 
 
 CREATE TABLE `dido`.`Country` (
+  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `Country` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL,
-  PRIMARY KEY (`Country`)
+  PRIMARY KEY (`Id`)
 );
 
 
@@ -91,14 +92,14 @@ CREATE TABLE `dido`.`SellerPost` (
 );
 
 CREATE TABLE `dido`.`Offer` (
-     `Id`         BIGINT(10) NOT NULL,
+     `Id`         BIGINT(10) NOT NULL AUTO_INCREMENT,
      `PostId`     BIGINT(10) NOT NULL,
      `SellerId` BIGINT(10) NOT NULL,
      PRIMARY KEY (`Id`)
   ); 
 
 CREATE TABLE `dido`.`Message` (
-  `Id` bigint(10) NOT NULL,
+  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
   `SenderId` bigint(10) NOT NULL,
   `OfferId` bigint(10) NOT NULL,
   `Description` varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
@@ -153,7 +154,7 @@ CREATE TABLE `dido`.`Subscription` (
 
 --fix post table - remove latitude and longitude, add sellerTag table
 
-insert into COUNTRY (id, country) values (1, "Ukraine");
+insert into dido.Country (id, country) values (1, "Ukraine");
 insert into LOCATION (id, city, latitude, longitude, region, street, countryId) values (1, 'Lviv', 5, 4, 'Lvivska', 'Perf', 1);
 insert into USER (id, creationdate, email, issupplier, name, password, phone, website, locationId) values (1, now(), 'orysia@ua', 0, 'orysia', 'pass', '096123', 'www', 1);
 insert into USER (id, creationdate, email, issupplier, name, password, phone, website, locationId) values (2, now(), 'ihor@ua', 0, 'ihor', 'pass', '096123', 'www', 1);
