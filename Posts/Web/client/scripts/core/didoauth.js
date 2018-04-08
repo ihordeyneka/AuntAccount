@@ -8,7 +8,7 @@ define(["jquery", "./persistence"], function ($, persistence) {
   var ACCESS_TOKEN_KEY = 'access-token';
   var REFRESH_TOKEN_KEY = 'refresh-token';
   var USER_DATA_KEY = 'current-user';
-  var TEMPORARY_USER_ID = "temp-user-id";
+  var ANONYMOUS = 'Anonymous';
   var ERROR_EMAIL_SIGNIN = 1;
   var ERROR_REFRESH_TOKEN = 2;
   var ERROR_EMAIL_SIGNUP = 3;
@@ -51,16 +51,6 @@ define(["jquery", "./persistence"], function ($, persistence) {
     };
   };
 
-  Auth.prototype.getTemporaryUserId = function() {
-    var id = persistence.retrieveData(TEMPORARY_USER_ID);
-    if (!id) {
-      var rand = Math.floor(Math.random() * 100000000000000000); //create better temporary user id
-      id = -rand; //temporary user IDs are negative numbers long enough to avoid guesses
-      persistence.persistData(TEMPORARY_USER_ID, id);
-    }
-    return id;
-  }
-
   Auth.prototype.configure = function(opts, reset) {
     // destroy all session data
     if (reset) {
@@ -79,9 +69,6 @@ define(["jquery", "./persistence"], function ($, persistence) {
     var user = persistence.retrieveData(USER_DATA_KEY);
     if (user)
       root.didoauth.setCurrentUser(user, false);
-    else {
-      this.user.id = root.didoauth.getTemporaryUserId();
-    }
 
     // set configured
     this.config = $.extend({}, this.configBase, opts);
@@ -110,12 +97,10 @@ define(["jquery", "./persistence"], function ($, persistence) {
     for (var key in this.user) {
       delete this.user[key];
     }
-    this.user.id = root.didoauth.getTemporaryUserId();
 
     persistence.deleteData(ACCESS_TOKEN_KEY);
     persistence.deleteData(REFRESH_TOKEN_KEY);
     persistence.deleteData(USER_DATA_KEY);
-    persistence.deleteData(TEMPORARY_USER_ID);
   };
 
   Auth.prototype.setCurrentUser = function(user, persist) {
@@ -124,9 +109,17 @@ define(["jquery", "./persistence"], function ($, persistence) {
       delete this.user[key];
     }
 
+    //set temporary user id if passed value is null
+    if (user == null) {
+      var rand = Math.floor(Math.random() * 100000000000000000); //create better temporary user id
+      var temporaryId = -rand;
+      user = { id: temporaryId }; //temporary user IDs are negative numbers long enough to avoid guesses
+      persistence.persistData(ACCESS_TOKEN_KEY, ANONYMOUS + temporaryId);
+    }
+
     // save user data, preserve bindings to original user object
     $.extend(this.user, user);
-    this.user.signedIn = true;
+    this.user.signedIn = this.user.id > 0;
 
     if (persist)
       persistence.persistData(USER_DATA_KEY, JSON.stringify(user));
