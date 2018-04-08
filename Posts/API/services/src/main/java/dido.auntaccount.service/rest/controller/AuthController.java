@@ -39,7 +39,7 @@ public class AuthController extends Controller {
 
     @GET
     @Path("/google")
-    public Response authGoogle() throws URISyntaxException, OAuthSystemException {
+    public Response authGoogle() throws OAuthSystemException {
 
         OAuthClientRequest request = OAuthClientRequest
                 .authorizationLocation(OAuthProviderType.GOOGLE.getAuthzEndpoint())

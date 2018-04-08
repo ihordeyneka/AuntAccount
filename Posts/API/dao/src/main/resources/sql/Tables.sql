@@ -145,7 +145,7 @@ CREATE TABLE `dido`.`VerificationToken` (
 
 CREATE TABLE `dido`.`Subscription` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
+  `UserId` BIGINT(255) NOT NULL,
   `Endpoint` VARCHAR(2000) NOT NULL,
   `PublicKey` VARCHAR(2000) NOT NULL,
   `Auth` VARCHAR(2000) NOT NULL,
