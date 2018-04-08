@@ -166,7 +166,7 @@ public class TokenController extends Controller {
                 .setClientSecret(provider.getClientSecret())
                 .setRedirectURI(provider.getRedirectURI())
                 .setCode(code)
-                .buildBodyMessage();
+                .buildQueryMessage();
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 
