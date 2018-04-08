@@ -1,4 +1,4 @@
-define(["../../views/post.html", "../core/globals", "../core/config", "../components/grid"], function(source, globals, config, grid) {
+define(["../../views/postoffers.html", "../core/globals", "../core/config", "../components/grid"], function(source, globals, config, grid) {
   var self = {};
 
   self.source = source;

@@ -24,9 +24,6 @@ define(["../../views/login.html", "../core/globals", "../core/config"], function
       $.didoauth.emailSignIn({
         username: $("#inputEmail").val(),
         password: $("#inputPassword").val(),
-        grant_type: "password",
-        client_secret: config.clientSecret,
-        client_id: config.clientId
       });
     });
 
