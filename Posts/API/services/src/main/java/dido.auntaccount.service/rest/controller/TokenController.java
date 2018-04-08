@@ -180,7 +180,7 @@ public class TokenController extends Controller {
                 .setClientSecret(provider.getClientSecret())
                 .setRedirectURI(provider.getRedirectURI())
                 .setCode(code)
-                .buildQueryMessage();
+                .buildBodyMessage();
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 

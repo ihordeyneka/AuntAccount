@@ -1,7 +1,6 @@
 package dido.auntaccount.service.rest;
 
 import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
-import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.dto.UserProfileDTO;
 import dido.auntaccount.mappers.JsonMapper;
 import org.apache.oltu.oauth2.client.OAuthClient;
