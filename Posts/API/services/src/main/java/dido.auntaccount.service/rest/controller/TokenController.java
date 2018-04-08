@@ -1,6 +1,7 @@
 package dido.auntaccount.service.rest.controller;
 
 import dido.auntaccount.dido.auntaccount.utils.OAuthRequestWrapper;
+import dido.auntaccount.dido.auntaccount.utils.PropertiesHandler;
 import dido.auntaccount.dto.RefreshTokenDTO;
 import dido.auntaccount.dto.UserDTO;
 import dido.auntaccount.dto.UserProfileDTO;
@@ -52,6 +53,12 @@ public class TokenController extends Controller {
     public static final String EXPIRES_IN = "expires_in";
     public static final String FACEBOOK = "fb";
     public static final String GOOGLE = "google";
+    public static final String SERVER_GRANT_TYPE = "grant_type";
+    public static final String SERVER_CLIENT_SECRET = "client_secret";
+    public static final String SERVER_CLIENT_ID = "client_id";
+    public static final String SERVER_CLIENT_ID_VALUE = PropertiesHandler.getProperty("server.client.id");
+    public static final String SERVER_CLIENT_SECRET_VALUE = PropertiesHandler.getProperty("server.client.secret");
+    public static final String SERVER_GRANT_TYPE_VALUE = PropertiesHandler.getProperty("server.grant.type");
 
     @Inject
     PasswordService passwordService;
@@ -90,9 +97,10 @@ public class TokenController extends Controller {
     @POST
     @Consumes("application/x-www-form-urlencoded")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response authorize(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws URISyntaxException, OAuthSystemException {
+    public Response authorize(MultivaluedMap<String, String> form, @Context HttpServletRequest request) throws OAuthSystemException {
 
         UserProfileDTO userDTO = null;
+        appendOAuthRequestParams(form);
 
         try {
             OAuthTokenRequest oauthRequest = new OAuthTokenRequest(new OAuthRequestWrapper(request, form));
@@ -108,6 +116,12 @@ public class TokenController extends Controller {
                 .header(ACCESS_TOKEN, tokens.getAccessToken())
                 .header(REFRESH_TOKEN, tokens.getRefreshToken())
                 .header(EXPIRES_IN, tokens.getAccessExpirationDate()).entity(userDTO).build();
+    }
+
+    private void appendOAuthRequestParams(MultivaluedMap<String, String> form) {
+        form.add(SERVER_GRANT_TYPE, SERVER_GRANT_TYPE_VALUE);
+        form.add(SERVER_CLIENT_SECRET, SERVER_CLIENT_SECRET_VALUE);
+        form.add(SERVER_CLIENT_ID, SERVER_CLIENT_ID_VALUE);
     }
 
     @POST
@@ -166,7 +180,7 @@ public class TokenController extends Controller {
                 .setClientSecret(provider.getClientSecret())
                 .setRedirectURI(provider.getRedirectURI())
                 .setCode(code)
-                .buildQueryMessage();
+                .buildBodyMessage();
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 
