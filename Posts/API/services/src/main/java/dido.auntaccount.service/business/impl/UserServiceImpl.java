@@ -163,6 +163,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = new User();
             user.setAnonymous(true);
+            user.setCreationDate(new Date(DateTime.now().getMillis()));
             return userDAO.save(user).getId();
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save anonymous user", e);
