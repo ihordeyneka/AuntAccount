@@ -2,6 +2,8 @@ package dido.auntaccount.service.filter;
 
 import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.service.business.TokenService;
+import dido.auntaccount.service.business.UserService;
+import dido.auntaccount.service.rest.Tokens;
 import dido.auntaccount.service.rest.controller.TokenController;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
@@ -28,6 +30,7 @@ import java.util.Date;
 public class AuthenticationFilter implements ContainerRequestFilter {
 
     public static final String LOGGED_IN_USER = "loggedInUser";
+    public static final String ANONYMOUS_TOKEN_PREFIX = "Anonymous";
 
     @Context
     private HttpServletRequest request;
@@ -35,12 +38,17 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     @Inject
     private TokenService tokenService;
 
+    @Inject
+    private UserService userService;
+
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext) {
         try {
             OAuthAccessResourceRequest oauthRequest = new OAuthAccessResourceRequest(request, ParameterStyle.HEADER);
 
             String accessToken = oauthRequest.getAccessToken();
+
+            accessToken = handleAnonymousUser(accessToken);
 
             TokenDTO tokenDTO = validateToken(accessToken);
             final MultivaluedMap<String, String> headers = requestContext.getHeaders();
@@ -50,6 +58,15 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         } catch (OAuthProblemException | OAuthSystemException e) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
         }
+    }
+
+    private String handleAnonymousUser(String accessToken) throws OAuthSystemException {
+        boolean anonymousUser = accessToken.startsWith(ANONYMOUS_TOKEN_PREFIX);
+        if (anonymousUser) {
+            Long userId = userService.saveAnonymousUser();
+            return tokenService.issueNativeTokens(userId).getAccessToken();
+        }
+        return accessToken;
     }
 
     private TokenDTO validateToken(String token) throws OAuthProblemException {

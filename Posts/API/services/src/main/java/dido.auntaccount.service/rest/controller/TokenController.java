@@ -46,8 +46,6 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 @Path("/token")
 public class TokenController extends Controller {
 
-    private static final int ACCESS_EXPIRATION_HOURS = 1;
-    private static final int REFRESH_EXPIRATION_YEARS = 1;
     public static final String ACCESS_TOKEN = "access-token";
     public static final String REFRESH_TOKEN = "refresh-token";
     public static final String EXPIRES_IN = "expires_in";
@@ -110,7 +108,7 @@ public class TokenController extends Controller {
             return getResponseBuilder(UNAUTHORIZED.getStatusCode()).entity(ex).build();
         }
 
-        Tokens tokens = issueNativeTokens(userDTO.getId());
+        Tokens tokens = tokenService.issueNativeTokens(userDTO.getId());
 
         return getResponseBuilder()
                 .header(ACCESS_TOKEN, tokens.getAccessToken())
@@ -139,7 +137,7 @@ public class TokenController extends Controller {
 
         String accessToken = oauthIssuerImpl.accessToken();
 
-        long accessExpirationDate = getAccessExpirationDate();
+        long accessExpirationDate = tokenService.getAccessExpirationDate();
         tokenService.saveAccessToken(accessToken, accessExpirationDate, storedRefreshToken.getUserId());
 
         return getResponseBuilder()
@@ -196,7 +194,7 @@ public class TokenController extends Controller {
         user.setCreationDate(new Date(DateTime.now().getMillis()));
 
         UserDTO savedUser = userService.saveUser(user);
-        Tokens tokens = issueNativeTokens(savedUser.getId());
+        Tokens tokens = tokenService.issueNativeTokens(savedUser.getId());
 
         return getResponseBuilder()
                 .header(ACCESS_TOKEN, tokens.getAccessToken())
@@ -221,28 +219,6 @@ public class TokenController extends Controller {
         return user;
     }
 
-    private Tokens issueNativeTokens(Long userId) throws OAuthSystemException {
 
-        OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
-
-        String accessToken = oauthIssuerImpl.accessToken();
-        String refreshToken = oauthIssuerImpl.refreshToken();
-
-        long accessExpirationDate = getAccessExpirationDate();
-        tokenService.saveAccessToken(accessToken, accessExpirationDate, userId);
-
-        long refreshExpirationDate = getRefreshExpirationDate();
-        tokenService.saveRefreshToken(refreshToken, refreshExpirationDate, userId);
-
-        return new Tokens(accessToken, accessExpirationDate, refreshToken, refreshExpirationDate);
-    }
-
-    private static long getRefreshExpirationDate() {
-        return DateTime.now().plusYears(REFRESH_EXPIRATION_YEARS).getMillis();
-    }
-
-    private static long getAccessExpirationDate() {
-        return DateTime.now().plusHours(ACCESS_EXPIRATION_HOURS).getMillis();
-    }
 
 }

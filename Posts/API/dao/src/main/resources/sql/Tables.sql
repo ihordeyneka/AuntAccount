@@ -37,6 +37,7 @@ CREATE TABLE `dido`.`USER` (
   `CreationDate` datetime NOT NULL,
   `ClientId` varchar(45) DEFAULT NULL,
   `Enabled` tinyint(1) NOT NULL,
+  `Anonymous` tinyint(1) NOT NULL,
   PRIMARY KEY (`Id`)
 );
 

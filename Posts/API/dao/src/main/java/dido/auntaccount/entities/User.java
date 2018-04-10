@@ -20,6 +20,7 @@ public class User implements Serializable {
     private Date creationDate;
     private String clientId;
     private boolean enabled;
+    private boolean anonymous;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LocationId")
@@ -112,6 +113,15 @@ public class User implements Serializable {
 
     public User setEnabled(boolean enabled) {
         this.enabled = enabled;
+        return this;
+    }
+
+    public boolean isAnonymous() {
+        return anonymous;
+    }
+
+    public User setAnonymous(boolean anonymous) {
+        this.anonymous = anonymous;
         return this;
     }
 }

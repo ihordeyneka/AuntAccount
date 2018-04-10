@@ -2,6 +2,8 @@ package dido.auntaccount.service.business;
 
 import dido.auntaccount.dto.RefreshTokenDTO;
 import dido.auntaccount.dto.TokenDTO;
+import dido.auntaccount.service.rest.Tokens;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 
 public interface TokenService {
 
@@ -15,4 +17,7 @@ public interface TokenService {
 
     void deleteToken(String token);
 
+    Tokens issueNativeTokens(Long userId) throws OAuthSystemException;
+
+    long getAccessExpirationDate();
 }

@@ -29,4 +29,6 @@ public interface UserService {
     VerificationTokenDTO getVerificationToken(String token);
 
     void activateUser(UserProfileDTO userDTO);
+
+    Long saveAnonymousUser();
 }

@@ -4,6 +4,7 @@ import dido.auntaccount.dto.OfferDTO;
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.PostDetailsDTO;
 import dido.auntaccount.dto.UserDTO;
+import dido.auntaccount.entities.Token;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
@@ -21,6 +22,8 @@ import java.io.InputStream;
 import java.util.List;
 
 import static dido.auntaccount.service.filter.AuthenticationFilter.LOGGED_IN_USER;
+import static dido.auntaccount.service.rest.controller.TokenController.ACCESS_TOKEN;
+import static dido.auntaccount.service.rest.controller.TokenController.REFRESH_TOKEN;
 
 @Path("/posts")
 public class PostController extends Controller {
@@ -49,9 +52,14 @@ public class PostController extends Controller {
     @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response savePost(PostDTO post) throws Exception {
+    public Response savePost(PostDTO post, @HeaderParam(LOGGED_IN_USER) String loggedInUserId, @HeaderParam(ACCESS_TOKEN) String accessToken) throws Exception {
+        Long userId = Long.valueOf(loggedInUserId);
+        post.setUserId(userId);
         PostDTO savedPost = postService.savePost(post);
-        return getResponseBuilder().entity(savedPost).build();
+        return getResponseBuilder()
+                .header(ACCESS_TOKEN, accessToken)
+                .entity(savedPost).build();
+
     }
 
     @GET

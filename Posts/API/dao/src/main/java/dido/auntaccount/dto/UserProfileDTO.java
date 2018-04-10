@@ -23,6 +23,7 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
     private String clientId;
     private boolean hasSellers;
     private boolean enabled;
+    private boolean anonymous;
 
     public UserProfileDTO() {
     }
@@ -46,6 +47,7 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
         this.location = location != null ? new LocationDTO(user.getLocation()) : null;
         this.clientId = user.getClientId();
         this.enabled = user.isEnabled();
+        this.anonymous = user.isAnonymous();
     }
 
     @Override
@@ -61,7 +63,8 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
                 .setCreationDate(creationDate)
                 .setLocation(entityLocation)
                 .setClientId(clientId)
-                .setEnabled(enabled);
+                .setEnabled(enabled)
+                .setAnonymous(anonymous);
     }
 
     public UserDTO buildUserDTO() {

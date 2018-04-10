@@ -8,9 +8,14 @@ import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.entities.RefreshToken;
 import dido.auntaccount.entities.Token;
 import dido.auntaccount.service.business.TokenService;
+import dido.auntaccount.service.rest.Tokens;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.oltu.oauth2.as.issuer.MD5Generator;
+import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
+import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -20,6 +25,9 @@ public class TokenServiceImpl implements TokenService {
 
     private static final Logger logger = LogManager.getLogger(TokenServiceImpl.class);
     private static final CacheMap<String, Token> tokenCacheMap = new CacheMap<>(1000);
+
+    private static final int REFRESH_EXPIRATION_YEARS = 1;
+    private static final int ACCESS_EXPIRATION_HOURS = 1;
 
     @Inject
     TokenDAO tokenDAO;
@@ -76,4 +84,27 @@ public class TokenServiceImpl implements TokenService {
         }
     }
 
+    public Tokens issueNativeTokens(Long userId) throws OAuthSystemException {
+
+        OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
+
+        String accessToken = oauthIssuerImpl.accessToken();
+        String refreshToken = oauthIssuerImpl.refreshToken();
+
+        long accessExpirationDate = getAccessExpirationDate();
+        saveAccessToken(accessToken, accessExpirationDate, userId);
+
+        long refreshExpirationDate = getRefreshExpirationDate();
+        saveRefreshToken(refreshToken, refreshExpirationDate, userId);
+
+        return new Tokens(accessToken, accessExpirationDate, refreshToken, refreshExpirationDate);
+    }
+
+    public long getAccessExpirationDate() {
+        return DateTime.now().plusHours(ACCESS_EXPIRATION_HOURS).getMillis();
+    }
+
+    private static long getRefreshExpirationDate() {
+        return DateTime.now().plusYears(REFRESH_EXPIRATION_YEARS).getMillis();
+    }
 }

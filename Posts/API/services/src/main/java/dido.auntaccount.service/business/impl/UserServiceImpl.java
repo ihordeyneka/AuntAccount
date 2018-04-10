@@ -158,6 +158,18 @@ public class UserServiceImpl implements UserService {
         updateUser(entity);
     }
 
+    @Override
+    public Long saveAnonymousUser() {
+        try {
+            User user = new User();
+            user.setAnonymous(true);
+            return userDAO.save(user).getId();
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "Couldn't save anonymous user", e);
+        }
+        return null;
+    }
+
     private Date calculateExpiryDate(int expiryTimeInHours) {
         return new Date(DateTime.now().plusHours(expiryTimeInHours).getMillis());
     }
