@@ -209,10 +209,6 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
           };
           location.radius = self.radiusSlider.isEnabled() ? self.radiusSlider.getValue() : 0;
 
-          if (!$.didoauth.user.id) {
-            $.didoauth.setCurrentUser(null, true);
-          }
-
           var postData = {
             postTags: self.tagsInput.getTags(),
             description: $("#inputPost").val(),
@@ -237,6 +233,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
             self.notificationArea.error();
           }).always(function() {
             globals.loading($('body'), false);
+            //TODO: if user was anonymous we would reset the user here
           });
         }
       });
