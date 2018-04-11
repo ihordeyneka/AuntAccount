@@ -221,7 +221,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
               dataType: "json",
               contentType: "application/json",
               data: JSON.stringify(postData)
-          }).done(function(data) {
+          }).done(function(data, textStatus, request) {
             self.lastPostId = data.id;
             if (self.attachmentUpload.fileinput("getFilesCount") > 0)
               self.attachmentUpload.fileinput("upload");
@@ -229,6 +229,12 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
             self.notificationArea.success({
               message: $.i18n('MessagePosted')
             });
+
+            if (!$.didoauth.user.id) {
+              $.didoauth.user.id = data.userId;
+              $.didoauth.updateAuthHeaders(request);
+            }
+
           }).fail(function(result) {
             self.notificationArea.error();
           }).always(function() {
