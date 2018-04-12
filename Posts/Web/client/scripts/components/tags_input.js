@@ -1,6 +1,8 @@
 define(["../core/config", "tagsinput"], function(config, tagsinputControl) {
-  return function(element) {
-    var self = {};
+  return function(element, notificationArea) {
+    var self = {
+      notificationArea: notificationArea
+    };
 
     self.element = element;
     self.getTags = function() {

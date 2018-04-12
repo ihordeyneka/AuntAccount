@@ -1,5 +1,5 @@
-define(["../../views/seller.html", "../core/globals", "../core/config", "../core/resources", "underscore", "typeahead", "fileinput", "maskedinput", "jqueryRaty", "../components/google_autocomplete", "../components/tags_input"],
-function(source, globals, config, resources, _, typeaheadControl, fileinputControl, maskedinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
+define(["../../views/seller.html", "../core/globals", "../core/config", "../core/resources", "../navigation/menu", "underscore", "typeahead", "fileinput", "maskedinput", "jqueryRaty", "../components/google_autocomplete", "../components/tags_input"],
+function(source, globals, config, resources, menu, _, typeaheadControl, fileinputControl, maskedinputControl, jqueryRaty, googleAutocompleteControl, tagsInputControl) {
   var self = {};
 
   self.source = source;
@@ -11,9 +11,10 @@ function(source, globals, config, resources, _, typeaheadControl, fileinputContr
   self.seller = null;
 
   self.init = function(sellerId) {
+    self.notificationArea = $(".aa-notification-area").notificationArea();
     self.sellerId = sellerId || null;
     self.locationTypeahead = new googleAutocompleteControl($("#inputPrimaryLocation"));
-    self.tagsInput = new tagsInputControl($("#inputTags"));
+    self.tagsInput = new tagsInputControl($("#inputTags"), self.notificationArea);
     $("#inputPhone").mask("(999) 999-99-99");
 
     initPictureUpload();
@@ -23,7 +24,6 @@ function(source, globals, config, resources, _, typeaheadControl, fileinputContr
     self.validatorForm.validator({
       focus: false
     });
-    self.notificationArea = $(".aa-notification-area").notificationArea();
 
     if (self.sellerId) {
       fetchCurrentSeller();
@@ -130,6 +130,10 @@ function(source, globals, config, resources, _, typeaheadControl, fileinputContr
             self.notificationArea.success({
               message: $.i18n('SellerRegistered')
             });
+
+            $.didoauth.user.hasSellers = true;
+            menu.refresh(); //in case we added the first seller, Notificatios menu item should appear
+
             if (self.pictureUpload.fileinput("getFilesCount") > 0) {
               self.pictureUpload
                 .on('filebatchuploadsuccess', goBackDelayed)
@@ -163,7 +167,7 @@ function(source, globals, config, resources, _, typeaheadControl, fileinputContr
     $(".aa-new-review-container").show();
   };
 
-  var goBack = function() {
+  var goBack = function () {
     window.location = "#sellers";
   };
 

@@ -46,6 +46,8 @@ define(["../core/globals", "../core/didoauth", "./menu", "../core/resources"], f
 
     routeParts.shift(); //remove the first entry
 
+    globals.loading($("#router"), true);
+
     import("../pages/" + page  /* webpackChunkName: "chunk-[request]" */ )
       .then(function (script) {
         $("#router").html(cleanHtml(script.source));

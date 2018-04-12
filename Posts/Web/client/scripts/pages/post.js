@@ -30,7 +30,8 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
   }
 
   self.init = function(){
-    self.tagsInput = new tagsInputControl($("#inputKeywords"));
+    self.notificationArea = $(".aa-notification-area").notificationArea();
+    self.tagsInput = new tagsInputControl($("#inputKeywords"), self.notificationArea);
     self.initLocationTypeahead();
     self.initRadiusSlider();
     self.initAttachmentUpload();
@@ -40,7 +41,6 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
 
     self.validatorForm = $("#formPost");
     self.validatorForm.validator({ focus: false });
-    self.notificationArea = $(".aa-notification-area").notificationArea();
   }
 
   self.initMap = function() {
