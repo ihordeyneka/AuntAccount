@@ -2,6 +2,7 @@ package dido.auntaccount.service.business;
 
 import dido.auntaccount.dto.PostDTO;
 import dido.auntaccount.dto.SellerDTO;
+import dido.auntaccount.entities.Seller;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface SellerService {
 
     List<PostDTO> getSellerPosts(Long sellerId);
 
-    List<Long> savePostForSellers(PostDTO post);
+    List<Seller> savePostForSellers(PostDTO post);
 
     void updatePicture(SellerDTO seller, byte[] picture) throws Exception;
 

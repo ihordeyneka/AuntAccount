@@ -9,6 +9,7 @@ import dido.auntaccount.dto.SubscriptionDTO;
 import dido.auntaccount.entities.Country;
 import dido.auntaccount.entities.Offer;
 import dido.auntaccount.entities.Post;
+import dido.auntaccount.entities.Seller;
 import dido.auntaccount.service.business.PostService;
 import dido.auntaccount.service.business.SellerService;
 import dido.auntaccount.service.business.SubscriptionService;
@@ -66,8 +67,8 @@ public class PostServiceImpl implements PostService {
                 }
             }
             savedPost = new PostDTO(postDAO.save(postEntity));
-            final List<Long> sellerIds = sellerService.savePostForSellers(savedPost);
-            sellerIds.forEach(id -> subscriptionService.sendNotifications(id, post.getDescription()));
+            final List<Seller> sellers = sellerService.savePostForSellers(savedPost);
+            sellers.forEach(seller -> subscriptionService.sendNotifications(seller.getUserId(), post.getDescription()));
         } catch (Exception e) {
             logger.log(Level.ERROR, "Couldn't save post", e);
         }

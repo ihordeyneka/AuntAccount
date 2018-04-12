@@ -77,8 +77,8 @@ public class MessageServiceImpl implements MessageService {
     private Long getMessageReceiver(Message message) {
         final User sender = message.getSender();
         final OfferDTO offer = offerService.getOffer(message.getOfferId());
-        final Long sellerId = offer.getSeller().getId();
-        if (sellerId.equals(sender.getId())) {
+        final Long sellerId = offer.getSeller().getUserId();
+        if (!sellerId.equals(sender.getId())) {
             return sellerId;
         }
         final PostDTO offerPost = offerService.getOfferPost(message.getOfferId());
