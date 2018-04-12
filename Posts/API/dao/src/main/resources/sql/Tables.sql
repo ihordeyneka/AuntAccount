@@ -63,7 +63,7 @@ CREATE TABLE `dido`.`LOCATION` (
   `PlaceId` varchar(45) CHARACTER SET 'utf8' NOT NULL,
   `Region1` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `Region2` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
-  `Name` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
+  `Name` varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
   `StreetNumber` int(11) DEFAULT NULL,
   `Neighborhood` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `ROUTE` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
