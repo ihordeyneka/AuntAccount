@@ -1,9 +1,9 @@
 {
-  "name": "Aunt Account",
+  "name": "DIDO",
   "short_name": "DIDO",
   "display": "standalone",
   "start_url": ".",
-  "theme_color": "#673ab6",
+  "theme_color": "#111111",
   "background_color": "#111111",
   "icons": [{
     "src": "client/images/icons/homescreen14.png",

@@ -17,7 +17,7 @@ public class TagController extends Controller {
 
     @GET
     @Path("/{param}")
-    @Secured
+
     @Produces(MediaType.APPLICATION_JSON)
     public Response queryTags(@PathParam("param") String tag) {
         List<String> tags = tagService.queryTags(tag);
@@ -26,7 +26,6 @@ public class TagController extends Controller {
 
     @OPTIONS
     @Path("/{param}")
-    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response queryTagsPreflight(@PathParam("param") String tag) {
         return getResponseBuilder().build();

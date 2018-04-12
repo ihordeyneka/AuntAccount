@@ -24,7 +24,23 @@ public class TagServiceImpl implements TagService {
     }
     }'
 
-    curl -XPUT localhost:9200/dido/_mapping/seller -d '
+    curl -XPUT 'localhost:9200/dido?pretty' -H 'Content-Type: application/json' -d'
+{
+    "settings" : {
+        "number_of_shards" : 1
+    },
+    "mappings" : {
+        "seller" : {
+            "properties" : {
+                "tags" : { "type" : "completion" }
+            }
+        }
+    }
+}
+'
+
+
+    curl -XPUT localhost:9200/dido/_mapping/seller?update_all_types=true -H 'Content-Type: application/json'  -d '
     {
       "properties" : {
         "tags" : {
