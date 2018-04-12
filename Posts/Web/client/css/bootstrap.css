@@ -64,8 +64,13 @@ a.header-nav__navigation-link:hover {
   overflow: hidden;
 }
 
-.bootstrap-tagsinput > .tag, .bootstrap-tagsinput > input {
+.bootstrap-tagsinput > .tag {
   position: relative;
+}
+
+.bootstrap-tagsinput > input {
+  position: relative;
+  max-width: 70%;
 }
 
 .readonly.bootstrap-tagsinput > .tag span {

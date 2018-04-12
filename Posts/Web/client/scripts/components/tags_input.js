@@ -50,36 +50,38 @@ define(["../core/config", "tagsinput"], function(config, tagsinputControl) {
     tagsinput.$input.attr("data-i18n", element.data("i18n"));
 
     tagsinput.currentShift = 0;
-    var updateTagsPosition = function() {
-      var shiftStepPixels = 100;
+    var updateTagsPosition = function(shiftLeft) {
+      var shiftStepPixels = 20;
       var inputRight = tagsinput.$input.position().left + tagsinput.$input.width();
       var containerRight = tagsinput.$container.position().left + tagsinput.$container.width();
-      if (inputRight > containerRight) {
+      if ((inputRight > containerRight) && shiftLeft) {
         tagsinput.currentShift -= shiftStepPixels;
-      } else if (tagsinput.currentShift < 0) {
+      } else if ((tagsinput.currentShift < 0) && !shiftLeft) {
         var restoreStepsCount = (containerRight - inputRight) / shiftStepPixels;
         tagsinput.currentShift += restoreStepsCount * shiftStepPixels;
       }
       if (tagsinput.currentShift > 0)
-      tagsinput.currentShift = 0;
+        tagsinput.currentShift = 0;
       //update left css property for input and tags within the tagsinput
       tagsinput.$container.children('span.tag, input')
       .css("left", tagsinput.currentShift.toString() + "px");
     }
 
     element.on("itemAdded", function() {
-      updateTagsPosition();
+      updateTagsPosition(true);
       tagsinput.$input.attr('placeholder', ''); //remove placeholder if at least one tag is added
     });
 
     element.on("itemRemoved", function() {
-      updateTagsPosition();
+      updateTagsPosition(false);
       if (tagsinput.itemsArray.length === 0)
         tagsinput.$input.attr('placeholder', tagsinput.placeholderText); //restore placeholder if there are no tags again
+        //TODO: maybe apply translation here because placeholderText might be in English
     });
 
-    tagsinput.$input.keypress(function() {
-      updateTagsPosition();
+    tagsinput.$input.keypress(function (e) {
+      var shiftLeft = e.which !== 8 && e.which !== 46; //not delete or backspace
+      updateTagsPosition(shiftLeft);
     });
 
     tagsinput.$input.keydown(function(e) {
