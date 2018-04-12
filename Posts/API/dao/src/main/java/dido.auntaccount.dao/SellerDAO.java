@@ -9,7 +9,7 @@ public interface SellerDAO {
 
     public Seller save(Seller seller) throws Exception;
 
-    public void addSellerPost(Long sellerId, Post post);
+    public void addSellerPost(Seller seller, Post post);
 
     void deleteSeller(Long sellerId) throws Exception;
 

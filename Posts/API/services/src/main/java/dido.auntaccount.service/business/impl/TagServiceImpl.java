@@ -32,7 +32,7 @@ public class TagServiceImpl implements TagService {
     "mappings" : {
         "seller" : {
             "properties" : {
-                "tags" : { "type" : "completion" }
+                "tagList" : { "type" : "completion" }
             }
         }
     }
@@ -54,7 +54,7 @@ public class TagServiceImpl implements TagService {
     SearchClientService clientService;
 
     public static final String INDEX = "dido";
-    public static final String TAGS_FIELD = "tags";
+    public static final String TAGS_FIELD = "tagList";
     public static final String SELLER_TYPE = "seller";
 
     @Override

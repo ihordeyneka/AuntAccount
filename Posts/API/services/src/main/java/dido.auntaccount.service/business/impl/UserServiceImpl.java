@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
     public static final int EXPIRY_TIME_IN_HOURS = 24;
+    public static final String ANONYMOUS_NAME = "Anonymous";
 
     @Inject
     private UserDAO userDAO;
@@ -163,6 +164,8 @@ public class UserServiceImpl implements UserService {
         try {
             User user = new User();
             user.setAnonymous(true);
+            user.setFirstName(ANONYMOUS_NAME);
+            user.setLastName("");
             user.setCreationDate(new Date(DateTime.now().getMillis()));
             return userDAO.save(user).getId();
         } catch (Exception e) {

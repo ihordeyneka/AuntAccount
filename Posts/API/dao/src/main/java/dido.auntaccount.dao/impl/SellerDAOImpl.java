@@ -28,8 +28,7 @@ public class SellerDAOImpl extends GeneralDAO<Seller> implements SellerDAO {
         return persistEntity(seller);
     }
 
-    public void addSellerPost(Long sellerId, Post post) {
-        Seller seller = find(sellerId);
+    public void addSellerPost(Seller seller, Post post) {
         seller.getSellerPosts().add(post);
         try {
             updateEntity(seller);
