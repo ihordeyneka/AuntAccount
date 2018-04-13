@@ -163,3 +163,5 @@ insert into REVIEW (id, creationdate, description, rate, authorId, objectId) val
 insert into TAG (id, tag) values (1, "tag");
 
 ALTER TABLE MESSAGE ADD COLUMN  `Read` tinyint(1) NOT NULL DEFAULT 0;
+
+ALTER TABLE  dido.Subscription ADD UNIQUE (UserId, Endpoint(200) , PublicKey(100), Auth(50));

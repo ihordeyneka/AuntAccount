@@ -37,6 +37,6 @@ public class RefreshTokenDTO {
 
     public boolean isValid() {
         long now = DateTime.now().getMillis();
-        return expirationDate.before(new Date(now));
+        return expirationDate.after(new Date(now));
     }
 }

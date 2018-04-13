@@ -126,7 +126,7 @@ public class TokenController extends Controller {
     @Consumes("application/x-www-form-urlencoded")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("refresh")
-    public Response refreshToken(@PathParam("refreshToken") String refreshToken) throws URISyntaxException, OAuthSystemException {
+    public Response refreshToken(@FormParam("refreshToken") String refreshToken) throws OAuthSystemException {
         RefreshTokenDTO storedRefreshToken = tokenService.getRefreshToken(refreshToken);
 
         if (storedRefreshToken == null || !storedRefreshToken.isValid()) {

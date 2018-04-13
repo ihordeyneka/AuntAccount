@@ -1,5 +1,6 @@
 package dido.auntaccount.service.business.impl;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import dido.auntaccount.dao.SubscriptionDAO;
 import dido.auntaccount.dto.SubscriptionDTO;
 import dido.auntaccount.entities.Subscription;
@@ -53,6 +54,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public void saveSubscription(SubscriptionDTO subscriptionDTO) {
         try {
             subscriptionDAO.saveSubscription(subscriptionDTO.buildEntity());
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            logger.error("Subscription already exists");
         } catch (Exception e) {
             logger.error("Couldn't save subscription");
         }
