@@ -1,6 +1,14 @@
 var path = require("path");
 var webpack = require('webpack');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var Dotenv = require('dotenv-webpack');
+
+require('dotenv').config();
+
+console.log('hah...');
+
+console.log(process.env.NODE_ENV);
+var isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   devtool: "source-map",
@@ -36,7 +44,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.html$/, use: { loader: "html-loader" }  },
+      { test: /\.html$/, use: { loader: "html-loader" } },
       { test: /\.css/, use: [{ loader: "style-loader" }, { loader: "css-loader" }] },
       { test: /\.(gif|png|woff|woff2|eot|ttf|svg)$/, use: { loader: "url-loader?limit=100000" } }
     ]
@@ -47,7 +55,15 @@ module.exports = {
       jQuery: "jquery",
       _: "underscore"
     }),
-    new BundleAnalyzerPlugin({ openAnalyzer: false }), //don't use in PROD
-    //new webpack.optimize.UglifyJsPlugin({ minimize: true }) //use in PROD
-  ]
+    new Dotenv({
+      safe: true
+    })
+  ].concat(isProduction ? [
+    // production only plugins
+    new webpack.optimize.UglifyJsPlugin({ minimize: true })
+  ] :
+  [
+    // development only plugins
+    new BundleAnalyzerPlugin({ openAnalyzer: false })
+  ])
 };

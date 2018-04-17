@@ -1,6 +1,6 @@
 define(["../core/config"], function(config) {
 
-  let swRegistration = null;
+  var swRegistration = null;
   //TODO: receive public key from server
   const applicationServerPublicKey = urlB64ToUint8Array('BBHf1J50o1qRq_QPs_y-Lpg21Jo9hfMZlKjbO7sPJ-GxfjCS7qC9joosXVZrs6rM8sARigM7HgJGWG6beRmT4d0');
 
@@ -43,7 +43,7 @@ define(["../core/config"], function(config) {
       const rawData = window.atob(base64);
       const outputArray = new Uint8Array(rawData.length);
 
-      for (let i = 0; i < rawData.length; ++i) {
+      for (var i = 0; i < rawData.length; ++i) {
           outputArray[i] = rawData.charCodeAt(i);
       }
       return outputArray;
