@@ -17,7 +17,6 @@ public class TagController extends Controller {
 
     @GET
     @Path("/{param}")
-
     @Produces(MediaType.APPLICATION_JSON)
     public Response queryTags(@PathParam("param") String tag) {
         List<String> tags = tagService.queryTags(tag);

@@ -15,7 +15,7 @@ public class EmailServiceImpl implements EmailService {
     private static final String EMAIL_PASSWORD = PropertiesHandler.getProperty("email.password");
     private static final String REGISTRATION_SUBJECT = "Complete Registration With DIDO";
     private static final String REGISTRATION_MESSAGE = "Follow link to complete your registration ";
-    private static final String ACTIVATION_URL = "http://localhost:8080/api/service/users/activate?token=";
+    private static final String ACTIVATION_URL = PropertiesHandler.getProperty("gui.uri") + "api/service/users/activate?token=";
 
     public void sendCompleteRegistration(String to, String token) {
         send(to, REGISTRATION_SUBJECT, REGISTRATION_MESSAGE + ACTIVATION_URL + token);

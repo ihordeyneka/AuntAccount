@@ -3,3 +3,14 @@
 /Posts/Web/.vs
 /Posts/Web/package-lock.json
 /package-lock.json
+.gradle/
+.idea/
+app/
+build.gradle
+build/
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
+local.properties
+settings.gradle

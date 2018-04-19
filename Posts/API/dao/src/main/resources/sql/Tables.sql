@@ -37,11 +37,9 @@ CREATE TABLE `dido`.`USER` (
   `CreationDate` datetime NOT NULL,
   `ClientId` varchar(45) DEFAULT NULL,
   `Enabled` tinyint(1) NOT NULL,
-  `Anonymous` tinyint(1) NOT NULL,
+  `Anonymous` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id`)
 );
-
-
 
 CREATE TABLE `dido`.`SellerReview` (
   `Id` BIGINT(10) NOT NULL AUTO_INCREMENT,
@@ -153,6 +151,10 @@ CREATE TABLE `dido`.`Subscription` (
   PRIMARY KEY (`Id`));
 
 
+ALTER TABLE dido.MESSAGE ADD COLUMN  `Read` tinyint(1) NOT NULL DEFAULT 0;
+
+ALTER TABLE  dido.Subscription ADD UNIQUE (UserId, Endpoint(200) , PublicKey(100), Auth(50));
+
 --fix post table - remove latitude and longitude, add sellerTag table
 
 insert into dido.Country (id, country) values (1, "Ukraine");
@@ -162,6 +164,4 @@ insert into USER (id, creationdate, email, issupplier, name, password, phone, we
 insert into REVIEW (id, creationdate, description, rate, authorId, objectId) values (1, now(), 'good', 5, 1, 2);
 insert into TAG (id, tag) values (1, "tag");
 
-ALTER TABLE MESSAGE ADD COLUMN  `Read` tinyint(1) NOT NULL DEFAULT 0;
 
-ALTER TABLE  dido.Subscription ADD UNIQUE (UserId, Endpoint(200) , PublicKey(100), Auth(50));
