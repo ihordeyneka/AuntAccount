@@ -21,12 +21,27 @@ app.use('/lib', express.static(DIST_DIR + '/lib'));
 
 var router = express.Router();
 
-router.get('/manifest.json', function(req, res) {
-  res.sendFile(DIST_DIR + '/manifest.json');
-});
-router.get('/sw.js', function(req, res) {
-  res.sendFile(DIST_DIR + '/sw.js');
-});
+var manifestRoutes = [
+  '/manifest.json',
+  '/sw.js',
+  '/android-chrome-192x192.png',
+  '/android-chrome-512x512.png',
+  '/apple-touch-icon.png',
+  '/browserconfig.xml',
+  '/favicon.ico',
+  '/favicon-16x16.png',
+  '/favicon-32x32.png',
+  '/mstile-150x150.png',
+  '/safari-pinned-tab.svg',
+  '/site.webmanifest'
+];
+
+for (var i = 0; i < manifestRoutes.length; i++) {
+  let route = manifestRoutes[i];
+  router.get(route, function (req, res) {
+    res.sendFile(DIST_DIR + route);
+  });
+}
 
 // Send home url to index.html.
 router.get('/', function(req, res) {

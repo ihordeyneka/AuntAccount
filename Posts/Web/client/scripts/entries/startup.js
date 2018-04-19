@@ -24,6 +24,7 @@ import "../../css/pages/sellers.css"
 
 
 //bundle js
+import "../core/polyfills"
 import globals from "../core/globals"
 import config from "../core/config"
 import didoauth from "../core/didoauth"
