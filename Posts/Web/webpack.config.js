@@ -5,9 +5,6 @@ var Dotenv = require('dotenv-webpack');
 
 require('dotenv').config();
 
-console.log('hah...');
-
-console.log(process.env.NODE_ENV);
 var isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {

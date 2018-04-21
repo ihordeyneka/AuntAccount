@@ -23,7 +23,7 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
     private String clientId;
     private boolean hasSellers;
     private boolean enabled;
-    private boolean anonymous;
+    private boolean anonymous = false;
 
     public UserProfileDTO() {
     }
@@ -159,5 +159,13 @@ public class UserProfileDTO extends PictureDTO implements DTO<User>, Serializabl
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isAnonymous() {
+        return anonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        this.anonymous = anonymous;
     }
 }

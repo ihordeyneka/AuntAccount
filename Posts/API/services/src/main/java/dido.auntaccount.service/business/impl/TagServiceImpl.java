@@ -40,15 +40,6 @@ public class TagServiceImpl implements TagService {
 }
 '
 
-
-    curl -XPUT localhost:9200/dido/_mapping/seller?update_all_types=true -H 'Content-Type: application/json'  -d '
-    {
-      "properties" : {
-        "tags" : {
-          "type" : "completion"
-      }
-     }
-    }'
     */
 
     @Inject

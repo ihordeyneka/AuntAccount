@@ -20,10 +20,10 @@ var PATHS = {
     img: 'client/**/*.{svg,jpg,png,ico}',
     fonts: 'client/**/*.{ttf,otf,woff,woff2}'
   },
-  pwa: 'client/{manifest.json,sw.js}',
+  manifest: 'client/manifest/**/*',
   dist: 'dist',
   distClient: 'dist/client',
-  distPwa: 'dist/{manifest.json,sw.js}',
+  distManifest: 'dist/*',
   port: 8282
 };
 
@@ -65,7 +65,7 @@ gulp.task('fonts', function() {
 
 gulp.task('clean', function() {
   del([PATHS.distClient], function(){ });
-  del([PATHS.distPwa], function(){ });
+  del([PATHS.distManifest], function(){ });
 });
 
 gulp.task('watch', function() {
@@ -75,16 +75,16 @@ gulp.task('watch', function() {
   gulp.watch(PATHS.client.img, ['img']);
 });
 
-gulp.task('pwa', function() {
+gulp.task('manifest', function() {
   return gulp
-    .src(PATHS.pwa)
+    .src(PATHS.manifest)
     .pipe(changed(PATHS.dist))
     .pipe(gulp.dest(PATHS.dist));
 });
 
 
 gulp.task('bundle', function() {
-  runSequence(['html', 'webpack', 'img', 'fonts', 'pwa']);
+  runSequence(['html', 'webpack', 'img', 'fonts', 'manifest']);
 });
 
 gulp.task('default', ['server', 'bundle'], function() {

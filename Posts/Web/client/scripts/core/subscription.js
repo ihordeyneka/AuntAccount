@@ -8,31 +8,32 @@ define(["../core/config"], function(config) {
       console.log('Service Worker and Push is supported');
 
       navigator.serviceWorker.register('sw.js')
-          .then(function(swReg) {
-              console.log('Service Worker is registered', swReg);
+        .then(function (swReg) {
+          console.log('Service Worker is registered', swReg);
 
-              swRegistration = swReg;
+          swRegistration = swReg;
+        })
+        .catch(function (error) {
+          console.error('Service Worker Error', error);
+        });
+
+      navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
+        serviceWorkerRegistration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: applicationServerPublicKey
+        })
+          .then(function (subscription) {
+            console.log('User is subscribed.');
+            updateSubscriptionOnServer(subscription);
           })
-          .catch(function(error) {
-              console.error('Service Worker Error', error);
+          .catch(function (e) {
+            console.log('Something unfortunate happened: ' + e);
           });
+      });
+
   } else {
       console.warn('Push messaging is not supported');
   }
-
-  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-      serviceWorkerRegistration.pushManager.subscribe({
-              userVisibleOnly: true,
-              applicationServerKey: applicationServerPublicKey
-          })
-          .then(function(subscription) {
-              console.log('User is subscribed.');
-              updateSubscriptionOnServer(subscription);
-          })
-          .catch(function(e) {
-              console.log('Something unfortunate happened: ' + e);
-          });
-  });
 
  function urlB64ToUint8Array(base64String) {
       const padding = '='.repeat((4 - base64String.length % 4) % 4);

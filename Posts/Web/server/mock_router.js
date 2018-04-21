@@ -67,6 +67,12 @@ exports.init = function(router) {
     res.send(JSON.stringify(result));
   });
 
+  router.post(mockApiRoot + '/subscriptions', function (req, res) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.send("{}");
+  });
+
   router.get(mockApiRoot + '/posts/:postId/offer', function(req, res) {
 
     var result = { postId: req.params.postId };

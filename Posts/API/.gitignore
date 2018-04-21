@@ -2,3 +2,4 @@
 *.iml
 */target/
 /services/src/main/resources/config.properties
+script

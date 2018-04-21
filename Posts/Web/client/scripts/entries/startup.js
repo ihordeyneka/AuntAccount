@@ -24,6 +24,7 @@ import "../../css/pages/sellers.css"
 
 
 //bundle js
+import "../core/polyfills"
 import globals from "../core/globals"
 import config from "../core/config"
 import didoauth from "../core/didoauth"
@@ -36,8 +37,7 @@ import $ from "jquery"
 import bootstrap from "bootstrap"
 import jsrender from "jsrender"
 import bootstrapValidator from "bootstrap-validator"
-
-import "../pages/subscription.js"
+import "../core/subscription.js"
 
 window.jQuery = $;
 jsrender($);
