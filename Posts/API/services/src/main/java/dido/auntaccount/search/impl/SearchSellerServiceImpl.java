@@ -351,11 +351,9 @@ curl -s -XGET 'localhost:9200/dido/_nodes/http?pretty=1'
         tags.stream().forEach(t -> boolQueryBuilder.should(QueryBuilders.matchQuery(TAGS_FIELD, t)));
 
         boolQueryBuilder.minimumShouldMatch("1<80%");
-/*
 
         LocationSearchQuery locationSearchQuery = LocationSearchQuery.getSearchQuery(location);
         locationSearchQuery.filter(boolQueryBuilder);
-*/
 
         SearchResponse response = clientService.getClient().prepareSearch(INDEX)
                 .setTypes(SELLER_TYPE)

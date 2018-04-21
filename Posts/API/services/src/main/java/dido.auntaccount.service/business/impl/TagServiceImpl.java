@@ -3,6 +3,7 @@ package dido.auntaccount.service.business.impl;
 import dido.auntaccount.search.client.SearchClientService;
 import dido.auntaccount.service.business.TagService;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.suggest.Suggest;
 import org.elasticsearch.search.suggest.SuggestBuilder;
 import org.elasticsearch.search.suggest.SuggestBuilders;
 
@@ -63,7 +64,10 @@ public class TagServiceImpl implements TagService {
                 .addSuggestion(SELLER_TYPE, SuggestBuilders.completionSuggestion(TAGS_FIELD).text(tag))).get();
 
         List<String> results = new ArrayList<>();
-        searchResponse.getSuggest().forEach(suggestion -> suggestion.forEach(entry -> entry.forEach(option -> results.add(option.getText().string()))));
+        Suggest suggest = searchResponse.getSuggest();
+        if (suggest != null) {
+            suggest.forEach(suggestion -> suggestion.forEach(entry -> entry.forEach(option -> results.add(option.getText().string()))));
+        }
         return results;
     }
 
