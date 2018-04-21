@@ -22,7 +22,8 @@ self.addEventListener('notificationclick', function(event) {
 
   event.notification.close();
 
+  //TODO: should redirect to post page (need ID to be passed), for now redirecting to home page
   event.waitUntil(
-    clients.openWindow('http://localhost:8282/#post')
+    clients.openWindow(location.origin + '/#recent')
   );
 });
