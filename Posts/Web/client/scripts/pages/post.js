@@ -16,6 +16,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
   self.locationTypeahead = null;
   self.attachmentUpload = null;
   self.lastPostId = null;
+  self.postGlobally = false;
 
   self.updateUserPosition = function (position) { //executed when user geolocation data is processed
     self.userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -45,7 +46,10 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
 
   self.initMap = function() {
     self.map = new google.maps.Map($(".aa-post-map").get(0), {
-      zoom: MIN_ZOOM_FOR_PLACE
+      zoom: MIN_ZOOM_FOR_PLACE,
+      zoomControl: false,
+      fullscreenControl: false,
+      streetViewControl: false
     });
     self.marker = new google.maps.Marker({
       map: self.map
@@ -65,16 +69,18 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
   }
 
   self.initLocationTypeahead = function() {
-    var processPlace = function(place) {
+    var processPlace = function (place) {
       if (!place)
         return;
+
+      applyMode($(".btn-location-search"));
 
       var request = {
         query: place
       };
 
       var service = new google.maps.places.PlacesService(self.map);
-      service.textSearch(request, function(results, status) {
+      service.textSearch(request, function (results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           var data = results[0].geometry;
           self.map.fitBounds(data.viewport);
@@ -83,14 +89,20 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
           self.updateSlider();
         }
       });
-    }
+    };
+    var applyMode = function (element) {
+      $(".aa-post-location-container .btn-selected").removeClass("btn-selected");
+      element.addClass("btn-selected");
+      self.postGlobally = element.hasClass("btn-location-globe");
+      self.marker.setMap(self.postGlobally ? null : self.map);
+    };
 
     self.locationTypeahead = new googleAutocompleteControl($("#inputLocation"));
     self.locationTypeahead.element.bind("place_changed", function() {
       processPlace(self.locationTypeahead.getLocationString());
     })
 
-    $(".btn-location-search").click(function() {
+    $(".btn-location-search").click(function () {
       processPlace(self.locationTypeahead.getLocationString());
     });
 
@@ -106,6 +118,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
 
     $(".btn-location-nearby").click(function(e) {
       if (self.userPosition) {
+        applyMode($(".btn-location-nearby"));
         $("#inputLocation").val("");
         self.updatePosition(self.userPosition);
         self.map.setZoom(MIN_ZOOM_FOR_PLACE);
@@ -119,6 +132,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
     });
 
     $(".btn-location-globe").click(function(e) {
+      applyMode($(".btn-location-globe"));
       $("#inputLocation").val("");
       self.updatePosition(self.userPosition || DEF_POSITION);
       self.map.setZoom(1);
@@ -208,6 +222,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
             lon: self.marker.position.lng()
           };
           location.radius = self.radiusSlider.isEnabled() ? self.radiusSlider.getValue() : 0;
+          location.isGlobal = self.postGlobally;
 
           var postData = {
             postTags: self.tagsInput.getTags(),

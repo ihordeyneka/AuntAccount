@@ -81,6 +81,14 @@ a.header-nav__navigation-link:hover {
   border-radius: 0;
 }
 
+.btn.btn-default, .btn.btn-default:focus {
+  outline-color: transparent;
+}
+
+.btn.btn-selected, .btn.btn-selected:focus {
+  background-color: #ccc;
+}
+
 .btn-primary, .btn-primary:focus {
   color: #979797;
   background-color: transparent;
