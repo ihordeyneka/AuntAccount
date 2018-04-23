@@ -56,8 +56,12 @@ public class UserDAOImpl extends GeneralDAO<User> implements UserDAO {
     }
 
     public List<PostDTO> getUserPostsWithOfferCount(Long userId) {
-        List<Object[]> resultList = entityManager.createNativeQuery("SELECT p.*, count(o.id) as offerCount" +
-                        " FROM Post p LEFT JOIN Offer o ON p.id = o.postId WHERE p.userId=?1 GROUP BY p.id",
+        List<Object[]> resultList = entityManager.createNativeQuery("SELECT MAX(m.creationDate), p.*, count(o.id) as offerCount FROM Post p" +
+                        " LEFT JOIN Offer o ON p.id = o.postId" +
+                        " LEFT JOIN Message m ON o.id = m.offerId AND m.isRead = 0" +
+                        " WHERE p.userId=?1" +
+                        " GROUP BY p.id"+"" +
+                        " ORDER BY 1 DESC, p.creationDate DESC",
                 "PostOfferCountMapping")
                 .setParameter(1, userId).getResultList();
         List<PostDTO> posts = new ArrayList<>();
