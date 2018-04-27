@@ -1,5 +1,7 @@
 package dido.auntaccount.dto;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import dido.auntaccount.entities.Country;
 import dido.auntaccount.entities.Location;
 
@@ -18,6 +20,7 @@ public class LocationDTO implements DTO<Location> {
     private CountryDTO country;
     private double radius;
     private PointDTO point;
+    private boolean global;
 
     public LocationDTO() {
     }
@@ -37,6 +40,7 @@ public class LocationDTO implements DTO<Location> {
         this.radius = location.getRadius();
         this.place = location.getPlace();
         this.placeId = location.getPlaceId();
+        this.global = location.isGlobal();
     }
 
     @Override
@@ -56,7 +60,8 @@ public class LocationDTO implements DTO<Location> {
                 .setCountry(entityCountry)
                 .setRadius(radius)
                 .setPlace(place)
-                .setPlaceId(placeId);
+                .setPlaceId(placeId)
+                .setGlobal(global);
     }
 
     public Long getId() {
@@ -73,7 +78,7 @@ public class LocationDTO implements DTO<Location> {
     }
 
     public String getCity() {
-        return city;
+        return city != null ? city.replace("'", "") : city;
     }
 
     public void setCity(String city) {
@@ -88,6 +93,7 @@ public class LocationDTO implements DTO<Location> {
         this.region1 = region1;
     }
 
+    @JsonGetter("street_number")
     public Integer getStreetNumber() {
         return streetNumber;
     }
@@ -100,6 +106,7 @@ public class LocationDTO implements DTO<Location> {
         this.country = country;
     }
 
+    @JsonSetter("street_number")
     public void setStreetNumber(Integer streetNumber) {
         this.streetNumber = streetNumber;
     }
@@ -158,5 +165,13 @@ public class LocationDTO implements DTO<Location> {
 
     public void setPlaceId(String placeId) {
         this.placeId = placeId;
+    }
+
+    public boolean isGlobal() {
+        return global;
+    }
+
+    public void setGlobal(boolean global) {
+        this.global = global;
     }
 }

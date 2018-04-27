@@ -21,6 +21,7 @@ public class Location {
     private String neighborhood;
     private Integer streetNumber;
     private double radius;
+    private boolean global;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Country")
@@ -149,6 +150,15 @@ public class Location {
 
     public Location setPlaceId(String placeId) {
         this.placeId = placeId;
+        return this;
+    }
+
+    public boolean isGlobal() {
+        return global;
+    }
+
+    public Location setGlobal(boolean global) {
+        this.global = global;
         return this;
     }
 }

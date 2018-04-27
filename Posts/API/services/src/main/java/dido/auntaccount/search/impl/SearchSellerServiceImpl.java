@@ -67,7 +67,7 @@ public class SearchSellerServiceImpl implements SearchSellerService {
     }';
 
 
-     curl -XPUT 'localhost:9200/dido/_mapping/seller' -d '
+     curl -XPUT 'localhost:9200/dido/_mapping/seller' -H 'Content-Type: application/json' -d '
     {
          "properties": {
                 "location": {

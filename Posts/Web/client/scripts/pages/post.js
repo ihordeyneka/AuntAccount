@@ -222,7 +222,7 @@ define(["../../views/post.html", "../core/globals", "../core/config", "typeahead
             lon: self.marker.position.lng()
           };
           location.radius = self.radiusSlider.isEnabled() ? self.radiusSlider.getValue() : 0;
-          location.isGlobal = self.postGlobally;
+          location.global = self.postGlobally;
 
           var postData = {
             postTags: self.tagsInput.getTags(),
