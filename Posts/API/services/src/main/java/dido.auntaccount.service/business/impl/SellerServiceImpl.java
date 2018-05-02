@@ -18,6 +18,7 @@ import org.joda.time.DateTime;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SellerServiceImpl implements SellerService {
@@ -80,7 +81,7 @@ public class SellerServiceImpl implements SellerService {
         List<String> tags = postTags.stream().map(TagDTO::getTag).collect(Collectors.toList());
 
         List<Long> sellerIds = searchSellerService.getSellerIdsByTagsAndLocation(tags, post.getLocation());
-        List<Seller> sellers = sellerIds.stream().map(s -> sellerDAO.find(s)).collect(Collectors.toList());
+        List<Seller> sellers = sellerIds.stream().map(s -> sellerDAO.find(s)).filter(Objects::nonNull).collect(Collectors.toList());
         sellers.stream().forEach(s -> sellerDAO.addSellerPost(s, post.buildEntity()));
         return sellers;
     }

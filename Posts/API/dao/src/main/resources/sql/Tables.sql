@@ -30,7 +30,7 @@ CREATE TABLE `dido`.`USER` (
   `LastName` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `Password` varchar(200) CHARACTER SET 'utf8',
   `LocationId` bigint(10) DEFAULT NULL,
-  `Email` varchar(45) NOT NULL,
+  `Email` varchar(45),
   `Phone` varchar(45) DEFAULT NULL,
   `Photo` longblob DEFAULT NULL,
   `Website` varchar(45) DEFAULT NULL,
@@ -53,12 +53,12 @@ CREATE TABLE `dido`.`SellerReview` (
 
 CREATE TABLE `dido`.`LOCATION` (
   `Id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `Latitude` varchar(45) NOT NULL,
-  `Longitude` varchar(45) NOT NULL,
+  `Latitude` varchar(45) DEFAULT NULL,
+  `Longitude` varchar(45) DEFAULT NULL,
   `Country` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `City` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
-  `Place` varchar(45) CHARACTER SET 'utf8' NOT NULL,
-  `PlaceId` varchar(45) CHARACTER SET 'utf8' NOT NULL,
+  `Place` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
+  `PlaceId` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `Region1` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `Region2` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `Name` varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
@@ -66,6 +66,7 @@ CREATE TABLE `dido`.`LOCATION` (
   `Neighborhood` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `ROUTE` varchar(45) CHARACTER SET 'utf8' DEFAULT NULL,
   `Radius` double DEFAULT NULL,
+  `Global` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id`)
 );
 
@@ -165,3 +166,40 @@ insert into REVIEW (id, creationdate, description, rate, authorId, objectId) val
 insert into TAG (id, tag) values (1, "tag");
 
 
+
+  curl -XPUT 'localhost:9200/dido?pretty' -H 'Content-Type: application/json' -d'
+{
+    "settings" : {
+         "analysis" : {
+        "analyzer" : {
+            "my_analyzer" : {
+                "tokenizer" : "standard",
+                "filter" : ["standard",  "my_word_delimiter"]
+            }
+        },
+        "filter" : {
+            "my_word_delimiter" : {
+                "type" : "word_delimiter",
+                "preserve_original": "true"
+            }
+        }
+    }
+    },
+
+    "mappings" : {
+        "seller" : {
+            "properties" : {
+                "tagList" : { "type" : "completion" },
+                 "location": {
+                    "properties": {
+                        "point": {
+                            "type": "geo_point"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+'

@@ -40,6 +40,64 @@ public class TagServiceImpl implements TagService {
 }
 '
 
+  curl -XPUT 'localhost:9200/dido?pretty' -H 'Content-Type: application/json' -d'
+{
+    "settings" : {
+         "analysis" : {
+        "analyzer" : {
+            "my_analyzer" : {
+                "tokenizer" : "standard",
+                "filter" : ["standard",  "my_word_delimiter"]
+            }
+        },
+        "filter" : {
+            "my_word_delimiter" : {
+                "type" : "word_delimiter",
+                "preserve_original": "true"
+            }
+        }
+    }
+    },
+
+    "mappings" : {
+        "seller" : {
+            "properties" : {
+                "tagList" : { "type" : "completion" },
+                 "location": {
+                    "properties": {
+                        "point": {
+                            "type": "geo_point"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+'
+
+
+curl -XPUT 'localhost:9200/dido?pretty' -H 'Content-Type: application/json' -d'
+{
+  "dido" : {
+    "analysis" : {
+        "analyzer" : {
+            "my_analyzer" : {
+                "tokenizer" : "standard",
+                "filter" : ["standard", "lowercase", "my_word_delimiter"]
+            }
+        },
+        "filter" : {
+            "my_word_delimiter" : {
+                "type" : "word_delimiter",
+                "preserve_original": "true"
+            }
+        }
+    }
+  }
+}
+
     */
 
     @Inject
