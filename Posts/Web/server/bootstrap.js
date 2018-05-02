@@ -65,3 +65,22 @@ app.use('/', router);
 app.listen(PORT, function() {
   console.log('Server started at http://localhost:' + PORT);
 });
+
+//CORS checks
+//var admin_app = express();
+//admin_app.listen(8383, function () {
+//  console.log('Server started at http://localhost:' + PORT);
+//});
+//admin_app.options('*', function (req, res) {
+//  res.statusCode = 200;
+//  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8282');
+//  res.setHeader('Access-Control-Allow-Methods', 'DELETE');
+//  res.send('{}');
+//});
+//admin_app.delete('*', function (req, res) {
+//  var data = req.get('Authorization');
+//  res.statusCode = data == "Bearer NEW-ACCESS-TOKEN-SECRET" ? 201 : 401;
+//  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8282');
+//  res.setHeader('Access-Control-Allow-Methods', 'DELETE');
+//  res.send(data);
+//});
