@@ -14,6 +14,7 @@ define(["../core/globals", "../core/didoauth", "./menu", "../core/resources"], f
   self.home = function() {
     menu.refresh();
     location.hash = "";
+    resources.translate();
   }
 
   self.toLogin = function() {
