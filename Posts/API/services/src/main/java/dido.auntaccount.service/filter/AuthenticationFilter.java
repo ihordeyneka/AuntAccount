@@ -4,6 +4,7 @@ import dido.auntaccount.dto.TokenDTO;
 import dido.auntaccount.service.business.TokenService;
 import dido.auntaccount.service.business.UserService;
 import dido.auntaccount.service.rest.Tokens;
+import dido.auntaccount.service.rest.controller.Controller;
 import dido.auntaccount.service.rest.controller.TokenController;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
@@ -27,7 +28,7 @@ import java.util.Date;
 @Provider
 @Secured
 @Priority(Priorities.AUTHENTICATION)
-public class AuthenticationFilter implements ContainerRequestFilter {
+public class AuthenticationFilter extends Controller implements ContainerRequestFilter {
 
     public static final String LOGGED_IN_USER = "loggedInUser";
     public static final String ANONYMOUS_TOKEN_PREFIX = "Anonymous";
@@ -56,7 +57,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             headers.add(LOGGED_IN_USER, tokenDTO.getUserId().toString());
 
         } catch (OAuthProblemException | OAuthSystemException e) {
-            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+            requestContext.abortWith(getResponseBuilder(Response.Status.UNAUTHORIZED.getStatusCode()).build());
         }
     }
 

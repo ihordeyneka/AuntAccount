@@ -110,7 +110,7 @@ curl -XPUT 'localhost:9200/dido?pretty' -H 'Content-Type: application/json' -d'
     @Override
     public List<String> queryTags(String tag) {
         SearchResponse searchResponse = clientService.getClient().prepareSearch(INDEX).suggest(new SuggestBuilder()
-                .addSuggestion(SELLER_TYPE, SuggestBuilders.completionSuggestion(TAGS_FIELD).text(tag))).get();
+                .addSuggestion(SELLER_TYPE,  SuggestBuilders.completionSuggestion(TAGS_FIELD).text(tag).skipDuplicates(true))).get();
 
         List<String> results = new ArrayList<>();
         Suggest suggest = searchResponse.getSuggest();
